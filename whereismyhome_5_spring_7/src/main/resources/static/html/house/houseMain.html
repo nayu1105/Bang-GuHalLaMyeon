@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실거래가 조회 메인</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"
+    />
+    <!-- Default theme -->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"
+    />
+    <!-- Semantic UI theme -->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"
+    />
+    <!-- Bootstrap theme -->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"
+    />
+    <!-- kakao map  -->
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9fa060a9b4a46b0e7e27c1cfe9d4e2f4&libraries=services,clusterer"
+    ></script>
+
+    <link rel="stylesheet" href="/css/login.css" type="text/css" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="/css/map.css" type="text/css" />
+    <link rel="stylesheet" href="/css/menu.css" type="text/css" />
+    <style>
+      #topContainer {
+        margin-top: 150px;
+      }
+
+      .page-link {
+        color: #000;
+        background-color: #fff;
+        border: 1px solid #ccc;
+      }
+
+      .page-item.active .page-link {
+        z-index: 1;
+        color: white;
+        font-weight: bold;
+        background-color: #212529 !important;
+        border-color: #212529 !important;
+      }
+
+      .page-link:focus,
+      .page-link:hover {
+        color: #000;
+        background-color: #fafafa;
+        border-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <div class="wrapper">
+        <!-- nav PART start -->
+        <div class="nav_part">
+          <!-- nav start -->
+          <nav class="navbar fixed-top navbar-expand navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/html/index.html">🏠 구해줘 Home</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-link active" aria-current="page" href="/html/index.html">메인</a>
+                  <a class="nav-link" href="/board">공지사항</a>
+                  <a class="nav-link" href="/arround">주변 업종</a>
+                  <a class="nav-link" href="/event" id="btnEventManage">이벤트 관리</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 메뉴 버튼 -->
+            <button
+              type="button"
+              class="nav_btn btn btn-outline-light navLogin"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              로그인
+            </button>
+            <button
+              type="button"
+              class="nav_btn btn btn-outline-light navLogout loginState"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+              id="btnLogout"
+            >
+              로그아웃
+            </button>
+            <button type="button" class="nav_btn btn btn-outline-light navSignup">
+              <a href="/html/register.html">회원가입</a>
+            </button>
+            <button type="button" class="nav_btn btn btn-outline-light loginState navProfile">
+              <a href="/html/user/profile.html">내 정보</a>
+            </button>
+            <button type="button" class="nav_btn btn btn-outline-light loginState navBookmark">
+              <a href="/html/house/houseFavorite.html">북마크</a>
+            </button>
+          </nav>
+          <!-- nav end -->
+        </div>
+        <!-- nav PART end -->
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div id="loginBox">
+                  <form>
+                    <div id="loginBtnBox">
+                      <h2 id="login">로그인</h2>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="loginEmail" class="form-label">아이디</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="loginEmail"
+                        placeholder="이메일을 입력하세요."
+                        aria-describedby="emailHelp"
+                        value="admin@admin.com"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="loginPassword" class="form-label">비밀번호</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="loginPassword"
+                        placeholder="비밀번호를 입력하세요."
+                        value="1234"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div id="loginBtnBox">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="btnLogin"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        로그인
+                      </button>
+                    </div>
+                    <br />
+                    <div id="loginBtnBox">
+                      <!--
+                      <button type="submit" class="btnfind">아이디/비밀번호 찾기</button>
+                      <div id="divInline">|</div> -->
+                      <button type="submit" class="btnfind">
+                        <a href="/html/register.html">회원가입</a>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- logout Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal2"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">로그아웃 되었습니다.</h5>
+              </div>
+              <div class="modal-footer">
+                <button
+                  id="goMain"
+                  type="button"
+                  class="btn btn-primary gomain"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  메인으로 가기
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="topContainer" class="container">
+      <!-- 		<%-- nav bar --%> <%@ include file="../login.jsp"%> -->
+      <h4 class="text-center mt-4">실거래가 조회</h4>
+
+      <!-- 검색 -->
+      <div class="input-group mb-3 mt-4">
+        <select
+          class="form-select"
+          id="sido"
+          aria-label="Default select example"
+          onchange="setSido(this); getGugun();"
+        >
+          <option selected value="">도/광역시</option>
+        </select>
+        <select
+          class="form-select"
+          id="gugun"
+          aria-label="Default select example"
+          onchange="setGugun(this); houseSearch()"
+        >
+          <option value="">시/군/구</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <select
+          class="form-select"
+          id="searchCategory"
+          aria-label="Default select example"
+          onchange="setCategory(this); houseSearch();"
+        >
+          <option selected value="아파트별">아파트별</option>
+          <option value="동별">동별</option>
+        </select>
+        <input
+          class="form-control"
+          type="text"
+          id="searchWord"
+          placeholder="검색어를 입력하세요"
+          aria-label="default input example"
+        />
+        <button class="btn btn-dark" type="button" id="btnHouseSearch" onclick="houseSearch()">
+          조회
+        </button>
+      </div>
+
+      <div class="container">
+        <div class="map_wrap">
+          <!-- map start -->
+          <div id="map"></div>
+          <!-- map end -->
+          <div id="menu_wrap">
+            <div>
+              <p class="menu_title">거래 정보</p>
+            </div>
+
+            <ul id="placesList"></ul>
+          </div>
+        </div>
+      </div>
+      <!-- 테이블 -->
+      <!-- <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">시구</th>
+            <th scope="col">구군</th>
+            <th scope="col">동</th>
+            <th scope="col">아파트명</th>
+            <th scope="col">층</th>
+            <th scope="col">면적</th>
+            <th scope="col">거래금액</th>
+          </tr>
+        </thead>
+        <tbody id="aptTbody"></tbody>
+      </table> -->
+
+      <!-- 페이지네이션 -->
+      <!-- <nav id="paginationWrapper" class="mt-4"></nav> -->
+
+      <!-- Board Detail Modal -->
+      <!-- <div
+        class="modal fade"
+        id="houseDetailModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">아파트 상세조회</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <table class="table table-hover" style="cursor: default">
+                <tbody>
+                  <tr>
+                    <td>글 번호</td>
+                    <td id="houseSeqDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>시도</td>
+                    <td id="sidoDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>구군</td>
+                    <td id="gugunDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>동</td>
+                    <td id="dongDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>아파트명</td>
+                    <td id="aptNameDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>층</td>
+                    <td id="floorDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>면적</td>
+                    <td id="areaDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>거래금액</td>
+                    <td id="dealAmountDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>개설연도</td>
+                    <td id="buildYearDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>거래연도</td>
+                    <td id="dealYearDetail">#</td>
+                  </tr>
+                  <tr>
+                    <td>거래월</td>
+                    <td id="dealMonthDetail">#</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <button id="btnHouseFavorite" type="button" class="btn btn-dark">북마크</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <!-- footer start -->
+    <!-- 
+    <footer>
+      <ul class="footer-list p-0 m-0">
+        <li><a href="#">개인정보 처리방침</a></li>
+        <li><a href="#">이용 약관</a></li>
+        <li><a href="#">오시는 길</a></li>
+        <li>&copy; SSAFY 9조 반유진 염정아</li>
+      </ul>
+    </footer> -->
+    <!-- footer end -->
+    <script src="/js/util.js"></script>
+    <script>
+      var OFFSET = 0; // offset
+      var SEARCH_WORD = ""; // 검색어
+
+      // Pagination
+      var LIST_ROW_COUNT = 10; // limit, 한 페이지 내에 보여주는 글의 개수
+      var PAGE_LINK_COUNT = 10; // 페이지 링크를 몇 개 만들 것인가. 그 밑에 10개 이렇게 있는거
+      var CURRENT_PAGE_INDEX = 1; // 현재 페이지 인덱스
+      var TOTAL_LIST_ITEM_COUNT = 0; // 총 아이템 건 수
+
+      var SUCCESS = 1;
+
+      // 초기 검색 변수 값
+      let sidoCode = "11";
+      // 서울 특별시
+      let gugunCode = "11110";
+      // 종로구
+      let searchCategory = "전체";
+
+      window.onload = () => {
+        getSido();
+        houseSearch();
+
+        // document.querySelector("#btnHouseFavorite").onclick = (e) => {
+        //   let houseSeq = e.path[1].querySelector("#houseSeqDetail").innerHTML;
+        //   houseFavorite(houseSeq);
+        // };
+      };
+
+      // async function houseFavorite(houseSeq) {
+      //   let url = "/favorite/favoriteInsert";
+      //   let urlParams = "?houseSeq=" + houseSeq;
+
+      //   let fetchOptions = {
+      //     method: "GET",
+      //   };
+
+      //   try {
+      //     let res = await fetch(url + urlParams, fetchOptions);
+      //     let data = await res.json();
+
+      //     if (data.result == "success") {
+      //       alertify.success("북마크 되었습니다.");
+      //       setTimeout(() => {
+      //         window.location.href = "/favorite/favoriteMain";
+      //       }, 800);
+      //     } else if (data.result == "fail") {
+      //       alertify.error(
+      //         "북마크 과정에 실패했습니다. <br> 북마크는 최대 10개 가능하며, <br> 중복 등록이 불가합니다."
+      //       );
+      //     }
+      //   } catch (err) {
+      //     console.log(err);
+      //     alertify.error("북마크 과정에서 문제가 생겼습니다.");
+      //   }
+      // }
+
+      // async function houseDetail(houseSeq) {
+      //   let url = "/houses/";
+      //   let urlParams = houseSeq;
+      //   console.log(houseSeq);
+
+      //   let fetchOptions = {
+      //     method: "GET",
+      //   };
+
+      //   try {
+      //     let res = await fetch(url + urlParams, fetchOptions);
+      //     let data = await res.json();
+      //     makeDetailHtml(data);
+      //   } catch (err) {
+      //     console.log(err);
+      //     alertify.error("실거래가 조회 과정에서 문제가 생겼습니다.");
+      //   }
+      // }
+
+      // async function makeDetailHtml(detail) {
+      //   let houseSeq = detail.no;
+      //   let sido = detail.sido;
+      //   let gugun = detail.gugun;
+      //   let dong = detail.dong;
+      //   let aptName = detail.aptName;
+      //   let floor = detail.floor;
+      //   let area = detail.area;
+      //   let dealAmount = detail.dealAmount;
+      //   let buildYear = detail.buildYear;
+      //   let dealYear = detail.dealYear;
+      //   let dealMonth = detail.dealMonth;
+
+      //   document.querySelector("#houseDetailModal").setAttribute("data-no", houseSeq);
+      //   document.querySelector("#houseSeqDetail").innerHTML = houseSeq;
+      //   document.querySelector("#dongDetail").innerHTML = dong;
+      //   document.querySelector("#gugunDetail").innerHTML = gugun;
+      //   document.querySelector("#sidoDetail").innerHTML = sido;
+      //   document.querySelector("#aptNameDetail").innerHTML = aptName;
+      //   document.querySelector("#floorDetail").innerHTML = floor;
+      //   document.querySelector("#areaDetail").innerHTML = area;
+      //   document.querySelector("#dealAmountDetail").innerHTML = dealAmount;
+      //   document.querySelector("#buildYearDetail").innerHTML = buildYear;
+      //   document.querySelector("#dealYearDetail").innerHTML = dealYear;
+      //   document.querySelector("#dealMonthDetail").innerHTML = dealMonth;
+
+      //   let modalDetail = new bootstrap.Modal(document.querySelector("#houseDetailModal"));
+      //   modalDetail.show();
+      // }
+
+      async function houseSearch() {
+        let searchWord = document.querySelector("#searchWord").value;
+        var urlParams;
+        if (searchCategory == "아파트별") {
+          console.log("아파트");
+          urlParams =
+            "?sido=" + sidoCode + "&gugun=" + gugunCode + "&dong=" + "&aptName=" + searchWord;
+        } else if (searchCategory == "동별") {
+          console.log("동별");
+          urlParams =
+            "?sido=" + sidoCode + "&gugun=" + gugunCode + "&aptName=" + "&dong=" + searchWord;
+        } else if (searchCategory == "전체") {
+          console.log("전체");
+          urlParams =
+            "?sido=" +
+            sidoCode +
+            "&gugun=" +
+            gugunCode +
+            "&dong=" +
+            searchWord +
+            "&aptName=" +
+            searchWord;
+        }
+
+        let fetchOptions = {
+          method: "GET",
+        };
+        try {
+          let response = await fetch("/houses/search" + urlParams, fetchOptions);
+          let data = await response.json();
+          if (data.result == SUCCESS) {
+            makeAptListHtml(data.list);
+          } else {
+            alertify.error("실거래 조회에서 문제가 생겼습니다.");
+          }
+        } catch (err) {
+          console.log(err);
+          alertify.error("실거래 조회에서 문제가 생겼습니다.");
+        }
+      }
+
+      async function getSido() {
+        let url = "/city";
+        let urlParam = "?option=1";
+
+        let fetchOptions = {
+          method: "GET",
+        };
+
+        try {
+          let response = await fetch(url + urlParam, fetchOptions);
+          let data = await response.json();
+          if (data.result == SUCCESS) {
+            makeSidoListHtml(data.list);
+          } else {
+            alertify.error("도시이름을 읽는 과정에서 오류가 발생했습니다. ");
+          }
+        } catch (error) {
+          alertify.error("도시이름을 읽는 과정에서 오류가ㄴ 발생했습니다. ");
+        }
+      }
+
+      function makeSidoListHtml(list) {
+        let listHtml = `<option selected>도/광역시</option>`;
+        list.forEach((el) => {
+          let sidoName = el.sidoName;
+          let sidoCode = el.sidoCode;
+
+          listHtml += `<option data-sidoCode=${sidoCode} value=${sidoCode}>${sidoName}</option>`;
+        });
+
+        document.querySelector("#sido").innerHTML = listHtml;
+      }
+
+      async function getGugun() {
+        searchCategory = "아파트별";
+        let url = "/city";
+        let urlParams = "?option=2&sidoCode=" + sidoCode;
+        let fetchOptions = {
+          method: "GET",
+        };
+        try {
+          let response = await fetch(url + urlParams, fetchOptions);
+          let data = await response.json();
+          if (data.result == SUCCESS) {
+            makeGugunListHtml(data.list);
+          } else {
+            alertify.error("구군이름을 읽는 과정에서 오류가 발생했습니다. ");
+          }
+        } catch (error) {
+          alertify.error("구군이름을 읽는 과정에서 오류가 발생했습니다. ");
+        }
+      }
+
+      function makeGugunListHtml(list) {
+        let listHtml = `<option selected>시/군/구</option>`;
+        list.forEach((el) => {
+          var gugunName = el.gugunName;
+          var gugunCode = el.gugunCode;
+
+          listHtml += `<option data-gugunCode=${gugunCode} value=${gugunCode}>${gugunName}</option>`;
+        });
+
+        document.querySelector("#gugun").innerHTML = listHtml;
+      }
+
+      function setCategory(category) {
+        console.log(category.value);
+        searchCategory = category.value;
+      }
+
+      function setSido(el) {
+        sidoCode = el.value;
+      }
+
+      function setGugun(el) {
+        gugunCode = el.value;
+      }
+
+      var map = new kakao.maps.Map(
+        document.getElementById("map"), // 지도를 표시할 div
+        {
+          center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
+          level: 14, // 지도의 확대 레벨
+        }
+      );
+      // 마커 클러스터러를 생성합니다
+      var clusterer = new kakao.maps.MarkerClusterer({
+        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+        minLevel: 10, // 클러스터 할 최소 지도 레벨
+      });
+
+      var markers = [];
+
+      function makeAptListHtml(list) {
+        let listHtml = ``;
+
+        list.forEach((el, index) => {
+          // makeMark(el);
+          let aptName = el.aptName;
+          let dealAmount = el.dealAmount;
+          let address = el.address;
+          let area = el.area;
+          let floor = el.floor;
+          listHtml += ` <div class="card"> 
+                          <img src="/img/building1.jpg" class="card-img-top" /> 
+                          <div class="card-body">
+                            <p class="card-title">${el.aptName}  ${dealAmount}</p>
+                            <p class="card-subtitle" >${el.sido} ${el.gugun} ${el.dong} ${el.jibun}</p>
+                            <p class="card-text">${el.area}㎡ ${el.floor}층</p> 
+                            <p class="card-text">거래날짜 : ${el.dealYear}.${el.dealMonth}.${el.dealDay}</p> 
+                            <a href="<%= contextPath%>/jsp/aptDeal/searchaptdetail.jsp?aptNo=${el.aptNo}" class="btn btn-primary">아파트 상세보기</a>
+                            <button class="btn btn-primary" value=${index}>주변 상가보기</button>
+                          </div>
+                        </div>
+                        `;
+        });
+        document.querySelector("#placesList").innerHTML = listHtml;
+        removeMarker(); // 마커 삭제가 안됨
+        
+        // # 할 것
+        // 1. 클러스터 하지말고 마커만 생성 (마커에 mousehover 이벤트로 아파트이름 뜨도록 하기)& 중간 지점으로 position 옮기기
+        // 2. 아파트 자세히 보기하면 모달창 뜨고 아파트 상세 내역 뜨기
+        // 3. 아파트 가격 순 정렬 하기 btn 생성.(알고리즘)
+        // 4. 아파트 관심 지역? 관심 아파트 설정 기능 추가
+        // 5. 주변 업종(부동산) 보이도록 하기 (마커 그림만 다르게 해서 보이기)
+        // 6. 아파트 카드에 주변 업종 클릭시 주변 업종(반경 ~m 내 ) 리스트 보이도록 하기 
+        makeAptMarker(list);
+        // document.querySelector("#placesList").onclick = function (e) {
+        //   let index = e.target.value;
+        //   let home = homeList[index];
+        //   selectedHome = homeList[index];
+        //   // getStore(home["lat"], home["lng"]);
+        // };
+      }
+
+      function makeAptMarker(list) {
+        list.forEach((el) => {
+          // 마커가 표시될 위치입니다
+          var markerPosition = new kakao.maps.LatLng(el.lat, el.lng);
+          // 마커를 생성합니다
+          var marker = new kakao.maps.Marker({
+            position: markerPosition,
+          });
+
+          markers.push(marker);
+        });
+        // 클러스터러에 마커들을 추가합니다
+        clusterer.addMarkers(markers);
+      }
+
+      // 지도 위에 표시되고 있는 마커를 모두 제거합니다
+      function removeMarker() {
+        console.log("마커삭제");
+        clusterer.clear();
+        markers = [];
+      }
+    </script>
+  </body>
+</html>

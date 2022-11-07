@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>관심 아파트 북마크</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+
+<!-- JavaScript -->
+<script
+	src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+<style>
+#topContainer {
+	margin-top: 150px;
+}
+
+.page-link {
+	color: #000;
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+
+.page-item.active .page-link {
+	z-index: 1;
+	color: white;
+	font-weight: bold;
+	background-color: #212529 !important;
+	border-color: #212529 !important;
+}
+
+.page-link:focus, .page-link:hover {
+	color: #000;
+	background-color: #fafafa;
+	border-color: #ccc;
+}
+</style>
+</head>
+<div id="topContainer" class="container">
+	<!-- 		<%-- nav bar --%> <%@ include file="../login.jsp"%> -->
+	<h4 class="text-center">관심 아파트 리스트</h4>
+	<button class="btn btn-primary" id="btnFavoritePathList">최적경로
+		기준 정렬</button>
+
+
+	<div id="cards" class="d-flex flex-wrap"></div>
+
+	<!-- 페이지네이션 -->
+	<nav id="paginationWrapper"></nav>
+
+	<!-- Board Detail Modal -->
+	<div class="modal fade" id="houseDetailModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">관심아파트 상세조회</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<table class="table table-hover" style="cursor: default;">
+						<tbody>
+							<tr>
+								<td>글 번호</td>
+								<td id="houseSeqDetail">#</td>
+							</tr>
+							<tr>
+								<td>시도</td>
+								<td id="sidoDetail">#</td>
+							</tr>
+							<tr>
+								<td>구군</td>
+								<td id="gugunDetail">#</td>
+							</tr>
+							<tr>
+								<td>동</td>
+								<td id="dongDetail">#</td>
+							</tr>
+							<tr>
+								<td>아파트명</td>
+								<td id="aptNameDetail">#</td>
+							</tr>
+							<tr>
+								<td>층</td>
+								<td id="floorDetail">#</td>
+							</tr>
+							<tr>
+								<td>면적</td>
+								<td id="areaDetail">#</td>
+							</tr>
+							<tr>
+								<td>거래금액</td>
+								<td id="dealAmountDetail">#</td>
+							</tr>
+							<tr>
+								<td>개설연도</td>
+								<td id="buildYearDetail">#</td>
+							</tr>
+							<tr>
+								<td>거래연도</td>
+								<td id="dealYearDetail">#</td>
+							</tr>
+							<tr>
+								<td>거래월</td>
+								<td id="dealMonthDetail">#</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/js/util.js"></script>
+<!-- 	<script>
+		var OFFSET = 0; // offset
+		var SEARCH_WORD = ""; // 검색어
+
+		// Pagination
+		var LIST_ROW_COUNT = 10; // limit, 한 페이지 내에 보여주는 글의 개수
+		var PAGE_LINK_COUNT = 10; // 페이지 링크를 몇 개 만들 것인가. 그 밑에 10개 이렇게 있는거
+		var CURRENT_PAGE_INDEX = 1; // 현재 페이지 인덱스
+		var TOTAL_LIST_ITEM_COUNT = 0; // 총 아이템 건 수
+
+		window.onload = () => {
+			favoriteList();
+			
+
+			document.querySelector("#btnFavoritePathList").onclick = (e) =>{
+				let houseSeq = e.path[2].getAttribute("data-houseSeq");
+				
+				navigator.geolocation.getCurrentPosition((position)=>{
+					favoritePathList(houseSeq, position.coords.latitude, position.coords.longitude);
+				})
+			};
+		};
+
+		async function favoriteList() {
+			let urlParmas = new URLSearchParams({
+				limit: LIST_ROW_COUNT,
+				offset: OFFSET,
+			});
+
+			let fetchOptions = {
+				method: "POST",
+				body: urlParmas,
+			};
+
+			let response = await fetch("/favorite/favoriteList", fetchOptions);
+			let data = await response.json();
+
+			makeListHtml(data);
+		}
+
+		function makeListHtml(list) {
+			let listHtml = ``;
+			console.log(list);
+
+			var count = 1;
+			list.forEach((el) => {
+				let favoriteId = el.favoriteId;
+				let houseSeq = el.houseSeq;
+				let dong = el.dong;
+				let floor = el.floor;
+				let area = el.area;
+				let aptName = el.aptName;
+				let dealAmount = el.dealAmount;
+				// let img = el.img;
+
+				listHtml += `
+					<div class="card" style="width: 18rem;" data-favoriteId="\${favoriteId}"  data-houseSeq="\${houseSeq}">
+						<img src="/img/noAptImg.jpg" class="card-img-top" alt="..." />
+						<div class="card-body">
+							<h5 class="card-title">\${count++}. \${aptName}</h5>
+							<p class="card-text">\${dong}</p>
+							<p class="card-text">층 : \${floor} </p>
+							<p class="card-text">면적 : \${area}</p>
+							<p class="card-text">가격 : \${dealAmount}</p>
+							<button class="btn btn-dark" id="btnFavoriteDetail">상세정보 보기</button>
+							<button class="btn btn-danger" id="btnFavoriteDelete">삭제</button>
+						</div>
+					</div>
+		              `;
+			});
+
+
+			document.querySelector("#cards").innerHTML = listHtml;
+
+			makeListHtmlEventHandler();
+			// favoriteListTotalCnt();
+		}
+
+		async function makeListHtmlEventHandler() {
+			document.querySelectorAll("#cards div.card").forEach((el) => {
+				el.querySelector("#btnFavoriteDetail").onclick = (e) => {
+					let houseSeq = e.path[2].getAttribute("data-houseSeq");
+					favoriteDetail(houseSeq);
+				};
+				
+				el.querySelector("#btnFavoriteDelete").onclick = (e) => {
+					let favoriteId = e.path[2].getAttribute("data-favoriteId");
+					favoriteDelete(favoriteId);
+				};		
+			});
+		}
+
+		async function favoriteDetail(houseSeq) {
+			let url = "/favorite/favoriteDetail";
+			let urlParams = "?houseSeq=" + houseSeq;
+
+			let fetchOptions = {
+				method: "GET",
+			};
+
+			try {
+				let res = await fetch(url + urlParams, fetchOptions);
+				let data = await res.json();
+				makeDetailHtml(data);
+			} catch (err) {
+				console.log(err);
+				alertify.error("실거래가 조회 과정에서 문제가 생겼습니다.");
+			}
+		}
+		
+		async function favoritePathList(houseSeq, latitude, longitude){
+			let url = "/favorite/favoritePateSearch";
+			
+			console.log(latitude);
+			console.log(longitude);
+			
+			let urlParams = "?latitude=" + latitude + "&longitude=" +longitude;
+			let fetchOptions = { method: "GET"};
+			
+			try{
+				let res = await fetch(url + urlParams, fetchOptions);
+				let data = await res.json();
+				
+
+				alertify.success("최적경로로 정렬을 완료했습니다.");
+				document.querySelector("#cards").innerHTML = "";
+				makeListHtml(data);
+			} catch(err){
+				console.log(err);
+				alertify.error("최적경로 정렬과정에서 문제가 발생했습니다.");
+			}
+		}
+
+		async function favoriteDelete(favoriteId) {
+			let url = "/favorite/favoriteDelete";
+			let urlParams = "?favoriteId=" + favoriteId;
+
+			let fetchOptions = {
+				method: "GET",
+			};
+
+			try {
+				let res = await fetch(url + urlParams, fetchOptions);
+				let data = await res.json();
+
+				if (data.result == "success") {
+					alertify.success("북마크가 삭제되었습니다.");
+					setTimeout(() => {
+						window.location.href = "/favorite/favoriteMain";
+					}, 800);
+				} else if (data.result == "fail") {
+					alertify.error("북마크 삭제 과정에 실패했습니다.");
+				}
+			} catch (err) {
+				console.log(err);
+				alertify.error("실거래가 조회 과정에서 문제가 생겼습니다.");
+			}
+		}
+
+		async function makeDetailHtml(detail) {
+			let houseSeq = detail.houseSeq;
+			let sido = detail.sido;
+			let gugun = detail.gugun;
+			let dong = detail.dong;
+			let aptName = detail.aptName;
+			let floor = detail.floor;
+			let area = detail.area;
+			let dealAmount = detail.dealAmount;
+			let buildYear = detail.buildYear;
+			let dealYear = detail.dealYear;
+			let dealMonth = detail.dealMonth;
+
+			document.querySelector("#houseDetailModal").setAttribute("data-no", houseSeq);
+			document.querySelector("#houseSeqDetail").innerHTML = houseSeq;
+			document.querySelector("#dongDetail").innerHTML = dong;
+			document.querySelector("#gugunDetail").innerHTML = gugun;
+			document.querySelector("#sidoDetail").innerHTML = sido;
+			document.querySelector("#aptNameDetail").innerHTML = aptName;
+			document.querySelector("#floorDetail").innerHTML = floor;
+			document.querySelector("#areaDetail").innerHTML = area;
+			document.querySelector("#dealAmountDetail").innerHTML = dealAmount;
+			document.querySelector("#buildYearDetail").innerHTML = buildYear;
+			document.querySelector("#dealYearDetail").innerHTML = dealYear;
+			document.querySelector("#dealMonthDetail").innerHTML = dealMonth;
+
+			let modalDetail = new bootstrap.Modal(document.querySelector("#houseDetailModal"));
+			modalDetail.show();
+		}
+
+		async function favoriteListTotalCnt() {
+			let url = "/favorite/favoriteListTotalCnt";
+
+			let fetchOptions = {
+				method: "GET",
+			};
+
+			try {
+				let res = await fetch(url, fetchOptions);
+				let data = await res.json();
+				TOTAL_LIST_ITEM_COUNT = data.totalCnt;
+
+				makePaginationHtml(
+					LIST_ROW_COUNT,
+					PAGE_LINK_COUNT,
+					CURRENT_PAGE_INDEX,
+					TOTAL_LIST_ITEM_COUNT,
+					"paginationWrapper"
+				);
+			} catch (err) {
+				console.log(err);
+				alertify.error("실거래가 조회 과정에서 문제가 생겼습니다.");
+			}
+		}
+
+		function movePage(pageIndex) {
+			OFFSET = (pageIndex - 1) * LIST_ROW_COUNT;
+			CURRENT_PAGE_INDEX = pageIndex;
+			houseList();
+		}
+	</script> -->
+</html>

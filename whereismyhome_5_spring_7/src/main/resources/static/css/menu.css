@@ -1,0 +1,116 @@
+#menu_wrap {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  bottom: 0;
+  max-width: 370px;
+  max-height: 100%;
+  margin: 10px 0 30px 10px;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+#menu_wrap_r {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  bottom: 0;
+  max-width: 430px;
+  max-height: 100%;
+  margin: 10px 10px 30px 0;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+#search {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: large;
+}
+
+#check {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+}
+
+.menu_title {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 15px;
+}
+
+.dropdowns {
+  margin-bottom: 15px;
+}
+
+/* .form-select {
+  display: inline-block;
+  width: 120px !important;
+  font-size: large;
+  padding: 5px;
+  text-align: center;
+} */
+
+/* dropdown scrollable */
+.scrollable-menu {
+  height: auto;
+  max-height: 100px;
+  overflow-x: hidden;
+}
+
+.btn {
+  padding: 5px;
+}
+
+/* dropdown button 
+.btn {
+  font-size: large;
+  width: 120px;
+  --bs-btn-bg: #003580;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-hover-color: #003580;
+  --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #{shade-color($bd-violet, 20%)};
+  --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
+}*/
+
+/* card css */
+.card {
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.card-body {
+  margin: 15px;
+}
+
+.card-title {
+  font-size: 25px;
+  font-weight: bold;
+  color: #009fe3;
+}
+
+.card-subtitle {
+  color: grey;
+  margin-bottom: 5px;
+}
+
+.card-text {
+  color: black;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+}
+
+/*  */

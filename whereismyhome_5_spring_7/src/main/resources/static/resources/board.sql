@@ -1,0 +1,13 @@
+-- notice board table
+
+CREATE TABLE board (
+  BOARD_ID int NOT NULL AUTO_INCREMENT,
+  USER_SEQ int NOT NULL,
+  TITLE varchar(500) DEFAULT NULL,
+  CONTENT text,
+  REG_DT datetime DEFAULT NULL,
+  PRIMARY KEY (BOARD_ID),
+  KEY FK_USER_idx (USER_SEQ),
+  CONSTRAINT FK_USER FOREIGN KEY (USER_SEQ) REFERENCES users (USER_SEQ)
+  on delete cascade
+);

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycom.myapp.city.dao.CityDao">
+	<select id="cityList" resultType="com.mycom.myapp.city.dto.CityCodeDto">
+		select code sidoCode, name sidoName
+		from sido_code
+	</select>
+	
+	<select id="gugunList" parameterType="map" resultType="com.mycom.myapp.city.dto.CityCodeDto">
+		select code gugunCode, name gugunName
+		from gugun_code
+		where sido_code = #{sidoCode}
+	</select>
+	
+	<select id="dongList" parameterType="map" resultType="com.mycom.myapp.city.dto.CityCodeDto">
+		select code dongCode, name dongName, city_code sidoCode, city_name sidoName, gugun_code gugunCode, gugun_name gugunName 
+		from dong_code
+		where gugun_code = #{gugunCode}
+	</select>
+</mapper>

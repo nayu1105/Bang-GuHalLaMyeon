@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: "Pretendard", sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.container-fluid {
+  width: calc(100% - 300px);
+  /* height: 100%; */
+}
+
+.wrapper {
+  background-color: whitesmoke;
+  /* width: calc(100% - 300px); */
+  width: 100%;
+  /* height: auto; */
+  /* margin: auto; */
+}
+
+/* nav 메뉴 PART */
+.navbar {
+  height: 9%;
+}
+.nav_part {
+  /* width: calc(100% - 400px); */
+}
+.fixed-top {
+  padding: 0 200px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.205);
+}
+.nav_btn {
+  width: 100px;
+  margin: 10px;
+}
+.nav_part a {
+  text-decoration: none;
+  color: white;
+}
+
+/* 패널 PART */
+.pannel_part {
+  /* width: calc(100% - 300px); */
+}
+.carousel {
+  margin-top: 58px;
+  background-color: black;
+}
+.carousel-item img {
+  height: 400px;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+/* login */
+#loginBox {
+  width: 420px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+#login {
+  padding-bottom: 15px;
+  font-weight: 600;
+}
+
+.form-control {
+  height: 45px;
+}
+
+#loginBtnBox .btn-primary {
+  background-color: #212529;
+  border: none;
+}
+
+#loginBtnBox .btn-primary:hover {
+  color: #fff !important;
+  background-color: #727272 !important;
+  border-color: #727272 !important;
+}
+
+.btnfind {
+  margin-top: 10px;
+  border: none;
+  background-color: white;
+}
+
+#loginBtn {
+  width: 100%;
+  line-height: 2;
+  margin-top: 20px;
+}
+
+#loginBtnBox {
+  text-align: center;
+}
+
+#divInline {
+  display: inline;
+  margin: 50px 20px 0 20px;
+}
+
+.btnfind a {
+  color: #212529;
+}
+
+.modal-header {
+  border: none;
+}
+
+.loginState {
+  display: none !important;
+}
+
+/* logout modal */
+#exampleModal2 .modal-header {
+  padding-top: 20px;
+  justify-content: center !important;
+  border-bottom: none;
+}
+#exampleModal2 .modal-footer {
+  border: none;
+}
+.modal-footer .gomain {
+  margin-top: 5px;
+}
+
+.modal-footer .btn-primary {
+  background-color: #212529;
+  border: none;
+  width: 100%;
+  height: 45px;
+}
+
+.modal-footer .btn-primary:hover {
+  color: #fff !important;
+  background-color: #727272 !important;
+  border-color: #727272 !important;
+}

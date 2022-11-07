@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycom.myapp.user.dao.UserDao">
+	
+	<!-- 회원 가입 -->
+	<insert id="userRegister" parameterType="com.mycom.myapp.user.dto.UserDto">
+		insert into USERS (user_name, user_password, user_email, user_profile_image_url, user_register_date, user_clsf)
+		values (#{userName}, #{userPassword}, #{userEmail},'', now(), #{userClsf})
+	</insert>
+	
+	<!-- 회원 정보 불러오기 -->
+	<select id="userProfile" parameterType="int" resultType="com.mycom.myapp.user.dto.UserDto">
+		select user_name, user_email, user_password FROM users where user_seq = #{userSeq}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="userUpdate" parameterType="com.mycom.myapp.user.dto.UserDto">
+		update USERS
+		set user_name = #{userName}, user_email = #{userEmail}, user_password = #{userPassword}
+		where user_seq = #{userSeq}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="userDelete" parameterType="int">
+		delete from USERS where USER_SEQ = #{userSeq}
+	</delete>
+	
+</mapper>

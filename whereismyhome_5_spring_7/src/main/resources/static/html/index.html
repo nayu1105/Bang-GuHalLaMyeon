@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Where Is My House</title>
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"
+    />
+    <!-- Default theme -->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"
+    />
+    <!-- Semantic UI theme -->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"
+    />
+    <!-- Bootstrap theme -->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="/css/login.css" type="text/css" />
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <div class="wrapper_main">
+        <!-- nav PART start -->
+        <div class="nav_part">
+          <!-- nav start -->
+          <nav class="navbar fixed-top navbar-expand navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">🏠 구해줘 Home</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-link active" aria-current="page" href="/">메인</a>
+                  <a class="nav-link" href="/board">공지사항</a>
+                  <a class="nav-link" href="/arround">주변 업종</a>
+                  <a class="nav-link" href="/event" id="btnEventManage">이벤트 관리</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 메뉴 버튼 -->
+            <button
+              type="button"
+              class="nav_btn btn btn-outline-light navLogin"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              로그인
+            </button>
+            <button
+              type="button"
+              class="nav_btn btn btn-outline-light navLogout loginState"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+              id="btnLogout"
+            >
+              로그아웃
+            </button>
+            <button type="button" class="nav_btn btn btn-outline-light navSignup">
+              <a href="/register">회원가입</a>
+            </button>
+            <button type="button" class="nav_btn btn btn-outline-light loginState navProfile">
+              <a href="/html/user/profile.html">내 정보</a>
+            </button>
+            <button type="button" class="nav_btn btn btn-outline-light loginState navBookmark">
+              <a href="/html/house/houseFavorite.html">북마크</a>
+            </button>
+          </nav>
+          <!-- nav end -->
+        </div>
+        <!-- nav PART end -->
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div id="loginBox">
+                  <form>
+                    <div id="loginBtnBox">
+                      <h2 id="login">로그인</h2>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="loginEmail" class="form-label">아이디</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="loginEmail"
+                        placeholder="이메일을 입력하세요."
+                        aria-describedby="emailHelp"
+                        value="admin@admin.com"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="loginPassword" class="form-label">비밀번호</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="loginPassword"
+                        placeholder="비밀번호를 입력하세요."
+                        value="1234"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div id="loginBtnBox">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="btnLogin"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        로그인
+                      </button>
+                    </div>
+                    <br />
+                    <div id="loginBtnBox">
+                      <!--
+								<button type="submit" class="btnfind">아이디/비밀번호 찾기</button>
+								<div id="divInline">|</div> -->
+                      <button type="submit" class="btnfind">
+                        <a href="/register">회원가입</a>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- logout Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal2"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">로그아웃 되었습니다.</h5>
+              </div>
+              <div class="modal-footer">
+                <button
+                  id="goMain"
+                  type="button"
+                  class="btn btn-primary gomain"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  메인으로 가기
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 패널 PART start -->
+        <div class="pannel_part">
+          <!-- carousel start -->
+          <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="/img/building1.jpg" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>오늘의 뉴스1</h5>
+                  <p>Some representative placeholder content for the first slide.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="/img/building2.jpg" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>오늘의 뉴스2</h5>
+                  <p>Some representative placeholder content for the second slide.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="/img/building3.jpg" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>오늘의 뉴스3</h5>
+                  <p>Some representative placeholder content for the third slide.</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <!-- 메인 패널 carousel end -->
+        </div>
+        <!-- 패널 PART end -->
+
+        <!-- find PART start -->
+        <div class="find_part">
+          <h3 class="find_part_title">아파트 실거래가 확인하기</h3>
+
+          <div class="find_select">
+            <!-- 아파트 실거래가 start -->
+            <select
+              id="sido"
+              class="form-select form-select-lg"
+              aria-label=".form-select-lg example"
+              onchange="getGugun(this)"
+            >
+              <option value="1" selected>도/광역시</option>
+            </select>
+            <select
+              id="gugun"
+              class="form-select form-select-lg"
+              aria-label=".form-select-lg example"
+              onchange="getDong(this)"
+            >
+              <option value="1" selected>시/군/구</option>
+            </select>
+            <select
+              id="dong"
+              class="form-select form-select-lg"
+              aria-label=".form-select-lg example"
+              onchange="setSearchHomeUrl(this)"
+            >
+              <option value="1" selected>동</option>
+            </select>
+            <button type="button" class="find_btn btn btn-light btn-lg">
+              <a id="searchHome" class="text-decoration-none" href="/house">내 집 찾으러 가기</a>
+            </button>
+            <!-- 아파트 실거래가 end -->
+          </div>
+        </div>
+        <!-- find PART end -->
+
+        <!-- 공지사항 start -->
+        <div class="list_part">
+          <div class="list_part_list">
+            <div class="row m-0">
+              <div class="col p-0 list_part_list_wrapper2">
+                <h3>공지사항</h3>
+                <div>
+                  <ul class="list-group">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                    <li class="list-group-item">A fourth item</li>
+                    <li class="list-group-item">And a fifth one</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col p-0 list_part_list_wrapper2">
+                <h3>게시판</h3>
+                <div>
+                  <ul class="list-group">
+                    <li class="list-group-item" aria-current="true">An active item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                    <li class="list-group-item">A fourth item</li>
+                    <li class="list-group-item">And a fifth one</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-0">
+              <div class="col p-0 list_part_list_wrapper">
+                <div class="list_part_list_item1">
+                  <div>
+                    <span>Q&A</span>
+                    <div>
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet repellat
+                      qui, voluptatem cupiditate nulla necessitatibus ipsa, eligendi numquam
+                      officiis sunt ratione ut beatae, quam suscipit ea aperiam iste quo commodi!
+                    </div>
+                  </div>
+
+                  <!-- <img src="./img/temp.jpg" alt="" /> -->
+                </div>
+                <div class="list_part_list_item2">
+                  <div>
+                    <span>TIP</span>
+                    <div>
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet repellat
+                      qui, voluptatem cupiditate nulla necessitatibus ipsa, eligendi numquam
+                      officiis sunt ratione ut beatae, quam suscipit ea aperiam iste quo commodi!
+                    </div>
+                  </div>
+                  <!-- <img src="./img/temp.jpg" alt="" /> -->
+                </div>
+                <div class="list_part_list_item3">
+                  <div>
+                    <span>문의하기</span>
+                    <div>
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet repellat
+                      qui, voluptatem cupiditate nulla necessitatibus ipsa, eligendi numquam
+                      officiis sunt ratione ut beatae, quam suscipit ea aperiam iste quo commodi!
+                    </div>
+                  </div>
+                  <!-- <img src="./img/temp.jpg" alt="" /> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 공지사항 end -->
+
+        <!-- footer start -->
+        <footer>
+          <ul class="footer-list p-0 m-0">
+            <li><a href="#">개인정보 처리방침</a></li>
+            <li><a href="#">이용 약관</a></li>
+            <li><a href="#">오시는 길</a></li>
+            <li>&copy; SSAFY 9조 반유진 염정아</li>
+          </ul>
+        </footer>
+        <!-- footer end -->
+      </div>
+    </div>
+
+    <script src="/js/util.js"></script>
+
+    <script>
+      let SUCCESS = 1;
+
+      let sidoCode = "";
+      let gugunCode = "";
+      let dongCode = "";
+
+      let navLogout = document.querySelector(".navLogout");
+      let navLogin = document.querySelector(".navLogin");
+      let navProfile = document.querySelector(".navProfile");
+      let navSignup = document.querySelector(".navSignup");
+      let navBookmark = document.querySelector(".navBookmark");
+
+      let user_code = sessionStorage.getItem("userCode");
+
+      if (user_code != "null") {
+        if (user_code == "001") {
+          document.querySelector("#btnEventManage").style.display = "block";
+        } else {
+          document.querySelector("#btnEventManage").style.display = "none";
+        }
+      } else {
+        document.querySelector("#btnEventManage").style.display = "none";
+      }
+
+      document.querySelector("#btnLogin").addEventListener("click", loginToggle);
+      navLogout.addEventListener("click", logoutToggle);
+
+      function loginToggle() {
+        navLogout.classList.remove("loginState");
+        navLogin.classList.add("loginState");
+
+        navProfile.classList.remove("loginState");
+        navSignup.classList.add("loginState");
+      }
+
+      function logoutToggle() {
+        navLogout.classList.add("loginState");
+        navLogin.classList.remove("loginState");
+
+        navProfile.classList.add("loginState");
+        navSignup.classList.remove("loginState");
+      }
+
+      if (user_code != null) {
+        navLogout.classList.remove("loginState");
+        navLogin.classList.add("loginState");
+
+        navProfile.classList.remove("loginState");
+        navBookmark.classList.remove("loginState");
+        navSignup.classList.add("loginState");
+      } else {
+        navLogout.classList.add("loginState");
+        navLogin.classList.remove("loginState");
+
+        navProfile.classList.add("loginState");
+        navBookmark.classList.add("loginState");
+        navSignup.classList.remove("loginState");
+      }
+      /////////////////////
+
+      window.onload = function () {
+        getSido();
+
+        document.querySelector("#btnLogin").onclick = function (e) {
+          e.preventDefault();
+
+          let userEmailValue = document.querySelector("#loginEmail").value;
+          let userPasswordValue = document.querySelector("#loginPassword").value;
+          console.log(userEmailValue, userPasswordValue);
+
+          // 유효성 검사 => post 전송
+          if (validate()) {
+            // alert("valid");
+            login();
+          } else {
+            // 유효성 검사 실패에 대한 UI 처리
+            alertify.error("아이디 또는 패스워드를 확인하세요. ");
+          }
+        };
+      };
+
+      // logout
+      document.querySelector("#btnLogout").onclick = function (e) {
+        e.preventDefault();
+        logout();
+      };
+
+      document.querySelector("#goMain").onclick = function (e) {
+        e.preventDefault();
+        // 메인 주소 넣기
+        window.location.reload();
+      };
+
+      function validate() {
+        // return true / false
+        let isUserEmailValid = false;
+        let isUserPasswordValid = false;
+
+        let userEmailValue = document.querySelector("#loginEmail").value;
+        if (userEmailValue.length > 0) {
+          isUserEmailValid = true;
+        }
+
+        let userPasswordValue = document.querySelector("#loginPassword").value;
+        if (userPasswordValue.length > 0) {
+          isUserPasswordValid = true;
+        }
+
+        if (isUserEmailValid && isUserPasswordValid) {
+          return true;
+        }
+
+        return false;
+      }
+
+      async function login() {
+        // validate() 가 true를 return 하면 수행
+        // 백엔드로 전송한 데이터(파라미터) 준비
+        // 비동기로 요청
+        // POST
+        // 로그인 성공 => 게시판 메인 페이지로 이동 (/board/boardMain)
+        // 로그인 실패 => alert 띄우기
+
+        let userEmail = document.querySelector("#loginEmail").value;
+        let userPassword = document.querySelector("#loginPassword").value;
+
+        // parameter
+        let urlParams = new URLSearchParams({
+          userEmail: userEmail,
+          userPassword: userPassword,
+        });
+
+        // fetch options
+        let fetchOptions = {
+          method: "POST",
+          body: urlParams,
+        };
+
+        // fetch(url, option)
+        let response = await fetch("/login", fetchOptions);
+        let data = await response.json(); // json => javascript object <= JSON.parse()
+        if (data.result == "success") {
+          // server로 부터 받은 사용자 정보를 저장/사용
+          sessionStorage.setItem("userName", data.userName);
+          sessionStorage.setItem("userProfileImageUrl", data.userProfileImageUrl);
+          sessionStorage.setItem("userCode", data.userCode);
+          sessionStorage.setItem("userSeq", data.userSeq);
+
+          alertify.success("로그인 되었습니다!");
+          setTimeout(() => window.location.reload(), 700);
+        } else if (data.result == "fail") {
+          alertify.error("아이디 또는 패스워드를 확인하세요. ");
+        }
+      }
+
+      async function logout() {
+        // sessionStorage 초기화
+        destroyUserInfo();
+
+        let url = "/logout";
+
+        try {
+          let response = await fetch(url);
+          let data = await response.json(); // json => javascript object <= JSON.parse()
+          if (data.result == "success") {
+            window.location.href = "/";
+          } else if (data.result == "fail") {
+            alertify.error("로그아웃 과정에서 오류가 발생했습니다. ");
+          }
+        } catch (error) {
+          alertify.error("로그아웃 과정에서 오류가 발생했습니다. ");
+        }
+      }
+
+      async function getSido() {
+        let url = "/city";
+        let urlParam = "?option=1";
+
+        let fetchOptions = {
+          method: "GET",
+        };
+
+        try {
+          let response = await fetch(url + urlParam, fetchOptions);
+          let data = await response.json();
+          if (data.result == SUCCESS) {
+            makeSidoListHtml(data.list);
+          } else {
+            alertify.error("도시이름을 읽는 과정에서 오류가 발생했습니다. ");
+          }
+        } catch (error) {
+          alertify.error("도시이름을 읽는 과정에서 오류가ㄴ 발생했습니다. ");
+        }
+      }
+
+      function makeSidoListHtml(list) {
+        let listHtml = `<option selected>도/광역시</option>`;
+        list.forEach((el) => {
+          let sidoName = el.sidoName;
+          let sidoCode = el.sidoCode;
+
+          listHtml += `<option data-sidoCode=${sidoCode} value=${sidoCode}>${sidoName}</option>`;
+        });
+
+        document.querySelector("#sido").innerHTML = listHtml;
+      }
+
+      async function getGugun(sidoCode) {
+        sidoName = sidoCode.value;
+        let url = "/city";
+        let urlParams = "?option=2&sidoCode=" + sidoCode.value;
+        let fetchOptions = {
+          method: "GET",
+        };
+        try {
+          let response = await fetch(url + urlParams, fetchOptions);
+          let data = await response.json();
+          if (data.result == SUCCESS) {
+            makeGugunListHtml(data.list);
+          } else {
+            alertify.error("구군이름을 읽는 과정에서 오류가 발생했습니다. ");
+          }
+        } catch (error) {
+          alertify.error("구군이름을 읽는 과정에서 오류가 발생했습니다. ");
+        }
+      }
+
+      function makeGugunListHtml(list) {
+        let listHtml = `<option selected>시/군/구</option>`;
+        list.forEach((el) => {
+          let gugunName = el.gugunName;
+          let gugunCode = el.gugunCode;
+
+          listHtml += `<option data-gugunCode=${gugunCode} value=${gugunCode}>${gugunName}</option>`;
+        });
+
+        document.querySelector("#gugun").innerHTML = listHtml;
+      }
+
+      async function getDong(gugunCode) {
+        gugunCode = gugunCode.value;
+        let url = "/city";
+        let urlParams = "?option=3&gugunCode=" + gugunCode.value;
+        let fetchOptions = {
+          method: "GET",
+        };
+
+        try {
+          let response = await fetch(url + urlParams, fetchOptions);
+          let data = await response.json();
+          if (data.result == SUCCESS) {
+            makeDongListHtml(data.list);
+          } else {
+            alertify.error("동이름을 읽는 과정에서 오류가 발생했습니다. ");
+          }
+        } catch (error) {
+          alertify.error("동이름을 읽는 과정에서 오류가 발생했습니다. ");
+        }
+      }
+
+      function makeDongListHtml(list) {
+        let listHtml = `<option selected>동</option>`;
+        list.forEach((el) => {
+          let dongName = el.dongName;
+          let dongCode = el.dongCode;
+
+          listHtml += `<option data-dongCode=${dongCode} value=${dongName}>${dongName}</option>`;
+        });
+
+        document.querySelector("#dong").innerHTML = listHtml;
+
+        setSearchHomeUrl();
+      }
+
+      function setSearchHomeUrl(dongCode) {
+        let url = "/house";
+        dongCode = dongCode.value;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycom.myapp.admin.board.dao.AdminBoardDao">
+
+	<!-- 공지사항 등록 -->
+	<insert id="boardInsert" parameterType="com.mycom.myapp.admin.board.dto.BoardDto">
+		insert into BOARD (user_seq, title, content, reg_dt)
+		values ( #{userSeq}, #{title}, #{content}, now())
+	</insert>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="boardDelete" parameterType="int">
+		 delete from board where board_id = #{boardId}
+	</delete>	
+	
+	<!-- 공지사항 수정 -->
+	<update id="boardUpdate" parameterType="com.mycom.myapp.admin.board.dto.BoardDto">
+		update BOARD
+		set title= #{title}, content= #{content}
+		where board_id= #{boardId}
+	</update>
+	
+	<!-- 공지사항 detail -->
+	<select id="boardDetail" parameterType="int" resultType="com.mycom.myapp.admin.board.dto.BoardDto">
+		select b.board_id, b.user_seq, u.user_name, u.user_profile_image_url, b.title, b.content, b.reg_dt 
+		from BOARD b, USERS u
+		where b.user_seq = u.user_seq
+		and b.board_id = #{boardId}
+	</select>
+	
+	<!-- 공시자항 전체 조회 -->
+	<select id="boardList" parameterType="com.mycom.myapp.admin.board.dto.BoardParamDto" resultType="com.mycom.myapp.admin.board.dto.BoardDto">
+		 select b.board_id, b.user_seq, u.user_name, u.user_profile_image_url, b.title, b.content, b.reg_dt
+		 from BOARD b, USERS u 
+		 where b.user_seq = u.user_seq
+		 order by b.board_id desc
+		 limit #{limit} offset #{offset}
+	</select>
+	
+	<!-- 공지사항 전체 count -->
+	<select id="boardListTotalCnt" resultType="int">
+	select count(*) from BOARD
+	</select>
+	
+	<!-- 공지사항 searchWord 조회 -->
+	<select id="boardListSearchWord" parameterType="com.mycom.myapp.admin.board.dto.BoardParamDto" resultType="com.mycom.myapp.admin.board.dto.BoardDto">
+	select b.board_id, b.user_seq, u.user_name, u.user_profile_image_url, b.title, b.content, b.reg_dt 
+	from BOARD b, USERS u
+	where b.user_seq = u.user_seq
+	and b.title like concat('%', #{searchWord}, '%')
+	order by b.board_id desc
+	limit #{limit} offset #{offset}
+	</select>
+	
+	<!-- 공지사항 searchWord count -->
+	<select id="boardListSearchWordTotalCount" parameterType="com.mycom.myapp.admin.board.dto.BoardParamDto" resultType="int">
+		select count(*) from board b where b.title like concat('%', #{searchWord}, '%')
+	</select>
+</mapper>
