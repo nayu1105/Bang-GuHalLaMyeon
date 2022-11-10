@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import Home from '../pages/Home.vue';
+// import Home from '../pages/Home.vue';
 import HomeTwo from '../pages/HomeTwo.vue';
-import HomeThree from '../pages/HomeThree.vue';
+// import HomeThree from '../pages/HomeThree.vue';
 import Courses from '../pages/Courses.vue';
 import CoursesList from '../pages/CoursesList.vue';
 import CourseSidebar from '../pages/CourseSidebar.vue';
@@ -35,15 +35,11 @@ const router = createRouter({
     },
     {
       path: '/home',
-      component: Home,
+      component: HomeTwo,
     },
     {
       path: '/home-two',
       component: HomeTwo,
-    },
-    {
-      path: '/home-three',
-      component: HomeThree,
     },
     {
       path: '/courses',
