@@ -21,6 +21,10 @@ import ErrorPage from '../pages/ErrorPage.vue';
 import Contact from '../pages/Contact.vue';
 import CourseDetailsPage from '../pages/DynamicCourseDetails.vue';
 import DynamicBlogDetails from '../pages/DynamicBlogDetails.vue';
+import BoardsPage from '../pages/BoardsPage.vue';
+import EventsPage from '../pages/EventsPage.vue';
+import AdminBoardsPage from '../pages/AdminBoardsPage.vue';
+import AdminEventsPage from '../pages/AdminEventsPage.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -115,6 +119,26 @@ const router = createRouter({
     },
     {
       path: '/userDetail',
+      component: UserDetail,
+    },
+    {
+      path: '/boardsPage',
+      component: BoardsPage,
+    },
+    {
+      path: '/eventsPage',
+      component: EventsPage,
+    },
+    {
+      path: '/adminBoardsPage',
+      component: AdminBoardsPage,
+    },
+    {
+      path: '/adminEventsPage',
+      component: AdminEventsPage,
+    },
+    {
+      path: '/userDatail',
       component: UserDetail,
     },
   ],

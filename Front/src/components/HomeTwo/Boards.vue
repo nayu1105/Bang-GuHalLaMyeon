@@ -10,17 +10,17 @@
             <h2 class="section__title">
               Current
               <span class="yellow-bg yellow-bg-big"
-                >Events<img src="../../assets/img/shape/yellow-bg.png" alt=""
+                >Boards<img src="../../assets/img/shape/yellow-bg.png" alt=""
               /></span>
             </h2>
-            <p>We found 13 events available for you.</p>
+            <p>We found 13 boards available for you.</p>
           </div>
         </div>
       </div>
       <div class="row">
         <div
-          v-for="event in EventData"
-          :key="event.id"
+          v-for="board in BoardData"
+          :key="board.id"
           class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1"
         >
           <div class="events__item mb-10 hover__active">
@@ -29,16 +29,16 @@
             >
               <div class="events__content">
                 <div class="events__meta">
-                  <span>{{ event.date }}</span>
-                  <span>{{ event.time }}</span>
-                  <span>{{ event.city }}</span>
+                  <span>{{ board.date }}</span>
+                  <span>{{ board.time }}</span>
+                  <span>{{ board.city }}</span>
                 </div>
                 <h3 class="events__title">
-                  <router-link to="/event-details">{{ event.title }}</router-link>
+                  <router-link to="/event-details">{{ board.title }}</router-link>
                 </h3>
               </div>
               <div class="events__more">
-                <router-link to="/event-details" class="link-btn">
+                <router-link to="/instructor-details" class="link-btn">
                   View More
                   <i class="far fa-arrow-right"></i>
                   <i class="far fa-arrow-right"></i>
@@ -54,10 +54,10 @@
 
 <script>
 export default {
-  name: 'EventArea',
+  name: 'BoardArea',
   data() {
     return {
-      EventData: [
+      BoardData: [
         {
           id: 1,
           title: 'Digital transformation conference',
