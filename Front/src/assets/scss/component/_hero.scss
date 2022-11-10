@@ -32,45 +32,28 @@
         }
     }
     &__title{
-        font-size: 60px;
+        font-size: 72px;
         line-height: 1;
 
         @media #{$xl}{
-            font-size: 55px;
+            font-size: 60px;
         }
         @media #{$lg}{
-            font-size: 45px;
-        }
-        @media #{$md}{
-            font-size: 35px;
-        }
-        @media #{$sm}{
             font-size: 50px;
         }
+        @media #{$md}{
+            font-size: 40px;
+        }
+        @media #{$sm}{
+            font-size: 35px;
+        }
         @media #{$xs}{
-            font-size: 30px;
+            font-size: 20px;
         }
         & span{
             &:first-child{
-                font-weight: 300;
-                display: block;
-            }
-            &.yellow-shape{
-                position: relative;
-                z-index: 1;
-                & img{
-                    position: absolute;
-                    bottom: 22px;
-                    left: -8px;
-                    z-index: -1;
-                    -webkit-animation: section-animation 3s infinite;
-                    animation: section-animation 3s infinite;
-
-                    @media #{$md}{
-                        bottom: 12px;
-                        height: 40% !important;
-                    }
-                }
+                // font-weight: 300;
+                // display: block;
             }
         }
         &-2{
