@@ -1,19 +1,19 @@
 <template>
-  <Header headerShadow="header__area header__padding header__padding-2 header__shadow " />
-  <UserDetailArea />
+  <Header />
+  <Boards />
   <Footer footerPadding="true" />
 </template>
 
 <script>
 import Header from '../components/HomeTwo/Header.vue';
-import UserDetailArea from '../components/UserDetail/UserDetailArea.vue';
+import Boards from '../components/HomeTwo/Boards.vue';
 import Footer from '../components/HomeTwo/Footer.vue';
 
 export default {
-  name: 'UserDetail',
+  name: 'AdminBoardsPage',
   components: {
     Header,
-    UserDetailArea,
+    Boards,
     Footer,
   },
 };

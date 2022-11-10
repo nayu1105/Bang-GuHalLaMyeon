@@ -17,68 +17,6 @@
                   <img src="../../assets/img/logo/logo.png" alt="logo" />
                 </router-link>
               </div>
-              <!-- <div class="header__category d-none d-lg-block">
-                <nav>
-                  <ul>
-                    <li>
-                      <router-link to="/courses" class="cat-menu d-flex align-items-center">
-                        <div class="cat-dot-icon d-inline-block">
-                          <svg viewBox="0 0 276.2 276.2">
-                            <g>
-                              <g>
-                                <path
-                                  class="cat-dot"
-                                  d="M33.1,2.5C15.3,2.5,0.9,17,0.9,34.8s14.5,32.3,32.3,32.3s32.3-14.5,32.3-32.3S51,2.5,33.1,2.5z"
-                                />
-                                <path
-                                  class="cat-dot"
-                                  d="M137.7,2.5c-17.8,0-32.3,14.5-32.3,32.3s14.5,32.3,32.3,32.3c17.8,0,32.3-14.5,32.3-32.3S155.5,2.5,137.7,2.5    z"
-                                />
-                                <path
-                                  class="cat-dot"
-                                  d="M243.9,67.1c17.8,0,32.3-14.5,32.3-32.3S261.7,2.5,243.9,2.5S211.6,17,211.6,34.8S226.1,67.1,243.9,67.1z"
-                                />
-                                <path
-                                  class="cat-dot"
-                                  d="M32.3,170.5c17.8,0,32.3-14.5,32.3-32.3c0-17.8-14.5-32.3-32.3-32.3S0,120.4,0,138.2S14.5,170.5,32.3,170.5z"
-                                />
-                                <path
-                                  class="cat-dot"
-                                  d="M136.8,170.5c17.8,0,32.3-14.5,32.3-32.3c0-17.8-14.5-32.3-32.3-32.3c-17.8,0-32.3,14.5-32.3,32.3    C104.5,156.1,119,170.5,136.8,170.5z"
-                                />
-                                <path
-                                  class="cat-dot"
-                                  d="M243,170.5c17.8,0,32.3-14.5,32.3-32.3c0-17.8-14.5-32.3-32.3-32.3s-32.3,14.5-32.3,32.3    C210.7,156.1,225.2,170.5,243,170.5z"
-                                />
-                                <path
-                                  class="cat-dot"
-                                  d="M33,209.1c-17.8,0-32.3,14.5-32.3,32.3c0,17.8,14.5,32.3,32.3,32.3s32.3-14.5,32.3-32.3S50.8,209.1,33,209.1z    "
-                                />
-                                <path
-                                  class="cat-dot"
-                                  d="M137.6,209.1c-17.8,0-32.3,14.5-32.3,32.3c0,17.8,14.5,32.3,32.3,32.3c17.8,0,32.3-14.5,32.3-32.3    S155.4,209.1,137.6,209.1z"
-                                />
-                                <path
-                                  class="cat-dot"
-                                  d="M243.8,209.1c-17.8,0-32.3,14.5-32.3,32.3c0,17.8,14.5,32.3,32.3,32.3c17.8,0,32.3-14.5,32.3-32.3    S261.6,209.1,243.8,209.1z"
-                                />
-                              </g>
-                            </g>
-                          </svg>
-                        </div>
-                        <span>Category</span>
-                      </router-link>
-                      <ul class="cat-submenu">
-                        <li><router-link to="/course-details">English Learning</router-link></li>
-                        <li><router-link to="/course-details">Web Development</router-link></li>
-                        <li><router-link to="/course-details">Logo Design</router-link></li>
-                        <li><router-link to="/course-details">Motion Graphics</router-link></li>
-                        <li><router-link to="/course-details">Video Edition</router-link></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </nav>
-              </div> -->
             </div>
           </div>
           <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-10 col-sm-8 col-6">
@@ -87,69 +25,32 @@
                 <nav id="mobile-menu" class="d-none d-xl-block">
                   <ul>
                     <li><router-link to="/">Home</router-link></li>
-                    <!-- <li class="has-dropdown">
-                      <router-link to="/">Home</router-link>
-                      <ul class="submenu">
-                        <li>
-                          <router-link to="/home">Home Style 1</router-link>
-                        </li>
-                        <li>
-                          <router-link to="/home-two">Home Style 2</router-link>
-                        </li>
-                        <li>
-                          <router-link to="/home-three">Home Style 3</router-link>
-                        </li>
-                      </ul>
-                    </li> -->
                     <li class="has-dropdown">
-                      <router-link to="/courses">공지사항</router-link>
+                      <router-link to="/boardsPage">공지사항</router-link>
                       <ul class="submenu">
                         <li>
-                          <router-link to="/courses">공지사항</router-link>
+                          <router-link to="/boardsPage">공지사항</router-link>
                         </li>
                         <li>
-                          <router-link to="/courses-list">이벤트</router-link>
+                          <router-link to="/eventsPage">이벤트</router-link>
                         </li>
-                        <!-- <li>
-                          <router-link to="/courses-sidebar">Course sidebar </router-link>
-                        </li>
-                        <li>
-                          <router-link to="/course-details">Course Details </router-link>
-                        </li> -->
                       </ul>
                     </li>
-                    <li><router-link to="/contact">실거래가</router-link></li>
+                    <li><router-link to="/">실거래가</router-link></li>
                     <li class="has-dropdown">
-                      <router-link to="/blog">관리자</router-link>
+                      <router-link to="/adminBoardsPage">관리자</router-link>
                       <ul class="submenu">
-                        <li><router-link to="/blog">공지사항 관리</router-link></li>
-                        <li><router-link to="/blog-details">이벤트 관리</router-link></li>
+                        <li><router-link to="/adminBoardsPage">공지사항 관리</router-link></li>
+                        <li><router-link to="/adminEventsPage">이벤트 관리</router-link></li>
                       </ul>
                     </li>
-                    <!-- <li class="has-dropdown">
-                      <router-link to="/courses">Pages</router-link>
-                      <ul class="submenu">
-                        <li><router-link to="/about">About</router-link></li>
-                        <li><router-link to="/instructor">Instructor</router-link></li>
-                        <li>
-                          <router-link to="/instructor-details"> Instructor Details</router-link>
-                        </li>
-                        <li><router-link to="/event-details">Event Details</router-link></li>
-                        <li><router-link to="/cart">My Cart</router-link></li>
-                        <li><router-link to="/checkout">Checkout</router-link></li>
-                        <li><router-link to="/login">Sign In</router-link></li>
-                        <li><router-link to="/register">Sign Up</router-link></li>
-                        <li><router-link to="/errorPage">Error</router-link></li>
-                      </ul>
-                    </li> -->
                     <li class="has-dropdown">
-                      <router-link to="/blog">내 정보</router-link>
+                      <router-link to="/userDatail">내 정보</router-link>
                       <ul class="submenu">
-                        <li><router-link to="/blog">회원 정보</router-link></li>
-                        <li><router-link to="/blog-details">찜한 목록</router-link></li>
+                        <li><router-link to="/userDatail">회원 정보</router-link></li>
+                        <li><router-link to="/courses-list">찜한 목록</router-link></li>
                       </ul>
                     </li>
-                    <!-- <li><router-link to="/contact">Contact</router-link></li> -->
                   </ul>
                 </nav>
               </div>
@@ -191,104 +92,44 @@
             <li>
               <router-link to="/home" class="border-0">Home</router-link>
             </li>
-            <!-- <li
-              class="menu-item-has-children has-droupdown"
-              v-bind:class="[menuOption.homeDropdown === true ? 'active' : '']"
-            >
-              <a @click="menuOption.homeDropdown = !menuOption.homeDropdown">Home</a>
-              <ul class="sub-menu" :class="[menuOption.homeDropdown === true ? 'active' : '']">
-                <li>
-                  <router-link to="/home">Home Style 1</router-link>
-                </li>
-                <li>
-                  <router-link to="/home-two">Home Style 2</router-link>
-                </li>
-                <li>
-                  <router-link to="/home-three">Home Style 3</router-link>
-                </li>
-              </ul>
-            </li> -->
-
             <li
               class="menu-item-has-children has-droupdown"
-              :class="[menuOption.coursesDropdown === true ? 'active' : '']"
+              :class="[menuOption.boardsDropdown === true ? 'active' : '']"
             >
-              <a @click="menuOption.coursesDropdown = !menuOption.coursesDropdown">공지사항</a>
-              <ul class="sub-menu" :class="[menuOption.coursesDropdown === true ? 'active' : '']">
+              <a @click="menuOption.boardsDropdown = !menuOption.boardsDropdown">공지사항</a>
+              <ul class="sub-menu" :class="[menuOption.boardsDropdown === true ? 'active' : '']">
                 <li>
-                  <router-link to="/courses">공지사항</router-link>
+                  <router-link to="/boardsPage">공지사항</router-link>
                 </li>
                 <li>
-                  <router-link to="/courses-list">이벤트</router-link>
+                  <router-link to="/eventsPage">이벤트</router-link>
                 </li>
-                <!-- <li>
-                  <router-link to="/courses-sidebar">Course sidebar </router-link>
-                </li>
-                <li>
-                  <router-link to="/course-details">Course Details </router-link>
-                </li> -->
               </ul>
             </li>
             <li>
-              <router-link to="/home" class="border-0">실거래가</router-link>
+              <router-link to="/" class="border-0">실거래가</router-link>
             </li>
-            <!-- <li
-              class="menu-item-has-children has-droupdown"
-              :class="[menuOption.blogDropdown === true ? 'active' : '']"
-            >
-              <a v-on:click="menuOption.blogDropdown = !menuOption.blogDropdown">Blog</a>
-              <ul class="sub-menu" :class="[menuOption.blogDropdown === true ? 'active' : '']">
-                <li>
-                  <router-link to="/blog">Blog</router-link>
-                </li>
-                <li>
-                  <router-link to="/blog-details">Blog Details</router-link>
-                </li>
-              </ul>
-            </li> -->
 
             <li
               class="menu-item-has-children has-droupdown"
-              :class="[menuOption.pagesDropDown === true ? 'active' : '']"
+              :class="[menuOption.adminDropDown === true ? 'active' : '']"
             >
-              <a @click="menuOption.pagesDropDown = !menuOption.pagesDropDown">관리자</a>
-              <ul class="sub-menu" :class="[menuOption.pagesDropDown === true ? 'active' : '']">
-                <li><router-link to="/about">공지사항 관리</router-link></li>
-                <li><router-link to="/instructor">이벤트 관리</router-link></li>
-                <!-- <li>
-                  <router-link to="/instructor-details"> Instructor Details</router-link>
-                </li>
-                <li><router-link to="/event-details">Event Details</router-link></li>
-                <li><router-link to="/cart">My Cart</router-link></li>
-                <li><router-link to="/checkout">Checkout</router-link></li>
-                <li><router-link to="/login">Sign In</router-link></li>
-                <li><router-link to="/register">Sign Up</router-link></li>
-                <li><router-link to="/errorPage">Error</router-link></li> -->
+              <a @click="menuOption.adminDropDown = !menuOption.adminDropDown">관리자</a>
+              <ul class="sub-menu" :class="[menuOption.adminDropDown === true ? 'active' : '']">
+                <li><router-link to="/adminBoardsPage">공지사항 관리</router-link></li>
+                <li><router-link to="/adminEventsPage">이벤트 관리</router-link></li>
               </ul>
             </li>
             <li
               class="menu-item-has-children has-droupdown"
-              :class="[menuOption.pagesDropDown === true ? 'active' : '']"
+              :class="[menuOption.myDropDown === true ? 'active' : '']"
             >
-              <a @click="menuOption.pagesDropDown = !menuOption.pagesDropDown">내 정보</a>
-              <ul class="sub-menu" :class="[menuOption.pagesDropDown === true ? 'active' : '']">
-                <li><router-link to="/about">회원 정보</router-link></li>
-                <li><router-link to="/instructor">찜한 목록</router-link></li>
-                <!-- <li>
-                  <router-link to="/instructor-details"> Instructor Details</router-link>
-                </li>
-                <li><router-link to="/event-details">Event Details</router-link></li>
-                <li><router-link to="/cart">My Cart</router-link></li>
-                <li><router-link to="/checkout">Checkout</router-link></li>
-                <li><router-link to="/login">Sign In</router-link></li>
-                <li><router-link to="/register">Sign Up</router-link></li>
-                <li><router-link to="/errorPage">Error</router-link></li> -->
+              <a @click="menuOption.myDropDown = !menuOption.myDropDown">내 정보</a>
+              <ul class="sub-menu" :class="[menuOption.myDropDown === true ? 'active' : '']">
+                <li><router-link to="/userDatail">회원 정보</router-link></li>
+                <li><router-link to="/courses-list">찜한 목록</router-link></li>
               </ul>
             </li>
-
-            <!-- <li>
-              <router-link to="/contact" class="border-0">Contact</router-link>
-            </li> -->
           </ul>
         </div>
 
@@ -333,11 +174,15 @@ export default {
       menuOption: {
         menuShow: false,
         menuSearch: false,
-        homeDropdown: false,
-        coursesDropdown: false,
-        pagesDropDown: false,
-        blogDropdown: false,
-        aboutDropdown: false,
+        boardsDropdown: false,
+        adminDropDown: false,
+        myDropDown: false,
+
+        // homeDropdown: false,
+        // coursesDropdown: false,
+        // pagesDropDown: false,
+        // blogDropdown: false,
+        // aboutDropdown: false,
       },
     };
   },
