@@ -14,7 +14,7 @@
             <div class="header__left d-flex">
               <div class="logo">
                 <router-link to="/">
-                  <img src="../../assets/img/logo/logo.png" alt="logo" />
+                  <img src="../../assets/img/logo/logo-ramen.png" style="width: 90px" alt="logo" />
                 </router-link>
               </div>
             </div>
@@ -40,8 +40,10 @@
                     <li class="has-dropdown">
                       <router-link to="/adminBoardsPage">관리자</router-link>
                       <ul class="submenu">
+                        <li><router-link to="/adminEventsPage">관리자 정보</router-link></li>
                         <li><router-link to="/adminBoardsPage">공지사항 관리</router-link></li>
                         <li><router-link to="/adminEventsPage">이벤트 관리</router-link></li>
+                        <li><router-link to="/adminEventsPage">회원 정보 관리</router-link></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
@@ -166,7 +168,7 @@
 
 <script>
 export default {
-  name: 'HomeTwoHeader',
+  name: "HomeTwoHeader",
   data() {
     return {
       isSticky: false,
@@ -206,7 +208,7 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener('scroll', this.handleSticky);
+    window.addEventListener("scroll", this.handleSticky);
   },
 };
 </script>

@@ -72,6 +72,7 @@
  
  .container-80{
     width: 70%;
+    padding-bottom: 130px;
  }
  
  .main-box {

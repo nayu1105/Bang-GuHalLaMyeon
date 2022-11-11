@@ -1,144 +1,109 @@
-import { createWebHistory, createRouter } from 'vue-router';
-import Home from '../pages/Home.vue';
-import HomeTwo from '../pages/HomeTwo.vue';
-import HomeThree from '../pages/HomeThree.vue';
-import Courses from '../pages/Courses.vue';
-import CoursesList from '../pages/CoursesList.vue';
-import CourseSidebar from '../pages/CourseSidebar.vue';
-import CourseDetails from '../pages/CourseDetails.vue';
-import Blog from '../pages/Blog.vue';
-import BlogDetails from '../pages/BlogDetails.vue';
-import About from '../pages/About.vue';
-import Instructor from '../pages/Instructor.vue';
-import InstructorDetails from '../pages/InstructorDetails.vue';
-import EventDetails from '../pages/EventDetails.vue';
-import Cart from '../pages/Cart.vue';
-import Checkout from '../pages/Checkout.vue';
-import SignIn from '../pages/SignIn.vue';
-import SignUp from '../pages/SignUp.vue';
-import UserDetail from '../pages/UserDetail.vue';
-import ErrorPage from '../pages/ErrorPage.vue';
-import Contact from '../pages/Contact.vue';
-import CourseDetailsPage from '../pages/DynamicCourseDetails.vue';
-import DynamicBlogDetails from '../pages/DynamicBlogDetails.vue';
-import BoardsPage from '../pages/BoardsPage.vue';
-import EventsPage from '../pages/EventsPage.vue';
-import AdminBoardsPage from '../pages/AdminBoardsPage.vue';
-import AdminEventsPage from '../pages/AdminEventsPage.vue';
+import { createWebHistory, createRouter } from "vue-router";
+import HomeTwo from "../pages/HomeTwo.vue";
+import Courses from "../pages/Courses.vue";
+import CoursesList from "../pages/CoursesList.vue";
+import CourseSidebar from "../pages/CourseSidebar.vue";
+import CourseDetails from "../pages/CourseDetails.vue";
+import About from "../pages/About.vue";
+import Instructor from "../pages/Instructor.vue";
+import InstructorDetails from "../pages/InstructorDetails.vue";
+import EventDetails from "../pages/EventDetails.vue";
+import SignIn from "../pages/SignIn.vue";
+import SignUp from "../pages/SignUp.vue";
+import UserDetail from "../pages/UserDetail.vue";
+import ErrorPage from "../pages/ErrorPage.vue";
+import Contact from "../pages/Contact.vue";
+import BoardsPage from "../pages/BoardsPage.vue";
+import EventsPage from "../pages/EventsPage.vue";
+import AdminBoardsPage from "../pages/AdminBoardsPage.vue";
+import AdminEventsPage from "../pages/AdminEventsPage.vue";
+import CourseDetailsPage from "../pages/DynamicCourseDetails.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/',
+      path: "/",
       component: HomeTwo,
     },
     {
-      path: '/home',
-      component: Home,
-    },
-    {
-      path: '/home-two',
+      path: "/home-two",
       component: HomeTwo,
     },
     {
-      path: '/home-three',
-      component: HomeThree,
-    },
-    {
-      path: '/courses',
+      path: "/courses",
       component: Courses,
     },
     {
-      path: '/courses-list',
+      path: "/courses-list",
       component: CoursesList,
     },
     {
-      path: '/courses-sidebar',
+      path: "/courses-sidebar",
       component: CourseSidebar,
     },
     {
-      path: '/course-details',
+      path: "/course-details",
       component: CourseDetails,
     },
     {
-      path: '/blog',
-      component: Blog,
-    },
-    {
-      path: '/blog-details',
-      component: BlogDetails,
-    },
-    {
-      path: '/about',
+      path: "/about",
       component: About,
     },
     {
-      path: '/instructor',
+      path: "/instructor",
       component: Instructor,
     },
     {
-      path: '/instructor-details',
+      path: "/instructor-details",
       component: InstructorDetails,
     },
     {
-      path: '/event-details',
+      path: "/event-details",
       component: EventDetails,
     },
     {
-      path: '/cart',
-      component: Cart,
-    },
-    {
-      path: '/checkout',
-      component: Checkout,
-    },
-    {
-      path: '/login',
+      path: "/login",
       component: SignIn,
     },
     {
-      path: '/register',
+      path: "/register",
       component: SignUp,
     },
     {
-      path: '/errorPage',
-      component: ErrorPage,
-    },
-    {
-      path: '/contact',
-      component: Contact,
-    },
-    {
-      path: '/course-details/:id',
+      path: "/course-details/:id",
       component: CourseDetailsPage,
     },
     {
-      path: '/blog-details/:id',
-      component: DynamicBlogDetails,
+      path: "/errorPage",
+      component: ErrorPage,
     },
     {
-      path: '/userDetail',
+      path: "/contact",
+      component: Contact,
+    },
+    {
+      path: "/userDetail",
       component: UserDetail,
     },
     {
-      path: '/boardsPage',
+      path: "/boardsPage",
       component: BoardsPage,
     },
     {
-      path: '/eventsPage',
+      path: "/eventsPage",
       component: EventsPage,
     },
     {
-      path: '/adminBoardsPage',
+      path: "/adminBoardsPage",
       component: AdminBoardsPage,
     },
     {
-      path: '/adminEventsPage',
+      path: "/adminEventsPage",
       component: AdminEventsPage,
     },
     {
-      path: '/userDatail',
+      path: "/userDatail",
       component: UserDetail,
     },
   ],
