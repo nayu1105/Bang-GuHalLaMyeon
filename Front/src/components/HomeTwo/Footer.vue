@@ -1,115 +1,78 @@
 <template>
- <footer>
-   <div :class="`footer__area ${footerBgTwo ? 'grey-bg-2' : 'footer-bg'}`">
+   
+  <footer>
+    <div :class="`footer__area ${footerBgTwo ? 'grey-bg-2' : 'footer-bg'}`">
       <div :class="`footer__top ${footerPadding ? 'pt-90' : 'pt-190'} pb-40`">
-         <div class="container">
-            <div class="row">
-               <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                  <div class="footer__widget mb-50">
-                     <div class="footer__widget-head mb-22">
-                        <div class="footer__logo">
-                           <router-link to="/">
-                              <img :src="`${footerBgTwo ? require('../../assets/img/logo/logo.png') : require('../../assets/img/logo/logo-2.png')}`" alt="">
-                           </router-link>
-                        </div>
-                     </div>
-                     <div :class="`${footerBgTwo ? 'footer__widget-body-2' : 'footer__widget-body'}`">
-                        <p>Great lesson ideas and lesson plans for ESL teachers! Educators can customize lesson plans to best.</p>
-
-                        <div class="footer__social">
-                           <ul>
-                              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                              <li><a href="#" class="tw"><i class="fab fa-twitter"></i></a></li>
-                              <li><a href="#" class="pin"><i class="fab fa-pinterest-p"></i></a></li>
-                           </ul>
-                        </div>
-                     </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6">
+              <div class="footer__widget mb-50">
+                <div class="footer__widget-head mb-22">
+                  <div class="footer__logo">
+                    <router-link to="/">
+                      <!-- <img :src="`${footerBgTwo ? require('../../assets/img/logo/logo.png') : require('../../assets/img/logo/logo-2.png')}`" alt=""> -->
+                      <h3 style="color: white">방구할라면</h3>
+                    </router-link>
                   </div>
-               </div>
-               <div class="col-xxl-2 offset-xxl-1 col-xl-2 offset-xl-1 col-lg-3 offset-lg-0 col-md-2 offset-md-1 col-sm-5 offset-sm-1">
-                  <div class="footer__widget mb-50">
-                     <div class="footer__widget-head mb-22">
-                        <h3 :class="`${footerBgTwo ? 'footer__widget-title-2' : 'footer__widget-title'}`">Company</h3>
-                     </div>
-                     <div class="footer__widget-body">
-                        <div :class="`${footerBgTwo ? 'footer__link-2' : 'footer__link'}`">
-                           <ul>
-                              <li><a href="#">About</a></li>
-                              <li><a href="#">Courses</a></li>
-                              <li><a href="#">Events</a></li>
-                              <li><a href="#">Instructor</a></li>
-                              <li><a href="#">Career</a></li>
-                              <li><a href="#">Become a Teacher</a></li>
-                              <li><a href="#">Contact</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xxl-2 col-xl-2 col-lg-2 offset-lg-0 col-md-3 offset-md-1 col-sm-6">
-                  <div class="footer__widget mb-50">
-                     <div class="footer__widget-head mb-22">
-                        <h3 :class="`${footerBgTwo ? 'footer__widget-title-2' : 'footer__widget-title'}`">Platform</h3>
-                     </div>
-                     <div class="footer__widget-body">
-                        <div :class="`${footerBgTwo ? 'footer__link-2' : 'footer__link'}`">
-                           <ul>
-                              <li><a href="#">Browse Library</a></li>
-                              <li><a href="#">Library</a></li>
-                              <li><a href="#">Partners</a></li>
-                              <li><a href="#">News & Blogs</a></li>
-                              <li><a href="#">FAQs</a></li>
-                              <li><a href="#">Tutorials</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-5 col-sm-6">
-                  <div class="footer__widget footer__pl-70 mb-50">
-                     <div class="footer__widget-head mb-22">
-                        <h3 :class="`${footerBgTwo ? 'footer__widget-title-2' : 'footer__widget-title'}`">Subscribe</h3>
-                     </div>
-                     <div class="footer__widget-body">
-                        <div :class="`${footerBgTwo ? 'footer__subscribe-2' : 'footer__subscribe'}`">
-                           <form action="#">
-                              <div class="footer__subscribe-input mb-15">
-                                 <input type="email" placeholder="Your email address">
-                                 <button type="submit">
-                                    <i class="far fa-arrow-right"></i>
-                                    <i class="far fa-arrow-right"></i>
-                                 </button>
-                              </div>
-                           </form>
-                           <p>Get the latest news and updates right at your inbox.</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                </div>
+                <div :class="`${footerBgTwo ? 'footer__widget-body-2' : 'footer__widget-body'}`">
+                  <p>부울경 3반 7조 나유진, 반유진</p>
+                </div>
+              </div>
             </div>
-         </div>
+            <div
+              class="company-box"
+            >
+              <div class="footer__widget mb-50">
+                <div class="footer__widget-head mb-22">
+                  <h3 :class="`${footerBgTwo ? 'footer__widget-title-2' : 'footer__widget-title'}`">
+                    Company
+                  </h3>
+                </div>
+                <div class="footer__widget-body">
+                  <div :class="`${footerBgTwo ? 'footer__link-2' : 'footer__link'}`">
+                    <ul>
+                      <li><a href="https://www.ssafy.com" target="_blank">SSAFY</a> &nbsp;<span>부산광역시 강서구 송정동 녹산산업중로 333</span></li>
+                      
+                      <li><a href="https://github.com/nayu1105" target="_blank">NaYuJin</a> &nbsp;<span>dbwls387@gmail.com</span></li>
+                      <li><a href="https://github.com/dbwls387" target="_blank">BanYuJin</a> &nbsp;<span>dbwls387@gmail.com</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div :class="`${footerBgTwo ? 'footer__bottom footer__bottom-2' : 'footer__bottom'}`">
-         <div class="container">
-            <div class="row">
-               <div class="col-xxl-12">
-                  <div :class="`${footerBgTwo ? 'footer__copyright-2 text-center' : 'footer__copyright text-center'}`">
-                     <p>© 2022 Educal, All Rights Reserved. Design By <router-link to="/">Theme Pure</router-link></p>
-                  </div>
-               </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xxl-12">
+              <div
+                :class="`${
+                  footerBgTwo ? 'footer__copyright-2 text-center' : 'footer__copyright text-center'
+                }`"
+              >
+                <p>
+                  © 2022 SSAFY-8th, All Rights Reserved. BUK-3
+                  <span style="color: white">TwoYuJin.</span>
+                </p>
+              </div>
             </div>
-         </div>
+          </div>
+        </div>
       </div>
-   </div>
-</footer>
+    </div>
+  </footer>
 </template>
 
 <script>
 export default {
-   name:'FooterArea',
-   props:{
-      footerBgTwo:String,
-      footerPadding:String,
-   }
+  name: 'FooterArea',
+  props: {
+    footerBgTwo: String,
+    footerPadding: String,
+  },
 };
 </script>
+
