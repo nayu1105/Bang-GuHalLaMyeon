@@ -36,7 +36,7 @@
                         </li>
                       </ul>
                     </li>
-                    <li><router-link to="/">실거래가</router-link></li>
+                    <li><router-link to="/houseDeal">실거래가</router-link></li>
                     <li class="has-dropdown">
                       <router-link to="/adminBoardsPage">관리자</router-link>
                       <ul class="submenu">
@@ -107,7 +107,7 @@
               </ul>
             </li>
             <li>
-              <router-link to="/" class="border-0">실거래가</router-link>
+              <router-link to="houseDeal" class="border-0">실거래가</router-link>
             </li>
 
             <li

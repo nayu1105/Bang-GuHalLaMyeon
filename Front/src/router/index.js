@@ -25,7 +25,7 @@ import BoardsPage from '../pages/BoardsPage.vue';
 import EventsPage from '../pages/EventsPage.vue';
 import AdminBoardsPage from '../pages/AdminBoardsPage.vue';
 import AdminEventsPage from '../pages/AdminEventsPage.vue';
-
+import HouseDeal from '../pages/HouseDeal.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -136,6 +136,10 @@ const router = createRouter({
     {
       path: '/userDatail',
       component: UserDetail,
+    },
+    {
+      path: '/houseDeal',
+      component: HouseDeal,
     },
   ],
 });
