@@ -7,7 +7,7 @@
       <div class="hero__content-wrapper mt-50">
         <div class="main-box align-items-center">
           <div class="col-xxl">
-            <div class="hero__content hero__content-2 p-relative z-index-1">
+            <div class="hero__content hero__content-2 z-index-1">
               <h3 class="hero__title hero__title-2">
                 Find Your&nbsp;<span class="perfect">Perfect</span>&nbsp;Home <br />
               </h3>
@@ -17,7 +17,7 @@
                 <div id="selectForm">
                   <select
                     id="selectDo"
-                    class="form-select mt-5"
+                    class="form-select hero__select mt-5"
                     aria-label="Default select example"
                   >
                     <option selected>도/광역시</option>
@@ -25,24 +25,12 @@
                     <option value="2">Two</option>
                   </select>
 
-                  <!-- <button type="button" class="toggle-btn">
-                    도/광역시
-                    <img src="../../assets/img/icon/select-arrow.svg" alt="" class="ico-down" />
-                  </button>
-                  <ul class="selectbox-option hide">
-                    <li><button type="button" class="option-btn">Python</button></li>
-                    <li><button type="button" class="option-btn">Java</button></li>
-                    <li><button type="button" class="option-btn">JavaScript</button></li>
-                    <li><button type="button" class="option-btn">C#</button></li>
-                    <li><button type="button" class="option-btn">C/C++</button></li>
-                  </ul> -->
-
-                  <select class="form-select mt-5" aria-label="Default select example">
+                  <select class="form-select hero__select mt-5" aria-label="Default select example">
                     <option selected>시/군/구</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                   </select>
-                  <select class="form-select mt-5" aria-label="Default select example">
+                  <select class="form-select hero__select mt-5" aria-label="Default select example">
                     <option selected>동</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
@@ -67,13 +55,12 @@ export default {
 
 <style scoped>
 .form-select {
-  width: 25%;
   margin-right: 5px;
   display: inline-block;
 }
 
 #selectForm {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
