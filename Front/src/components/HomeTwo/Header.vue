@@ -12,9 +12,10 @@
         <div class="row align-items-center">
           <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-2 col-sm-4 col-6">
             <div class="header__left d-flex">
-              <div class="logo">
+              <div class="logo" style="vertical-align: middle">
                 <router-link to="/">
-                  <img src="../../assets/img/logo/logo-ramen.png" style="width: 90px" alt="logo" />
+                  <img src="../../assets/img/logo/logo-gif.gif" style="width: 70px" alt="logo" />
+                  <span>방구할라면</span>
                 </router-link>
               </div>
             </div>
