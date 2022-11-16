@@ -14,7 +14,7 @@
             <div class="header__left d-flex">
               <div class="logo" style="vertical-align: middle">
                 <router-link to="/">
-                  <img src="../../assets/img/logo/logo-gif.gif" style="width: 70px" alt="logo" />
+                  <img src="../../assets/img/logo/logo-gif.gif" style="width: 50px" alt="logo" />
                   <span>방구할라면</span>
                 </router-link>
               </div>

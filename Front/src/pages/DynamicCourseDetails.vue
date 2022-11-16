@@ -254,30 +254,8 @@
                 </div>
               </div>
             </div>
-            <div class="course__related">
-              <div class="row">
-                <div class="col-xxl-12">
-                  <div class="section__title-wrapper mb-40">
-                    <h2 class="section__title">
-                      Related
-                      <span class="yellow-bg yellow-bg-big"
-                        >Course<img src="../assets/img/shape/yellow-bg.png" alt=""
-                      /></span>
-                    </h2>
-                    <p>You don't have to struggle alone, you've got our assistance and help.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- slider courses start-->
-              <SliderCourses />
-              <!-- slider courses end-->
-            </div>
           </div>
         </div>
-
-        <!-- course side bar start -->
-        <CourseSidebar :course-data="course" />
-        <!-- course side bar end -->
       </div>
     </div>
   </section>
@@ -290,8 +268,6 @@
 import Header from "../components/HomeTwo/Header.vue";
 import Footer from "../components/HomeTwo/Footer.vue";
 import CourseItemMixin from "../mixins/courseItemsMixin";
-import SliderCourses from "../components/CourseDetails/SliderCourses.vue";
-import CourseSidebar from "../components/CourseDetails/CourseSidebar.vue";
 import CurriculumTab from "../components/CourseDetails/CurriculumTab.vue";
 import ReviewTab from "../components/CourseDetails/ReviewTab.vue";
 import MemberTab from "../components/CourseDetails/MemberTab.vue";
@@ -300,8 +276,6 @@ export default {
   name: "CourseDetailsPage",
   components: {
     Header,
-    SliderCourses,
-    CourseSidebar,
     CurriculumTab,
     ReviewTab,
     MemberTab,

@@ -8,7 +8,6 @@
         <div class="col-xxl-4 offset-xxl-4">
           <div class="section__title-wrapper mb-60 text-center">
             <h2 class="section__title">
-              Current
               <span class="yellow-bg yellow-bg-big"
                 >Events<img src="../../assets/img/shape/yellow-bg.png" alt=""
               /></span>
@@ -54,37 +53,37 @@
 
 <script>
 export default {
-  name: 'EventArea',
+  name: "EventArea",
   data() {
     return {
       EventData: [
         {
           id: 1,
-          title: 'Digital transformation conference',
-          date: 'Jun 14, 2022',
-          time: '12:00 am - 2:30 pm',
-          city: 'New York',
+          title: "Digital transformation conference",
+          date: "Jun 14, 2022",
+          time: "12:00 am - 2:30 pm",
+          city: "New York",
         },
         {
           id: 2,
-          title: 'World education day conference',
-          date: 'April 10, 2022',
-          time: '9:00 am - 5:00 pm',
-          city: 'Mindahan',
+          title: "World education day conference",
+          date: "April 10, 2022",
+          time: "9:00 am - 5:00 pm",
+          city: "Mindahan",
         },
         {
           id: 3,
-          title: 'Foundations of global health',
-          date: 'July 16, 2022',
-          time: '10:30 am - 1:30 pm',
-          city: 'Weedpatch',
+          title: "Foundations of global health",
+          date: "July 16, 2022",
+          time: "10:30 am - 1:30 pm",
+          city: "Weedpatch",
         },
         {
           id: 4,
-          title: 'Business creativity workshops',
-          date: 'March 24, 2022',
-          time: '10:30 am - 12:00 pm',
-          city: 'Lnland',
+          title: "Business creativity workshops",
+          date: "March 24, 2022",
+          time: "10:30 am - 12:00 pm",
+          city: "Lnland",
         },
       ],
     };
