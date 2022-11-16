@@ -102,6 +102,6 @@ export default {
 }
 
 .perfect {
-  color: rgb(240, 195, 50);
+  color: #f0c332;
 }
 </style>
