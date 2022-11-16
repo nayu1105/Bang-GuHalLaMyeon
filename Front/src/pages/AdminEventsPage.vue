@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <Header />
-    <Boards />
-    <Footer footerPadding="true" />
-  </div>
+  <Header />
+  <AdminEvents />
+  <Footer footerPadding="true" />
 </template>
 
 <script>
-import Header from '../components/Home/Header.vue';
-import Events from '../components/Events/Events.vue';
-import Footer from '../components/Home/Footer.vue';
+import Header from "../components/Home/Header.vue";
+// import AdminEvents from '../components/Home/AdminEvents.vue';
+import Footer from "../components/Home/Footer.vue";
 
 export default {
-  name: 'AdminEventsPage',
+  name: "AdminEventsPage",
   components: {
     Header,
-    Events,
+    // AdminEvents,
     Footer,
   },
 };

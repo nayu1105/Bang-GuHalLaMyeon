@@ -1,5 +1,5 @@
 <template>
-  <section class="events__area pb-120 p-relative">
+  <section class="events__area pt-115 pb-120 p-relative">
     <div class="events__shape">
       <img class="events-1-shape" src="../../assets/img/events/events-shape.png" alt="" />
     </div>
@@ -36,6 +36,13 @@
                   <router-link to="/event-details">{{ event.title }}</router-link>
                 </h3>
               </div>
+
+              <!-- 이벤트 관리 리스트에서는 진행 상황을 바로 수정할 수 있게 만들면 어떨지..?  -->
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                <label class="form-check-label" for="flexSwitchCheckDefault">진행 중</label>
+              </div>
+
               <div class="events__more">
                 <router-link to="/event-details" class="link-btn">
                   View More
@@ -53,37 +60,37 @@
 
 <script>
 export default {
-  name: 'EventArea',
+  name: "EventArea",
   data() {
     return {
       EventData: [
         {
           id: 1,
-          title: 'Digital transformation conference',
-          date: 'Jun 14, 2022',
-          time: '12:00 am - 2:30 pm',
-          city: 'New York',
+          title: "Digital transformation conference",
+          date: "Jun 14, 2022",
+          time: "12:00 am - 2:30 pm",
+          city: "New York",
         },
         {
           id: 2,
-          title: 'World education day conference',
-          date: 'April 10, 2022',
-          time: '9:00 am - 5:00 pm',
-          city: 'Mindahan',
+          title: "World education day conference",
+          date: "April 10, 2022",
+          time: "9:00 am - 5:00 pm",
+          city: "Mindahan",
         },
         {
           id: 3,
-          title: 'Foundations of global health',
-          date: 'July 16, 2022',
-          time: '10:30 am - 1:30 pm',
-          city: 'Weedpatch',
+          title: "Foundations of global health",
+          date: "July 16, 2022",
+          time: "10:30 am - 1:30 pm",
+          city: "Weedpatch",
         },
         {
           id: 4,
-          title: 'Business creativity workshops',
-          date: 'March 24, 2022',
-          time: '10:30 am - 12:00 pm',
-          city: 'Lnland',
+          title: "Business creativity workshops",
+          date: "March 24, 2022",
+          time: "10:30 am - 12:00 pm",
+          city: "Lnland",
         },
       ],
     };
