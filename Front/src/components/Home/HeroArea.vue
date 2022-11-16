@@ -79,16 +79,31 @@ export default {
     doBtnToggle() {
       const doSelect = this.$refs.doSelect;
       doSelect.classList.toggle("on");
+
+      const siSelect = this.$refs.siSelect;
+      siSelect.classList.remove("on");
+      const dongSelect = this.$refs.dongSelect;
+      dongSelect.classList.remove("on");
     },
 
     siBtnToggle() {
       const siSelect = this.$refs.siSelect;
       siSelect.classList.toggle("on");
+
+      const doSelect = this.$refs.doSelect;
+      doSelect.classList.remove("on");
+      const dongSelect = this.$refs.dongSelect;
+      dongSelect.classList.remove("on");
     },
 
     dongBtnToggle() {
       const dongSelect = this.$refs.dongSelect;
       dongSelect.classList.toggle("on");
+
+      const doSelect = this.$refs.doSelect;
+      doSelect.classList.remove("on");
+      const siSelect = this.$refs.siSelect;
+      siSelect.classList.remove("on");
     },
 
     doAddNodeName() {
@@ -116,22 +131,14 @@ export default {
     },
 
     clickBack() {
-      // alert(1);
       const doSelect = this.$refs.doSelect;
-      // if (event.target.nodeName === "BUTTON") {
       doSelect.classList.remove("on");
-      // }
 
       const siSelect = this.$refs.siSelect;
-      // if (event.target.nodeName === "BUTTON") {
       siSelect.classList.remove("on");
-      // }
 
       const dongSelect = this.$refs.dongSelect;
-      // if (event.target.nodeName === "BUTTON") {
-      // dongSelect.innerText = event.target.innerText;
       dongSelect.classList.remove("on");
-      // }
     },
   },
 };
