@@ -8,7 +8,7 @@
 
 <script>
 import Header from '../components/Home/Header.vue';
-import Events from '../components/Home/Events.vue';
+import Events from '../components/Events/Events.vue';
 import Footer from '../components/Home/Footer.vue';
 
 export default {
