@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'; // installed module
 
 Vue.use(VueRouter);
 
-import Home from '../pages/Home.vue';
+import Home from '@/pages/Home.vue';
 // import Bookmark from '@/pages/CoursesList.vue';
 // import BoardsDetails from '@/pages/BoardsDetails.vue';
 // import EventDetails from '@/pages/EventDetails.vue';
@@ -30,7 +30,7 @@ export default new VueRouter({
     {
       path: '/login',
       component: SignIn,
-    // },
+    },
     // {
     //   path: '/register',
     //   component: SignUp,

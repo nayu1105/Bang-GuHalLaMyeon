@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import Header from '../components/Home/Header.vue';
-import BannerArea from '../components/Home/BannerArea.vue';
-import Events from '../components/Events/Events.vue';
-import HeroArea from '../components/Home/HeroArea.vue';
-import Footer from '../components/Home/Footer.vue';
+import Header from '@/components/Home/Header.vue';
+import BannerArea from '@/components/Home/BannerArea.vue';
+import Events from '@/components/Events/Events.vue';
+import HeroArea from '@/components/Home/HeroArea.vue';
+import Footer from '@/components/Home/Footer.vue';
 
 export default {
   name: 'HomePage',
