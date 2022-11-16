@@ -1,5 +1,5 @@
 <template>
-  <section class="signup__area po-rel-z1 pt-100 pb-145">
+  <section class="signup__area po-rel-z1 pt-50 pb-145">
     <div class="sign__shape">
       <img class="man-1" src="../../assets/img/icon/sign/man-3.png" alt="" />
       <img class="man-2 man-22" src="../../assets/img/icon/sign/man-2.png" alt="" />
@@ -12,12 +12,8 @@
     <div class="container">
       <div class="row">
         <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
-          <div class="section__title-wrapper text-center mb-55">
-            <h2 class="section__title">
-              Create a free <br />
-              Account
-            </h2>
-            <p>I'm a subhead that goes with a story.</p>
+          <div class="section__title-wrapper text-center mb-30">
+            <h2 class="section__title">회원가입</h2>
           </div>
         </div>
       </div>
@@ -89,6 +85,6 @@
 
 <script>
 export default {
-  name: 'SignUpArea',
+  name: "SignUpArea",
 };
 </script>

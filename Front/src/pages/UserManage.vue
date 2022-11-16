@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Header from '../components/HomeTwo/Header.vue';
-import Footer from '../components/HomeTwo/Footer.vue';
+import Header from "../components/HomeTwo/Header.vue";
+import Footer from "../components/HomeTwo/Footer.vue";
 
 export default {
-  name: 'UserManage',
+  name: "UserManage",
   components: {
     Header,
     Footer,

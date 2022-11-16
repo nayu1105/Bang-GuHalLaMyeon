@@ -41,24 +41,30 @@
                     <li class="has-dropdown">
                       <router-link to="/adminBoardsPage">관리자</router-link>
                       <ul class="submenu">
-                        <li><router-link to="/adminEventsPage">관리자 정보</router-link></li>
+                        <li><router-link to="/userDatail">관리자 정보</router-link></li>
                         <li><router-link to="/adminBoardsPage">공지사항 관리</router-link></li>
                         <li><router-link to="/adminEventsPage">이벤트 관리</router-link></li>
-                        <li><router-link to="/adminEventsPage">회원 정보 관리</router-link></li>
+                        <li><router-link to="/userManage">회원 정보 관리</router-link></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
                       <router-link to="/userDatail">내 정보</router-link>
                       <ul class="submenu">
                         <li><router-link to="/userDatail">회원 정보</router-link></li>
-                        <li><router-link to="/courses-list">찜한 목록</router-link></li>
+                        <li><router-link to="/bookmark">찜한 목록</router-link></li>
                       </ul>
                     </li>
                   </ul>
                 </nav>
               </div>
               <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
-                <router-link to="/login" class="e-btn">Login</router-link>
+                <router-link to="/login" class="e-btn">
+                  Login
+                  <!-- <img
+                    src="../../assets/img/noProfile.png"
+                    style="width: 42px; height: 42px; border-radius: 50%; background-color: #198754"
+                  /> -->
+                </router-link>
               </div>
               <div class="sidebar__menu d-xl-none">
                 <div @click="handleSidebar" class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
@@ -130,7 +136,7 @@
               <a @click="menuOption.myDropDown = !menuOption.myDropDown">내 정보</a>
               <ul class="sub-menu" :class="[menuOption.myDropDown === true ? 'active' : '']">
                 <li><router-link to="/userDatail">회원 정보</router-link></li>
-                <li><router-link to="/courses-list">찜한 목록</router-link></li>
+                <li><router-link to="/bookmark">찜한 목록</router-link></li>
               </ul>
             </li>
           </ul>

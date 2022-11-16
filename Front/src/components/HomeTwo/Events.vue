@@ -1,5 +1,5 @@
 <template>
-  <section class="events__area pt-115 pb-120 p-relative">
+  <section class="events__area pb-120 p-relative">
     <div class="events__shape">
       <img class="events-1-shape" src="../../assets/img/events/events-shape.png" alt="" />
     </div>

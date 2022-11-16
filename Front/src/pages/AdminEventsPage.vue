@@ -1,19 +1,19 @@
 <template>
   <Header />
-  <Events />
+  <AdminEvents />
   <Footer footerPadding="true" />
 </template>
 
 <script>
-import Header from '../components/HomeTwo/Header.vue';
-import Events from '../components/HomeTwo/Events.vue';
-import Footer from '../components/HomeTwo/Footer.vue';
+import Header from "../components/HomeTwo/Header.vue";
+import AdminEvents from "../components/HomeTwo/AdminEvents.vue";
+import Footer from "../components/HomeTwo/Footer.vue";
 
 export default {
-  name: 'AdminEventsPage',
+  name: "AdminEventsPage",
   components: {
     Header,
-    Events,
+    AdminEvents,
     Footer,
   },
 };
