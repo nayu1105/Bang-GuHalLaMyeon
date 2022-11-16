@@ -26,7 +26,7 @@
             <p class="card-text">건축년도: 111 거래날짜 : 111.111.111</p>
             <div style="display: inline-block">
               <a href="" class="btn btn-primary">아파트 상세보기</a>
-              <a href="" class="btn btn-primary">아파트 상세보기</a>
+              <a href="" class="btn btn-primary">찜하기</a>
             </div>
           </div>
         </div>
