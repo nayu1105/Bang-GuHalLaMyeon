@@ -1,13 +1,15 @@
 <template>
-  <Header headerShadow="header__area header__padding header__padding-2 header__shadow " />
-  <UserDetailArea />
-  <Footer footerPadding="true" />
+  <div>
+    <Header headerShadow="header__area header__padding header__padding-2 header__shadow " />
+    <UserDetailArea />
+    <Footer footerPadding="true" />
+  </div>
 </template>
 
 <script>
-import Header from '../components/HomeTwo/Header.vue';
-import UserDetailArea from '../components/UserDetail/UserDetailArea.vue';
-import Footer from '../components/HomeTwo/Footer.vue';
+import Header from '/components/Home/Header.vue';
+import UserDetailArea from '/components/UserDetail/UserDetailArea.vue';
+import Footer from '/components/Home/Footer.vue';
 
 export default {
   name: 'UserDetail',

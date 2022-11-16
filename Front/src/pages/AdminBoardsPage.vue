@@ -1,13 +1,15 @@
 <template>
-  <Header />
-  <Boards />
-  <Footer footerPadding="true" />
+  <div>
+    <Header />
+    <Boards />
+    <Footer footerPadding="true" />
+  </div>
 </template>
 
 <script>
-import Header from '../components/HomeTwo/Header.vue';
-import Boards from '../components/HomeTwo/Boards.vue';
-import Footer from '../components/HomeTwo/Footer.vue';
+import Header from '../components/Home/Header.vue';
+import Boards from '../components/Boards/Boards.vue';
+import Footer from '../components/Home/Footer.vue';
 
 export default {
   name: 'AdminBoardsPage',
