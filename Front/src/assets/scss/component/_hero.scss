@@ -8,13 +8,13 @@
   &__area {
   }
   &__height {
-    min-height: 950px;
+    min-height: 1050px;
 
     @media #{$lg} {
-      min-height: 950px;
+      min-height: 850px;
     }
     @media #{$md} {
-      min-height: 940px;
+      min-height: 750px;
     }
     @media #{$sm} {
       min-height: 1100px;
@@ -24,10 +24,10 @@
     }
     &-2 {
       @media #{$sm} {
-        min-height: 930px;
+        min-height: 850px;
       }
       @media #{$xs} {
-        min-height: 930px;
+        min-height: 850px;
       }
     }
   }
@@ -36,19 +36,19 @@
     line-height: 1;
 
     @media #{$xl} {
-      font-size: 53px;
+      font-size: 60px;
     }
     @media #{$lg} {
-      font-size: 44px;
+      font-size: 50px;
     }
     @media #{$md} {
       font-size: 40px;
     }
     @media #{$sm} {
-      font-size: 33px;
+      font-size: 35px;
     }
     @media #{$xs} {
-      font-size: 27px;
+      font-size: 20px;
     }
     & span {
       &:first-child {
@@ -68,7 +68,7 @@
       line-height: 30px;
       margin-bottom: 28px;
       @media #{$lg} {
-        padding-right: 0px;
+        padding-right: 30px;
       }
       @media #{$md} {
         padding-right: 0px;
@@ -131,11 +131,55 @@
         @include box-shadow(0px 30px 60px 0px rgba(1, 11, 60, 0.14));
       }
     }
+    &-shape {
+      & img {
+        position: absolute;
+        z-index: -1;
+
+        &.hero-1-dot {
+          bottom: -25px;
+          left: -30px;
+          -webkit-animation: hero-dot-1 5s linear 0s infinite alternate;
+          -moz-animation: hero-dot-1 5s linear 0s infinite alternate;
+          -o-animation: hero-dot-1 5s linear 0s infinite alternate;
+          animation: hero-dot-1 5s linear 0s infinite alternate;
+        }
+        &.hero-1-circle-3 {
+          bottom: -47px;
+          right: 1%;
+        }
+        &.hero-1-circle-4 {
+          top: -50px;
+          right: 10%;
+        }
+      }
+    }
     &-2 {
       position: relative;
       z-index: 1;
       & img {
         &.hero-big {
+          @media #{$xl} {
+            width: 100%;
+          }
+          @media #{$lg} {
+            width: 100%;
+          }
+          @media #{$md} {
+            width: 100%;
+          }
+          @media #{$sm} {
+            width: 100%;
+          }
+          @media #{$xs} {
+            width: 100%;
+          }
+        }
+        &.hero-shape-purple {
+          position: absolute;
+          left: 0;
+          bottom: 19%;
+          z-index: -1;
           @media #{$xl} {
             width: 100%;
           }
@@ -202,12 +246,33 @@
       animation-name: hero-bounce;
     }
   }
+  &__shape {
+    & img {
+      position: absolute;
+      &.hero-1-circle {
+        top: 25%;
+        left: 5%;
+        -webkit-animation: hero-circle-1 6s linear 0s infinite alternate;
+        -moz-animation: hero-circle-1 6s linear 0s infinite alternate;
+        -o-animation: hero-circle-1 6s linear 0s infinite alternate;
+        animation: hero-circle-1 6s linear 0s infinite alternate;
+      }
+      &.hero-1-circle-2 {
+        bottom: 29%;
+        left: 0;
+      }
+      &.hero-1-dot-2 {
+        right: 0;
+        bottom: 38%;
+      }
+    }
+  }
   &__search {
     &-input {
       position: relative;
-      width: 300px;
+      width: 370px;
       @media #{$xs} {
-        width: 80%;
+        width: 100%;
       }
       & input {
         width: 100%;
@@ -246,7 +311,6 @@
       font-size: 16px;
       color: $e-text-3;
     }
-
     .form-select,
     .select-btn {
       @media #{$xl} {
@@ -408,15 +472,6 @@
         fill: $white;
       }
     }
-  }
-}
-
-.container {
-  @media #{$xl} {
-    width: 50% !important;
-  }
-  @media #{$lg} {
-    width: 50% !important;
   }
 }
 
