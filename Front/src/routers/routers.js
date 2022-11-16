@@ -1,13 +1,13 @@
-import Vue from 'vue'; // defalut module
-import VueRouter from 'vue-router'; // installed module
+import Vue from "vue"; // defalut module
+import VueRouter from "vue-router"; // installed module
 
 Vue.use(VueRouter);
 
-import Home from '../pages/Home.vue';
+import Home from "../pages/Home.vue";
 // import Bookmark from '@/pages/CoursesList.vue';
 // import BoardsDetails from '@/pages/BoardsDetails.vue';
 // import EventDetails from '@/pages/EventDetails.vue';
-import SignIn from '@/pages/SignIn.vue';
+// import SignIn from "@/pages/SignIn.vue";
 // import SignUp from '@/pages/SignUp.vue';
 // import UserDetail from '@/pages/UserDetail.vue';
 // import BoardsPage from '@/pages/BoardsPage.vue';
@@ -20,16 +20,16 @@ import SignIn from '@/pages/SignIn.vue';
 export default new VueRouter({
   routes: [
     {
-      path: '/',
+      path: "/",
       component: Home,
     },
     {
-      path: '/home',
+      path: "/home",
       component: Home,
     },
-    {
-      path: '/login',
-      component: SignIn,
+    // {
+    //   path: "/login",
+    //   component: SignIn,
     // },
     // {
     //   path: '/register',
