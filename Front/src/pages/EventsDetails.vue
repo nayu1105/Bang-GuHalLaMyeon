@@ -7,12 +7,12 @@
 </template>
 
 <script>
-import Header from '../components/Home/Header.vue';
-import EventDetailsArea from '../components/Events/EventDetailsArea.vue';
-import Footer from '../components/Home/Footer.vue';
+import Header from "@/components/Home/Header.vue";
+import EventDetailsArea from "@/components/Events/EventDetailsArea.vue";
+import Footer from "@/components/Home/Footer.vue";
 
 export default {
-  name: 'EventDetails',
+  name: "EventDetails",
   components: {
     Header,
     EventDetailsArea,

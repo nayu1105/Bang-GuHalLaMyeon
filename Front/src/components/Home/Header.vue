@@ -54,7 +54,7 @@
                         <router-link to="/userDatail">내 정보</router-link>
                         <ul class="submenu">
                           <li><router-link to="/userDatail">회원 정보</router-link></li>
-                          <li><router-link to="/courses-list">찜한 목록</router-link></li>
+                          <li><router-link to="/bookmark">찜한 목록</router-link></li>
                         </ul>
                       </li>
                     </ul>
@@ -133,7 +133,7 @@
                 <a @click="menuOption.myDropDown = !menuOption.myDropDown">내 정보</a>
                 <ul class="sub-menu" :class="[menuOption.myDropDown === true ? 'active' : '']">
                   <li><router-link to="/userDatail">회원 정보</router-link></li>
-                  <li><router-link to="/courses-list">찜한 목록</router-link></li>
+                  <li><router-link to="/bookmark">찜한 목록</router-link></li>
                 </ul>
               </li>
             </ul>
@@ -173,7 +173,7 @@
 
 <script>
 export default {
-  name: 'HomeTwoHeader',
+  name: "HomeTwoHeader",
   data() {
     return {
       isSticky: false,
@@ -207,7 +207,7 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener('scroll', this.handleSticky);
+    window.addEventListener("scroll", this.handleSticky);
   },
 };
 </script>
