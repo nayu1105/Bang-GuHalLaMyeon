@@ -17,8 +17,8 @@
       </div>
       <div class="row">
         <div
-          v-for="board in BoardData"
-          :key="board.id"
+          v-for="(board, index) in listGetters"
+          :key="index"
           class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1"
         >
           <div class="events__item mb-10 hover__active">
@@ -27,9 +27,8 @@
             >
               <div class="events__content">
                 <div class="events__meta">
-                  <span>{{ board.date }}</span>
-                  <span>{{ board.time }}</span>
-                  <span>{{ board.city }}</span>
+                  <span>{{ board.regDt.date }}</span>
+                  <span>{{ board.regDt.date }}</span>
                 </div>
                 <h3 class="events__title">
                   <router-link to="/boards-details">{{ board.title }}</router-link>
@@ -37,7 +36,7 @@
               </div>
               <div class="events__more">
                 <router-link to="/boards-details" class="link-btn">
-                  View More
+                  More
                   <i class="far fa-arrow-right"></i>
                   <i class="far fa-arrow-right"></i>
                 </router-link>
@@ -51,41 +50,30 @@
 </template>
 
 <script>
+// import http from '@/common/axios.js';
+// import util from '@/common/util.js';
+
+import Vue from 'vue';
+import VueAlertify from 'vue-alertify';
+Vue.use(VueAlertify);
 export default {
   name: 'BoardArea',
-  data() {
-    return {
-      BoardData: [
-        {
-          id: 1,
-          title: 'Digital transformation conference',
-          date: 'Jun 14, 2022',
-          time: '12:00 am - 2:30 pm',
-          city: 'New York',
-        },
-        {
-          id: 2,
-          title: 'World education day conference',
-          date: 'April 10, 2022',
-          time: '9:00 am - 5:00 pm',
-          city: 'Mindahan',
-        },
-        {
-          id: 3,
-          title: 'Foundations of global health',
-          date: 'July 16, 2022',
-          time: '10:30 am - 1:30 pm',
-          city: 'Weedpatch',
-        },
-        {
-          id: 4,
-          title: 'Business creativity workshops',
-          date: 'March 24, 2022',
-          time: '10:30 am - 12:00 pm',
-          city: 'Lnland',
-        },
-      ],
-    };
+  computed: {
+    // gttters 이용
+    listGetters() {
+      return this.$store.getters.getBoardList; // no getBoardList()
+    },
+  },
+  methods: {
+    // list
+    // store actions 에 구현
+    // 가능한 한 가지 방법
+    boardList() {
+      this.$store.dispatch('boardList');
+    },
+  },
+  created() {
+    this.boardList();
   },
 };
 </script>

@@ -9,7 +9,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'swiper/css/bundle';
 import './assets/css/fontAwesome5Pro.css';
 import 'bootstrap';
-import BootstrapVue from 'bootstrap-vue';
+// import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import './assets/scss/main.scss';
 
@@ -17,6 +17,4 @@ new Vue({
   render: (h) => h(App),
   router,
   store,
-})
-  .$mount('#app')
-  .use(BootstrapVue);
+}).$mount('#app');

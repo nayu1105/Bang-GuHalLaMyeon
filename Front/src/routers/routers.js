@@ -11,14 +11,11 @@ import BoardsPage from '../pages/BoardsPage.vue';
 import BoardsDetails from '../pages/BoardsDetails.vue';
 import EventsPage from '../pages/EventsPage.vue';
 import EventDetails from '../pages/EventsDetails.vue';
-import Bookmark from "../pages/BookMarkPage.vue";
-import EventDetails from "@/pages/EventsDetails.vue";
-import UserDetail from "../pages/UserDetail.vue";
-import AdminBoardsPage from "../pages/AdminBoardsPage.vue";
-import AdminEventsPage from "../pages/AdminEventsPage.vue";
-import HouseDeal from "@/pages/HouseDeal.vue";
-import UserManage from "@/pages/UserManage.vue";
-
+import Bookmark from '../pages/BookMarkPage.vue';
+import AdminBoardsPage from '../pages/AdminBoardsPage.vue';
+import AdminEventsPage from '../pages/AdminEventsPage.vue';
+import HouseDeal from '../pages/HouseDeal.vue';
+import UserManage from '../pages/UserManage.vue';
 
 export default new VueRouter({
   routes: [
@@ -55,31 +52,31 @@ export default new VueRouter({
       component: EventDetails,
     },
     {
-      path: "/houseDeal",
+      path: '/houseDeal',
       component: HouseDeal,
     },
     {
-      path: "/adminDetail",
+      path: '/adminDetail',
       component: UserDetail,
     },
     {
-      path: "/userManage",
+      path: '/userManage',
       component: UserManage,
     },
     {
-      path: "/adminBoardsPage",
+      path: '/adminBoardsPage',
       component: AdminBoardsPage,
     },
     {
-      path: "/adminEventsPage",
+      path: '/adminEventsPage',
       component: AdminEventsPage,
     },
     {
-      path: "/userDatail",
+      path: '/userDatail',
       component: UserDetail,
     },
     {
-      path: "/bookmark",
+      path: '/bookmark',
       component: Bookmark,
     },
   ],
