@@ -12,9 +12,10 @@
         <div class="row align-items-center">
           <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-2 col-sm-4 col-6">
             <div class="header__left d-flex">
-              <div class="logo">
+              <div class="logo" style="vertical-align: middle">
                 <router-link to="/">
-                  <img src="../../assets/img/logo/logo.png" alt="logo" />
+                  <img src="../../assets/img/logo/logo-gif.gif" style="width: 50px" alt="logo" />
+                  <span>방구할라면</span>
                 </router-link>
               </div>
             </div>
@@ -40,8 +41,10 @@
                     <li class="has-dropdown">
                       <router-link to="/adminBoardsPage">관리자</router-link>
                       <ul class="submenu">
+                        <li><router-link to="/adminEventsPage">관리자 정보</router-link></li>
                         <li><router-link to="/adminBoardsPage">공지사항 관리</router-link></li>
                         <li><router-link to="/adminEventsPage">이벤트 관리</router-link></li>
+                        <li><router-link to="/adminEventsPage">회원 정보 관리</router-link></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
@@ -166,7 +169,7 @@
 
 <script>
 export default {
-  name: 'HomeTwoHeader',
+  name: "HomeTwoHeader",
   data() {
     return {
       isSticky: false,
@@ -206,7 +209,7 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener('scroll', this.handleSticky);
+    window.addEventListener("scroll", this.handleSticky);
   },
 };
 </script>
