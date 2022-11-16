@@ -1,21 +1,20 @@
 <template>
   <Header headerShadow="header__area header__padding header__padding-2 header__shadow " />
-  <LoginArea/>
+  <LoginArea />
   <Footer footerPadding="true" />
 </template>
 
 <script>
-import Header from '../components/HomeTwo/Header.vue';
-import LoginArea from '../components/SignIn/LoginArea.vue';
-import Footer from '../components/Home/Footer.vue';
+import Header from "../components/HomeTwo/Header.vue";
+import LoginArea from "../components/SignIn/LoginArea.vue";
+import Footer from "../components/HomeTwo/Footer.vue";
 
 export default {
-    name:'SignIn',
-    components:{
-        Header,
-        LoginArea,
-        Footer,
-    }
-}
+  name: "SignIn",
+  components: {
+    Header,
+    LoginArea,
+    Footer,
+  },
+};
 </script>
-
