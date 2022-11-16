@@ -7,7 +7,7 @@ import Home from '../pages/Home.vue';
 // import Bookmark from '@/pages/CoursesList.vue';
 // import BoardsDetails from '@/pages/BoardsDetails.vue';
 // import EventDetails from '@/pages/EventDetails.vue';
-// import SignIn from '@/pages/SignIn.vue';
+import SignIn from '@/pages/SignIn.vue';
 // import SignUp from '@/pages/SignUp.vue';
 // import UserDetail from '@/pages/UserDetail.vue';
 // import BoardsPage from '@/pages/BoardsPage.vue';
@@ -23,13 +23,13 @@ export default new VueRouter({
       path: '/',
       component: Home,
     },
-    // {
-    //   path: '/home',
-    //   component: Home,
-    // },
-    // {
-    //   path: '/login',
-    //   component: SignIn,
+    {
+      path: '/home',
+      component: Home,
+    },
+    {
+      path: '/login',
+      component: SignIn,
     // },
     // {
     //   path: '/register',
