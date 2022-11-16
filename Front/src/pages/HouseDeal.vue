@@ -1,16 +1,16 @@
 <template>
   <div>
-    <Header />
-    <MapArea />
+    <Header></Header>
+    <MapArea></MapArea>
   </div>
 </template>
 
 <script>
-import Header from '../components/HomeTwo/Header.vue';
-import MapArea from '../components/Map/MapArea.vue';
+import Header from "@/components/Home/Header.vue";
+import MapArea from "@/components/Map/MapArea.vue";
 
 export default {
-  name: 'HouseDeal',
+  name: "HouseDeal",
   components: {
     Header,
     MapArea,
