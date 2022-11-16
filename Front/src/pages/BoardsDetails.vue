@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Header from '../components/HomeTwo/Header.vue';
-import BoardsDetailsArea from '../components/Boards/BoardsDetailsArea.vue';
-import Footer from '../components/HomeTwo/Footer.vue';
+import Header from '@/components/Home/Header.vue';
+import BoardsDetailsArea from '@/components/Boards/BoardsDetailsArea.vue';
+import Footer from '@/components/Home/Footer.vue';
 
 export default {
   name: 'BoardsDetails',
