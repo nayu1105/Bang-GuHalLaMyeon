@@ -12,7 +12,6 @@
                 >공지사항<img src="../../assets/img/shape/yellow-bg.png" alt=""
               /></span>
             </h2>
-            <p>We found 13 boards available for you.</p>
           </div>
         </div>
       </div>
@@ -33,11 +32,11 @@
                   <span>{{ board.city }}</span>
                 </div>
                 <h3 class="events__title">
-                  <router-link to="/event-details">{{ board.title }}</router-link>
+                  <router-link to="/boards-details">{{ board.title }}</router-link>
                 </h3>
               </div>
               <div class="events__more">
-                <router-link to="/instructor-details" class="link-btn">
+                <router-link to="/boards-details" class="link-btn">
                   View More
                   <i class="far fa-arrow-right"></i>
                   <i class="far fa-arrow-right"></i>
