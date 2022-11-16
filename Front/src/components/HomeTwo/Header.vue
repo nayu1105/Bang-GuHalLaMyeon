@@ -10,7 +10,7 @@
     >
       <div class="container">
         <div class="row align-items-center">
-          <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-2 col-sm-4 col-6">
+          <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-3 col-sm-5 col-7">
             <div class="header__left d-flex">
               <div class="logo" style="vertical-align: middle">
                 <router-link to="/">
@@ -20,7 +20,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-10 col-sm-8 col-6">
+          <div class="col-xxl-8 col-xl-8 col-lg-7 col-md-9 col-sm-7 col-5">
             <div class="header__right d-flex justify-content-end align-items-center">
               <div class="main-menu main-menu-2">
                 <nav id="mobile-menu" class="d-none d-xl-block">
@@ -58,7 +58,7 @@
                 </nav>
               </div>
               <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
-                <router-link to="/register" class="e-btn">Sign up</router-link>
+                <router-link to="/login" class="e-btn">Login</router-link>
               </div>
               <div class="sidebar__menu d-xl-none">
                 <div @click="handleSidebar" class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
