@@ -1,0 +1,88 @@
+package com.mycom.myapp.event.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mycom.myapp.event.dao.EventDao;
+import com.mycom.myapp.event.dto.EventDto;
+import com.mycom.myapp.event.dto.EventParamDto;
+import com.mycom.myapp.event.dto.EventResultDto;
+
+@Service
+public class EventServiceImpl implements EventService {
+
+	@Autowired
+	EventDao dao;
+
+	private final int SUCCESS = 1;
+	private final int FAIL = -1;
+
+	@Override
+	public EventResultDto eventList(EventParamDto eventParamDto) {
+		EventResultDto eventResultDto = new EventResultDto();
+		try {
+			// 목록, 총건수를 가져온다.
+			List<EventDto> list = dao.eventList(eventParamDto);
+			int count = dao.eventListTotalCnt();
+			eventResultDto.setList(list);
+			eventResultDto.setCount(count);
+			eventResultDto.setResult(SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			eventResultDto.setResult(FAIL);
+		}
+		return eventResultDto;
+	}
+
+	@Override
+	public EventResultDto eventListSearchWord(EventParamDto eventParamDto) {
+		EventResultDto eventResultDto = new EventResultDto();
+		try {
+			// 목록, 총건수를 가져온다.
+			List<EventDto> list = dao.eventListSearchWord(eventParamDto);
+			int count = dao.eventListSearchWordTotalCnt(eventParamDto.getSearchWord());
+			eventResultDto.setList(list);
+			eventResultDto.setCount(count);
+			eventResultDto.setResult(SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			eventResultDto.setResult(FAIL);
+		}
+		return eventResultDto;
+	}
+
+	@Override
+	public int eventListTotalCnt() {
+		return dao.eventListTotalCnt();
+	}
+
+	@Override
+	public int eventListSearchWordTotalCnt(String searchWord) {
+		return dao.eventListSearchWordTotalCnt(searchWord);
+	}
+
+	@Override
+	public EventResultDto eventDetail(EventParamDto eventParamDto) {
+		EventResultDto eventResultDto = new EventResultDto();
+
+		try {
+			EventDto eventDto = dao.eventDetail(eventParamDto.getEventKey());
+			// 두 사용자가 같은지에 대한 sameUser 처리
+			if (eventDto.getUserSeq() == eventParamDto.getUserSeq()) {
+				eventDto.setSameUser(true);
+			} else {
+				eventDto.setSameUser(false);
+			}
+			eventResultDto.setDto(eventDto);
+			System.out.println(eventDto);
+			return eventResultDto;
+		} catch (Exception e) {
+			e.printStackTrace();
+			eventResultDto.setResult(FAIL);
+		}
+		return eventResultDto;
+	}
+
+}
