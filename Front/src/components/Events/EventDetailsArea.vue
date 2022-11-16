@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import EventDetailsTitle from './EventDetailsTitle.vue';
+import EventDetailsTitle from '@/components/Events/EventDetailsTitle.vue';
 
 export default {
   name: 'EventDetailsArea',

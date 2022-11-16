@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Header from '/components/Home/Header.vue';
-import SignUpArea from '/components/SignUp/SignUpArea.vue';
-import Footer from '/components/Home/Footer.vue';
+import Header from '@/components/Home/Header.vue';
+import SignUpArea from '@/components/SignUp/SignUpArea.vue';
+import Footer from '@/components/Home/Footer.vue';
 
 export default {
   name: 'SignUp',

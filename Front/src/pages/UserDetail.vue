@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Header from "@/components/Home/Header.vue";
-import UserDetailArea from "@/components/UserDetail/UserDetailArea.vue";
-import Footer from "@/components/Home/Footer.vue";
+import Header from '@/components/Home/Header.vue';
+import UserDetailArea from '@/components/UserDetail/UserDetailArea.vue';
+import Footer from '@/components/Home/Footer.vue';
 
 export default {
   name: "UserDetail",

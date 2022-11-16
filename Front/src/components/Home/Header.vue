@@ -173,7 +173,7 @@
 
 <script>
 export default {
-  name: "HomeTwoHeader",
+  name: 'HomeHeader',
   data() {
     return {
       isSticky: false,
