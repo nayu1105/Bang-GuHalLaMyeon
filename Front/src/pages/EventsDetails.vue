@@ -12,7 +12,7 @@ import EventDetailsArea from '@/components/Events/EventDetailsArea.vue';
 import Footer from '@/components/Home/Footer.vue';
 
 export default {
-  name: 'EventDetails',
+  name: "EventDetails",
   components: {
     Header,
     EventDetailsArea,

@@ -1,19 +1,22 @@
 <template>
   <div>
-    <Header />
-    <h4>BookMark</h4>
+    <Header header__white="header__white" />
+    <Breadcrumb title="Courses" subtitle="Courses" />
+    <BookMarkListArea />
     <Footer footerPadding="true" />
   </div>
 </template>
 
 <script>
-import Header from '../components/Home/Header.vue';
-import Footer from '../components/Home/Footer.vue';
+import Header from "@/components/Home/Header.vue";
+import BookMarkListArea from "@/components/BookMark/BookMarkList.vue";
+import Footer from "@/components/Home/Footer.vue";
 
 export default {
-  name: 'BookMarkPage',
+  name: "CoursesList",
   components: {
     Header,
+    BookMarkListArea,
     Footer,
   },
 };

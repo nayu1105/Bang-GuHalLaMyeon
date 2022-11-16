@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'; // installed module
 Vue.use(VueRouter);
 
 import Home from '../pages/Home.vue';
-// import Bookmark from '../pages/CoursesList.vue';
 import SignIn from '../pages/SignIn.vue';
 import SignUp from '../pages/SignUp.vue';
 import UserDetail from '../pages/UserDetail.vue';
@@ -12,10 +11,14 @@ import BoardsPage from '../pages/BoardsPage.vue';
 import BoardsDetails from '../pages/BoardsDetails.vue';
 import EventsPage from '../pages/EventsPage.vue';
 import EventDetails from '../pages/EventsDetails.vue';
-// import AdminBoardsPage from '../pages/AdminBoardsPage.vue';
-// import AdminEventsPage from '../pages/AdminEventsPage.vue';
-// import HouseDeal from '../pages/HouseDeal.vue';
-// import UserManage from '../pages/UserManage.vue';
+import Bookmark from "../pages/BookMarkPage.vue";
+import EventDetails from "@/pages/EventsDetails.vue";
+import UserDetail from "../pages/UserDetail.vue";
+import AdminBoardsPage from "../pages/AdminBoardsPage.vue";
+import AdminEventsPage from "../pages/AdminEventsPage.vue";
+import HouseDeal from "@/pages/HouseDeal.vue";
+import UserManage from "@/pages/UserManage.vue";
+
 
 export default new VueRouter({
   routes: [
@@ -51,33 +54,33 @@ export default new VueRouter({
       path: '/event-details',
       component: EventDetails,
     },
-    // {
-    //   path: '/houseDeal',
-    //   component: HouseDeal,
-    // },
-    // {
-    //   path: '/adminDetail',
-    //   component: UserDetail,
-    // },
-    // {
-    //   path: '/userManage',
-    //   component: UserManage,
-    // },
-    // {
-    //   path: '/adminBoardsPage',
-    //   component: AdminBoardsPage,
-    // },
-    // {
-    //   path: '/adminEventsPage',
-    //   component: AdminEventsPage,
-    // },
     {
-      path: '/userDatail',
+      path: "/houseDeal",
+      component: HouseDeal,
+    },
+    {
+      path: "/adminDetail",
       component: UserDetail,
     },
-    // {
-    //   path: '/bookmark',
-    //   component: Bookmark,
-    // },
+    {
+      path: "/userManage",
+      component: UserManage,
+    },
+    {
+      path: "/adminBoardsPage",
+      component: AdminBoardsPage,
+    },
+    {
+      path: "/adminEventsPage",
+      component: AdminEventsPage,
+    },
+    {
+      path: "/userDatail",
+      component: UserDetail,
+    },
+    {
+      path: "/bookmark",
+      component: Bookmark,
+    },
   ],
 });

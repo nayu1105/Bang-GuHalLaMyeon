@@ -7,12 +7,12 @@
 </template>
 
 <script>
-import Header from '../components/Home/Header.vue';
-import Boards from '../components/Boards/Boards.vue';
-import Footer from '../components/Home/Footer.vue';
+import Header from "@/components/Home/Header.vue";
+import Boards from "@/components/Boards/Boards.vue";
+import Footer from "@/components/Home/Footer.vue";
 
 export default {
-  name: 'AdminBoardsPage',
+  name: "AdminBoardsPage",
   components: {
     Header,
     Boards,
