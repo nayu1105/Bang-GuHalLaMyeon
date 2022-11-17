@@ -66,9 +66,9 @@
 </template>
 
 <script>
-import CourseMixin from "../../mixins/courseItemsMixin";
+import CourseMixin from '@/mixins/courseItemsMixin';
 export default {
-  name: "ListTabItems",
+  name: 'ListTabItems',
   mixins: [CourseMixin],
 };
 </script>

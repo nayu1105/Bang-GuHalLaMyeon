@@ -93,7 +93,7 @@ export default {
 }
 
 #sectionImg {
-  background-image: url('../../assets/img/hero/home_bg2.jpg');
+  background-image: url('@/assets/img/hero/home_bg2.jpg');
   background-size: cover;
 }
 

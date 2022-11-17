@@ -1,59 +1,19 @@
 <template>
   <section class="page__title-area pt-120 pb-90">
-    <div class="page__title-shape">
-      <img
-        class="page-title-shape-5 d-none d-sm-block"
-        src="../../assets/img/page-title/page-title-shape-1.png"
-        alt=""
-      />
-      <img
-        class="page-title-shape-6"
-        src="../../assets/img/page-title/page-title-shape-6.png"
-        alt=""
-      />
-      <img
-        class="page-title-shape-7"
-        src="../../assets/img/page-title/page-title-shape-4.png"
-        alt=""
-      />
-    </div>
     <div class="container">
       <div class="row">
         <div class="col-xxl-8 col-xl-8 col-lg-8">
           <div class="course__wrapper">
             <div class="page__title-content mb-25">
-              <div class="page__title-breadcrumb">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-                    <li class="breadcrumb-item">
-                      <router-link to="/courses">Courses</router-link>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                      The business Intelligence analyst Course 2022
-                    </li>
-                  </ol>
-                </nav>
-              </div>
-              <span class="page__title-pre">Development</span>
-              <h5 class="page__title-3">The business Intelligence analyst Course 2022</h5>
+              <h5 class="page__title-3">아파트 이름</h5>
             </div>
             <div class="course__meta-2 d-sm-flex mb-30">
-              <div class="course__teacher-3 d-flex align-items-center mr-70 mb-30">
-                <div class="course__teacher-thumb-3 mr-15">
-                  <img src="../../assets/img/course/teacher/teacher-1.jpg" alt="" />
-                </div>
-                <div class="course__teacher-info-3">
-                  <h5>Teacher</h5>
-                  <p><a href="#">Elon Gated</a></p>
-                </div>
-              </div>
               <div class="course__update mr-80 mb-30">
-                <h5>Last Update:</h5>
-                <p>July 24, 2022</p>
+                <h5>최근 거래 일자 :</h5>
+                <p>2022-11-17</p>
               </div>
               <div class="course__rating-2 mb-30">
-                <h5>Review:</h5>
+                <h5>Review :</h5>
                 <div class="course__rating-inner d-flex align-items-center">
                   <ul>
                     <li>
@@ -77,7 +37,7 @@
               </div>
             </div>
             <div class="course__img w-img mb-30">
-              <img src="../../assets/img/course/details/course-details-1.jpg" alt="" />
+              <img src="@/assets/img/apt/noAptImg.jpg" alt="" />
             </div>
             <div class="course__tab-2 mb-45">
               <ul class="nav nav-tabs" id="courseTab" role="tablist">
@@ -92,7 +52,7 @@
                     aria-controls="description"
                     aria-selected="true"
                   >
-                    <i class="icon_ribbon_alt"></i> <span>Discription</span>
+                    <i class="icon_ribbon_alt"></i> <span>Detail</span>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -106,7 +66,7 @@
                     aria-controls="curriculum"
                     aria-selected="false"
                   >
-                    <i class="icon_book_alt"></i> <span>Curriculum</span>
+                    <i class="icon_book_alt"></i> <span>거래 일자</span>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -120,21 +80,7 @@
                     aria-controls="review"
                     aria-selected="false"
                   >
-                    <i class="icon_star_alt"></i> <span>Reviews</span>
-                  </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button
-                    class="nav-link"
-                    id="member-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#member"
-                    type="button"
-                    role="tab"
-                    aria-controls="member"
-                    aria-selected="false"
-                  >
-                    <i class="fal fa-user"></i> <span>Members</span>
+                    <i class="icon_star_alt"></i> <span>리뷰</span>
                   </button>
                 </li>
               </ul>
@@ -188,106 +134,33 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="course__instructor mb-45">
-                      <h3>Other Instructors</h3>
-                      <div class="course__instructor-wrapper d-md-flex align-items-center">
-                        <div class="course__instructor-item d-flex align-items-center mr-70">
-                          <div class="course__instructor-thumb mr-20">
-                            <img src="../../assets/img/course/teacher/teacher-3.jpg" alt="" />
-                          </div>
-                          <div class="course__instructor-content">
-                            <h3>Eleanor Fant</h3>
-                            <p>Instructor</p>
-                          </div>
-                        </div>
-                        <div class="course__instructor-item d-flex align-items-center mr-70">
-                          <div class="course__instructor-thumb mr-20">
-                            <img src="../../assets/img/course/teacher/teacher-2.jpg" alt="" />
-                          </div>
-                          <div class="course__instructor-content">
-                            <h3>Lauren Stamps</h3>
-                            <p>Teacher</p>
-                          </div>
-                        </div>
-                        <div class="course__instructor-item d-flex align-items-center mr-70">
-                          <div class="course__instructor-thumb mr-20">
-                            <img src="../../assets/img/course/teacher/teacher-1.jpg" alt="" />
-                          </div>
-                          <div class="course__instructor-content">
-                            <h3>Jonquil Von</h3>
-                            <p>Associate</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
                 <!-- CurriculumTab start -->
-                <CurriculumTab />
+                <HouseContents />
                 <!-- CurriculumTab end -->
 
                 <!-- CurriculumTab start -->
-                <ReviewTab />
+                <HouseReviewTab />
                 <!-- CurriculumTab end -->
-
-                <!-- CurriculumTab start -->
-                <MemberTab />
-                <!-- CurriculumTab end -->
-
-                <div class="course__share">
-                  <h3>Share :</h3>
-                  <ul>
-                    <li>
-                      <a href="#" class="fb"><i class="fab fa-facebook-f"></i> </a>
-                    </li>
-                    <li>
-                      <a href="#" class="tw"><i class="fab fa-twitter"></i> </a>
-                    </li>
-                    <li>
-                      <a href="#" class="pin"><i class="fab fa-pinterest-p"></i> </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
-            </div>
-            <div class="course__related">
-              <div class="row">
-                <div class="col-xxl-12">
-                  <div class="section__title-wrapper mb-40">
-                    <h2 class="section__title">
-                      Related
-                      <span class="yellow-bg yellow-bg-big"
-                        >Course<img src="../../assets/img/shape/yellow-bg.png" alt=""
-                      /></span>
-                    </h2>
-                    <p>You don't have to struggle alone, you've got our assistance and help.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- slider courses start-->
-              <SliderCourses />
-              <!-- slider courses end-->
             </div>
           </div>
         </div>
-
-        <!-- course side bar start -->
-        <CourseSidebar />
-        <!-- course side bar end -->
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import CurriculumTab from "./CurriculumTab.vue";
-import ReviewTab from "./ReviewTab.vue";
+import HouseContents from '@/components/House/HouseContents.vue';
+import HouseReviewTab from '@/components/House/HouseReviewTab.vue';
 export default {
-  name: "CourseDetailsArea",
+  name: 'HouseDetail',
   components: {
-    CurriculumTab,
-    ReviewTab,
+    HouseContents,
+    HouseReviewTab,
   },
 };
 </script>

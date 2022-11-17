@@ -33,12 +33,12 @@
                 <div class="events__sidebar-shape">
                   <img
                     class="events-sidebar-img-2"
-                    src="../../assets/img/events/event-shape-2.png"
+                    src="@/assets/img/events/event-shape-2.png"
                     alt=""
                   />
                   <img
                     class="events-sidebar-img-3"
-                    src="../../assets/img/events/event-shape-3.png"
+                    src="@/assets/img/events/event-shape-3.png"
                     alt=""
                   />
                 </div>

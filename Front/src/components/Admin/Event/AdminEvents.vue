@@ -1,7 +1,7 @@
 <template>
   <section class="events__area pt-115 pb-120 p-relative">
     <div class="events__shape">
-      <img class="events-1-shape" src="../../assets/img/events/events-shape.png" alt="" />
+      <img class="events-1-shape" src="@/assets/img/events/events-shape.png" alt="" />
     </div>
     <div class="container">
       <div class="row">
@@ -9,7 +9,7 @@
           <div class="section__title-wrapper mb-60 text-center">
             <h2 class="section__title">
               <span class="yellow-bg yellow-bg-big"
-                >Events<img src="../../assets/img/shape/yellow-bg.png" alt=""
+                >Events<img src="@/assets/img/shape/yellow-bg.png" alt=""
               /></span>
             </h2>
             <p>We found 13 events available for you.</p>

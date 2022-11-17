@@ -15,6 +15,8 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public UserDto login(UserDto dto) {
 		UserDto userDto = loginDao.login(dto.getUserEmail());
+		
+		System.out.println("service"+userDto);
 
 		// userDto 는 테이블에서 조회한 데이터가 포함 
 		// dto는 client가 전송한 데이터가 포함 

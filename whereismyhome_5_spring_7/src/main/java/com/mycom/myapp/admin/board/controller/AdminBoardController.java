@@ -31,7 +31,7 @@ public class AdminBoardController {
 	@GetMapping(value= "/admin/boards")
 	public ResponseEntity<BoardResultDto> boardList(BoardParamDto boardParamDto) {
 		BoardResultDto boardResultDto;
-
+		System.out.println(boardParamDto);
 		// servcie 호출할때, searchWord 유무에 따라 분리해서 처리
 		if (boardParamDto.getSearchWord() == null || boardParamDto.getSearchWord().isEmpty()) {
 			boardResultDto = service.boardList(boardParamDto);

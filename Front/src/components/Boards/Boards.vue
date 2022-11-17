@@ -1,7 +1,7 @@
 <template>
   <section class="events__area pt-115 pb-120 p-relative">
     <div class="events__shape">
-      <img class="events-1-shape" src="../../assets/img/events/events-shape.png" alt="" />
+      <img class="events-1-shape" src="@/assets/img/events/events-shape.png" alt="" />
     </div>
     <div class="container">
       <div class="row">
@@ -9,7 +9,7 @@
           <div class="section__title-wrapper mb-60 text-center">
             <h2 class="section__title">
               <span class="yellow-bg yellow-bg-big"
-                >공지사항<img src="../../assets/img/shape/yellow-bg.png" alt=""
+                >공지사항<img src="@/assets/img/shape/yellow-bg.png" alt=""
               /></span>
             </h2>
           </div>
@@ -27,8 +27,7 @@
             >
               <div class="events__content">
                 <div class="events__meta">
-                  <span>{{ board.regDt.date }}</span>
-                  <span>{{ board.regDt.date }}</span>
+                  <span>{{ board.regDt.date | makeDateStr('.') }}</span>
                 </div>
                 <h3 class="events__title">
                   <router-link to="/boards-details">{{ board.title }}</router-link>
@@ -65,15 +64,23 @@ export default {
     },
   },
   methods: {
-    // list
-    // store actions 에 구현
-    // 가능한 한 가지 방법
     boardList() {
       this.$store.dispatch('boardList');
     },
   },
   created() {
     this.boardList();
+  },
+  filters: {
+    makeDateStr: function (date, separator) {
+      return (
+        date.year +
+        separator +
+        (date.month < 10 ? '0' + date.month : date.month) +
+        separator +
+        (date.day < 10 ? '0' + date.day : date.day)
+      );
+    },
   },
 };
 </script>

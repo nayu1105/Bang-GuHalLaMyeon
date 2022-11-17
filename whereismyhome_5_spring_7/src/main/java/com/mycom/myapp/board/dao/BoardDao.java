@@ -10,7 +10,7 @@ import com.mycom.myapp.board.dto.BoardParamDto;
 
 @Mapper
 public interface BoardDao {
-	List<BoardDto> boardList(BoardParamDto boardParamDto);
+	List<BoardDto> boardList();
 	List<BoardDto> boardListSearchWord(BoardParamDto boardParamDto);
 	
 	int boardListTotalCnt();

@@ -94,7 +94,7 @@ public class BoardDto {
 	public String toString() {
 		return "BoardDto [boardId=" + boardId + ", userSeq=" + userSeq + ", userName=" + userName
 				+ ", userProfileImageUrl=" + userProfileImageUrl + ", title=" + title + ", content=" + content
-				+ ", regDt=" + regDt + ",  sameUser=" + sameUser + "]";
+				+ ", regDt=" + regDt + ", sameUser=" + sameUser + "]";
 	}
 
 }
