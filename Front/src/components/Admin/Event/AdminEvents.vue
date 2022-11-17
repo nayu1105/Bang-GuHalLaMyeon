@@ -1,7 +1,7 @@
 <template>
   <section class="events__area pt-115 pb-120 p-relative">
     <div class="events__shape">
-      <img class="events-1-shape" src="../../assets/img/events/events-shape.png" alt="" />
+      <img class="events-1-shape" src="@/assets/img/events/events-shape.png" alt="" />
     </div>
     <div class="container">
       <div class="row">
@@ -9,16 +9,17 @@
           <div class="section__title-wrapper mb-60 text-center">
             <h2 class="section__title">
               <span class="yellow-bg yellow-bg-big"
-                >공지사항<img src="../../assets/img/shape/yellow-bg.png" alt=""
+                >Events<img src="@/assets/img/shape/yellow-bg.png" alt=""
               /></span>
             </h2>
+            <p>We found 13 events available for you.</p>
           </div>
         </div>
       </div>
       <div class="row">
         <div
-          v-for="board in BoardData"
-          :key="board.id"
+          v-for="event in EventData"
+          :key="event.id"
           class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1"
         >
           <div class="events__item mb-10 hover__active">
@@ -27,16 +28,23 @@
             >
               <div class="events__content">
                 <div class="events__meta">
-                  <span>{{ board.date }}</span>
-                  <span>{{ board.time }}</span>
-                  <span>{{ board.city }}</span>
+                  <span>{{ event.date }}</span>
+                  <span>{{ event.time }}</span>
+                  <span>{{ event.city }}</span>
                 </div>
                 <h3 class="events__title">
-                  <router-link to="/boards-details">{{ board.title }}</router-link>
+                  <router-link to="/event-details">{{ event.title }}</router-link>
                 </h3>
               </div>
+
+              <!-- 이벤트 관리 리스트에서는 진행 상황을 바로 수정할 수 있게 만들면 어떨지..?  -->
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                <label class="form-check-label" for="flexSwitchCheckDefault">진행 중</label>
+              </div>
+
               <div class="events__more">
-                <router-link to="/boards-details" class="link-btn">
+                <router-link to="/event-details" class="link-btn">
                   View More
                   <i class="far fa-arrow-right"></i>
                   <i class="far fa-arrow-right"></i>
@@ -52,10 +60,10 @@
 
 <script>
 export default {
-  name: 'BoardArea',
+  name: 'EventArea',
   data() {
     return {
-      BoardData: [
+      EventData: [
         {
           id: 1,
           title: 'Digital transformation conference',

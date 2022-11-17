@@ -1,4 +1,4 @@
-@use "../abstract" as *;
+@use '../abstract' as *;
 
 /*----------------------------------------*/
 /*  02. HEADER CSS START
@@ -88,7 +88,7 @@
               & li {
                 & a {
                   &::before {
-                    background: $e-blue;
+                    background: #f49d1a;
                   }
                 }
               }
@@ -109,10 +109,10 @@
       & .cat-menu {
         color: $black;
         &:hover {
-          color: $e-blue;
+          color: #f49d1a;
           & svg {
             & .cat-dot {
-              fill: $e-blue;
+              fill: #f49d1a;
             }
           }
         }
@@ -182,7 +182,7 @@
     padding-top: 3px;
     &::after {
       position: absolute;
-      content: "";
+      content: '';
       left: 0;
       top: 60%;
       @include transform(translateY(-50%));
@@ -297,7 +297,7 @@
     padding-left: 18px;
     &::after {
       position: absolute;
-      content: "";
+      content: '';
       top: -5px;
       left: 0;
       width: 2px;
@@ -525,7 +525,7 @@
         & > a {
           position: relative;
           &::after {
-            content: "\f107";
+            content: '\f107';
             @include transform(translateY(1px));
             font-size: 14px;
             color: $black;
@@ -586,7 +586,7 @@
             width: 100%;
             &::before {
               position: absolute;
-              content: "";
+              content: '';
               top: 0;
               left: auto;
               right: 0;
@@ -655,7 +655,7 @@
         }
         &::after {
           position: absolute;
-          content: "";
+          content: '';
           bottom: -5px;
           left: 10px;
           width: 0;
@@ -677,7 +677,7 @@
         position: relative;
         &::before {
           position: absolute;
-          content: "";
+          content: '';
           left: auto;
           right: 0;
           bottom: 38px;

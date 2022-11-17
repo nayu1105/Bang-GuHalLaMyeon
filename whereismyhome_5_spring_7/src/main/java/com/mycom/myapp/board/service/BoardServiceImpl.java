@@ -25,7 +25,7 @@ public class BoardServiceImpl implements BoardService {
 		BoardResultDto boardResultDto = new BoardResultDto();
 		try {
 			// 목록, 총건수를 가져온다.
-			List<BoardDto> list = dao.boardList(boardParamDto);
+			List<BoardDto> list = dao.boardList();
 			int count = dao.boardListTotalCnt();
 			boardResultDto.setList(list);
 			boardResultDto.setCount(count);

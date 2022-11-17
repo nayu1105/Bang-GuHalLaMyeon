@@ -17,7 +17,7 @@
               <div class="header__left d-flex">
                 <div class="logo" style="vertical-align: middle">
                   <router-link to="/">
-                    <img src="../../assets/img/logo/logo-gif.gif" style="width: 50px" alt="logo" />
+                    <img src="@/assets/img/logo/logo-gif.gif" style="width: 50px" alt="logo" />
                     <span>방구할라면</span>
                   </router-link>
                 </div>
@@ -30,24 +30,24 @@
                     <ul>
                       <li><router-link to="/">Home</router-link></li>
                       <li class="has-dropdown">
-                        <router-link to="/boardsPage">공지사항</router-link>
+                        <router-link to="/boards">공지사항</router-link>
                         <ul class="submenu">
                           <li>
-                            <router-link to="/boardsPage">공지사항</router-link>
+                            <router-link to="/boards">공지사항</router-link>
                           </li>
                           <li>
-                            <router-link to="/eventsPage">이벤트</router-link>
+                            <router-link to="/events">이벤트</router-link>
                           </li>
                         </ul>
                       </li>
                       <li><router-link to="/houseDeal">실거래가</router-link></li>
                       <li class="has-dropdown">
-                        <router-link to="/adminBoardsPage">관리자</router-link>
+                        <router-link to="/adminBoards">관리자</router-link>
                         <ul class="submenu">
-                          <li><router-link to="/adminEventsPage">관리자 정보</router-link></li>
-                          <li><router-link to="/adminBoardsPage">공지사항 관리</router-link></li>
-                          <li><router-link to="/adminEventsPage">이벤트 관리</router-link></li>
-                          <li><router-link to="/adminEventsPage">회원 정보 관리</router-link></li>
+                          <li><router-link to="/adminEvents">관리자 정보</router-link></li>
+                          <li><router-link to="/adminBoards">공지사항 관리</router-link></li>
+                          <li><router-link to="/adminEvents">이벤트 관리</router-link></li>
+                          <li><router-link to="/adminEvents">회원 정보 관리</router-link></li>
                         </ul>
                       </li>
                       <li class="has-dropdown">
@@ -89,7 +89,7 @@
         <div class="sidebar__content">
           <div class="logo mb-40">
             <router-link to="/">
-              <img src="../../assets/img/logo/logo.png" alt="logo" />
+              <img src="@/assets/img/logo/logo.png" alt="logo" />
             </router-link>
           </div>
 
@@ -105,10 +105,10 @@
                 <a @click="menuOption.boardsDropdown = !menuOption.boardsDropdown">공지사항</a>
                 <ul class="sub-menu" :class="[menuOption.boardsDropdown === true ? 'active' : '']">
                   <li>
-                    <router-link to="/boardsPage">공지사항</router-link>
+                    <router-link to="/boards">공지사항</router-link>
                   </li>
                   <li>
-                    <router-link to="/eventsPage">이벤트</router-link>
+                    <router-link to="/events">이벤트</router-link>
                   </li>
                 </ul>
               </li>
@@ -122,8 +122,8 @@
               >
                 <a @click="menuOption.adminDropDown = !menuOption.adminDropDown">관리자</a>
                 <ul class="sub-menu" :class="[menuOption.adminDropDown === true ? 'active' : '']">
-                  <li><router-link to="/adminBoardsPage">공지사항 관리</router-link></li>
-                  <li><router-link to="/adminEventsPage">이벤트 관리</router-link></li>
+                  <li><router-link to="/adminBoards">공지사항 관리</router-link></li>
+                  <li><router-link to="/adminEvents">이벤트 관리</router-link></li>
                 </ul>
               </li>
               <li
@@ -207,7 +207,7 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener("scroll", this.handleSticky);
+    window.addEventListener('scroll', this.handleSticky);
   },
 };
 </script>
