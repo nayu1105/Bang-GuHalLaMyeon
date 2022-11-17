@@ -1,23 +1,46 @@
-package com.mycom.myapp.event.service;
+package com.mycom.myapp.admin.event.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mycom.myapp.event.dao.EventDao;
-import com.mycom.myapp.event.dto.EventDto;
-import com.mycom.myapp.event.dto.EventParamDto;
-import com.mycom.myapp.event.dto.EventResultDto;
+import com.mycom.myapp.admin.board.dto.BoardDto;
+import com.mycom.myapp.admin.board.dto.BoardResultDto;
+import com.mycom.myapp.admin.event.dao.AdminEventDao;
+import com.mycom.myapp.admin.event.dto.EventDto;
+import com.mycom.myapp.admin.event.dto.EventParamDto;
+import com.mycom.myapp.admin.event.dto.EventResultDto;
 
 @Service
-public class EventServiceImpl implements EventService {
+public class AdminEventServiceImpl implements AdminEventService {
 
 	@Autowired
-	EventDao dao;
+	AdminEventDao dao;
 
 	private final int SUCCESS = 1;
 	private final int FAIL = -1;
+
+	@Override
+	public EventResultDto eventInsert(EventDto dto) {
+		EventResultDto eventResultDto = new EventResultDto();
+		eventResultDto.setResult(dao.eventInsert(dto));
+		return eventResultDto;
+	}
+
+	@Override
+	public EventResultDto eventUpdate(EventDto dto) {
+		EventResultDto eventResultDto = new EventResultDto();
+		eventResultDto.setResult(dao.eventUpdate(dto));
+		return eventResultDto;
+	}
+
+	@Override
+	public EventResultDto eventDelete(int eventId) {
+		EventResultDto eventResultDto = new EventResultDto();
+		eventResultDto.setResult(dao.eventDelete(eventId));
+		return eventResultDto;
+	}
 
 	@Override
 	public EventResultDto eventList(EventParamDto eventParamDto) {
@@ -65,18 +88,17 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public EventResultDto eventDetail(EventParamDto eventParamDto) {
-		EventResultDto eventResultDto = new EventResultDto();
+		EventResultDto boardResultDto = new EventResultDto();
 
 		try {
 			EventDto eventDto = dao.eventDetail(eventParamDto.getEventId());
-			eventResultDto.setDto(eventDto);
-			System.out.println(eventDto);
-			return eventResultDto;
+			boardResultDto.setDto(eventDto);
+			return boardResultDto;
 		} catch (Exception e) {
 			e.printStackTrace();
-			eventResultDto.setResult(FAIL);
+			boardResultDto.setResult(FAIL);
 		}
-		return eventResultDto;
+		return boardResultDto;
 	}
 
 }

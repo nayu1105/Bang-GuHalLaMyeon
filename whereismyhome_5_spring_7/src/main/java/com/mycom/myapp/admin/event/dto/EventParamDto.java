@@ -1,4 +1,4 @@
-package com.mycom.myapp.event.dto;
+package com.mycom.myapp.admin.event.dto;
 
 public class EventParamDto {
 	// Spring 에서 자동으로 파라미터 처리를 해주는 기능을 활용하기 위해

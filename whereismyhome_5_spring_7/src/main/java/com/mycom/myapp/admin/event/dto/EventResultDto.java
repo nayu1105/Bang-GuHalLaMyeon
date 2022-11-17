@@ -1,4 +1,4 @@
-package com.mycom.myapp.event.dto;
+package com.mycom.myapp.admin.event.dto;
 
 import java.util.List;
 

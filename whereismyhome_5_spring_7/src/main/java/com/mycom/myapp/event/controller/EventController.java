@@ -33,6 +33,8 @@ public class EventController {
 			eventResultDto = service.eventListSearchWord(eventParamDto);
 		}
 
+		System.out.println(eventParamDto.toString());
+		
 		if (eventResultDto.getResult() == SUCCESS) {
 			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.OK);
 		} else {
@@ -42,11 +44,11 @@ public class EventController {
 	}
 	
 	// eventDetail
-	@GetMapping(value= "/events/{eventKey}")
-	public ResponseEntity<EventResultDto> eventDetail(@PathVariable int eventKey, HttpSession session) {
+	@GetMapping(value= "/events/{eventId}")
+	public ResponseEntity<EventResultDto> eventDetail(@PathVariable int eventId, HttpSession session) {
 		
 		EventParamDto eventParamDto = new EventParamDto();
-		eventParamDto.setEventKey(eventKey);
+		eventParamDto.setEventId(eventId);
 		
 		UserDto userDto = (UserDto) session.getAttribute("userDto"); // 현재 로그인되어서 상세 요청을 한 사용자 정보
 		eventParamDto.setUserSeq(userDto.getUserSeq()); // 사용자 seq
