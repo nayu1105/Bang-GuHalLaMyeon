@@ -35,8 +35,11 @@
     font-size: 72px;
     line-height: 1;
 
+    @media #{$xxl} {
+      font-size: 65px;
+    }
     @media #{$xl} {
-      font-size: 60px;
+      font-size: 62px;
     }
     @media #{$lg} {
       font-size: 50px;
@@ -335,7 +338,8 @@
       }
     }
 
-    #selectForm {
+    #selectForm,
+    .cont-select {
       @media #{$md} {
         display: block;
       }
@@ -472,6 +476,18 @@
         fill: $white;
       }
     }
+  }
+}
+
+.container-80 {
+  @media #{$xxxl} {
+    width: 40% !important;
+  }
+  @media #{$xxl} {
+    width: 50% !important;
+  }
+  @media #{$xl} {
+    width: 60% !important;
   }
 }
 
