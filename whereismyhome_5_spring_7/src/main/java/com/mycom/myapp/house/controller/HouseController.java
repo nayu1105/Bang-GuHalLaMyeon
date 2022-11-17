@@ -25,9 +25,9 @@ public class HouseController {
 	private final int SUCCESS = 1;
 
 	
-	private final String SERVICE_URL = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
-	private final String SERVICE_KEY = "s%2BgxQEYCcJodyCSOlob44s%2Fgj61vZR9gXEcFlYBdCHQfFaGKVwlH1k9usrKhkLQ9Gd3V%2FC1LtNheA3vnW02SGQ%3D%3D";
-	
+//	private final String SERVICE_URL = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
+//	private final String SERVICE_KEY = "s%2BgxQEYCcJodyCSOlob44s%2Fgj61vZR9gXEcFlYBdCHQfFaGKVwlH1k9usrKhkLQ9Gd3V%2FC1LtNheA3vnW02SGQ%3D%3D";
+//	
 	// detail
 	@GetMapping(value = "/houses/{houseSeq}")
 	public ResponseEntity<HouseDto> houseDetail(@PathVariable int houseSeq) {

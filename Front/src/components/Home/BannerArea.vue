@@ -7,7 +7,7 @@
             <h2 class="section__title">
               Current
               <span class="yellow-bg yellow-bg-big"
-                >Events<img src="../../assets/img/shape/yellow-bg.png" alt=""
+                >Events<img src="@/assets/img/shape/yellow-bg.png" alt=""
               /></span>
             </h2>
             <p>이벤트 참여하고 혜택 받아가세요!</p>
@@ -20,7 +20,7 @@
           <div
             class="banner__item p-relative mb-40"
             :style="{
-              background: 'url(' + require('../../assets/img/banner/banner-bg-1.jpg') + ')',
+              background: 'url(' + require('@/assets/img/banner/banner-bg-1.jpg') + ')',
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
             }"
@@ -33,7 +33,7 @@
               <router-link to="/courses" class="e-btn e-btn-2">이벤트 참여하기</router-link>
             </div>
             <div class="banner__thumb d-none d-sm-block d-md-none d-lg-block">
-              <!-- <img src="../../assets/img/banner/banner-img-1.png" alt="" /> -->
+              <!-- <img src="@/assets/img/banner/banner-img-1.png" alt="" /> -->
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
           <div
             class="banner__item p-relative mb-40"
             :style="{
-              background: 'url(' + require('../../assets/img/banner/banner-bg-2.jpg') + ')',
+              background: 'url(' + require('@/assets/img/banner/banner-bg-2.jpg') + ')',
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
             }"
@@ -56,7 +56,7 @@
               <router-link to="/courses" class="e-btn e-btn-2">회원가입</router-link>
             </div>
             <div class="banner__thumb banner__thumb-2 d-none d-sm-block d-md-none d-lg-block">
-              <!-- <img src="../../assets/img/cta/cta-shape-2.png" alt="" /> -->
+              <!-- <img src="@/assets/img/cta/cta-shape-2.png" alt="" /> -->
             </div>
           </div>
         </div>

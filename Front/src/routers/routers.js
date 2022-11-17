@@ -3,22 +3,20 @@ import VueRouter from 'vue-router'; // installed module
 
 Vue.use(VueRouter);
 
-import Home from '../pages/Home.vue';
-import SignIn from '../pages/SignIn.vue';
-import SignUp from '../pages/SignUp.vue';
-import UserDetail from '../pages/UserDetail.vue';
-import BoardsPage from '../pages/BoardsPage.vue';
-import BoardsDetails from '../pages/BoardsDetails.vue';
-import EventsPage from '../pages/EventsPage.vue';
-import EventDetails from '../pages/EventsDetails.vue';
-import Bookmark from "../pages/BookMarkPage.vue";
-import EventDetails from "@/pages/EventsDetails.vue";
-import UserDetail from "../pages/UserDetail.vue";
-import AdminBoardsPage from "../pages/AdminBoardsPage.vue";
-import AdminEventsPage from "../pages/AdminEventsPage.vue";
-import HouseDeal from "@/pages/HouseDeal.vue";
-import UserManage from "@/pages/UserManage.vue";
-
+import Home from '@/components/Home/Home.vue';
+import SignIn from '@/components/User/SignIn.vue';
+import SignUp from '@/components/User/SignUp.vue';
+import UserDetail from '@/components/User/UserDetail.vue';
+import Boards from '@/components/Boards/Boards.vue';
+import BoardsDetails from '@/components/Boards/BoardsDetails.vue';
+import Events from '@/components/Events/Events.vue';
+import EventDetails from '@/components/Events/EventDetailsArea.vue';
+import Bookmark from '@/components/BookMark/BookMark.vue';
+import AdminBoards from '@/components/Admin/Board/AdminBoards.vue';
+import AdminEvents from '@/components/Admin/Event/AdminEvents.vue';
+import HouseDeal from '@/components/House/HouseDeal.vue';
+import UserManage from '@/components/Admin/User/UserManage.vue';
+import HouseDetail from '@/components/House/HouseDetail.vue';
 
 export default new VueRouter({
   routes: [
@@ -39,47 +37,51 @@ export default new VueRouter({
       component: SignUp,
     },
     {
-      path: '/boardsPage',
-      component: BoardsPage,
+      path: '/boards',
+      component: Boards,
     },
     {
       path: '/boards-details',
       component: BoardsDetails,
     },
     {
-      path: '/eventsPage',
-      component: EventsPage,
+      path: '/events',
+      component: Events,
     },
     {
       path: '/event-details',
       component: EventDetails,
     },
     {
-      path: "/houseDeal",
+      path: '/houseDeal',
       component: HouseDeal,
     },
     {
-      path: "/adminDetail",
+      path: '/house-details',
+      component: HouseDetail,
+    },
+    {
+      path: '/adminDetail',
       component: UserDetail,
     },
     {
-      path: "/userManage",
+      path: '/userManage',
       component: UserManage,
     },
     {
-      path: "/adminBoardsPage",
-      component: AdminBoardsPage,
+      path: '/adminBoards',
+      component: AdminBoards,
     },
     {
-      path: "/adminEventsPage",
-      component: AdminEventsPage,
+      path: '/adminEvents',
+      component: AdminEvents,
     },
     {
-      path: "/userDatail",
+      path: '/userDatail',
       component: UserDetail,
     },
     {
-      path: "/bookmark",
+      path: '/bookmark',
       component: Bookmark,
     },
   ],

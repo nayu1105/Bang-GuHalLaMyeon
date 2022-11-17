@@ -103,7 +103,7 @@
           <li>
             <div class="course__comment-box">
               <div class="course__comment-thumb float-start">
-                <img src="../../assets/img/course/comment/course-comment-1.jpg" alt="" />
+                <img src="@/assets/img/course/comment/course-comment-1.jpg" alt="" />
               </div>
               <div class="course__comment-content">
                 <div class="course__comment-wrapper ml-70 fix">
@@ -143,7 +143,7 @@
           <li>
             <div class="course__comment-box">
               <div class="course__comment-thumb float-start">
-                <img src="../../assets/img/course/comment/course-comment-2.jpg" alt="" />
+                <img src="@/assets/img/course/comment/course-comment-2.jpg" alt="" />
               </div>
               <div class="course__comment-content">
                 <div class="course__comment-wrapper ml-70 fix">
@@ -243,6 +243,6 @@
 
 <script>
 export default {
-  name: "ReviewTab",
+  name: 'BoardsReviewTab',
 };
 </script>

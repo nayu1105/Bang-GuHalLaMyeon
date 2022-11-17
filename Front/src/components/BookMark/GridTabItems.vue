@@ -54,9 +54,9 @@
 </template>
 
 <script>
-import CourseMixin from "../../mixins/courseItemsMixin";
+import CourseMixin from '@/mixins/courseItemsMixin';
 export default {
-  name: "GridTab",
+  name: 'GridTab',
   mixins: [CourseMixin],
 };
 </script>

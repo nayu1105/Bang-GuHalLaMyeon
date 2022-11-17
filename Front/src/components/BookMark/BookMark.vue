@@ -120,12 +120,12 @@
 </template>
 
 <script>
-import GridTabItems from "../BookMark/GridTabItems.vue";
-import ListTabItems from "../BookMark/ListTabItems.vue";
-import Pagination from "../BookMark/Pagination.vue";
+import GridTabItems from '@/components/BookMark/GridTabItems.vue';
+import ListTabItems from '@/components/BookMark/ListTabItems.vue';
+import Pagination from '@/components/BookMark/Pagination.vue';
 
 export default {
-  name: "CoursesArea",
+  name: 'BookMark',
   components: {
     Pagination,
     GridTabItems,
