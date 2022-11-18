@@ -18,8 +18,8 @@
       </div>
       <div class="row">
         <div
-          v-for="event in EventData"
-          :key="event.id"
+          v-for="(event, index) in listGetters"
+          :key="index"
           class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1"
         >
           <div class="events__item mb-10 hover__active">
@@ -28,9 +28,7 @@
             >
               <div class="events__content">
                 <div class="events__meta">
-                  <span>{{ event.date }}</span>
-                  <span>{{ event.time }}</span>
-                  <span>{{ event.city }}</span>
+                  <span>{{ event.regDt.date | makeDateStr(".") }}</span>
                 </div>
                 <h3 class="events__title">
                   <router-link to="/event-details">{{ event.title }}</router-link>
@@ -38,7 +36,7 @@
               </div>
               <div class="events__more">
                 <router-link to="/event-details" class="link-btn">
-                  View More
+                  More
                   <i class="far fa-arrow-right"></i>
                   <i class="far fa-arrow-right"></i>
                 </router-link>
@@ -52,41 +50,39 @@
 </template>
 
 <script>
+import Vue from "vue";
+import VueAlertify from "vue-alertify";
+Vue.use(VueAlertify);
+
 export default {
-  name: 'EventArea',
+  name: "EventArea",
   data() {
-    return {
-      EventData: [
-        {
-          id: 1,
-          title: 'Digital transformation conference',
-          date: 'Jun 14, 2022',
-          time: '12:00 am - 2:30 pm',
-          city: 'New York',
-        },
-        {
-          id: 2,
-          title: 'World education day conference',
-          date: 'April 10, 2022',
-          time: '9:00 am - 5:00 pm',
-          city: 'Mindahan',
-        },
-        {
-          id: 3,
-          title: 'Foundations of global health',
-          date: 'July 16, 2022',
-          time: '10:30 am - 1:30 pm',
-          city: 'Weedpatch',
-        },
-        {
-          id: 4,
-          title: 'Business creativity workshops',
-          date: 'March 24, 2022',
-          time: '10:30 am - 12:00 pm',
-          city: 'Lnland',
-        },
-      ],
-    };
+    return {};
+  },
+  computed: {
+    // getters 이용
+    listGetters() {
+      return this.$store.getters.getEventList;
+    },
+  },
+  methods: {
+    eventList() {
+      this.$store.dispatch("eventList");
+    },
+  },
+  created() {
+    this.eventList();
+  },
+  filters: {
+    makeDateStr: function (date, separator) {
+      return (
+        date.year +
+        separator +
+        (date.month < 10 ? "0" + date.month : date.month) +
+        separator +
+        (date.day < 10 ? "0" + date.day : date.day)
+      );
+    },
   },
 };
 </script>
