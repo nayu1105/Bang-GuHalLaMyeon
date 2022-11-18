@@ -70,7 +70,7 @@ public class EventServiceImpl implements EventService {
 		try {
 			EventDto eventDto = dao.eventDetail(eventParamDto.getEventId());
 			eventResultDto.setDto(eventDto);
-			System.out.println(eventDto);
+			eventResultDto.setResult(SUCCESS);
 			return eventResultDto;
 		} catch (Exception e) {
 			e.printStackTrace();

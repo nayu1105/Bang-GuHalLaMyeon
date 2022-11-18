@@ -34,6 +34,7 @@ public class EventController {
 	@GetMapping(value= "/events")
 	public ResponseEntity<EventResultDto> eventList(EventParamDto eventParamDto) {
 		EventResultDto eventResultDto;
+		System.out.println("list");
 
 		// servcie 호출할때, searchWord 유무에 따라 분리해서 처리
 		if (eventParamDto.getSearchWord() == null || eventParamDto.getSearchWord().isEmpty()) {
@@ -55,14 +56,14 @@ public class EventController {
 	// eventDetail
 	@GetMapping(value= "/events/{eventId}")
 	public ResponseEntity<EventResultDto> eventDetail(@PathVariable int eventId, HttpSession session) {
-		System.out.println("확인");
+		System.out.println("detail");
 		
 		EventParamDto eventParamDto = new EventParamDto();
 		eventParamDto.setEventId(eventId);
 		
-		UserDto userDto = (UserDto) session.getAttribute("userDto"); // 현재 로그인되어서 상세 요청을 한 사용자 정보
-		eventParamDto.setUserSeq(userDto.getUserSeq()); // 사용자 seq
-		
+//		UserDto userDto = (UserDto) session.getAttribute("userDto"); // 현재 로그인되어서 상세 요청을 한 사용자 정보
+//		eventParamDto.setUserSeq(userDto.getUserSeq()); // 사용자 seq
+//		
 		EventResultDto eventResultDto;
 		System.out.println(eventParamDto);
 		eventResultDto = service.eventDetail(eventParamDto);
@@ -77,5 +78,5 @@ public class EventController {
 		}
 		
 	}
-	
+	 
 }

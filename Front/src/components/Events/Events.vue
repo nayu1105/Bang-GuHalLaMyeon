@@ -80,13 +80,7 @@ export default {
       console.log(eventId);
 
       try {
-        // 이 부분.. 이 코드로 하면 아예 백에 가지를 않고
-        let { data } = await http.get("/events", { eventId });
-
-        // 이 코드로 하면 백엔드 콘솔엔 잘 찍히는데 500 에러 뜸 ... ㅠㅠ 흑ㅎㄱ
-        // 백이 잘못된 걸까 ..
-        // let { data } = await http.get("/events/" + eventId);
-
+        let { data } = await http.get("/events/" + eventId  );
         console.log(data);
 
         if (data.result == "login") {
