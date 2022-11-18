@@ -41,8 +41,8 @@ public class EventController {
 		} else {
 			eventResultDto = service.eventListSearchWord(eventParamDto);
 		}
-
-		System.out.println(eventParamDto.toString());
+		
+		// System.out.println(eventParamDto);
 		
 		if (eventResultDto.getResult() == SUCCESS) {
 			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.OK);
@@ -55,6 +55,7 @@ public class EventController {
 	// eventDetail
 	@GetMapping(value= "/events/{eventId}")
 	public ResponseEntity<EventResultDto> eventDetail(@PathVariable int eventId, HttpSession session) {
+		System.out.println("확인");
 		
 		EventParamDto eventParamDto = new EventParamDto();
 		eventParamDto.setEventId(eventId);
@@ -65,6 +66,9 @@ public class EventController {
 		EventResultDto eventResultDto;
 		System.out.println(eventParamDto);
 		eventResultDto = service.eventDetail(eventParamDto);
+		
+		System.out.println(eventResultDto);
+		System.out.println("확인 " + eventId);
 		
 		if (eventResultDto.getResult() == SUCCESS) {
 			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.OK);

@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-xxl-9 col-xl-8">
           <div class="page__title-content mb-25 pr-40">
-            <h5 class="page__title-3">이벤트 1</h5>
+            <h5 class="page__title-3">{{ $store.state.event.title }}</h5>
           </div>
           <div class="course__meta-2 d-sm-flex mb-30">
             <div class="course__teacher-3 d-flex align-items-center mr-70 mb-30">
@@ -38,7 +38,33 @@
 </template>
 
 <script>
+import util from "@/common/util.js";
+
 export default {
-  name: 'EventDetailsTitle',
+  name: "EventDetailsTitle",
+  methods: {
+    // util
+    makeDateStr: util.makeDateStr,
+  },
+  filters: {
+    makeDateStr: function (date, separator) {
+      return (
+        date.year +
+        separator +
+        (date.month < 10 ? "0" + date.month : date.month) +
+        separator +
+        (date.day < 10 ? "0" + date.day : date.day)
+      );
+    },
+    makeTimeStr: function (hour, minute, second, type) {
+      return (
+        hour +
+        type +
+        (minute < 10 ? "0" + minute : minute) +
+        type +
+        (second < 10 ? "0" + second : second)
+      );
+    },
+  },
 };
 </script>
