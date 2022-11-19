@@ -37,11 +37,10 @@
                 </h3>
               </div>
               <div class="events__more">
-                <div class="link-btn">
+                <router-link :to="`/event-details/${event.eventId}`">
                   More
                   <i class="far fa-arrow-right"></i>
-                  <i class="far fa-arrow-right"></i>
-                </div>
+                </router-link>
               </div>
             </div>
           </div>
