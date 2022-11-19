@@ -86,8 +86,10 @@ export default {
         this.$store.commit('SET_LOGIN', {
           isLogin: true,
           userName: data.userName,
+          userSeq: data.userSeq,
           userProfileImageUrl: data.userProfileImageUrl,
         });
+        console.log(this.$store.state.login.userSeq);
         this.$router.push('/');
       } catch (error) {
         if (error.response.status == '404') {

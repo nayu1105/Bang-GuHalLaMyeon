@@ -15,34 +15,30 @@
             <div class="sign__form">
               <form action="#">
                 <div class="sign__input-wrapper mb-25">
-                  <h5>Full Name</h5>
+                  <h5>User Name</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="Full name" />
+                    <input type="text" v-model="userName" disabled />
                     <i class="fal fa-user"></i>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-25">
-                  <h5>Work email</h5>
+                  <h5>Email</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="e-mail address" />
+                    <input type="text" v-model="userEmail" disabled />
                     <i class="fal fa-envelope"></i>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-25">
                   <h5>Password</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="Password" />
+                    <input type="text" v-model="userPassword" disabled />
                     <i class="fal fa-lock"></i>
                   </div>
                 </div>
-                <div class="sign__input-wrapper mb-10">
-                  <h5>Re-Password</h5>
-                  <div class="sign__input">
-                    <input type="text" placeholder="Re-Password" />
-                    <i class="fal fa-lock"></i>
-                  </div>
+                <div class="user_btn">
+                <button class="e-btn"><span></span> 수정</button>
+                <button class="e-btn ml-10"><span></span> 탈퇴</button>
                 </div>
-                <button class="e-btn w-100"><span></span> Sign Up</button>
               </form>
             </div>
           </div>
@@ -53,7 +49,35 @@
 </template>
 
 <script>
+import http from '@/common/axios.js';
+import Vue from "vue";
+import VueAlertify from "vue-alertify";
+Vue.use(VueAlertify);
 export default {
   name: "UserDetailArea",
+  data() {
+    return {
+      userName: "",
+      userEmail: "",
+      userPassword: "",
+    };
+  },
+  methods: {
+    async getUserDetail() {
+      let userSeq = this.$store.state.login.userSeq;
+      try {
+        let {data} = await http.get("/user/"+userSeq);
+        this.userName = data.userName;
+        this.userEmail = data.userEmail;
+        this.userPassword = data.userPassword;
+      } catch (error) {
+        console.log(error);
+        this.$alertify.error("Opps!! 서버에 문제가 발생했습니다.");
+      }
+    },
+  },
+  created() {
+    this.getUserDetail();
+  },
 };
 </script>

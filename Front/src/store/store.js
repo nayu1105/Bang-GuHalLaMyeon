@@ -15,6 +15,7 @@ export default new Vuex.Store({
       // NavBar
       isLogin: false,
 
+      userSeq: "",
       userName: "",
       userProfileImageUrl: "",
 
@@ -77,6 +78,7 @@ export default new Vuex.Store({
     SET_LOGIN(state, payload) {
       state.login.isLogin = payload.isLogin;
       state.login.userName = payload.userName;
+      state.login.userSeq = payload.userSeq;
       state.login.userProfileImageUrl = payload.userProfileImageUrl;
     },
 
