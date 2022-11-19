@@ -35,14 +35,9 @@ public class BoardController {
 	// boardList
 	@GetMapping(value= "/boards")
 	public ResponseEntity<BoardResultDto> boardList(BoardParamDto boardParamDto) {
-		System.out.println("boards");
 		BoardResultDto boardResultDto;
-		if (boardParamDto.getSearchWord() == null || boardParamDto.getSearchWord().isEmpty()) {
-			boardResultDto = service.boardList(boardParamDto);
-		} else {
-			boardResultDto = service.boardListSearchWord(boardParamDto);
-		}
-
+		boardResultDto = service.boardList(boardParamDto);
+		
 		if (boardResultDto.getResult() == SUCCESS) {
 			return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.OK);
 		} else {
@@ -54,15 +49,10 @@ public class BoardController {
 	// boardDetail
 	@GetMapping(value= "/boards/{boardId}")
 	public ResponseEntity<BoardResultDto> boardDetail(@PathVariable int boardId, HttpSession session) {
-		System.out.println("detail");
 		BoardParamDto boardParamDto = new BoardParamDto();
 		boardParamDto.setBoardId(boardId);
 		
-		UserDto userDto = (UserDto) session.getAttribute("userDto"); // 현재 로그인되어서 상세 요청을 한 사용자 정보
-		boardParamDto.setUserSeq(userDto.getUserSeq()); // 사용자 seq
-		
 		BoardResultDto boardResultDto;
-		System.out.println(boardParamDto);
 		boardResultDto = service.boardDetail(boardParamDto);
 		
 		if (boardResultDto.getResult() == SUCCESS) {

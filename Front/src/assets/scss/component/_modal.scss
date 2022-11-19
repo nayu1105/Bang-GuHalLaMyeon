@@ -3,6 +3,12 @@ iframe {
 	height: 350px;
 	width: 100%;
 }
+.modal{
+    top:60px;
+}
+.modal-body{
+    margin-top: 20px;
+}
 .modal-body p {
 	margin-bottom: 0;
 }
@@ -20,31 +26,38 @@ iframe {
 }
 .modal-content {
     border: none;
-    padding: 10px;
+    padding: 20px;
     padding-bottom: 0;
-    background: transparent;
+    // background: transparent;
 }
 .modal-dialog {
     max-width: 700px;
 }
-.modal-content button.btn-close {
-    box-sizing: content-box;
-    width: 1em;
-    height: 1em;
-    padding: 0.25em 0.25em;
-    color: #000;
-    background: transparent url("../img/icon/close.png") center/1em auto no-repeat;
-    border: 0;
-    border-radius: 0.25rem;
+// .modal-content button.btn-close {
+//     box-sizing: content-box;
+//     width: 1em;
+//     height: 1em;
+//     padding: 0.25em 0.25em;
+//     color: #000;
+//     background: transparent url("../img/icon/close.png") center/1em auto no-repeat;
+//     border: 0;
+//     border-radius: 0.25rem;
+//     opacity: 1;
+// }
+.btn-close{
+    margin: 0.3rem !important;
+}
+.btn-close:hover {    
     opacity: 1;
 }
-.btn-close:hover {
-    opacity: 1;
-}
-.btn-close:focus {
-    box-shadow: none;
-}
+// .btn-close:focus {
+//     box-shadow: none;
+// }
 
-.modal-footer {
-	display: none;
-}
+// .modal-footer {
+// 	display: none;
+// }
+
+// .modal-btn{
+//     color: #f49d1a;
+// }

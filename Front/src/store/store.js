@@ -1,12 +1,12 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-import http from '@/common/axios.js';
-import util from '@/common/util.js';
+import http from "@/common/axios.js";
+import util from "@/common/util.js";
 
-import router from '@/routers/routers.js';
+import router from "@/routers/routers.js";
 
 export default new Vuex.Store({
   state: {
@@ -15,12 +15,12 @@ export default new Vuex.Store({
       // NavBar
       isLogin: false,
 
-      userName: '',
-      userProfileImageUrl: '',
+      userName: "",
+      userProfileImageUrl: "",
 
       // Login
-      userEmail: 'nanana@ssafy.com',
-      userPassword: '1234',
+      userEmail: "nanana@ssafy.com",
+      userPassword: "1234",
     },
     //
     board: {
@@ -28,7 +28,6 @@ export default new Vuex.Store({
       list: [],
       limit: 10,
       offset: 0,
-      searchWord: '',
 
       // pagination
       listRowCount: 10,
@@ -40,14 +39,12 @@ export default new Vuex.Store({
       // detail, update, delete
 
       boardId: 0,
-      title: '',
-      content: '',
-      userName: '',
-      regDate: '',
-      regTime: '',
+      title: "",
+      content: "",
+      userName: "",
+      regDate: "",
+      regTime: "",
       readCount: 0,
-      fileList: [],
-      sameUser: false,
     },
     // event: {
     //   // list
@@ -105,21 +102,25 @@ export default new Vuex.Store({
         payload.regDt.date.year,
         payload.regDt.date.month,
         payload.regDt.date.day,
-        '.'
+        "."
       );
       state.board.regTime = util.makeTimeStr(
         payload.regDt.time.hour,
         payload.regDt.time.minute,
         payload.regDt.time.second,
-        ':'
+        ":"
       );
       state.board.readCount = payload.readCount;
-      state.board.fileList = payload.fileList;
       state.board.sameUser = payload.sameUser;
     },
     // for UpdateModal title v-modal
     SET_BOARD_TITLE(state, title) {
-      state.board.board.title = title;
+      state.board.title = title;
+    },
+    SET_BOARD_UPDATE(state, payload) {
+      state.board.boardId = payload.boardId;
+      state.board.title = payload.title;
+      state.board.content = payload.content;
     },
 
     // SET_EVENT_LIST(state, list) {
@@ -170,14 +171,14 @@ export default new Vuex.Store({
         searchWord: this.state.board.searchWord,
       };
       try {
-        let { data } = await http.get('/boards', { params }); // params: params shorthand property, let response 도 제거
-        console.log('BoardMainVue: data : ');
+        let { data } = await http.get("/boards", { params }); // params: params shorthand property, let response 도 제거
+        console.log("BoardMainVue: data : ");
         console.log(data);
-        if (data.result == 'login') {
-          router.push('/login');
+        if (data.result == "login") {
+          router.push("/login");
         } else {
-          context.commit('SET_BOARD_LIST', data.list);
-          context.commit('SET_BOARD_TOTAL_LIST_ITEM_COUNT', data.count);
+          context.commit("SET_BOARD_LIST", data.list);
+          context.commit("SET_BOARD_TOTAL_LIST_ITEM_COUNT", data.count);
         }
       } catch (error) {
         console.error(error);

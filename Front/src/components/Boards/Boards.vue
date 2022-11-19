@@ -29,16 +29,14 @@
                 <div class="events__meta">
                   <span>{{ board.regDt.date | makeDateStr('.') }}</span>
                 </div>
-                <h3 class="events__title">
-                  <router-link to="/boards-details">{{ board.title }}</router-link>
-                </h3>
+                <h3 class="events__title link-btn" @click="boardDetail(board.boardId)">{{ board.title }}</h3>
               </div>
               <div class="events__more">
-                <router-link to="/boards-details" class="link-btn">
+                 <div class="link-btn" @click="boardDetail(board.boardId)">
                   More
                   <i class="far fa-arrow-right"></i>
                   <i class="far fa-arrow-right"></i>
-                </router-link>
+                </div>
               </div>
             </div>
           </div>
@@ -49,7 +47,7 @@
 </template>
 
 <script>
-// import http from '@/common/axios.js';
+import http from '@/common/axios.js';
 // import util from '@/common/util.js';
 
 import Vue from 'vue';
@@ -67,6 +65,25 @@ export default {
     boardList() {
       this.$store.dispatch('boardList');
     },
+    async boardDetail(boardId){
+      // back-end에서 detail 정보 가지고 와서
+      // store 에 detail 요소 바꾼 후
+      // router 를 이용해 이동
+
+      try{
+        let { data } = await http.get("/boards/"+ boardId ); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          this.$store.commit("SET_BOARD_DETAIL", data.dto);
+       }
+      }catch(error){
+        console.log(error);
+        this.$alertify.error("서버에 문제가 있습니다");
+      }
+
+      this.$router.push('/boards-details');
+    }
   },
   created() {
     this.boardList();

@@ -1,87 +1,92 @@
-import Vue from 'vue'; // defalut module
-import VueRouter from 'vue-router'; // installed module
+import Vue from "vue"; // defalut module
+import VueRouter from "vue-router"; // installed module
 
 Vue.use(VueRouter);
 
-import Home from '@/components/Home/Home.vue';
-import SignIn from '@/components/User/SignIn.vue';
-import SignUp from '@/components/User/SignUp.vue';
-import UserDetail from '@/components/User/UserDetail.vue';
-import Boards from '@/components/Boards/Boards.vue';
-import BoardsDetails from '@/components/Boards/BoardsDetails.vue';
-import Events from '@/components/Events/Events.vue';
-import EventDetails from '@/components/Events/EventDetailsArea.vue';
-import Bookmark from '@/components/BookMark/BookMark.vue';
-import AdminBoards from '@/components/Admin/Board/AdminBoards.vue';
-import AdminEvents from '@/components/Admin/Event/AdminEvents.vue';
-import HouseDeal from '@/components/House/HouseDeal.vue';
-import UserManage from '@/components/Admin/User/UserManage.vue';
-import HouseDetail from '@/components/House/HouseDetail.vue';
+import Home from "@/components/Home/Home.vue";
+import SignIn from "@/components/User/SignIn.vue";
+import SignUp from "@/components/User/SignUp.vue";
+import UserDetail from "@/components/User/UserDetail.vue";
+import Boards from "@/components/Boards/Boards.vue";
+import BoardsDetails from "@/components/Boards/BoardsDetails.vue";
+import AdminBoardsDetails from "@/components/Admin/Board/AdminBoardsDetails.vue";
+import Events from "@/components/Events/Events.vue";
+import EventDetails from "@/components/Events/EventDetailsArea.vue";
+import Bookmark from "@/components/BookMark/BookMark.vue";
+import AdminBoards from "@/components/Admin/Board/AdminBoards.vue";
+import AdminEvents from "@/components/Admin/Event/AdminEvents.vue";
+import HouseDeal from "@/components/House/HouseDeal.vue";
+import UserManage from "@/components/Admin/User/UserManage.vue";
+import HouseDetail from "@/components/House/HouseDetail.vue";
 
 export default new VueRouter({
   routes: [
     {
-      path: '/',
+      path: "/",
       component: Home,
     },
     {
-      path: '/home',
+      path: "/home",
       component: Home,
     },
     {
-      path: '/login',
+      path: "/login",
       component: SignIn,
     },
     {
-      path: '/register',
+      path: "/register",
       component: SignUp,
     },
     {
-      path: '/boards',
+      path: "/boards",
       component: Boards,
     },
     {
-      path: '/boards-details',
+      path: "/boards-details",
       component: BoardsDetails,
     },
     {
-      path: '/events',
+      path: "/admin/boards-details",
+      component: AdminBoardsDetails,
+    },
+    {
+      path: "/events",
       component: Events,
     },
     {
-      path: '/event-details',
+      path: "/event-details",
       component: EventDetails,
     },
     {
-      path: '/houseDeal',
+      path: "/houseDeal",
       component: HouseDeal,
     },
     {
-      path: '/house-details',
+      path: "/house-details",
       component: HouseDetail,
     },
     {
-      path: '/adminDetail',
+      path: "/adminDetail",
       component: UserDetail,
     },
     {
-      path: '/userManage',
+      path: "/userManage",
       component: UserManage,
     },
     {
-      path: '/adminBoards',
+      path: "/adminBoards",
       component: AdminBoards,
     },
     {
-      path: '/adminEvents',
+      path: "/adminEvents",
       component: AdminEvents,
     },
     {
-      path: '/userDatail',
+      path: "/userDatail",
       component: UserDetail,
     },
     {
-      path: '/bookmark',
+      path: "/bookmark",
       component: Bookmark,
     },
   ],
