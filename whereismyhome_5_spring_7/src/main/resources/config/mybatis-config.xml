@@ -16,5 +16,7 @@
     	<mapper resource="mapper/adminboard_query.xml"></mapper>
     	<mapper resource="mapper/house_query.xml"></mapper>
     	<mapper resource="mapper/city_query.xml"></mapper>
+    	<mapper resource="mapper/event_query.xml"></mapper>
+    	<mapper resource="mapper/adminevent_query.xml"></mapper>
     </mappers>
 </configuration>

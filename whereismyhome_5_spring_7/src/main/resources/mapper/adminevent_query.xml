@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycom.myapp.admin.event.dao.AdminEventDao">
+
+	<!-- 이벤트 등록 -->
+	<insert id="eventInsert" parameterType="com.mycom.myapp.admin.event.dto.EventDto">
+		insert into EVENT (title, content, start_date, end_date, user_seq, reg_dt)
+		values ( #{title}, #{content}, #{startDate}, #{endDate}, #{userSeq}, now())
+	</insert>
+	
+	<!-- 이벤트 삭제 -->
+	<delete id="eventDelete" parameterType="int">
+		 delete from EVENT where event_id = #{eventId}
+	</delete>	
+	
+	<!-- 이벤트 수정 -->
+	<update id="eventUpdate" parameterType="com.mycom.myapp.admin.event.dto.EventDto">
+		update EVENT
+		set title = #{title}, content = #{content}, start_date = #{startDate}, end_date = #{endDate}, status_code = #{statusCode}, user_seq = #{userSeq}
+		where event_id= #{eventId}
+	</update>
+	
+	<!-- 이벤트 detail -->
+	<select id="eventDetail" parameterType="int" resultType="com.mycom.myapp.event.dto.EventDto">
+		select e.event_id, u.user_name, e.title, e.content, e.start_date, e.end_date, e.status_code, e.reg_dt 
+		from EVENT e, USERS u
+		where e.user_seq = u.user_seq
+		and e.event_id = #{eventId}
+	</select>
+	
+	<!-- 이벤트 전체 조회 -->
+	<select id="eventList" parameterType="map" resultType="com.mycom.myapp.event.dto.EventDto">
+		 select e.event_id, e.title, e.content, e.start_date, e.end_date, e.status_code
+		 from EVENT e, USERS u 
+		 where e.user_seq = u.user_seq
+		 order by e.event_id desc
+		 limit #{limit} offset #{offset}
+	</select>
+	
+	<!-- 이벤트 전체 count -->
+	<select id="eventListTotalCnt" resultType="int">
+	select count(*) from EVENT
+	</select>
+	
+	<!-- 이벤트 searchWord 조회 -->
+	<select id="eventListSearchWord" parameterType="map" resultType="com.mycom.myapp.event.dto.EventDto">
+	select e.event_id, e.user_seq, u.user_name, u.user_profile_image_url, e.title, e.content, e.reg_dt 
+	from EVENT e, USERS u
+	where e.user_seq = u.user_seq
+	and e.title like concat('%', #{searchWord}, '%')
+	order by e.event_id desc
+	limit #{limit} offset #{offset}
+	</select>
+	
+	<!-- 이벤트 searchWord count -->
+	<select id="eventListSearchWordTotalCount" parameterType="map" resultType="int">
+		select count(*) from EVENT e where e.title like concat('%', #{searchWord}, '%')
+	</select>
+</mapper>
