@@ -88,7 +88,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public int eventParticipateState(EventParticipateDto eventParticipateDto) {		
+	public Integer eventParticipateState(EventParticipateDto eventParticipateDto) {
 		return dao.eventParticipateState(eventParticipateDto);
 	}
 

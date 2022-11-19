@@ -18,6 +18,7 @@ public interface EventDao {
 	
 	EventDto eventDetail(int eventId);
 	
+	// 이벤트 참가 관련
 	int eventParticipate(EventParticipateDto eventParticipateDto);
-	int eventParticipateState(EventParticipateDto eventParticipateDto);
+	Integer eventParticipateState(EventParticipateDto eventParticipateDto);
 }

@@ -10,9 +10,57 @@
                 <img src="../../assets/img/events/event-1.jpg" alt="" />
               </div> -->
               <div class="events__details mb-35">
-                <p>
-                  {{ $store.state.event.content }}
-                </p>
+                <p v-html="$store.state.event.content"></p>
+              </div>
+            </div>
+            <hr />
+            <div class="participant-list">
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 @click="participantList" class="accordion-header" id="headingTwo">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="collapseTwo"
+                    >
+                      참가자 명단
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseTwo"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">회원 번호</th>
+                            <th scope="col">이름</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(user, index) in userList" :key="index">
+                            <td scope="row">{{ user.userSeq }}</td>
+                            <td>{{ user.userName }}</td>
+                            <td>
+                              <button
+                                @click="participantDeleteConfirm(user.userSeq)"
+                                class="btn btn-light"
+                              >
+                                삭제
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -32,17 +80,6 @@
                   />
                 </div>
                 <div class="events__info">
-                  <!-- <div
-                    class="events__info-meta mb-25 d-flex align-items-center justify-content-between"
-                  >
-                    <div class="events__info-price">
-                      <h5>$76.<span>00</span></h5>
-                      <h5 class="old-price">$142.00</h5>
-                    </div>
-                    <div class="events__info-discount">
-                      <span>68% OFF</span>
-                    </div>
-                  </div> -->
                   <div class="events__info-content mb-35">
                     <div class="events__allow mb-30">
                       <h3>시간</h3>
@@ -63,10 +100,10 @@
                 </div>
               </div>
               <div class="admin-footer">
-                <button type="button" @click="changeToUpdate" class="btn btn-sm btn-primary">
+                <button type="button" @click="changeToUpdate" class="btn btn-sm btn-primary mr-10">
                   수정
                 </button>
-                <button type="button" @click="changeToDelete" class="btn btn-sm btn-warning">
+                <button type="button" @click="changeToDelete" class="btn btn-sm btn-success">
                   삭제
                 </button>
               </div>
@@ -100,6 +137,7 @@ export default {
   data() {
     return {
       updateModal: null,
+      userList: [], // 참가자 명단
     };
   },
   created() {
@@ -110,6 +148,56 @@ export default {
     this.updateModal = new Modal(document.querySelector("#updateModal"));
   },
   methods: {
+    participantDeleteConfirm(userSeq) {
+      var $this = this;
+      this.$alertify.confirm(
+        `${userSeq}번 회원의 이벤트 참여를 삭제하겠습니까?`,
+        function () {
+          let eventId = $this.$route.params.eventId;
+          $this.participantDelete(eventId, userSeq); // this 아님
+          $this.$router.go();
+        },
+        function () {
+          console.log("canceled!!!");
+        }
+      );
+    },
+    async participantDelete(eventId, userSeq) {
+      try {
+        let response = await http.delete(`/participant/${eventId}/${userSeq}`);
+        let { data } = response;
+
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          this.$alertify.success("삭제되었습니다. ");
+        }
+      } catch (error) {
+        console.error(error);
+        this.$alertify.error("서버에 문제가 생겼습니다. ");
+      }
+    },
+    async participantList() {
+      let eventId = this.$route.params.eventId;
+      try {
+        // axios 가 json 으로 parameter 를 보내는 방법 ? 객체를 전달
+        let response = await http.get("/participantList/" + eventId);
+        let { data } = response;
+
+        console.log(data);
+
+        // interceptor session check fail
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          this.userList = data.list; // 참가자 명단
+        }
+      } catch (error) {
+        console.error(error);
+        this.$alertify.error("서버에 문제가 생겼습니다. ");
+      }
+    },
+
     async eventDetail(eventId) {
       // back-end에서 detail 정보 가지고 와서
       // store 에 detail 요소 바꾼 후

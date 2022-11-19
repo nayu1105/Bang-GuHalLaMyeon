@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mycom.myapp.admin.event.dao.AdminEventDao">
+	
+	<!-- 이벤트 참가 명단 참가자 삭제 -->
+	<delete id="participantDelete" parameterType="Integer">
+		 delete from EVENT_PARTICIPATE where event_id=#{eventId} and user_seq=#{userSeq};
+	</delete>	
+
+	<!-- 이벤트 참가 명단 리스트 --> 
+	<select id="eventParticipateList" parameterType="int" resultType="com.mycom.myapp.admin.event.dto.EventDto">
+		 select u.user_seq, u.user_name 
+	 	 from (EVENT e join EVENT_PARTICIPATE p on e.event_id = p.event_id)
+		 join USERS u on p.user_seq = u.user_seq
+    	 where e.event_id = #{eventId};
+	</select>
 
 	<!-- 이벤트 등록 -->
 	<insert id="eventInsert" parameterType="com.mycom.myapp.admin.event.dto.EventDto">

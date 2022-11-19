@@ -16,5 +16,5 @@ public interface EventService {
 	EventResultDto eventDetail(EventParamDto eventParamDto);
 	
 	EventResultDto eventParticipate(EventParticipateDto eventParticipateDto);
-	int eventParticipateState(EventParticipateDto eventParticipateDto);
+	Integer eventParticipateState(EventParticipateDto eventParticipateDto);
 }

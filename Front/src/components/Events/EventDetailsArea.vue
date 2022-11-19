@@ -60,15 +60,15 @@
                     </div>
                   </div>
                   <div class="events__join-btn">
-                    <button v-if="btnState === 0" @click="participate" class="e-btn e-btn-7 w-100">
-                      이벤트 참여하기
-                    </button>
                     <button
-                      v-else
+                      v-if="btnState === 1"
                       class="e-btn e-btn-7 w-100"
                       style="background-color: grey; pointer-events: none"
                     >
                       참여 완료
+                    </button>
+                    <button v-else class="e-btn e-btn-7 w-100" @click="participate">
+                      이벤트 참여하기
                     </button>
                   </div>
                 </div>
@@ -105,6 +105,7 @@ export default {
       try {
         let stateData = await http.get(`/eventsParticipate/${eventId}`);
         this.btnState = stateData.data;
+        console.log(this.btnState);
       } catch (error) {
         console.log("EventMainVue: error : ");
         console.log(error);

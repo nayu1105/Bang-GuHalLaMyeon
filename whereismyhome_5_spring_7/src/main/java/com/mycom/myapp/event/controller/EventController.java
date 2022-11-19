@@ -97,7 +97,7 @@ public class EventController {
 
 	// eventParticipateState
 	@GetMapping(value = "/eventsParticipate/{eventId}")
-	public int eventParticipateState(@PathVariable int eventId, HttpSession session) {
+	public Integer eventParticipateState(@PathVariable int eventId, HttpSession session) {
 		EventParticipateDto eventParticipateDto = new EventParticipateDto();
 		eventParticipateDto.setEventId(eventId);
 
@@ -106,7 +106,7 @@ public class EventController {
 
 		System.out.println(eventParticipateDto);
 
-		int result = service.eventParticipateState(eventParticipateDto);
+		Integer result = service.eventParticipateState(eventParticipateDto);
 
 		return result;
 	}

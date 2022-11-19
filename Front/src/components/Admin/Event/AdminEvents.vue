@@ -1,7 +1,7 @@
 <template>
   <section class="events__area pt-115 p-relative">
     <div class="events__shape">
-      <img class="events-1-shape" src="@/assets/img/events/events-shape.png" alt="" />
+      <!-- <img class="events-1-shape" src="@/assets/img/events/events-shape.png" alt="" /> -->
     </div>
     <div class="container">
       <div class="row">
@@ -47,11 +47,11 @@
         </div>
       </div>
       <!-- <paginationUI v-on:call-parent="movePage"></paginationUI> -->
+      <button class="d-sm-block e-btn mb-50" @click="showInsertModal" style="cursor: pointer">
+        등록
+      </button>
+      <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
     </div>
-    <button class="d-sm-block e-btn mb-50" @click="showInsertModal" style="cursor: pointer">
-      등록
-    </button>
-    <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
   </section>
 </template>
 

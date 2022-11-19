@@ -101,7 +101,6 @@ export default {
         } else {
           // 등록 성공
           this.$alertify.success("이벤트가 수정되었습니다. ");
-          this.closeModal();
         }
       } catch (error) {
         this.$alertify.error("글 수정 과정에서 오류가 발생했습니다. ");
