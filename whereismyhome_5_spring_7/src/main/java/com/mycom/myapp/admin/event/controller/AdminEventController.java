@@ -103,7 +103,7 @@ public class AdminEventController {
 	}
 
 	// eventUpdate
-	@PutMapping(value = "/admin/events")
+	@PutMapping(value = "/admin/events/{eventId}")
 	public ResponseEntity<EventResultDto> eventUpdate(EventDto eventDto) {
 		EventResultDto eventResultDto = service.eventUpdate(eventDto);
 
