@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mycom.myapp.event.dao.EventDao">
+
+	<!-- 이벤트 참가 여부 -->
+	<select id="eventParticipateState" parameterType="map" resultType="int">
+		select IFNULL(event_id=#{eventId} and user_seq=#{userSeq}, 0) from event_participate;
+	</select>
+
+	<!-- 이벤트 참가 --> 
+	<insert id="eventParticipate" parameterType="com.mycom.myapp.event.dto.EventParticipateDto">
+		insert into EVENT_PARTICIPATE (event_id, user_seq)
+			values ( #{eventId}, #{userSeq} );
+	</insert>
 	
 	<!-- 이벤트 detail -->
 	<select id="eventDetail" parameterType="int" resultType="com.mycom.myapp.event.dto.EventDto">

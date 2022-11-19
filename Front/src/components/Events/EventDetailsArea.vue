@@ -11,9 +11,7 @@
               </div> -->
               <div class="events__details mb-35">
                 <!-- <h3>이벤트 Content</h3> -->
-                <p>
-                  {{ $store.state.event.content }}
-                </p>
+                <p v-html="$store.state.event.content"></p>
               </div>
             </div>
           </div>
@@ -62,9 +60,16 @@
                     </div>
                   </div>
                   <div class="events__join-btn">
-                    <router-link to="/contact" class="e-btn e-btn-7 w-100"
-                      >이벤트 참여하기</router-link
+                    <button v-if="btnState === 0" @click="participate" class="e-btn e-btn-7 w-100">
+                      이벤트 참여하기
+                    </button>
+                    <button
+                      v-else
+                      class="e-btn e-btn-7 w-100"
+                      style="background-color: grey; pointer-events: none"
                     >
+                      참여 완료
+                    </button>
                   </div>
                 </div>
               </div>
@@ -85,11 +90,26 @@ export default {
   components: {
     EventDetailsTitle,
   },
+  data() {
+    return {
+      btnState: "",
+    };
+  },
   created() {
     let eventId = this.$route.params.eventId;
     this.eventDetail(eventId);
+    this.participateState(eventId);
   },
   methods: {
+    async participateState(eventId) {
+      try {
+        let stateData = await http.get(`/eventsParticipate/${eventId}`);
+        this.btnState = stateData.data;
+      } catch (error) {
+        console.log("EventMainVue: error : ");
+        console.log(error);
+      }
+    },
     async eventDetail(eventId) {
       // back-end에서 detail 정보 가지고 와서
       // store 에 detail 요소 바꾼 후
@@ -107,6 +127,45 @@ export default {
       } catch (error) {
         console.log("EventMainVue: error : ");
         console.log(error);
+      }
+    },
+    participate() {
+      var $this = this;
+      this.$alertify.confirm(
+        "이벤트에 참여하시겠습니까?",
+        function () {
+          $this.participateInsert($this.$store.state.event.eventId); // this 아님
+        },
+        function () {
+          console.log("canceled!!!");
+        }
+      );
+    },
+    async participateInsert(eventId) {
+      let formData = new FormData();
+      formData.append("eventId", eventId);
+
+      // multipart/form-data
+      let options = {
+        headers: { "Content-Type": "multipart/form-data" },
+      };
+
+      try {
+        let response = await http.post("/events/participate", formData, options);
+        let { data } = response;
+
+        console.log(data);
+
+        // interceptor session check fail
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          // 등록 성공
+          this.$alertify.success("이벤트에 참여되었습니다. ");
+        }
+      } catch (error) {
+        console.log(error);
+        this.$alertify.error("이벤트 참여 과정에 오류가 발생했습니다. ");
       }
     },
   },
