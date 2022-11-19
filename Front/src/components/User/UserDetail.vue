@@ -37,7 +37,7 @@
                 </div>
                 <div class="user_btn">
                 <button class="e-btn" @click="changeToUpdate"><span></span> 수정</button>
-                <button class="e-btn ml-10"><span></span> 탈퇴</button>
+                <button class="e-btn ml-10" @click="changeToDelete"><span></span> 탈퇴</button>
                 </div>
               </form>
             </div>
@@ -72,6 +72,7 @@
                 </div>
                 <div class="user_btn">
                 <button class="e-btn" @click="userUpdate"><span></span> 수정</button>
+                <button class="e-btn ml-10" @click="changeToDetail"><span></span> 취소</button>
                 </div>
               </form>
             </div>
@@ -125,19 +126,60 @@ export default {
         let {data} = await http.put("/user/"+this.userSeq, params);
         this.$store.commit("UPDATE_USER", params);
         console.log(data);
-        if(data.result=="success"){
-          this.$alertify.success("회원정보가 수정되었습니다!");
-          this.isUpdate=false;
-          this.$router.push("/userDatail");
-        }
-        else{
-          this.$alertify.error("Opps!! 서버에 문제가 발생했습니다.");
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          if(data.result=="success"){
+            this.$alertify.success("회원정보가 수정되었습니다!");
+            this.isUpdate=false;
+            this.$router.push("/userDatail");
+          }
+          else{
+            this.$alertify.error("Opps!! 서버에 문제가 발생했습니다.");
+          }
         }
       }catch (error) {
         console.log(error);
         this.$alertify.error("Opps!! 서버에 문제가 발생했습니다.");
       }
-    }
+    },
+    changeToDetail(){
+      this.isUpdate=false;
+    },
+    changeToDelete() {
+      var $this = this;
+      
+      this.$alertify.confirm(
+        "이 글을 삭제하시겠습니까?",
+        function () {
+          $this.userDelete(); // this 아니고 $this
+        },
+        function () {
+          console.log("cancled!");
+        }
+      );
+    },
+    async userDelete() {
+      try {
+        let response = await http.delete("/user/" + this.userSeq);
+        let { data } = response;
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          this.$alertify.success("회원 탈퇴가 정상적으로 되었습니다.");
+          let payload = {
+              isLogin : false,
+              userName : '',
+              userSeq : '',
+              userProfileImageUrl : '',
+          }
+          this.$store.commit("SET_LOGIN",payload);
+          this.$router.push("/home");
+        }
+      } catch (error) {
+        this.$alertify.error("서버에 문제가 있습니다.");
+      }
+    },
   },
   created() {
     this.getUserDetail();
