@@ -74,6 +74,14 @@ export default new Vuex.Store({
       userSeq: 0,
       regDate: "",
       regTime: "",
+      // regDt: {
+      //   date: {},
+      //   time: {},
+      //   // date: { year: 0, month: 0, day: 0 },
+      //   // time: { hour: 0, minute: 0, second: 0, nano: 0 },
+      // },
+      userName: "",
+      userProfileImageUrl: "",
     },
   },
   // state 상태를 변경하는 유일한 방법
@@ -145,6 +153,8 @@ export default new Vuex.Store({
       state.event.htmlUrl = payload.htmlUrl;
       state.event.statusCode = payload.statusCode;
       state.event.userSeq = payload.userSeq;
+      state.event.userName = payload.userName;
+      state.event.userProfileImageUrl = payload.userProfileImageUrl;
       state.event.regDate = util.makeDateStr(
         payload.regDt.date.year,
         payload.regDt.date.month,

@@ -5,7 +5,7 @@
 	
 	<!-- 이벤트 detail -->
 	<select id="eventDetail" parameterType="int" resultType="com.mycom.myapp.event.dto.EventDto">
-		select e.event_id, u.user_name, e.title, e.content, e.start_date, e.end_date, e.status_code, e.reg_dt 
+		select e.event_id, e.user_seq, u.user_name, u.user_profile_image_url, e.title, e.content, e.start_date, e.end_date, e.status_code, e.reg_dt 
 		from EVENT e, USERS u
 		where e.user_seq = u.user_seq
 		and e.event_id = #{eventId}

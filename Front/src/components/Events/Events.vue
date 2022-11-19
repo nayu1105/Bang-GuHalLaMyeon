@@ -30,12 +30,14 @@
                 <div class="events__meta">
                   <span>{{ event.regDt.date | makeDateStr(".") }}</span>
                 </div>
-                <h3 class="events__title" @click="eventDetail(event.eventId)">
-                  {{ event.title }}
+                <h3 class="events__title">
+                  <router-link :to="`/event-details/${event.eventId}`">
+                    {{ event.title }}
+                  </router-link>
                 </h3>
               </div>
               <div class="events__more">
-                <div class="link-btn" @click="eventDetail(event.eventId)">
+                <div class="link-btn">
                   More
                   <i class="far fa-arrow-right"></i>
                   <i class="far fa-arrow-right"></i>
@@ -51,8 +53,6 @@
 </template>
 
 <script>
-import http from "@/common/axios.js";
-
 import Vue from "vue";
 import VueAlertify from "vue-alertify";
 Vue.use(VueAlertify);
@@ -71,30 +71,6 @@ export default {
   methods: {
     eventList() {
       this.$store.dispatch("eventList");
-    },
-    async eventDetail(eventId) {
-      // back-end에서 detail 정보 가지고 와서
-      // store 에 detail 요소 바꾼 후
-      // router 를 이용해 이동
-
-      console.log(eventId);
-
-      try {
-        let { data } = await http.get("/events/" + eventId  );
-        console.log(data);
-
-        if (data.result == "login") {
-          this.$router.push("/login");
-        } else {
-          let { dto } = data;
-          this.$store.commit("SET_EVENT_DETAIL", dto);
-        }
-      } catch (error) {
-        console.log("EventMainVue: error : ");
-        console.log(error);
-      }
-
-      this.$router.push("/event-details");
     },
   },
   created() {

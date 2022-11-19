@@ -49,7 +49,7 @@ export default new VueRouter({
       component: Events,
     },
     {
-      path: "/event-details",
+      path: "/event-details/:eventId",
       component: EventDetails,
     },
     {
