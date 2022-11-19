@@ -82,6 +82,11 @@ export default new Vuex.Store({
       state.login.userProfileImageUrl = payload.userProfileImageUrl;
     },
 
+    UPDATE_USER(state, payload) {
+      state.login.userName = payload.userName;
+      state.login.userPassword = payload.userPassword;
+    },
+
     SET_BOARD_LIST(state, list) {
       state.board.list = list;
     },
