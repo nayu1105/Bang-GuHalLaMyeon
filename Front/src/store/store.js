@@ -168,9 +168,15 @@ export default new Vuex.Store({
         ":"
       );
     },
-    // for UpdateModal title v-modal
-    SET_EVENT_EVENTNAME(state, eventName) {
-      state.event.eventName = eventName;
+    // for UpdateModal event v-modal
+    SET_EVENT_TITLE(state, title) {
+      state.event.title = title;
+    },
+    SET_EVENT_STARTDATE(state, startDate) {
+      state.event.startDate = startDate;
+    },
+    SET_EVENT_ENDDATE(state, endDate) {
+      state.event.endDate = endDate;
     },
   },
   // for async method
