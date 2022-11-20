@@ -9,7 +9,7 @@
   >
     <div class="modal-dialog modal-xl" style="background-color: white; border-radius: 10px">
       <div class="modal-content">
-        <h4 class="title" id="exampleModalLabel" style="margin: 15px">이벤트 등록</h4>
+        <h4 class="title" id="exampleModalLabel" style="margin: 15px">이벤트 수정</h4>
         <div class="modal-header">
           <button
             type="button"
@@ -22,7 +22,7 @@
         <div class="modal-body">
           <div class="mb-3">
             <label for="titleUpdate" class="form-label">제목</label>
-            <input type="text" class="form-control" id="titleUpdate" v-model="title" />
+            <input type="text" class="form-control" id="titleUpdate" v-model="storeTitle" />
           </div>
           <div class="mb-3">
             <label for="contentUpdate" class="form-label">내용</label>
@@ -31,11 +31,17 @@
           </div>
           <div class="mb-3">
             <label for="startUpdate" class="form-label">시작 일시</label>
-            <input type="date" class="form-control" id="startUpdate" v-model="startDate" />
+            <input type="date" class="form-control" id="startUpdate" v-model="storeStartDate" />
           </div>
           <div class="mb-3">
             <label for="endUpdate" class="form-label">종료 일시</label>
-            <input type="date" class="form-control" id="endUpdate" v-model="endDate" />
+            <input
+              type="date"
+              class="form-control"
+              id="endUpdate"
+              v-model="storeEndDate"
+              value="endDate"
+            />
           </div>
           <button
             @click="eventUpdate"
@@ -66,23 +72,49 @@ export default {
   data() {
     return {
       eventId: this.$store.state.event.eventId,
-      title: this.$store.state.event.title,
-      content: "",
-      CKEditor: null,
-      startDate: "",
-      endDate: "",
+      CKEditor: "",
+      startDate: this.$store.state.event.startDate,
+      endDate: this.$store.state.event.endDate,
     };
   },
-
+  computed: {
+    storeTitle: {
+      get() {
+        return this.$store.state.event.title;
+      },
+      set(title) {
+        this.$store.commit("SET_EVENT_TITLE", title);
+      },
+    },
+    storeStartDate: {
+      get() {
+        return this.$store.state.event.startDate;
+      },
+      set(startDate) {
+        this.$store.commit("SET_EVENT_STARTDATE", startDate);
+      },
+    },
+    storeEndDate: {
+      get() {
+        return this.$store.state.event.endDate;
+      },
+      set(endDate) {
+        this.$store.commit("SET_EVENT_ENDDATE", endDate);
+      },
+    },
+  },
   methods: {
+    initUI() {
+      this.CKEditor.setData(this.$store.state.event.content);
+    },
     async eventUpdate() {
       let formData = new FormData();
       this.eventId = this.$store.state.event.eventId;
       formData.append("eventId", this.eventId);
-      formData.append("title", this.title);
+      formData.append("title", this.storeTitle);
       formData.append("content", this.CKEditor.getData());
-      formData.append("startDate", this.startDate);
-      formData.append("endDate", this.endDate);
+      formData.append("startDate", this.storeStartDate);
+      formData.append("endDate", this.storeEndDate);
 
       // multipart/form-data
       let options = {
@@ -110,23 +142,20 @@ export default {
       this.$emit("call-parent-update");
     },
   },
+  // modal.show() 이전에 이미 mounted() 호출됨
   async mounted() {
     try {
       this.CKEditor = await ClassicEditor.create(document.querySelector("#divEditorUpdate"));
     } catch (error) {
       console.error(error);
     }
-  },
-  watch: {
-    // props event 를 watch
-    event: function () {
-      console.log("watch!!");
-      this.eventId = this.$store.state.event.eventId; // this.event <- props
-      this.title = this.$store.state.event.eventId;
-      this.CKEditor.setData(this.event.content);
-      this.startDate = this.event.startDate;
-      this.endDate = this.event.endDate;
-    },
+
+    // bootstrap modal show event hook
+    // UpdateModal 이 보일 때 초기화
+    let $this = this;
+    this.$el.addEventListener("show.bs.modal", function () {
+      $this.initUI();
+    });
   },
 };
 </script>
