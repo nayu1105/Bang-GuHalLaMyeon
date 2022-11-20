@@ -72,6 +72,16 @@ export default new Vuex.Store({
     //   regTime: '',
     //   sameUser: false,
     // },
+
+    house: {
+      sidoList: [],
+      gugunList: [],
+      dongList: [],
+
+      sido: "",
+      gugun: "",
+      dong: "",
+    },
   },
   // state 상태를 변경하는 유일한 방법
   mutations: {
@@ -129,6 +139,15 @@ export default new Vuex.Store({
       state.board.title = payload.title;
       state.board.content = payload.content;
     },
+    SET_HOUSE_SIDO_LIST(state, sidoList) {
+      state.house.sidoList = sidoList;
+    },
+    SET_HOUSE_GUGUN_LIST(state, gugunList) {
+      state.house.gugunList = gugunList;
+    },
+    SET_HOUSE_DONG_LIST(state, dongList) {
+      state.house.dongList = dongList;
+    },
 
     // SET_EVENT_LIST(state, list) {
     //   state.event.list = list;
@@ -179,8 +198,6 @@ export default new Vuex.Store({
       };
       try {
         let { data } = await http.get("/boards", { params }); // params: params shorthand property, let response 도 제거
-        console.log("BoardMainVue: data : ");
-        console.log(data);
         if (data.result == "login") {
           router.push("/login");
         } else {
@@ -212,6 +229,55 @@ export default new Vuex.Store({
     //     console.error(error);
     //   }
     // },
+    async sidoList(context) {
+      let params = {
+        option: "sido",
+      };
+      try {
+        let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          router.push("/login");
+        } else {
+          context.commit("SET_HOUSE_SIDO_LIST", data.list);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async gugunList(context, payload) {
+      let params = {
+        option: "gugun",
+        sidoCode: payload,
+      };
+      try {
+        let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          router.push("/login");
+        } else {
+          context.commit("SET_HOUSE_GUGUN_LIST", data.list);
+          console.log(data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async dongList(context, payload) {
+      let params = {
+        option: "dong",
+        sidoCode: payload,
+      };
+      try {
+        let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          router.push("/login");
+        } else {
+          context.commit("SET_HOUSE_DONG_LIST", data.list);
+          console.log(data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
   getters: {
     isLogin: function (state) {
@@ -220,6 +286,13 @@ export default new Vuex.Store({
 
     getBoardList: function (state) {
       return state.board.list;
+    },
+
+    getSidoList: function (state) {
+      return state.house.sidoList;
+    },
+    getGugunList: function (state) {
+      return state.house.gugunList;
     },
 
     getEventList: function (state) {

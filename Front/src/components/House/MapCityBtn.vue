@@ -4,14 +4,8 @@
     <article class="cont-select mt-5" @click.stop="">
       <button class="btn-select" @click="doBtnToggle" ref="doSelect">도/광역시</button>
       <ul class="list-member">
-        <li>
-          <button type="button" @click="doAddNodeName">부산광역시</button>
-        </li>
-        <li>
-          <button type="button" @click="doAddNodeName">경상남도</button>
-        </li>
-        <li>
-          <button type="button" @click="doAddNodeName">충청북도</button>
+        <li v-for="(sido, index) in sidoListGetters" :key="index">
+          <button type="button" @click="doAddNodeName(sido.sidoCode)" >{{sido.sidoName}}</button>
         </li>
       </ul>
     </article>
@@ -19,11 +13,8 @@
     <article class="cont-select mt-5" @click.stop="">
       <button class="btn-select" @click="siBtnToggle" ref="siSelect">시/군/구</button>
       <ul class="list-member">
-        <li>
-          <button type="button" @click="siAddNodeName">양산시</button>
-        </li>
-        <li>
-          <button type="button" @click="siAddNodeName">창원시</button>
+        <li v-for="(gugun, index) in gugunListGetters" :key="index">
+          <button type="button" @click="siAddNodeName(gugun.gugunCode)">{{gugun.gugunName}}</button>
         </li>
       </ul>
     </article>
@@ -48,6 +39,16 @@
 <script>
 export default {
   name: "MapCityBtn",
+   computed: {
+    // gttters 이용
+    sidoListGetters() {
+      return this.$store.getters.getSidoList; // no getBoardList()
+    },
+
+    gugunListGetters(){
+      return this.$store.getters.getGugunList;
+    }
+  },
   methods: {
     doBtnToggle() {
       const doSelect = this.$refs.doSelect;
@@ -79,18 +80,22 @@ export default {
       siSelect.classList.remove("on");
     },
 
-    doAddNodeName() {
+    doAddNodeName(sidoCode) {
       const doSelect = this.$refs.doSelect;
       if (event.target.nodeName === "BUTTON") {
         doSelect.innerText = event.target.innerText;
+        this.$store.state.house.sido = doSelect.innerText;
+        this.gugunList(sidoCode);
         doSelect.classList.remove("on");
       }
     },
 
-    siAddNodeName() {
+    siAddNodeName(gugunCode) {
       const siSelect = this.$refs.siSelect;
       if (event.target.nodeName === "BUTTON") {
         siSelect.innerText = event.target.innerText;
+        this.$store.state.house.gugun = siSelect.innerText;
+        this.dongList(gugunCode);
         siSelect.classList.remove("on");
       }
     },
@@ -113,7 +118,19 @@ export default {
       const dongSelect = this.$refs.dongSelect;
       dongSelect.classList.remove("on");
     },
+    sidoList(){
+      this.$store.dispatch('sidoList');
+    },
+    gugunList(sidoCode){
+      this.$store.dispatch('gugunList', sidoCode);
+    },
+    dongList(gugunCode){
+      this.$store.dispatch('dongList', gugunCode);
+    }
   },
+  created(){
+    this.sidoList();
+  }
 };
 </script>
 
