@@ -55,7 +55,7 @@
                           <li><router-link to="/adminEvents">관리자 정보</router-link></li>
                           <li><router-link to="/adminBoards">공지사항 관리</router-link></li>
                           <li><router-link to="/adminEvents">이벤트 관리</router-link></li>
-                          <li><router-link to="/adminEvents">회원 정보 관리</router-link></li>
+                          <li><router-link to="/userManage">회원 정보 관리</router-link></li>
                         </ul>
                       </li>
                       <li class="has-dropdown" v-show="this.$store.state.login.isLogin">
@@ -154,6 +154,8 @@
                 <ul class="sub-menu" :class="[menuOption.adminDropDown === true ? 'active' : '']">
                   <li><router-link to="/adminBoards">공지사항 관리</router-link></li>
                   <li><router-link to="/adminEvents">이벤트 관리</router-link></li>
+                          <li><router-link to="/userManage">회원 정보 관리</router-link></li>
+
                 </ul>
               </li>
               <li
