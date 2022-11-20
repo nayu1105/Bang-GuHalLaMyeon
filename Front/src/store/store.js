@@ -74,6 +74,8 @@ export default new Vuex.Store({
     // },
 
     house: {
+      houseList: [],
+
       sidoList: [],
       gugunList: [],
       dongList: [],
@@ -147,6 +149,9 @@ export default new Vuex.Store({
     },
     SET_HOUSE_DONG_LIST(state, dongList) {
       state.house.dongList = dongList;
+    },
+    SET_HOUSE_LIST(state, list) {
+      state.house.houseList = list;
     },
 
     // SET_EVENT_LIST(state, list) {
@@ -264,7 +269,7 @@ export default new Vuex.Store({
     async dongList(context, payload) {
       let params = {
         option: "dong",
-        sidoCode: payload,
+        gugunCode: payload,
       };
       try {
         let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
@@ -272,6 +277,21 @@ export default new Vuex.Store({
           router.push("/login");
         } else {
           context.commit("SET_HOUSE_DONG_LIST", data.list);
+          console.log(data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async houseList(context, payload) {
+      let lawd_cd = payload;
+      let deal_ymd = 202112;
+      try {
+        let { data } = await http.get("/houses/search/" + lawd_cd + "/" + deal_ymd); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          router.push("/login");
+        } else {
+          context.commit("SET_HOUSE_LIST", data.list);
           console.log(data);
         }
       } catch (error) {
@@ -293,6 +313,14 @@ export default new Vuex.Store({
     },
     getGugunList: function (state) {
       return state.house.gugunList;
+    },
+
+    getDongList: function (state) {
+      return state.house.dongList;
+    },
+
+    getHouseList: function (state) {
+      return state.house.houseList;
     },
 
     getEventList: function (state) {
