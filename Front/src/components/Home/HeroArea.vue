@@ -184,7 +184,7 @@ export default {
 }
 
 #sectionImg {
-  background-image: url("../../assets/img/hero/home_bg2.jpg");
+  background-image: url("@/assets/img/hero/home_bg2.jpg");
   background-size: cover;
 }
 
@@ -217,7 +217,7 @@ export default {
   border-radius: 10px;
   cursor: pointer;
   text-align: left;
-  background: url("../../assets/img/icon/select-arrow.svg") center right 14px no-repeat;
+  background: url("@/assets/img/icon/select-arrow.svg") center right 14px no-repeat;
 }
 
 .btn-select:hover,
@@ -240,7 +240,7 @@ export default {
 
 .btn-select.on {
   background-color: white !important;
-  background: url("../../assets/img/icon/select-arrow.svg") center right 14px no-repeat;
+  background: url("@/assets/img/icon/select-arrow.svg") center right 14px no-repeat;
 }
 
 .btn-select.on + .list-member {

@@ -18,6 +18,7 @@ import AdminEvents from "@/components/Admin/Event/AdminEvents.vue";
 import HouseDeal from "@/components/House/HouseDeal.vue";
 import UserManage from "@/components/Admin/User/UserManage.vue";
 import HouseDetail from "@/components/House/HouseDetail.vue";
+import AdminEventDetails from "@/components/Admin/Event/AdminEventDetailsArea";
 
 export default new VueRouter({
   routes: [
@@ -54,8 +55,12 @@ export default new VueRouter({
       component: Events,
     },
     {
-      path: "/event-details",
+      path: "/event-details/:eventId",
       component: EventDetails,
+    },
+    {
+      path: "/admin/event-details/:eventId",
+      component: AdminEventDetails,
     },
     {
       path: "/houseDeal",

@@ -2,21 +2,21 @@
   <div>
     <HeroArea />
     <BannerArea />
-    <Events />
+    <Boards />
   </div>
 </template>
 
 <script>
-import BannerArea from '@/components/Home/BannerArea.vue';
-import Events from '@/components/Events/Events.vue';
-import HeroArea from '@/components/Home/HeroArea.vue';
+import BannerArea from "@/components/Home/BannerArea.vue";
+import Boards from "@/components/Boards/Boards.vue";
+import HeroArea from "@/components/Home/HeroArea.vue";
 
 export default {
-  name: 'HomePage',
+  name: "HomePage",
   components: {
     HeroArea,
     BannerArea,
-    Events,
+    Boards,
   },
 };
 </script>

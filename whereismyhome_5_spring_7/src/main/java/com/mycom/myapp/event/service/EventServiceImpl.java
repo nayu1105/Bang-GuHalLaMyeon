@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.mycom.myapp.event.dao.EventDao;
 import com.mycom.myapp.event.dto.EventDto;
 import com.mycom.myapp.event.dto.EventParamDto;
+import com.mycom.myapp.event.dto.EventParticipateDto;
 import com.mycom.myapp.event.dto.EventResultDto;
 
 @Service
@@ -70,13 +71,25 @@ public class EventServiceImpl implements EventService {
 		try {
 			EventDto eventDto = dao.eventDetail(eventParamDto.getEventId());
 			eventResultDto.setDto(eventDto);
-			System.out.println(eventDto);
+			eventResultDto.setResult(SUCCESS);
 			return eventResultDto;
 		} catch (Exception e) {
 			e.printStackTrace();
 			eventResultDto.setResult(FAIL);
 		}
 		return eventResultDto;
+	}
+
+	@Override
+	public EventResultDto eventParticipate(EventParticipateDto eventParticipateDto) {
+		EventResultDto eventResultDto = new EventResultDto();
+		eventResultDto.setResult(dao.eventParticipate(eventParticipateDto));
+		return eventResultDto;
+	}
+
+	@Override
+	public Integer eventParticipateState(EventParticipateDto eventParticipateDto) {
+		return dao.eventParticipateState(eventParticipateDto);
 	}
 
 }

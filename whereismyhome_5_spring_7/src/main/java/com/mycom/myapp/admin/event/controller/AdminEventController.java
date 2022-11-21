@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mycom.myapp.admin.event.dto.EventDto;
 import com.mycom.myapp.admin.event.dto.EventParamDto;
+import com.mycom.myapp.admin.event.dto.EventParticipateDto;
 import com.mycom.myapp.admin.event.dto.EventResultDto;
 import com.mycom.myapp.admin.event.service.AdminEventService;
 import com.mycom.myapp.user.dto.UserDto;
 
 @RestController
 @CrossOrigin(
-	    // localhost:5500 과 127.0.0.1 구분
-	    origins = "http://localhost:5500", // allowCredentials = "true" 일 경우, orogins="*" 는 X
-	    allowCredentials = "true", 
-	    allowedHeaders = "*", 
-	    methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT,RequestMethod.HEAD,RequestMethod.OPTIONS}
-	)
+		// localhost:5500 과 127.0.0.1 구분
+		origins = "http://localhost:5500", // allowCredentials = "true" 일 경우, orogins="*" 는 X
+		allowCredentials = "true", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST,
+				RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.HEAD, RequestMethod.OPTIONS })
 public class AdminEventController {
 	@Autowired
 	AdminEventService service;
@@ -45,7 +45,7 @@ public class AdminEventController {
 		} else {
 			eventResultDto = service.eventListSearchWord(eventParamDto);
 		}
-		
+
 		System.out.println(eventResultDto.toString());
 
 		if (eventResultDto.getResult() == SUCCESS) {
@@ -94,7 +94,7 @@ public class AdminEventController {
 	@DeleteMapping(value = "/admin/events/{eventId}")
 	public ResponseEntity<EventResultDto> eventDelete(@PathVariable int eventId) {
 		EventResultDto eventResultDto = service.eventDelete(eventId);
-		
+
 		if (eventResultDto.getResult() == SUCCESS) {
 			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.OK);
 		} else {
@@ -103,8 +103,13 @@ public class AdminEventController {
 	}
 
 	// eventUpdate
-	@PutMapping(value = "/admin/events")
-	public ResponseEntity<EventResultDto> eventUpdate(EventDto eventDto) {
+	@PutMapping(value = "/admin/events/{eventId}")
+	public ResponseEntity<EventResultDto> eventUpdate(EventDto eventDto, MultipartHttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		UserDto userDto = (UserDto) session.getAttribute("userDto");
+		eventDto.setUserSeq(userDto.getUserSeq());
+		
 		EventResultDto eventResultDto = service.eventUpdate(eventDto);
 
 		if (eventResultDto.getResult() == SUCCESS) {
@@ -113,4 +118,34 @@ public class AdminEventController {
 			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	// eventParticipateList
+	@GetMapping(value = "/participantList/{eventId}")
+	public ResponseEntity<EventResultDto> eventParticipateList(@PathVariable int eventId, HttpSession session) {
+		EventResultDto eventResultDto;
+		eventResultDto = service.eventParticipateList(eventId);
+
+		if (eventResultDto.getResult() == SUCCESS) {
+			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	// participantDelete
+	@DeleteMapping(value = "/participant/{eventId}/{userSeq}")
+	public ResponseEntity<EventResultDto> participantDelete(@PathVariable int eventId, @PathVariable int userSeq) {
+		EventParticipateDto eventParticipateDto = new EventParticipateDto();
+		eventParticipateDto.setEventId(eventId);
+		eventParticipateDto.setUserSeq(userSeq);
+
+		EventResultDto eventResultDto = service.participantDelete(eventParticipateDto);
+
+		if (eventResultDto.getResult() == SUCCESS) {
+			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 }

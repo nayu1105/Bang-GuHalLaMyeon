@@ -108,7 +108,10 @@
         </div>
         <div class="sidebar__content">
           <div class="logo mb-40">
-            <router-link to="/login" class="e-btn login-btn" v-show="!this.$store.state.login.isLogin"
+            <router-link
+              to="/login"
+              class="e-btn login-btn"
+              v-show="!this.$store.state.login.isLogin"
               >Login
             </router-link>
             <button
@@ -154,8 +157,7 @@
                 <ul class="sub-menu" :class="[menuOption.adminDropDown === true ? 'active' : '']">
                   <li><router-link to="/adminBoards">공지사항 관리</router-link></li>
                   <li><router-link to="/adminEvents">이벤트 관리</router-link></li>
-                          <li><router-link to="/userManage">회원 정보 관리</router-link></li>
-
+                  <li><router-link to="/userManage">회원 정보 관리</router-link></li>
                 </ul>
               </li>
               <li
@@ -190,7 +192,7 @@
 
 <script>
 export default {
-  name: "HomeHeader",
+  name: 'HomeHeader',
   data() {
     return {
       isSticky: false,
@@ -223,21 +225,21 @@ export default {
       this.showSidebar = false;
     },
     doLogout() {
-      this.$store.commit("SET_LOGIN", { isLogin: false, userName: "", userProfileImageUrl: "" });
-      this.$router.push("/home");
+      this.$store.commit('SET_LOGIN', { isLogin: false, userName: '', userProfileImageUrl: '' });
+      this.$router.push('/home');
     },
     validLogin() {
       console.log(this.$store.state.login.isLogin);
       if (!this.$store.state.login.isLogin) {
-        this.$router.push("/login");
+        this.$router.push('/login');
       }
     },
     LinkToLogin() {
-      this.$router.push("/login");
+      this.$router.push('/login');
     },
   },
   mounted() {
-    window.addEventListener("scroll", this.handleSticky);
+    window.addEventListener('scroll', this.handleSticky);
   },
 };
 </script>

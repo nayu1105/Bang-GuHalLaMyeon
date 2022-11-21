@@ -10,6 +10,7 @@ import com.mycom.myapp.admin.board.dto.BoardResultDto;
 import com.mycom.myapp.admin.event.dao.AdminEventDao;
 import com.mycom.myapp.admin.event.dto.EventDto;
 import com.mycom.myapp.admin.event.dto.EventParamDto;
+import com.mycom.myapp.admin.event.dto.EventParticipateDto;
 import com.mycom.myapp.admin.event.dto.EventResultDto;
 
 @Service
@@ -99,6 +100,27 @@ public class AdminEventServiceImpl implements AdminEventService {
 			boardResultDto.setResult(FAIL);
 		}
 		return boardResultDto;
+	}
+	
+	@Override
+	public EventResultDto eventParticipateList(int eventId) {
+		EventResultDto eventResultDto = new EventResultDto();
+		try {
+			List<EventDto> list = dao.eventParticipateList(eventId);
+			eventResultDto.setList(list);
+			eventResultDto.setResult(SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			eventResultDto.setResult(FAIL);
+		}
+		return eventResultDto;
+	}
+
+	@Override
+	public EventResultDto participantDelete(EventParticipateDto eventParticipateDto) {
+		EventResultDto eventResultDto = new EventResultDto();
+		eventResultDto.setResult(dao.participantDelete(eventParticipateDto));
+		return eventResultDto;
 	}
 
 }
