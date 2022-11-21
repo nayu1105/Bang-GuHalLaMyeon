@@ -321,6 +321,9 @@
             &::placeholder{
                 color: $grey-13;
             }
+            &:disabled{
+                background: #d6d6d6;
+            }
             &:focus{
                 outline: none;
                 background: $white;

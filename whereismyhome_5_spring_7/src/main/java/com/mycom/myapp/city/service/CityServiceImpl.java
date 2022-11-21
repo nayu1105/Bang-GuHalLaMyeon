@@ -19,6 +19,7 @@ public class CityServiceImpl implements CityService {
 	public CityResultDto cityList() {
 		CityResultDto cityResultDto = new CityResultDto();
 		cityResultDto.setList(dao.cityList());
+		System.out.println(dao.cityList());
 		cityResultDto.setResult(SUCCESS);
 		return cityResultDto;
 	}

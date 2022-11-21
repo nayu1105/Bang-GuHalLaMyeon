@@ -30,27 +30,35 @@
                     <ul>
                       <li><router-link to="/">Home</router-link></li>
                       <li class="has-dropdown">
-                        <router-link to="/boards">공지사항</router-link>
+                        <router-link to="/boards" @click.native="validLogin">공지사항</router-link>
                         <ul class="submenu">
                           <li>
-                            <router-link to="/boards">공지사항</router-link>
+                            <router-link to="/boards" @click.native="validLogin"
+                              >공지사항</router-link
+                            >
                           </li>
                           <li>
-                            <router-link to="/events">이벤트</router-link>
+                            <router-link to="/events" @click.native="validLogin"
+                              >이벤트</router-link
+                            >
                           </li>
                         </ul>
                       </li>
-                      <li><router-link to="/houseDeal">실거래가</router-link></li>
-                      <li class="has-dropdown">
+                      <li>
+                        <router-link to="/houseDeal" @click.native="validLogin"
+                          >실거래가</router-link
+                        >
+                      </li>
+                      <li class="has-dropdown" v-show="this.$store.state.login.isLogin">
                         <router-link to="/adminBoards">관리자</router-link>
                         <ul class="submenu">
                           <li><router-link to="/adminEvents">관리자 정보</router-link></li>
                           <li><router-link to="/adminBoards">공지사항 관리</router-link></li>
                           <li><router-link to="/adminEvents">이벤트 관리</router-link></li>
-                          <li><router-link to="/adminEvents">회원 정보 관리</router-link></li>
+                          <li><router-link to="/userManage">회원 정보 관리</router-link></li>
                         </ul>
                       </li>
-                      <li class="has-dropdown">
+                      <li class="has-dropdown" v-show="this.$store.state.login.isLogin">
                         <router-link to="/userDatail">내 정보</router-link>
                         <ul class="submenu">
                           <li><router-link to="/userDatail">회원 정보</router-link></li>
@@ -61,7 +69,19 @@
                   </nav>
                 </div>
                 <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
-                  <router-link to="/login" class="e-btn">Login</router-link>
+                  <router-link
+                    to="/login"
+                    class="e-btn login-btn"
+                    v-show="!this.$store.state.login.isLogin"
+                    >Login</router-link
+                  >
+                  <button
+                    class="e-btn login-btn"
+                    v-show="this.$store.state.login.isLogin"
+                    @click="doLogout"
+                  >
+                    Logout
+                  </button>
                 </div>
                 <div class="sidebar__menu d-xl-none">
                   <div @click="handleSidebar" class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
@@ -88,9 +108,19 @@
         </div>
         <div class="sidebar__content">
           <div class="logo mb-40">
-            <router-link to="/">
-              <img src="@/assets/img/logo/logo.png" alt="logo" />
+            <router-link
+              to="/login"
+              class="e-btn login-btn"
+              v-show="!this.$store.state.login.isLogin"
+              >Login
             </router-link>
+            <button
+              class="e-btn login-btn"
+              v-show="this.$store.state.login.isLogin"
+              @click="doLogout"
+            >
+              Logout
+            </button>
           </div>
 
           <div class="side-info-content sidebar-menu mm-menu">
@@ -105,18 +135,21 @@
                 <a @click="menuOption.boardsDropdown = !menuOption.boardsDropdown">공지사항</a>
                 <ul class="sub-menu" :class="[menuOption.boardsDropdown === true ? 'active' : '']">
                   <li>
-                    <router-link to="/boards">공지사항</router-link>
+                    <router-link to="/boards" @click.native="validLogin">공지사항</router-link>
                   </li>
                   <li>
-                    <router-link to="/events">이벤트</router-link>
+                    <router-link to="/events" @click.native="validLogin">이벤트</router-link>
                   </li>
                 </ul>
               </li>
               <li>
-                <router-link to="houseDeal" class="border-0">실거래가</router-link>
+                <router-link to="houseDeal" class="border-0" @click.native="validLogin"
+                  >실거래가</router-link
+                >
               </li>
 
               <li
+                v-show="this.$store.state.login.isLogin"
                 class="menu-item-has-children has-droupdown"
                 :class="[menuOption.adminDropDown === true ? 'active' : '']"
               >
@@ -124,9 +157,11 @@
                 <ul class="sub-menu" :class="[menuOption.adminDropDown === true ? 'active' : '']">
                   <li><router-link to="/adminBoards">공지사항 관리</router-link></li>
                   <li><router-link to="/adminEvents">이벤트 관리</router-link></li>
+                  <li><router-link to="/userManage">회원 정보 관리</router-link></li>
                 </ul>
               </li>
               <li
+                v-show="this.$store.state.login.isLogin"
                 class="menu-item-has-children has-droupdown"
                 :class="[menuOption.myDropDown === true ? 'active' : '']"
               >
@@ -137,28 +172,12 @@
                 </ul>
               </li>
             </ul>
-          </div>
-
-          <div class="sidebar__search p-relative mt-40">
-            <form action="#">
-              <input type="text" placeholder="Search..." />
-              <button type="submit"><i class="fad fa-search"></i></button>
-            </form>
-          </div>
-          <div class="sidebar__cart mt-30">
-            <a href="#">
-              <div class="header__cart-icon">
-                <svg viewBox="0 0 24 24">
-                  <circle class="st0" cx="9" cy="21" r="1" />
-                  <circle class="st0" cx="20" cy="21" r="1" />
-                  <path
-                    class="st0"
-                    d="M1,1h4l2.7,13.4c0.2,1,1,1.6,2,1.6h9.7c1,0,1.8-0.7,2-1.6L23,6H6"
-                  />
-                </svg>
-              </div>
-              <span class="cart-item">2</span>
-            </a>
+            <div class="sidebar__search p-relative mt-40">
+              <form v-show="this.$store.state.login.isLogin" action="#">
+                <input type="text" placeholder="Search..." />
+                <button type="submit"><i class="fad fa-search"></i></button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -173,7 +192,7 @@
 
 <script>
 export default {
-  name: "HomeHeader",
+  name: 'HomeHeader',
   data() {
     return {
       isSticky: false,
@@ -205,9 +224,22 @@ export default {
     handleSidebarClose() {
       this.showSidebar = false;
     },
+    doLogout() {
+      this.$store.commit('SET_LOGIN', { isLogin: false, userName: '', userProfileImageUrl: '' });
+      this.$router.push('/home');
+    },
+    validLogin() {
+      console.log(this.$store.state.login.isLogin);
+      if (!this.$store.state.login.isLogin) {
+        this.$router.push('/login');
+      }
+    },
+    LinkToLogin() {
+      this.$router.push('/login');
+    },
   },
   mounted() {
-    window.addEventListener("scroll", this.handleSticky);
+    window.addEventListener('scroll', this.handleSticky);
   },
 };
 </script>

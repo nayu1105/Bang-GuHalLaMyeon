@@ -9,40 +9,71 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" v-show="!isUpdate">
         <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
           <div class="sign__wrapper white-bg">
             <div class="sign__form">
               <form action="#">
                 <div class="sign__input-wrapper mb-25">
-                  <h5>Full Name</h5>
+                  <h5>User Name</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="Full name" />
+                    <input type="text" v-model="userName" disabled />
                     <i class="fal fa-user"></i>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-25">
-                  <h5>Work email</h5>
+                  <h5>Email</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="e-mail address" />
+                    <input type="text" v-model="userEmail" disabled/>
                     <i class="fal fa-envelope"></i>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-25">
                   <h5>Password</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="Password" />
+                    <input type="text" v-model="userPassword" disabled />
                     <i class="fal fa-lock"></i>
                   </div>
                 </div>
-                <div class="sign__input-wrapper mb-10">
-                  <h5>Re-Password</h5>
+                <div class="user_btn">
+                <button class="e-btn" @click="changeToUpdate"><span></span> 수정</button>
+                <button class="e-btn ml-10" @click="changeToDelete"><span></span> 탈퇴</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" v-show="isUpdate">
+        <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+          <div class="sign__wrapper white-bg">
+            <div class="sign__form">
+              <form action="#">
+                <div class="sign__input-wrapper mb-25">
+                  <h5>Update User Name</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="Re-Password" />
+                    <input type="text" v-model="userName"  />
+                    <i class="fal fa-user"></i>
+                  </div>
+                </div>
+                <div class="sign__input-wrapper mb-25">
+                  <h5>Email</h5>
+                  <div class="sign__input">
+                    <input type="text" v-model="userEmail" disabled/>
+                    <i class="fal fa-envelope"></i>
+                  </div>
+                </div>
+                <div class="sign__input-wrapper mb-25">
+                  <h5>Update Password</h5>
+                  <div class="sign__input">
+                    <input type="text" v-model="userPassword"  />
                     <i class="fal fa-lock"></i>
                   </div>
                 </div>
-                <button class="e-btn w-100"><span></span> Sign Up</button>
+                <div class="user_btn">
+                <button class="e-btn" @click="userUpdate"><span></span> 수정</button>
+                <button class="e-btn ml-10" @click="changeToDetail"><span></span> 취소</button>
+                </div>
               </form>
             </div>
           </div>
@@ -53,7 +84,105 @@
 </template>
 
 <script>
+import http from '@/common/axios.js';
+import Vue from "vue";
+import VueAlertify from "vue-alertify";
+Vue.use(VueAlertify);
 export default {
   name: "UserDetailArea",
+  data() {
+    return {
+      userName: "",
+      userEmail: "",
+      userPassword: "",
+      isUpdate: false,
+      userSeq: "",
+    };
+  },
+  methods: {
+    async getUserDetail() {
+      this.userSeq = this.$store.state.login.userSeq;
+      try {
+        let {data} = await http.get("/user/"+this.userSeq);
+        this.userName = data.userName;
+        this.userEmail = data.userEmail;
+        this.userPassword = data.userPassword;
+      } catch (error) {
+        console.log(error);
+        this.$alertify.error("Opps!! 서버에 문제가 발생했습니다.");
+      }
+    },
+    changeToUpdate(){
+      this.isUpdate=true;
+    },
+    async userUpdate(){
+      let params = {
+        userName : this.userName,
+        userPassword : this.userPassword
+      };
+
+      console.log(this.userSeq);
+      try{
+        let {data} = await http.put("/user/"+this.userSeq, params);
+        this.$store.commit("UPDATE_USER", params);
+        console.log(data);
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          if(data.result=="success"){
+            this.$alertify.success("회원정보가 수정되었습니다!");
+            this.isUpdate=false;
+            this.$router.push("/userDatail");
+          }
+          else{
+            this.$alertify.error("Opps!! 서버에 문제가 발생했습니다.");
+          }
+        }
+      }catch (error) {
+        console.log(error);
+        this.$alertify.error("Opps!! 서버에 문제가 발생했습니다.");
+      }
+    },
+    changeToDetail(){
+      this.isUpdate=false;
+    },
+    changeToDelete() {
+      var $this = this;
+      
+      this.$alertify.confirm(
+        "이 글을 삭제하시겠습니까?",
+        function () {
+          $this.userDelete(); // this 아니고 $this
+        },
+        function () {
+          console.log("cancled!");
+        }
+      );
+    },
+    async userDelete() {
+      try {
+        let response = await http.delete("/user/" + this.userSeq);
+        let { data } = response;
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          this.$alertify.success("회원 탈퇴가 정상적으로 되었습니다.");
+          let payload = {
+              isLogin : false,
+              userName : '',
+              userSeq : '',
+              userProfileImageUrl : '',
+          }
+          this.$store.commit("SET_LOGIN",payload);
+          this.$router.push("/home");
+        }
+      } catch (error) {
+        this.$alertify.error("서버에 문제가 있습니다.");
+      }
+    },
+  },
+  created() {
+    this.getUserDetail();
+  },
 };
 </script>

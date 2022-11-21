@@ -7,7 +7,6 @@ public class BoardParamDto {
 	// 게시글 목록
 	private int limit;
 	private int offset;
-	private String searchWord;
 
 	// 게시글 상세
 	private int boardId;
@@ -29,14 +28,6 @@ public class BoardParamDto {
 		this.offset = offset;
 	}
 
-	public String getSearchWord() {
-		return searchWord;
-	}
-
-	public void setSearchWord(String searchWord) {
-		this.searchWord = searchWord;
-	}
-
 	public int getBoardId() {
 		return boardId;
 	}
@@ -55,7 +46,7 @@ public class BoardParamDto {
 
 	@Override
 	public String toString() {
-		return "BoardParamDto [limit=" + limit + ", offset=" + offset + ", searchWord=" + searchWord + ", boardId="
+		return "BoardParamDto [limit=" + limit + ", offset=" + offset + ", boardId="
 				+ boardId + ", userSeq=" + userSeq + "]";
 	}
 

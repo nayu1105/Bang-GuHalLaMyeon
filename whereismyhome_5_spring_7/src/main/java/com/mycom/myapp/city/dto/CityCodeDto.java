@@ -1,7 +1,7 @@
 package com.mycom.myapp.city.dto;
 
 public class CityCodeDto {
-	private int option;
+	private String option;
 	private String sidoName;
 	private String sidoCode;
 	private String gugunName;
@@ -9,11 +9,11 @@ public class CityCodeDto {
 	private String dongName;
 	private String dongCode;
 
-	public int getOption() {
+	public String getOption() {
 		return option;
 	}
 
-	public void setOption(int option) {
+	public void setOption(String option) {
 		this.option = option;
 	}
 
