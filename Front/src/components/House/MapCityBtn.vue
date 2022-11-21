@@ -14,7 +14,7 @@
       <button class="btn-select" @click="siBtnToggle" ref="siSelect">시/군/구</button>
       <ul class="list-member">
         <li v-for="(gugun, index) in gugunListGetters" :key="index">
-          <button type="button" @click="siAddNodeName(gugun.gugunCode)">
+          <button type="button" @click="siAddNodeName(gugun.gugunCode);">
             {{ gugun.gugunName }}
           </button>
         </li>
@@ -25,7 +25,7 @@
       <button class="btn-select" @click="dongBtnToggle" ref="dongSelect">동</button>
       <ul class="list-member">
         <li v-for="(dong, index) in dongListGetters" :key="index">
-          <button type="button" @click="dongAddNodeName(dong.dongCode)">{{ dong.dongName }}</button>
+          <button type="button" @click="dongAddNodeName(dong.dongCode);">{{ dong.dongName }}</button>
         </li>
       </ul>
     </article>
