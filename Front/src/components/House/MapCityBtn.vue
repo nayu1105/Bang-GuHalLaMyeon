@@ -5,7 +5,7 @@
       <button class="btn-select" @click="doBtnToggle" ref="doSelect">도/광역시</button>
       <ul class="list-member">
         <li v-for="(sido, index) in sidoListGetters" :key="index">
-          <button type="button" @click="doAddNodeName(sido.sidoCode)" >{{sido.sidoName}}</button>
+          <button type="button" @click="doAddNodeName(sido.sidoCode)">{{ sido.sidoName }}</button>
         </li>
       </ul>
     </article>
@@ -14,7 +14,9 @@
       <button class="btn-select" @click="siBtnToggle" ref="siSelect">시/군/구</button>
       <ul class="list-member">
         <li v-for="(gugun, index) in gugunListGetters" :key="index">
-          <button type="button" @click="siAddNodeName(gugun.gugunCode)">{{gugun.gugunName}}</button>
+          <button type="button" @click="siAddNodeName(gugun.gugunCode)">
+            {{ gugun.gugunName }}
+          </button>
         </li>
       </ul>
     </article>
@@ -23,7 +25,7 @@
       <button class="btn-select" @click="dongBtnToggle" ref="dongSelect">동</button>
       <ul class="list-member">
         <li v-for="(dong, index) in dongListGetters" :key="index">
-          <button type="button" @click="dongAddNodeName(dong.dongCode)">{{dong.dongName}}</button>
+          <button type="button" @click="dongAddNodeName(dong.dongCode)">{{ dong.dongName }}</button>
         </li>
       </ul>
     </article>
@@ -32,117 +34,118 @@
 
 <script>
 export default {
-  name: "MapCityBtn",
-   computed: {
+  name: 'MapCityBtn',
+  computed: {
     // gttters 이용
     sidoListGetters() {
       return this.$store.getters.getSidoList; // no getBoardList()
     },
 
-    gugunListGetters(){
+    gugunListGetters() {
       return this.$store.getters.getGugunList;
     },
 
-    dongListGetters(){
+    dongListGetters() {
       return this.$store.getters.getDongList;
-    }
+    },
   },
   methods: {
     doBtnToggle() {
       const doSelect = this.$refs.doSelect;
-      doSelect.classList.toggle("on");
+      doSelect.classList.toggle('on');
 
       const siSelect = this.$refs.siSelect;
-      siSelect.classList.remove("on");
+      siSelect.classList.remove('on');
       const dongSelect = this.$refs.dongSelect;
-      dongSelect.classList.remove("on");
+      dongSelect.classList.remove('on');
     },
 
     siBtnToggle() {
       const siSelect = this.$refs.siSelect;
-      siSelect.classList.toggle("on");
+      siSelect.classList.toggle('on');
 
       const doSelect = this.$refs.doSelect;
-      doSelect.classList.remove("on");
+      doSelect.classList.remove('on');
       const dongSelect = this.$refs.dongSelect;
-      dongSelect.classList.remove("on");
+      dongSelect.classList.remove('on');
     },
 
     dongBtnToggle() {
       const dongSelect = this.$refs.dongSelect;
-      dongSelect.classList.toggle("on");
+      dongSelect.classList.toggle('on');
 
       const doSelect = this.$refs.doSelect;
-      doSelect.classList.remove("on");
+      doSelect.classList.remove('on');
       const siSelect = this.$refs.siSelect;
-      siSelect.classList.remove("on");
+      siSelect.classList.remove('on');
     },
 
     doAddNodeName(sidoCode) {
       const doSelect = this.$refs.doSelect;
-      if (event.target.nodeName === "BUTTON") {
+      if (event.target.nodeName === 'BUTTON') {
         doSelect.innerText = event.target.innerText;
         this.$store.state.house.sido = doSelect.innerText;
         this.gugunList(sidoCode);
         const siSelect = this.$refs.siSelect;
-        siSelect.innerText = "시/군/구";
-        this.$store.state.house.gugun ="";
-        doSelect.classList.remove("on");
+        siSelect.innerText = '시/군/구';
+        this.$store.state.house.gugun = '';
+        doSelect.classList.remove('on');
       }
     },
 
     siAddNodeName(gugunCode) {
       const siSelect = this.$refs.siSelect;
-      if (event.target.nodeName === "BUTTON") {
+      if (event.target.nodeName === 'BUTTON') {
         siSelect.innerText = event.target.innerText;
         this.$store.state.house.gugun = siSelect.innerText;
         this.dongList(gugunCode);
         const dongSelect = this.$refs.dongSelect;
-        dongSelect.innerText = "동";
-        this.$store.state.house.dong="";
-        siSelect.classList.remove("on");
+        dongSelect.innerText = '동';
+        this.$store.state.house.dong = '';
+        siSelect.classList.remove('on');
+        this.getHouse(gugunCode);
       }
     },
 
     dongAddNodeName(dongCode) {
       const dongSelect = this.$refs.dongSelect;
-      if (event.target.nodeName === "BUTTON") {
+      if (event.target.nodeName === 'BUTTON') {
         dongSelect.innerText = event.target.innerText;
-        dongSelect.classList.remove("on");
-        this.$store.state.house.dong= dongSelect.innerText;
-        console.log("dongcode");
-        this.getHouse(dongCode);
+        dongSelect.classList.remove('on');
+        this.$store.state.house.dong = dongSelect.innerText;
+        console.log('dongcode');
+        console.log(dongCode);
       }
     },
 
-    getHouse(dongCode){
-      let param = dongCode.substr(0,5);
+    getHouse(dongCode) {
+      let param = dongCode.substr(0, 5);
       this.$store.dispatch('houseList', param);
     },
 
     clickBack() {
       const doSelect = this.$refs.doSelect;
-      doSelect.classList.remove("on");
+      doSelect.classList.remove('on');
 
       const siSelect = this.$refs.siSelect;
-      siSelect.classList.remove("on");
+      siSelect.classList.remove('on');
 
       const dongSelect = this.$refs.dongSelect;
-      dongSelect.classList.remove("on");
+      dongSelect.classList.remove('on');
     },
-    sidoList(){
+    sidoList() {
       this.$store.dispatch('sidoList');
     },
-    gugunList(sidoCode){
+    gugunList(sidoCode) {
       this.$store.dispatch('gugunList', sidoCode);
     },
-    dongList(gugunCode){
+    dongList(gugunCode) {
       this.$store.dispatch('dongList', gugunCode);
-    }
+    },
   },
-  created(){
+  created() {
     this.sidoList();
-  }
+  },
 };
 </script>
 
@@ -185,8 +188,8 @@ export default {
 }
 
 #sectionImg {
-    margin:10px;
-  background-image: url("../../assets/img/hero/home_bg2.jpg");
+  margin: 10px;
+  background-image: url('../../assets/img/hero/home_bg2.jpg');
   background-size: cover;
 }
 
@@ -217,7 +220,7 @@ export default {
   border-radius: 10px;
   cursor: pointer;
   text-align: left;
-  background: url("../../assets/img/icon/select-arrow.svg") center right 0px no-repeat;
+  background: url('../../assets/img/icon/select-arrow.svg') center right 0px no-repeat;
 }
 
 .btn-select:hover,
@@ -240,7 +243,7 @@ export default {
 
 .btn-select.on {
   background-color: white !important;
-  background: url("../../assets/img/icon/select-arrow.svg") center right 0px no-repeat;
+  background: url('../../assets/img/icon/select-arrow.svg') center right 0px no-repeat;
 }
 
 .btn-select.on + .list-member {
@@ -271,19 +274,19 @@ export default {
   background-color: #f0c432b6;
 }
 
-.house-btn{
-    display: flex;
-    justify-content: center;
-    background-color: transparent;
-    z-index: 1;
-    position: fixed;
-    margin: 0 auto;
-    left: 300px;
-    right: 0;
-    top: 110px;
+.house-btn {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  z-index: 1;
+  position: fixed;
+  margin: 0 auto;
+  left: 300px;
+  right: 0;
+  top: 110px;
 }
 
-.house-btn button{
-    width: 200px;
+.house-btn button {
+  width: 200px;
 }
 </style>
