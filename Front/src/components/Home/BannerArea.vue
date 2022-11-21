@@ -1,5 +1,5 @@
 <template>
-  <section class="banner__area pb-110">
+  <section class="banner__area pb-10">
     <div class="container">
       <div class="row">
         <div class="col-xxl-4 offset-xxl-4">
@@ -67,7 +67,7 @@
 
 <script>
 export default {
-  name: 'BannerArea',
+  name: "BannerArea",
 };
 </script>
 

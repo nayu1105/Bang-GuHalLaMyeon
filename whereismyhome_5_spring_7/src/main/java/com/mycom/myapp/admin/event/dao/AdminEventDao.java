@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.mycom.myapp.admin.event.dto.EventDto;
 import com.mycom.myapp.admin.event.dto.EventParamDto;
+import com.mycom.myapp.admin.event.dto.EventParticipateDto;
 
 @Mapper
 public interface AdminEventDao {
@@ -24,4 +25,7 @@ public interface AdminEventDao {
 	int eventListTotalCnt();
 	
 	int eventListSearchWordTotalCnt(String searchWord);
+	
+	List<EventDto> eventParticipateList(int eventId);
+	int participantDelete(EventParticipateDto eventParticipateDto);
 }

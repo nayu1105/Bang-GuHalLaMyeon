@@ -2,6 +2,7 @@ package com.mycom.myapp.admin.event.service;
 
 import com.mycom.myapp.admin.event.dto.EventDto;
 import com.mycom.myapp.admin.event.dto.EventParamDto;
+import com.mycom.myapp.admin.event.dto.EventParticipateDto;
 import com.mycom.myapp.admin.event.dto.EventResultDto;
 
 public interface AdminEventService {
@@ -16,4 +17,7 @@ public interface AdminEventService {
 	int eventListSearchWordTotalCnt(String searchWord);
 	
 	EventResultDto eventDetail(EventParamDto eventParamDto);
+	
+	EventResultDto eventParticipateList(int eventId);
+	EventResultDto participantDelete(EventParticipateDto eventParticipateDto);
 }

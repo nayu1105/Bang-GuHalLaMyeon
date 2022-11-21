@@ -2,10 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mycom.myapp.event.dao.EventDao">
+
+	<!-- 이벤트 참가 여부 -->
+	<select id="eventParticipateState" parameterType="map" resultType="int">
+		select IFNULL(event_id=#{eventId} and user_seq=#{userSeq}, 0) from event_participate;
+	</select>
+
+	<!-- 이벤트 참가 --> 
+	<insert id="eventParticipate" parameterType="com.mycom.myapp.event.dto.EventParticipateDto">
+		insert into EVENT_PARTICIPATE (event_id, user_seq)
+			values ( #{eventId}, #{userSeq} );
+	</insert>
 	
 	<!-- 이벤트 detail -->
 	<select id="eventDetail" parameterType="int" resultType="com.mycom.myapp.event.dto.EventDto">
-		select e.event_id, u.user_name, e.title, e.content, e.start_date, e.end_date, e.status_code, e.reg_dt 
+		select e.event_id, e.user_seq, u.user_name, u.user_profile_image_url, e.title, e.content, e.start_date, e.end_date, e.status_code, e.reg_dt 
 		from EVENT e, USERS u
 		where e.user_seq = u.user_seq
 		and e.event_id = #{eventId}
@@ -13,7 +24,7 @@
 	
 	<!-- 이벤트 전체 조회 -->
 	<select id="eventList" parameterType="map" resultType="com.mycom.myapp.event.dto.EventDto">
-		 select e.event_id, e.title, e.content, e.start_date, e.end_date, e.status_code
+		 select e.event_id, e.title, e.content, e.start_date, e.end_date, e.status_code, e.reg_dt
 		 from EVENT e, USERS u 
 		 where e.user_seq = u.user_seq
 		 order by e.event_id desc

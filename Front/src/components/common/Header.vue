@@ -61,7 +61,7 @@
                   </nav>
                 </div>
                 <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
-                  <router-link to="/register" class="e-btn">Login</router-link>
+                  <router-link to="/login" class="e-btn">Login</router-link>
                 </div>
                 <div class="sidebar__menu d-xl-none">
                   <div @click="handleSidebar" class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
@@ -207,7 +207,7 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener('scroll', this.handleSticky);
+    window.addEventListener("scroll", this.handleSticky);
   },
 };
 </script>

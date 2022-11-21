@@ -14,12 +14,15 @@ public class EventDto {
 	private int userSeq;
 	private LocalDateTime regDt;
 
+	private String userName;
+	private String userProfileImageUrl;
+
 	public EventDto() {
 
 	}
 
 	public EventDto(int eventId, String title, String content, String startDate, String endDate, String htmlUrl,
-			int statusCode, int userSeq, LocalDateTime regDt) {
+			int statusCode, int userSeq, LocalDateTime regDt, String userName, String userProfileImageUrl) {
 		super();
 		this.eventId = eventId;
 		this.title = title;
@@ -30,6 +33,8 @@ public class EventDto {
 		this.statusCode = statusCode;
 		this.userSeq = userSeq;
 		this.regDt = regDt;
+		this.userName = userName;
+		this.userProfileImageUrl = userProfileImageUrl;
 	}
 
 	public int getEventId() {
@@ -104,11 +109,28 @@ public class EventDto {
 		this.regDt = regDt;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserProfileImageUrl() {
+		return userProfileImageUrl;
+	}
+
+	public void setUserProfileImageUrl(String userProfileImageUrl) {
+		this.userProfileImageUrl = userProfileImageUrl;
+	}
+
 	@Override
 	public String toString() {
 		return "EventDto [eventId=" + eventId + ", title=" + title + ", content=" + content + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", htmlUrl=" + htmlUrl + ", statusCode=" + statusCode + ", userSeq="
-				+ userSeq + ", regDt=" + regDt + "]";
+				+ userSeq + ", regDt=" + regDt + ", userName=" + userName + ", userProfileImageUrl="
+				+ userProfileImageUrl + "]";
 	}
 
 }
