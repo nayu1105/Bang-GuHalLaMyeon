@@ -20,7 +20,7 @@
             <div class="course__teacher-3 d-flex align-items-center mr-70 mb-30">
               <div class="course__teacher-thumb-3 mr-15">
                 <!-- <img
-                  v-bind:src="require(`@/assets${$store.state.event.userProfileImageUrl}`)"
+                  :src="require(`@/assets${store.state.event.userProfileImageUrl}`)"
                   style="width: 42px; height: 42px; border-radius: 50%; background-color: #f49d1a"
                 /> -->
                 <img
