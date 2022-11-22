@@ -23,7 +23,7 @@
 
     <article class="cont-select mt-5" @click.stop="">
       <button class="btn-select" @click="dongBtnToggle" ref="dongSelect">동</button>
-      <ul class="list-member">
+      <ul class="list-member" >
         <li v-for="(dong, index) in dongListGetters" :key="index">
           <button type="button" @click="dongAddNodeName(dong.dongCode)">{{ dong.dongName }}</button>
         </li>
@@ -118,6 +118,11 @@ export default {
         dongSelect.classList.remove('on');
         this.$store.state.house.dong = dongSelect.innerText;
         // store dong이 변화가 오면 map center 이동;
+        console.log(this.$store.state.house.sido);
+        console.log(this.$store.state.house.gugun);
+        console.log(this.$store.state.house.dong);
+        console.log("getHouseList");
+        
         this.$parent.getHouseList();
       }
     },
@@ -225,6 +230,7 @@ export default {
   cursor: pointer;
   text-align: left;
   background: url('../../assets/img/icon/select-arrow.svg') center right 0px no-repeat;
+
 }
 
 .btn-select:hover,
@@ -243,6 +249,16 @@ export default {
   box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   background-color: #fff !important;
+
+  overflow: auto; 
+  max-height:400px;
+  -ms-overflow-style: none;
+
+}
+
+.list-member::-webkit-scrollbar { 
+    display: none;
+    width: 0 !important;
 }
 
 .btn-select.on {
