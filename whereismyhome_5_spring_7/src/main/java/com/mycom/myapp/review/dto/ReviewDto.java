@@ -4,6 +4,7 @@ public class ReviewDto {
 
 	private int reviewId;
 	private int houseNo;
+	private int rate;
 	private String userEmail;
 	private String userName;
 	private String title;
@@ -13,14 +14,24 @@ public class ReviewDto {
 
 	}
 
-	public ReviewDto(int reviewId, int houseNo, String userEmail, String userName, String title, String content) {
+	public ReviewDto(int reviewId, int houseNo, int rate, String userEmail, String userName, String title,
+			String content) {
 		super();
 		this.reviewId = reviewId;
 		this.houseNo = houseNo;
+		this.rate = rate;
 		this.userEmail = userEmail;
 		this.userName = userName;
 		this.title = title;
 		this.content = content;
+	}
+
+	public int getRate() {
+		return rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
 	}
 
 	public int getReviewId() {
@@ -73,8 +84,8 @@ public class ReviewDto {
 
 	@Override
 	public String toString() {
-		return "ReviewDto [reviewId=" + reviewId + ", houseNo=" + houseNo + ", userEmail=" + userEmail + ", userName="
-				+ userName + ", title=" + title + ", content=" + content + "]";
+		return "ReviewDto [reviewId=" + reviewId + ", houseNo=" + houseNo + ", rate=" + rate + ", userEmail="
+				+ userEmail + ", userName=" + userName + ", title=" + title + ", content=" + content + "]";
 	}
 
 }

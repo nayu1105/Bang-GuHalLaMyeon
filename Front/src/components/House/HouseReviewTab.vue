@@ -188,17 +188,17 @@
             <div class="row">
               <div class="col-xxl-6">
                 <div class="course__form-input">
-                  <input type="text" placeholder="Your Name" />
+                  <input type="text" placeholder="Your Name" v-model="userName" />
                 </div>
               </div>
               <div class="col-xxl-6">
                 <div class="course__form-input">
-                  <input type="email" placeholder="Your Email" />
+                  <input type="email" placeholder="Your Email" v-model="userEmail" />
                 </div>
               </div>
               <div class="col-xxl-12">
                 <div class="course__form-input">
-                  <input type="text" placeholder="Review Title" />
+                  <input type="text" placeholder="Review Title" v-model="title" />
                 </div>
               </div>
               <div class="col-xxl-12">
@@ -223,14 +223,14 @@
                       </li>
                     </ul>
                   </div>
-                  <textarea placeholder="Review Summary"></textarea>
+                  <textarea placeholder="Review Summary" v-model="content"></textarea>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-xxl-12">
                 <div class="course__form-btn mt-10 mb-55">
-                  <button type="submit" class="e-btn">Submit Review</button>
+                  <button @click="reviewInsert" type="submit" class="e-btn">Submit Review</button>
                 </div>
               </div>
             </div>
@@ -242,7 +242,56 @@
 </template>
 
 <script>
+import http from "@/common/axios.js";
+
 export default {
-  name: 'BoardsReviewTab',
+  name: "BoardsReviewTab",
+  data() {
+    return {
+      userName: "",
+      userEmail: "",
+      title: "",
+      content: "",
+      rate: 0,
+      houseNo: 0,
+    };
+  },
+  methods: {
+    async reviewInsert() {
+      let formData = new FormData();
+      formData.append("userName", this.userName);
+      formData.append("userEmail", this.userEmail);
+      formData.append("title", this.title);
+      formData.append("content", this.content);
+
+      formData.append("rate", 5);
+      formData.append("houseNo", 3);
+
+      // multipart/form-data
+      let options = {
+        headers: { "Content-Type": "multipart/form-data" },
+      };
+
+      try {
+        let response = await http.post("/reviews", formData, options);
+        let { data } = response;
+
+        console.log(data);
+
+        // interceptor session check fail
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          // 등록 성공
+          this.$alertify.success("리뷰가 등록되었습니다. ");
+        }
+      } catch (error) {
+        this.$alertify.error("리뷰 등록 과정에서 오류가 발생했습니다. ");
+      }
+    },
+    closeModal() {
+      this.$emit("call-parent-insert");
+    },
+  },
 };
 </script>

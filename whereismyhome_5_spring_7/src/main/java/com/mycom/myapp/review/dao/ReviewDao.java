@@ -9,8 +9,11 @@ import com.mycom.myapp.review.dto.ReviewParamDto;
 
 @Mapper
 public interface ReviewDao {
-	List<ReviewDto> reviewList(ReviewParamDto reviewParamDto);
-	int reviewListTotalCnt();
+	int reviewInsert(ReviewDto dto);
+	int reviewDelete(int reviewId);
 
 	ReviewDto reviewDetail(int reviewId);
+	
+	List<ReviewDto> reviewList(ReviewParamDto reviewParamDto);
+	int reviewListTotalCnt();
 }

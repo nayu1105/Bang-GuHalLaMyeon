@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycom.myapp.review.dao.ReviewDao">
+
+	<!-- 리뷰 등록 -->
+	<insert id="reviewInsert" parameterType="com.mycom.myapp.review.dto.ReviewDto">
+		insert into HOUSEREVIEW (title, content, user_name, user_email, house_no, rate, reg_dt)
+		values ( #{title}, #{content}, #{userName}, #{userEmail}, #{houseNo}, #{rate}, now())
+	</insert>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="reviewDelete" parameterType="int">
+		 delete from HOUSEREVIEW where review_id = #{reviewId}
+	</delete>	
+
+	<!-- 리뷰 detail -->
+	<select id="reviewDetail" parameterType="int" resultType="com.mycom.myapp.review.dto.ReviewDto">
+		select review_id, user_name, title, content, rate, reg_dt 
+		from HOUSEREVIEW
+		where review_id = #{reviewId}
+	</select>
+	
+	<!-- 리뷰 전체 조회 -->
+	<select id="reviewList" parameterType="map" resultType="com.mycom.myapp.review.dto.ReviewDto">
+		 select review_id, title, content, user_name, rate, reg_dt
+		 from HOUSEREVIEW
+		 where house_no = #{houseNo}
+		 order by review_id desc
+		 limit #{limit} offset #{offset}
+	</select>
+	
+	<!-- 리뷰 전체 count -->
+	<select id="reviewListTotalCnt" resultType="int">
+	select count(*) from HOUSEREVIEW
+	</select>
+	
+</mapper>
