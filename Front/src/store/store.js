@@ -1,27 +1,30 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-import http from '@/common/axios.js';
-import util from '@/common/util.js';
+import http from "@/common/axios.js";
+import util from "@/common/util.js";
 
-import router from '@/routers/routers.js';
+import router from "@/routers/routers.js";
+
+import createPersistedState from "vuex-persistedstate";
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
     // login, NavBar
     login: {
       // NavBar
       isLogin: false,
 
-      userSeq: '',
-      userName: '',
-      userProfileImageUrl: '',
+      userSeq: "",
+      userName: "",
+      userProfileImageUrl: "",
 
       // Login
-      userEmail: 'nanana@ssafy.com',
-      userPassword: '1234',
+      userEmail: "nanana@ssafy.com",
+      userPassword: "1234",
     },
     //
     board: {
@@ -29,7 +32,7 @@ export default new Vuex.Store({
       list: [],
       limit: 10,
       offset: 0,
-      searchWord: '',
+      searchWord: "",
 
       // pagination
       listRowCount: 10,
@@ -41,11 +44,11 @@ export default new Vuex.Store({
       // detail, update, delete
 
       boardId: 0,
-      title: '',
-      content: '',
-      userName: '',
-      regDate: '',
-      regTime: '',
+      title: "",
+      content: "",
+      userName: "",
+      regDate: "",
+      regTime: "",
       readCount: 0,
     },
     event: {
@@ -64,23 +67,23 @@ export default new Vuex.Store({
       // detail, update, delete
 
       eventId: 0,
-      title: '',
-      content: '',
-      startDate: '',
-      endDate: '',
-      htmlUrl: '',
+      title: "",
+      content: "",
+      startDate: "",
+      endDate: "",
+      htmlUrl: "",
       statusCode: 0,
       userSeq: 0,
-      regDate: '',
-      regTime: '',
+      regDate: "",
+      regTime: "",
       // regDt: {
       //   date: {},
       //   time: {},
       //   // date: { year: 0, month: 0, day: 0 },
       //   // time: { hour: 0, minute: 0, second: 0, nano: 0 },
       // },
-      userName: '',
-      userProfileImageUrl: '',
+      userName: "",
+      userProfileImageUrl: "",
     },
     house: {
       houseList: [],
@@ -89,9 +92,9 @@ export default new Vuex.Store({
       gugunList: [],
       dongList: [],
 
-      sido: '',
-      gugun: '',
-      dong: '',
+      sido: "",
+      gugun: "",
+      dong: "",
     },
   },
   // state 상태를 변경하는 유일한 방법
@@ -130,13 +133,13 @@ export default new Vuex.Store({
         payload.regDt.date.year,
         payload.regDt.date.month,
         payload.regDt.date.day,
-        '.'
+        "."
       );
       state.board.regTime = util.makeTimeStr(
         payload.regDt.time.hour,
         payload.regDt.time.minute,
         payload.regDt.time.second,
-        ':'
+        ":"
       );
       state.board.readCount = payload.readCount;
       state.board.sameUser = payload.sameUser;
@@ -191,13 +194,13 @@ export default new Vuex.Store({
         payload.regDt.date.year,
         payload.regDt.date.month,
         payload.regDt.date.day,
-        '.'
+        "."
       );
       state.event.regTime = util.makeTimeStr(
         payload.regDt.time.hour,
         payload.regDt.time.minute,
         payload.regDt.time.second,
-        ':'
+        ":"
       );
     },
     // for UpdateModal event v-modal
@@ -220,14 +223,14 @@ export default new Vuex.Store({
         searchWord: this.state.board.searchWord,
       };
       try {
-        let { data } = await http.get('/boards', { params }); // params: params shorthand property, let response 도 제거
-        console.log('BoardMainVue: data : ');
+        let { data } = await http.get("/boards", { params }); // params: params shorthand property, let response 도 제거
+        console.log("BoardMainVue: data : ");
         console.log(data);
-        if (data.result == 'login') {
-          router.push('/login');
+        if (data.result == "login") {
+          router.push("/login");
         } else {
-          context.commit('SET_BOARD_LIST', data.list);
-          context.commit('SET_BOARD_TOTAL_LIST_ITEM_COUNT', data.count);
+          context.commit("SET_BOARD_LIST", data.list);
+          context.commit("SET_BOARD_TOTAL_LIST_ITEM_COUNT", data.count);
         }
       } catch (error) {
         console.error(error);
@@ -241,14 +244,14 @@ export default new Vuex.Store({
       };
 
       try {
-        let { data } = await http.get('/events', { params }); // params: params shorthand property, let response 도 제거
-        console.log('EventMainVue: data : ');
+        let { data } = await http.get("/events", { params }); // params: params shorthand property, let response 도 제거
+        console.log("EventMainVue: data : ");
         console.log(data);
-        if (data.result == 'login') {
-          router.push('/login');
+        if (data.result == "login") {
+          router.push("/login");
         } else {
-          context.commit('SET_EVENT_LIST', data.list);
-          context.commit('SET_EVENT_TOTAL_LIST_ITEM_COUNT', data.count);
+          context.commit("SET_EVENT_LIST", data.list);
+          context.commit("SET_EVENT_TOTAL_LIST_ITEM_COUNT", data.count);
         }
       } catch (error) {
         console.error(error);
@@ -256,14 +259,14 @@ export default new Vuex.Store({
     },
     async sidoList(context) {
       let params = {
-        option: 'sido',
+        option: "sido",
       };
       try {
-        let { data } = await http.get('/city', { params }); // params: params shorthand property, let response 도 제거
-        if (data.result == 'login') {
-          router.push('/login');
+        let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          router.push("/login");
         } else {
-          context.commit('SET_HOUSE_SIDO_LIST', data.list);
+          context.commit("SET_HOUSE_SIDO_LIST", data.list);
         }
       } catch (error) {
         console.error(error);
@@ -271,15 +274,15 @@ export default new Vuex.Store({
     },
     async gugunList(context, payload) {
       let params = {
-        option: 'gugun',
+        option: "gugun",
         sidoCode: payload,
       };
       try {
-        let { data } = await http.get('/city', { params }); // params: params shorthand property, let response 도 제거
-        if (data.result == 'login') {
-          router.push('/login');
+        let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          router.push("/login");
         } else {
-          context.commit('SET_HOUSE_GUGUN_LIST', data.list);
+          context.commit("SET_HOUSE_GUGUN_LIST", data.list);
           console.log(data);
         }
       } catch (error) {
@@ -288,15 +291,15 @@ export default new Vuex.Store({
     },
     async dongList(context, payload) {
       let params = {
-        option: 'dong',
+        option: "dong",
         gugunCode: payload,
       };
       try {
-        let { data } = await http.get('/city', { params }); // params: params shorthand property, let response 도 제거
-        if (data.result == 'login') {
-          router.push('/login');
+        let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          router.push("/login");
         } else {
-          context.commit('SET_HOUSE_DONG_LIST', data.list);
+          context.commit("SET_HOUSE_DONG_LIST", data.list);
           console.log(data);
         }
       } catch (error) {
@@ -307,11 +310,11 @@ export default new Vuex.Store({
       let lawd_cd = payload;
       let deal_ymd = 202112;
       try {
-        let { data } = await http.get('/houses/search/' + lawd_cd + '/' + deal_ymd); // params: params shorthand property, let response 도 제거
-        if (data.result == 'login') {
-          router.push('/login');
+        let { data } = await http.get("/houses/search/" + lawd_cd + "/" + deal_ymd); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          router.push("/login");
         } else {
-          context.commit('SET_HOUSE_LIST', data.list);
+          context.commit("SET_HOUSE_LIST", data.list);
           console.log(data);
         }
       } catch (error) {

@@ -21,6 +21,7 @@ import HouseDetail from "@/components/House/HouseDetail.vue";
 import AdminEventDetails from "@/components/Admin/Event/AdminEventDetailsArea";
 
 export default new VueRouter({
+  mode: "history",
   routes: [
     {
       path: "/",
