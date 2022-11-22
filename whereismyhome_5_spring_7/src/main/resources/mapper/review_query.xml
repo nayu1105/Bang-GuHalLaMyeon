@@ -23,7 +23,7 @@
 	
 	<!-- 리뷰 전체 조회 -->
 	<select id="reviewList" parameterType="map" resultType="com.mycom.myapp.review.dto.ReviewDto">
-		 select h.review_id, h.title, h.content, u.user_name, h.rate, h.reg_dt, h.house_no, h.user_seq
+		 select h.review_id, h.title, h.content, u.user_name, h.rate, h.reg_dt, h.house_no, h.user_seq, AVG(h.rate) as avgRate
 		 from HOUSEREVIEW h, USERS u
 		 where h.user_seq = u.user_seq and house_no = #{houseNo}
 		 order by review_id desc

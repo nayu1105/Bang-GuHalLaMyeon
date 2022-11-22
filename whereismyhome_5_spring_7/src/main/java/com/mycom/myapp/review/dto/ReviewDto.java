@@ -13,12 +13,14 @@ public class ReviewDto {
 	private String content;
 	private LocalDateTime regDt;
 
+	private int avgRate;
+
 	public ReviewDto() {
 
 	}
 
 	public ReviewDto(int reviewId, int houseNo, int rate, int userSeq, String userName, String title, String content,
-			LocalDateTime regDt) {
+			LocalDateTime regDt, int avgRate) {
 		super();
 		this.reviewId = reviewId;
 		this.houseNo = houseNo;
@@ -28,6 +30,15 @@ public class ReviewDto {
 		this.title = title;
 		this.content = content;
 		this.regDt = regDt;
+		this.avgRate = avgRate;
+	}
+
+	public int getAvgRate() {
+		return avgRate;
+	}
+
+	public void setAvgRate(int avgRate) {
+		this.avgRate = avgRate;
 	}
 
 	public String getUserName() {
@@ -97,7 +108,8 @@ public class ReviewDto {
 	@Override
 	public String toString() {
 		return "ReviewDto [reviewId=" + reviewId + ", houseNo=" + houseNo + ", rate=" + rate + ", userSeq=" + userSeq
-				+ ", userName=" + userName + ", title=" + title + ", content=" + content + ", regDt=" + regDt + "]";
+				+ ", userName=" + userName + ", title=" + title + ", content=" + content + ", regDt=" + regDt
+				+ ", avgRate=" + avgRate + "]";
 	}
 
 }

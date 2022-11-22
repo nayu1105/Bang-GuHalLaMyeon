@@ -5,7 +5,7 @@
         <div class="row g-0">
           <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4">
             <div class="course__review-rating-info grey-bg text-center">
-              <h5>5</h5>
+              <h5>{{ $store.state.review.avgRate }}</h5>
               <ul>
                 <li>
                   <a href="#"> <i class="icon_star"></i> </a>
@@ -103,6 +103,28 @@
               </div>
               <div class="course__comment-content">
                 <div class="course__comment-wrapper ml-70 fix">
+                  <div class="mb-15">
+                    <div
+                      class="star"
+                      v-for="index in review.rate"
+                      :key="index"
+                      style="display: inline"
+                    >
+                      <span>
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                    </div>
+                    <div
+                      class="star"
+                      v-for="index in 5 - review.rate"
+                      :key="index"
+                      style="display: inline"
+                    >
+                      <span>
+                        <i class="fa-regular fa-star"></i>
+                      </span>
+                    </div>
+                  </div>
                   <div class="course__comment-info float-start">
                     <h5>{{ review.title }}</h5>
                     <span>{{ review.userName }}</span
@@ -147,14 +169,7 @@
             <div class="row">
               <div class="col-xxl-12">
                 <div class="course__form-input">
-                  <input type="text" placeholder="제목" v-model="title" />
-                </div>
-              </div>
-              <div class="col-xxl-12">
-                <div class="course__form-input">
                   <div class="course__form-rating">
-                    <span> 별점 </span>
-
                     <div>
                       <div
                         class="star"
@@ -189,6 +204,11 @@
                       </li>
                     </ul> -->
                   </div>
+                  <div class="col-xxl-12 mt-20">
+                    <div class="course__form-input">
+                      <input type="text" placeholder="제목" v-model="title" />
+                    </div>
+                  </div>
                   <textarea placeholder="내용" v-model="content"></textarea>
                 </div>
               </div>
@@ -220,6 +240,7 @@ export default {
       rate: 0,
       houseNo: 0,
       list: this.$store.state.review.list,
+      avgRate: this.$store.state.review.avgRate,
 
       score: 0,
     };
