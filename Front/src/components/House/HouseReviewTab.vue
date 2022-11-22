@@ -1,12 +1,6 @@
 <template>
   <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
     <div class="course__review">
-      <h3>Reviews</h3>
-      <p>
-        Gosh william I'm telling crikey burke I don't want no agro A bit of how's your father bugger
-        all mate off his nut that, what a plonker cuppa owt to do
-      </p>
-
       <div class="course__review-rating mb-50">
         <div class="row g-0">
           <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4">
@@ -96,20 +90,24 @@
           </div>
         </div>
       </div>
+
+      <!-- 리뷰 리스트 시작 -->
       <div class="course__comment mb-75">
-        <h3>2 Comments</h3>
+        <h3>후기 ({{ $store.state.review.totalListItemCount }})</h3>
 
         <ul>
-          <li>
+          <li v-for="(review, index) in list" :key="index">
             <div class="course__comment-box">
               <div class="course__comment-thumb float-start">
-                <img src="@/assets/img/course/comment/course-comment-1.jpg" alt="" />
+                <img src="@/assets/img/noProfile.png" alt="" />
               </div>
               <div class="course__comment-content">
                 <div class="course__comment-wrapper ml-70 fix">
                   <div class="course__comment-info float-start">
-                    <h4>Eleanor Fant</h4>
-                    <span>July 14, 2022</span>
+                    <h5>{{ review.title }}</h5>
+                    <span>{{ review.userName }}</span
+                    >&nbsp; | &nbsp;
+                    <span>{{ review.regDt.date | makeDateStr(".") }}</span>
                   </div>
                   <div class="course__comment-rating float-start float-sm-end">
                     <ul>
@@ -132,48 +130,9 @@
                   </div>
                 </div>
                 <div class="course__comment-text ml-70">
+                  <!-- <h5>{{ review.title }}</h5> -->
                   <p>
-                    So I said lurgy dropped a clanger Jeffrey bugger cuppa gosh David blatant have
-                    it, standard A bit of how's your father my lady absolutely.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="course__comment-box">
-              <div class="course__comment-thumb float-start">
-                <img src="@/assets/img/course/comment/course-comment-2.jpg" alt="" />
-              </div>
-              <div class="course__comment-content">
-                <div class="course__comment-wrapper ml-70 fix">
-                  <div class="course__comment-info float-start">
-                    <h4>Shahnewaz Sakil</h4>
-                    <span>July 17, 2022</span>
-                  </div>
-                  <div class="course__comment-rating float-start float-sm-end">
-                    <ul>
-                      <li>
-                        <a href="#"> <i class="icon_star"></i> </a>
-                      </li>
-                      <li>
-                        <a href="#"> <i class="icon_star"></i> </a>
-                      </li>
-                      <li>
-                        <a href="#"> <i class="icon_star"></i> </a>
-                      </li>
-                      <li>
-                        <a href="#"> <i class="icon_star"></i> </a>
-                      </li>
-                      <li>
-                        <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="course__comment-text ml-70">
-                  <p>
-                    David blatant have it, standard A bit of how's your father my lady absolutely.
+                    {{ review.content }}
                   </p>
                 </div>
               </div>
@@ -182,32 +141,39 @@
         </ul>
       </div>
       <div class="course__form">
-        <h3>Write a Review</h3>
+        <h3>후기 쓰기</h3>
         <div class="course__form-inner">
           <form action="#">
             <div class="row">
-              <div class="col-xxl-6">
-                <div class="course__form-input">
-                  <input type="text" placeholder="Your Name" v-model="userName" />
-                </div>
-              </div>
-              <div class="col-xxl-6">
-                <div class="course__form-input">
-                  <input type="email" placeholder="Your Email" v-model="userEmail" />
-                </div>
-              </div>
               <div class="col-xxl-12">
                 <div class="course__form-input">
-                  <input type="text" placeholder="Review Title" v-model="title" />
+                  <input type="text" placeholder="제목" v-model="title" />
                 </div>
               </div>
               <div class="col-xxl-12">
                 <div class="course__form-input">
                   <div class="course__form-rating">
-                    <span>Rating : </span>
-                    <ul>
+                    <span> 별점 </span>
+
+                    <div>
+                      <div
+                        class="star"
+                        v-for="index in 5"
+                        :key="index"
+                        @click="check(index)"
+                        style="display: inline"
+                      >
+                        <span v-if="index < score">
+                          <i class="fa-solid fa-star fa-2x"></i>
+                        </span>
+                        <span v-if="index >= score">
+                          <i class="fa-regular fa-star fa-2x"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <!-- <ul>
                       <li>
-                        <a href="#"> <i class="icon_star"></i> </a>
+                        <a href="#"> <i class="fa fa-star" aria-hidden="true"></i> </a>
                       </li>
                       <li>
                         <a href="#"> <i class="icon_star"></i> </a>
@@ -221,16 +187,16 @@
                       <li>
                         <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
                       </li>
-                    </ul>
+                    </ul> -->
                   </div>
-                  <textarea placeholder="Review Summary" v-model="content"></textarea>
+                  <textarea placeholder="내용" v-model="content"></textarea>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-xxl-12">
                 <div class="course__form-btn mt-10 mb-55">
-                  <button @click="reviewInsert" type="submit" class="e-btn">Submit Review</button>
+                  <button @click="reviewInsert" type="submit" class="e-btn">등록하기</button>
                 </div>
               </div>
             </div>
@@ -249,22 +215,36 @@ export default {
   data() {
     return {
       userName: "",
-      userEmail: "",
       title: "",
       content: "",
       rate: 0,
       houseNo: 0,
+      list: this.$store.state.review.list,
+
+      score: 0,
     };
   },
+  computed: {
+    listGetters() {
+      return this.$store.getters.getReviewList;
+    },
+  },
+  created() {
+    this.reviewList();
+  },
   methods: {
+    check(index) {
+      this.score = index + 1;
+    },
+    reviewList() {
+      this.$store.dispatch("reviewList");
+    },
     async reviewInsert() {
       let formData = new FormData();
-      formData.append("userName", this.userName);
-      formData.append("userEmail", this.userEmail);
       formData.append("title", this.title);
       formData.append("content", this.content);
 
-      formData.append("rate", 5);
+      formData.append("rate", this.score - 1);
       formData.append("houseNo", 3);
 
       // multipart/form-data
@@ -293,5 +273,22 @@ export default {
       this.$emit("call-parent-insert");
     },
   },
+  filters: {
+    makeDateStr: function (date, separator) {
+      return (
+        date.year +
+        separator +
+        (date.month < 10 ? "0" + date.month : date.month) +
+        separator +
+        (date.day < 10 ? "0" + date.day : date.day)
+      );
+    },
+  },
 };
 </script>
+
+<style scoped>
+.fa-solid {
+  color: #f49d1a;
+}
+</style>

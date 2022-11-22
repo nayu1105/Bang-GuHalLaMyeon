@@ -85,6 +85,29 @@ export default new Vuex.Store({
       userName: "",
       userProfileImageUrl: "",
     },
+    review: {
+      // list
+      list: [],
+      limit: 10,
+      offset: 0,
+
+      // pagination
+      listRowCount: 10,
+      pageLinkCount: 10,
+      currentPageIndex: 1,
+
+      totalListItemCount: 0,
+
+      // detail, delete
+
+      reviewId: 0,
+      title: "",
+      content: "",
+      regDate: "",
+      regTime: "",
+      houseNo: 0,
+      rate: 0,
+    },
     house: {
       houseList: [],
 
@@ -213,6 +236,20 @@ export default new Vuex.Store({
     SET_EVENT_ENDDATE(state, endDate) {
       state.event.endDate = endDate;
     },
+
+    // review
+    SET_REVIEW_LIST(state, list) {
+      state.review.list = list;
+    },
+
+    SET_REVIEW_TOTAL_LIST_ITEM_COUNT(state, count) {
+      state.review.totalListItemCount = count;
+    },
+
+    SET_REVIEW_MOVE_PAGE(state, pageIndex) {
+      state.review.offset = (pageIndex - 1) * state.review.listRowCount;
+      state.review.currentPageIndex = pageIndex;
+    },
   },
   // for async method
   actions: {
@@ -252,6 +289,27 @@ export default new Vuex.Store({
         } else {
           context.commit("SET_EVENT_LIST", data.list);
           context.commit("SET_EVENT_TOTAL_LIST_ITEM_COUNT", data.count);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async reviewList(context) {
+      let params = {
+        limit: this.state.review.limit,
+        offset: this.state.review.offset,
+        houseNo: 3,
+      };
+
+      try {
+        let { data } = await http.get("/reviews", { params }); // params: params shorthand property, let response 도 제거
+        console.log("ReviewMainVue: data : ");
+        console.log(data);
+        if (data.result == "login") {
+          router.push("/login");
+        } else {
+          context.commit("SET_REVIEW_LIST", data.list);
+          context.commit("SET_REVIEW_TOTAL_LIST_ITEM_COUNT", data.count);
         }
       } catch (error) {
         console.error(error);

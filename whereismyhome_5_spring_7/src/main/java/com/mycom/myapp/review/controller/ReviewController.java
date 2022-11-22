@@ -18,6 +18,7 @@ import com.mycom.myapp.review.dto.ReviewDto;
 import com.mycom.myapp.review.dto.ReviewParamDto;
 import com.mycom.myapp.review.dto.ReviewResultDto;
 import com.mycom.myapp.review.service.ReviewService;
+import com.mycom.myapp.user.dto.UserDto;
 
 @RestController
 @CrossOrigin(
@@ -36,6 +37,9 @@ public class ReviewController {
 	// reviewInsert
 	@PostMapping(value = "/reviews")
 	public ResponseEntity<ReviewResultDto> reviewInsert(ReviewDto reviewDto, MultipartHttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UserDto userDto = (UserDto) session.getAttribute("userDto");
+		reviewDto.setUserSeq(userDto.getUserSeq());
 
 		ReviewResultDto reviewResultDto = service.reviewInsert(reviewDto);
 
