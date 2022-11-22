@@ -9,34 +9,12 @@
 		where (dongCode like concat(#{lawdcd}, '%'))
 		group by aptName;
 	</select>
+
 	
-	<select id="houseListSearch" parameterType="map" resultType="com.mycom.myapp.house.dto.HouseDto">
-		select distinct hd.no, dc.city_name sido , dc.gugun_name gugun, hd.dong, hd.AptName,
-				hd.floor, hd.area, hd.dealAmount, hi.lat, hi.lng, hi.img, hd.dealYear, hd.dealMonth, hd.dealDay, hd.jibun
-		from housedeal hd, houseinfo hi, dong_code dc
-		where hd.house_no = hi.no 
-				and hd.code = dc.gugun_code 
-				and (dc.city_code like  concat('%', #{sido}, '%') and dc.gugun_code like  concat('%', #{gugun}, '%') and (hd.AptName like concat('%', #{aptName}, '%') and hd.dong like concat('%', #{dong}, '%')))
-	</select>	
-	
-	<select id="houseDetail" parameterType="int" resultType="com.mycom.myapp.house.dto.HouseDto">
-		select distinct hd.no, dc.city_name sido, dc.gugun_name gugun, hd.dong , hd.AptName, 
-				hd.floor, hd.area, hd.dealAmount,hd.buildYear, hd.dealYear, hd.dealMonth, 
-				hd.type, hd.rentMoney, hi.lat, hi.lng, hi.img
-		from housedeal hd, houseinfo hi, dong_code dc 
-		where hd.house_no = hi.no and hd.code = dc.gugun_code and hd.no = #{houseSeq}
-	</select>
-	
-	<select id="houseListTotalCnt" parameterType="map" resultType="int">
-		select count(hd.no) 
-		from housedeal hd, dong_code dc
-		where dc.gugun_code = hd.code and (dc.city_name like concat('%', #{sido}, '%') and dc.gugun_name like concat('%', #{gugun}, '%')) 
-	</select>
-	
-	<select id="houseListSearchTotalCnt" parameterType="map" resultType="int">
-		select distinct count(*) 
-		from housedeal hd, dong_code dc 
-		where hd.code = dc.gugun_code and (dc.city_name like concat('%', #{sido}, '%') and dc.gugun_name like concat('%', #{gugun}, '%') and (hd.AptName like concat('%', #{aptName}, '%') and hd.dong like concat('%', #{dong}, '%')))
+	<select id="houseDetail" parameterType="map" resultType="com.mycom.myapp.house.dto.HouseDealDto">
+		SELECT *
+		  FROM housedeal
+		 where aptCode= #{aptCode};
 	</select>
 	
 </mapper>

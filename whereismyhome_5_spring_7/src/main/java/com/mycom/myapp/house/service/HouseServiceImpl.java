@@ -1,13 +1,9 @@
 package com.mycom.myapp.house.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycom.myapp.house.dao.HouseDao;
-import com.mycom.myapp.house.dto.HouseDto;
-import com.mycom.myapp.house.dto.HouseParamDto;
 import com.mycom.myapp.house.dto.HouseResultDto;
 
 
@@ -23,7 +19,6 @@ public class HouseServiceImpl implements HouseService {
 	public HouseResultDto houseList(String lawdcd) {
 		HouseResultDto houseResultDto = new HouseResultDto();
 		try {
-			System.out.println(dao.houseList(lawdcd));
 			houseResultDto.setList(dao.houseList(lawdcd));
 			houseResultDto.setResult(SUCCESS);
 		}catch (Exception e) {
@@ -32,28 +27,20 @@ public class HouseServiceImpl implements HouseService {
 		return houseResultDto;
 	}
 
-
 	@Override
-	public List<HouseDto> houseListSearch(HouseParamDto houseParamDto) {
-		return dao.houseListSearch(houseParamDto);
+	public HouseResultDto houseDetail(long aptCode) {
+		System.out.println("service");
+		System.out.println(aptCode);
+		HouseResultDto houseResultDto = new HouseResultDto();
+		try {
+			houseResultDto.setHouseDealdto(dao.houseDetail(aptCode));
+			System.out.println("setHouseDealdto");
+			houseResultDto.setResult(SUCCESS);
+		}catch(Exception e){
+			houseResultDto.setResult(FAIL);
+		}
+		return houseResultDto;
 	}
 
-
-	@Override
-	public HouseDto houseDetail(int houseSeq) {
-		return dao.houseDetail(houseSeq);
-	}
-
-
-	@Override
-	public int houseListTotalCnt(HouseParamDto houseParamDto) {
-		return dao.houseListTotalCnt(houseParamDto);
-	}
-
-
-	@Override
-	public int houseListSearchTotalCnt(HouseParamDto houseParamDto) {
-		return dao.houseListSearchTotalCnt(houseParamDto);
-	}
 
 }

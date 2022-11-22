@@ -4,23 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mycom.myapp.house.dto.HouseDealDto;
 import com.mycom.myapp.house.dto.HouseDto;
-import com.mycom.myapp.house.dto.HouseParamDto;
 
 @Mapper
 public interface HouseDao {
 	// 조회
 	List<HouseDto> houseList(String lawdcd);
 
-	// 실거래가 검색 (동별 검색)
-	List<HouseDto> houseListSearch(HouseParamDto houseParamDto);
-
 	// 거래매매 상세조회
-	HouseDto houseDetail(int houseSeq);
+	HouseDealDto houseDetail(long aptCode);
 
-	// 조회 건수
-	int houseListTotalCnt(HouseParamDto houseParamDto);
-
-	// 검색 조회 건수
-	int houseListSearchTotalCnt(HouseParamDto houseParamDto);
 }

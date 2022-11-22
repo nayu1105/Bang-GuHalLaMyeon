@@ -4,11 +4,14 @@
     <div class="map_wrap">
       <div id="map"></div>
     </div>
+    <MapSidebar v-show="this.$store.state.map.showSidebar"></MapSidebar>
   </div>
 </template>
 
 <script>
 import MapCityBtn from '@/components/House/MapCityBtn.vue';
+import MapSidebar from '@/components/House/MapSidebar.vue';
+
 import Vue from 'vue';
 import VueAlertify from 'vue-alertify';
 Vue.use(VueAlertify);
@@ -19,6 +22,7 @@ export default {
   name: 'KakaoMap',
   components: {
     MapCityBtn,
+    MapSidebar,
   },
   data() {
     return {
@@ -122,7 +126,20 @@ export default {
         var marker = new kakao.maps.Marker({
           position: new kakao.maps.LatLng(el.lat, el.lng),
           image: markerImage, // 마커이미지 설정
+          clickable: true,  // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+          title: el.aptCode,
         });
+
+        kakao.maps.event.addListener(marker, 'click', function() {            
+            $this.map.setCenter(marker.getPosition());
+            console.log(marker.getTitle());
+            $this.$store.dispatch('houseDetail',marker.getTitle());
+
+            $this.$store.state.map.showSidebar=true;
+            // marker의 title store에 저장 후 자식 sidebar의 async detail 함수 불러서 sidebar에 데이터 주기
+            // 클릭한 위치를 중앙에 정렬하기
+        });
+
         $this.markers.push(marker);
       });
       this.clusterer.addMarkers($this.markers);
