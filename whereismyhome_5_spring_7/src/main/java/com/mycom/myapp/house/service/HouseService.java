@@ -4,10 +4,11 @@ import java.util.List;
 
 import com.mycom.myapp.house.dto.HouseDto;
 import com.mycom.myapp.house.dto.HouseParamDto;
+import com.mycom.myapp.house.dto.HouseResultDto;
 
 public interface HouseService {
-	// 조회
-	List<HouseDto> houseList(HouseParamDto houseParamDto);
+	// 전체 조회
+	HouseResultDto houseList(String lawdcd);
 
 	// 실거래가 검색 (동별검색)
 	List<HouseDto> houseListSearch(HouseParamDto houseParamDto);

@@ -3,11 +3,12 @@
 
 <mapper namespace="com.mycom.myapp.house.dao.HouseDao">
 
-<!--     <select id="houseList" parameterType="map" resultType="com.mycom.myapp.house.dto.HouseDto">
-		select distinct hd.no, dc.city_name sido, dc.gugun_name gugun, hd.dong, hd.AptName, hd.floor, hd.area, hd.dealAmount, hi.lat, hi.lng, hi.img, hd.dealYear, hd.dealMonth, hd.dealDay, hd.jibun
-		from housedeal hd, houseinfo hi, dong_code dc
-		where hd.house_no = hi.no and dc.gugun_code = hd.code and dc.city_code = #{sido} and dc.gugun_code = #{gugun}
-	</select> -->
+    <select id="houseList" parameterType="string" resultType="com.mycom.myapp.house.dto.HouseDto">
+		SELECT *
+		FROM houseinfo
+		where (dongCode like concat(#{lawdcd}, '%'))
+		group by aptName;
+	</select>
 	
 	<select id="houseListSearch" parameterType="map" resultType="com.mycom.myapp.house.dto.HouseDto">
 		select distinct hd.no, dc.city_name sido , dc.gugun_name gugun, hd.dong, hd.AptName,

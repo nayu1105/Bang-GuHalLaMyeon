@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.mycom.myapp.house.dao.HouseDao;
 import com.mycom.myapp.house.dto.HouseDto;
 import com.mycom.myapp.house.dto.HouseParamDto;
+import com.mycom.myapp.house.dto.HouseResultDto;
 
 
 @Service
@@ -15,9 +16,20 @@ public class HouseServiceImpl implements HouseService {
 	@Autowired
 	HouseDao dao;
 
+	private final int SUCCESS = 1;
+	private final int FAIL = -1;
+	
 	@Override
-	public List<HouseDto> houseList(HouseParamDto houseParamDto) {
-		return dao.houseList(houseParamDto);
+	public HouseResultDto houseList(String lawdcd) {
+		HouseResultDto houseResultDto = new HouseResultDto();
+		try {
+			System.out.println(dao.houseList(lawdcd));
+			houseResultDto.setList(dao.houseList(lawdcd));
+			houseResultDto.setResult(SUCCESS);
+		}catch (Exception e) {
+			houseResultDto.setResult(FAIL);
+		}
+		return houseResultDto;
 	}
 
 

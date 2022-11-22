@@ -14,7 +14,7 @@
       <button class="btn-select" @click="siBtnToggle" ref="siSelect">시/군/구</button>
       <ul class="list-member">
         <li v-for="(gugun, index) in gugunListGetters" :key="index">
-          <button type="button" @click="siAddNodeName(gugun.gugunCode);">
+          <button type="button" @click="siAddNodeName(gugun.gugunCode)">
             {{ gugun.gugunName }}
           </button>
         </li>
@@ -25,7 +25,7 @@
       <button class="btn-select" @click="dongBtnToggle" ref="dongSelect">동</button>
       <ul class="list-member">
         <li v-for="(dong, index) in dongListGetters" :key="index">
-          <button type="button" @click="dongAddNodeName(dong.dongCode);">{{ dong.dongName }}</button>
+          <button type="button" @click="dongAddNodeName(dong.dongCode)">{{ dong.dongName }}</button>
         </li>
       </ul>
     </article>
@@ -98,30 +98,34 @@ export default {
       if (event.target.nodeName === 'BUTTON') {
         siSelect.innerText = event.target.innerText;
         this.$store.state.house.gugun = siSelect.innerText;
-        this.dongList(gugunCode);
+        var payload = {
+          sidoName: this.$store.state.house.sido,
+          gugunName: this.$store.state.house.gugun,
+        };
+        this.$store.state.house.lawdcd = gugunCode;
+        this.dongList(payload);
         const dongSelect = this.$refs.dongSelect;
         dongSelect.innerText = '동';
         this.$store.state.house.dong = '';
         siSelect.classList.remove('on');
-        this.getHouse(gugunCode);
       }
     },
 
-    dongAddNodeName(dongCode) {
+    dongAddNodeName() {
       const dongSelect = this.$refs.dongSelect;
       if (event.target.nodeName === 'BUTTON') {
         dongSelect.innerText = event.target.innerText;
         dongSelect.classList.remove('on');
         this.$store.state.house.dong = dongSelect.innerText;
-        console.log('dongcode');
-        console.log(dongCode);
+        // store dong이 변화가 오면 map center 이동;
+        this.$parent.getHouseList();
       }
     },
 
-    getHouse(dongCode) {
-      let param = dongCode.substr(0, 5);
-      this.$store.dispatch('houseList', param);
-    },
+    // getHouse(dongCode) {
+    //   let param = dongCode.substr(0, 5);
+    //   this.$store.dispatch('houseList', param);
+    // },
 
     clickBack() {
       const doSelect = this.$refs.doSelect;
@@ -139,8 +143,8 @@ export default {
     gugunList(sidoCode) {
       this.$store.dispatch('gugunList', sidoCode);
     },
-    dongList(gugunCode) {
-      this.$store.dispatch('dongList', gugunCode);
+    dongList(payload) {
+      this.$store.dispatch('dongList', payload);
     },
   },
   created() {

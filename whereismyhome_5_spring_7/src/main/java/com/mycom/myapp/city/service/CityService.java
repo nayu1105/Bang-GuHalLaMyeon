@@ -7,4 +7,5 @@ public interface CityService {
 	CityResultDto cityList();
 	CityResultDto gugunList(CityCodeDto cityCodeDto);
 	CityResultDto dongList(CityCodeDto cityCodeDto);
+	CityResultDto lawdcdList();
 }

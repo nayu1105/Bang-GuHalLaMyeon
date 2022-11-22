@@ -8,6 +8,7 @@ public class CityCodeDto {
 	private String gugunCode;
 	private String dongName;
 	private String dongCode;
+	private String lawdcd;
 
 	public String getOption() {
 		return option;
@@ -65,10 +66,19 @@ public class CityCodeDto {
 		this.dongCode = dongCode;
 	}
 
+	public String getLawdcd() {
+		return lawdcd;
+	}
+
+	public void setLawdcd(String lawdcd) {
+		this.lawdcd = lawdcd;
+	}
+
 	@Override
 	public String toString() {
 		return "CityCodeDto [option=" + option + ", sidoName=" + sidoName + ", sidoCode=" + sidoCode + ", gugunName="
-				+ gugunName + ", gugunCode=" + gugunCode + ", dongName=" + dongName + ", dongCode=" + dongCode + "]";
+				+ gugunName + ", gugunCode=" + gugunCode + ", dongName=" + dongName + ", dongCode=" + dongCode
+				+ ", lawdcd=" + lawdcd + "]";
 	}
 
 }

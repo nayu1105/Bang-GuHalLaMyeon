@@ -10,7 +10,7 @@ import com.mycom.myapp.house.dto.HouseParamDto;
 @Mapper
 public interface HouseDao {
 	// 조회
-	List<HouseDto> houseList(HouseParamDto houseParamDto);
+	List<HouseDto> houseList(String lawdcd);
 
 	// 실거래가 검색 (동별 검색)
 	List<HouseDto> houseListSearch(HouseParamDto houseParamDto);

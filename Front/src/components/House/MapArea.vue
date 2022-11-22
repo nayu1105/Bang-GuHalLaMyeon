@@ -8,160 +8,156 @@
 </template>
 
 <script>
-import MapCityBtn from "@/components/House/MapCityBtn.vue";
+import MapCityBtn from '@/components/House/MapCityBtn.vue';
+import Vue from 'vue';
+import VueAlertify from 'vue-alertify';
+Vue.use(VueAlertify);
+
+import http from '@/common/axios.js';
+
 export default {
-  name: "KakaoMap",
+  name: 'KakaoMap',
   components: {
     MapCityBtn,
   },
   data() {
     return {
       infowindow: null,
-      markers : [],
+      markers: [],
+      map: null,
+      clusterer: null,
     };
-  },
-  watch: {
-    houseList: "initMap",
-    map: null,
-  },
-  computed: {
-    // gttters 이용
-    houseList: {
-      get() {
-        return this.$store.state.house.houseList;
-      },
-    },
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
-      const script = document.createElement("script");
+      const script = document.createElement('script');
       script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9fa060a9b4a46b0e7e27c1cfe9d4e2f4&libraries=services";
+        '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9fa060a9b4a46b0e7e27c1cfe9d4e2f4&libraries=services,clusterer,drawing';
 
       /* global kakao */
-      script.addEventListener("load", () => {
+      script.addEventListener('load', () => {
         kakao.maps.load(this.initMap);
       });
       document.head.appendChild(script);
     }
   },
+  // map init 후 모든 마커 생성 & 클러스터링
+  // 그 후 infowindow OR Marker Image 손보고
+  // house detail 뜨고
+
   methods: {
     initMap() {
-
-      this.map = null;
-      const container = document.getElementById("map");
+      const container = document.getElementById('map');
       const options = {
         center: new kakao.maps.LatLng(37.5366059, 126.9917822),
-        level: 8,
+        level: 6,
       };
 
       //지도 객체를 등록합니다.
       //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
-      let map = new kakao.maps.Map(container, options);
+      this.map = new kakao.maps.Map(container, options);
 
       var mapTypeControl = new kakao.maps.MapTypeControl();
 
       // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
       // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-      map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+      this.map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
       // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
       var zoomControl = new kakao.maps.ZoomControl();
-      map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+      this.map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-      //검색 된 곳으로 마커 표시
-      var list = this.houseList;
-
-      // var bounds = map.getBounds();
-
-      list.forEach((element) => {
-        // 주소-좌표 변환 객체를 생성합니다
-        var geocoder = new kakao.maps.services.Geocoder();
-        var location = element.법정동 + " " + element.지번;
-        console.log(location);
-
-        geocoder.addressSearch(location, function (result, status) {
-          // 정상적으로 검색이 완료됐으면
-          if (status === kakao.maps.services.Status.OK) {
-            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-            var message = "latlng: new kakao.maps.LatLng(" + result[0].y + ", " + result[0].x + ")";
-
-            console.log(coords);
-            console.log(message);
-
-            // 결과값으로 받은 위치를 마커로 표시합니다
-            var marker = new kakao.maps.Marker({
-              map: map,
-              position: coords,
-            });
-
-            this.markers.push(marker);
-            console.log(marker);
-
-            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-            // this.map.setCenter(coords);
-          }
-        });
+      // 마커 클러스터러를 생성합니다
+      this.clusterer = new kakao.maps.MarkerClusterer({
+        map: this.map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+        minLevel: 2, // 클러스터 할 최소 지도 레벨
       });
 
-      this.map =map;
+      kakao.maps.event.addListener(this.clusterer, 'clusterclick', function (cluster) {
+        console.log(cluster.getBounds());
+      });
+    },
+    // map.setBounds(bounds);
+    /////////////////////////////////* Open Api ver *///////////////////////////////////
 
-      // map.setBounds(bounds);
+    // getHouseList() {
+    //   this.$store.dispatch('houseTotalList');
+    // },
+
+    async getHouseList() {
+      let params = {
+        lawdcd: this.$store.state.house.lawdcd,
+      };
+
+      try {
+        let { data } = await http.get('/houses', { params });
+        if (data.result == 'login') {
+          this.$router.push('/login');
+        } else {
+          console.log(data.list);
+          this.makeClusterMakers(data.list);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
 
-    // 처음 마커가 생성되는데 map이 여러개 생성되는 느낌임.
-    // map init 후 마커만 생성 & 제어 하는 방법 찾기
-    // 그 후 클러스터링
-    // 그 후 infowindow OR Marker Image 손보고
-    // house detail 뜨고 
-    changeCenter(){
-      // 이전 마크 삭제
-      for (let i = 0; i < this.markers.length; i++) {
-        this.markers[i].setMap(null);        
+    makeClusterMakers(list) {
+      var $this = this;
+
+      if ($this.markers.length != 0) {
+        this.clusterer.removeMarkers($this.markers);
+        console.log('delete markers!!');
       }
-      this.markers =[];
 
-      // var bounds = this.map.getBounds();
+      $this.markers = [];
+      var imageSrc = require('@/assets/img/icon/marker/marker.png'); // 마커이미지의 주소입니다
+      var imageSize = new kakao.maps.Size(45, 45); // 마커이미지의 크기입니다
+      var imageOption = { offset: new kakao.maps.Point(13, 34) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-      var list = this.houseList;
-
-      list.forEach((element) => {
-          // 주소-좌표 변환 객체를 생성합니다
-        var geocoder = new kakao.maps.services.Geocoder();
-        var location = element.법정동 + " " + element.지번;
-        console.log(location);
-        geocoder.addressSearch(location, function (result, status) {
-            // 정상적으로 검색이 완료됐으면
-            if (status === kakao.maps.services.Status.OK) {
-              var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-              var message = "latlng: new kakao.maps.LatLng(" + result[0].y + ", " + result[0].x + ")";
-
-              console.log(coords);
-              console.log(message);
-
-              // 결과값으로 받은 위치를 마커로 표시합니다
-              var marker = new kakao.maps.Marker({
-                map: this.map,
-                position: coords,
-              });
-
-              this.markers.push(marker);
-              console.log(marker);
-
-              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-              // this.map.setCenter(coords);
-            }
+      list.forEach((el) => {
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+        var marker = new kakao.maps.Marker({
+          position: new kakao.maps.LatLng(el.lat, el.lng),
+          image: markerImage, // 마커이미지 설정
         });
+        $this.markers.push(marker);
       });
-      // this.map.setBounds(bounds);
-    }
+
+      console.log('this.markers');
+      console.log(this.markers);
+      this.clusterer.addMarkers($this.markers);
+
+      this.setMapCenterLocation();
+    },
+
+    setMapCenterLocation() {
+      console.log('setMapCenterLocation');
+      var $this = this;
+      var geocoder = new kakao.maps.services.Geocoder();
+
+      var location = this.$store.state.house.sido + ' ' + this.$store.state.house.gugun;
+
+      console.log(location);
+      geocoder.addressSearch(location, function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+          $this.map.setCenter(coords);
+        }
+      });
+    },
+  },
+  created() {
+    this.getHouseList();
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url("@/assets/css/map.css");
+@import url('@/assets/css/map.css');
 </style>

@@ -11,4 +11,5 @@ public interface CityDao {
 	List<CityCodeDto> cityList();
 	List<CityCodeDto> gugunList(CityCodeDto cityCodeDto);
 	List<CityCodeDto> dongList(CityCodeDto cityCodeDto);
+	List<CityCodeDto> lawdcdList();
 }
