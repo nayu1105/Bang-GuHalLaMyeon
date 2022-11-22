@@ -19,7 +19,7 @@
             </div>
             <div class="teacher__bio">
               <h3>{{ $store.state.board.userName }}</h3>
-              <p>{{ $store.state.board.content }}</p>
+              <p v-html="$store.state.board.content"></p>
             </div>
           </div>
         </div>
@@ -29,30 +29,30 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import VueAlertify from 'vue-alertify';
+import Vue from "vue";
+import VueAlertify from "vue-alertify";
 Vue.use(VueAlertify);
 
 export default {
-  name: 'BoardsDetails',
+  name: "BoardsDetails",
   computed: {},
   filters: {
     makeDateStr: function (date, separator) {
       return (
         date.year +
         separator +
-        (date.month < 10 ? '0' + date.month : date.month) +
+        (date.month < 10 ? "0" + date.month : date.month) +
         separator +
-        (date.day < 10 ? '0' + date.day : date.day)
+        (date.day < 10 ? "0" + date.day : date.day)
       );
     },
     makeTimeStr: function (hour, minute, second, type) {
       return (
         hour +
         type +
-        (minute < 10 ? '0' + minute : minute) +
+        (minute < 10 ? "0" + minute : minute) +
         type +
-        (second < 10 ? '0' + second : second)
+        (second < 10 ? "0" + second : second)
       );
     },
   },

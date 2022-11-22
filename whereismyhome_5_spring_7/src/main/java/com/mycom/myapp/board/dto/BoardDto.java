@@ -10,7 +10,6 @@ public class BoardDto {
 	private String title;
 	private String content;
 	private LocalDateTime regDt;
-	private boolean sameUser;
 
 	public BoardDto() {
 	}
@@ -82,19 +81,13 @@ public class BoardDto {
 		this.regDt = regDt;
 	}
 
-	public boolean isSameUser() {
-		return sameUser;
-	}
 
-	public void setSameUser(boolean sameUser) {
-		this.sameUser = sameUser;
-	}
 
 	@Override
 	public String toString() {
 		return "BoardDto [boardId=" + boardId + ", userSeq=" + userSeq + ", userName=" + userName
 				+ ", userProfileImageUrl=" + userProfileImageUrl + ", title=" + title + ", content=" + content
-				+ ", regDt=" + regDt + ", sameUser=" + sameUser + "]";
+				+ ", regDt=" + regDt + "]";
 	}
 
 }

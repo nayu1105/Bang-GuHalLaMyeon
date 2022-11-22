@@ -136,6 +136,7 @@ export default {
         "이벤트에 참여하시겠습니까?",
         function () {
           $this.participateInsert($this.$store.state.event.eventId); // this 아님
+          $this.$router.go();
         },
         function () {
           console.log("canceled!!!");

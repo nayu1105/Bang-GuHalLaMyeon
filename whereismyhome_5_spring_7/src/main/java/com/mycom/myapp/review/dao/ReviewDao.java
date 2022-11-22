@@ -13,7 +13,7 @@ public interface ReviewDao {
 	int reviewDelete(int reviewId);
 
 	ReviewDto reviewDetail(int reviewId);
-
+	
 	List<ReviewDto> reviewList(ReviewParamDto reviewParamDto);
 	int reviewListTotalCnt();
 }

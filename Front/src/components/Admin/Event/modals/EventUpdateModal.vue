@@ -22,7 +22,7 @@
         <div class="modal-body">
           <div class="mb-3">
             <label for="titleUpdate" class="form-label">제목</label>
-            <input type="text" class="form-control" id="titleUpdate" v-model="storeTitle" />
+            <input type="text" class="form-control" v-model="title" />
           </div>
           <div class="mb-3">
             <label for="contentUpdate" class="form-label">내용</label>
@@ -31,17 +31,11 @@
           </div>
           <div class="mb-3">
             <label for="startUpdate" class="form-label">시작 일시</label>
-            <input type="date" class="form-control" id="startUpdate" v-model="storeStartDate" />
+            <input type="date" class="form-control" v-model="startDate" />
           </div>
           <div class="mb-3">
             <label for="endUpdate" class="form-label">종료 일시</label>
-            <input
-              type="date"
-              class="form-control"
-              id="endUpdate"
-              v-model="storeEndDate"
-              value="endDate"
-            />
+            <input type="date" class="form-control" v-model="endDate" />
           </div>
           <button
             @click="eventUpdate"
@@ -72,37 +66,13 @@ export default {
   data() {
     return {
       eventId: this.$store.state.event.eventId,
+      title: this.$store.state.event.title,
       CKEditor: "",
       startDate: this.$store.state.event.startDate,
       endDate: this.$store.state.event.endDate,
     };
   },
-  computed: {
-    storeTitle: {
-      get() {
-        return this.$store.state.event.title;
-      },
-      set(title) {
-        this.$store.commit("SET_EVENT_TITLE", title);
-      },
-    },
-    storeStartDate: {
-      get() {
-        return this.$store.state.event.startDate;
-      },
-      set(startDate) {
-        this.$store.commit("SET_EVENT_STARTDATE", startDate);
-      },
-    },
-    storeEndDate: {
-      get() {
-        return this.$store.state.event.endDate;
-      },
-      set(endDate) {
-        this.$store.commit("SET_EVENT_ENDDATE", endDate);
-      },
-    },
-  },
+
   methods: {
     initUI() {
       this.CKEditor.setData(this.$store.state.event.content);
@@ -111,10 +81,11 @@ export default {
       let formData = new FormData();
       this.eventId = this.$store.state.event.eventId;
       formData.append("eventId", this.eventId);
-      formData.append("title", this.storeTitle);
+      formData.append("title", this.title);
       formData.append("content", this.CKEditor.getData());
-      formData.append("startDate", this.storeStartDate);
-      formData.append("endDate", this.storeEndDate);
+      formData.append("startDate", this.startDate);
+      formData.append("endDate", this.endDate);
+      formData.append("statusCode", 0);
 
       // multipart/form-data
       let options = {
@@ -127,12 +98,15 @@ export default {
 
         console.log(data);
 
+        var $this = this;
         // interceptor session check fail
         if (data.result == "login") {
           this.$router.push("/login");
         } else {
           // 등록 성공
-          this.$alertify.success("이벤트가 수정되었습니다. ");
+          this.$alertify.alert("수정되었습니다. ", function () {
+            $this.$router.go();
+          });
         }
       } catch (error) {
         this.$alertify.error("글 수정 과정에서 오류가 발생했습니다. ");
@@ -155,6 +129,10 @@ export default {
     let $this = this;
     this.$el.addEventListener("show.bs.modal", function () {
       $this.initUI();
+
+      $this.title = $this.$store.state.event.title;
+      $this.startDate = $this.$store.state.event.startDate;
+      $this.endDate = $this.$store.state.event.endDate;
     });
   },
 };

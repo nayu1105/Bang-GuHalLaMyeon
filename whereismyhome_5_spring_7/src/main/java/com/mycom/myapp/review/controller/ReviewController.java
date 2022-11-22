@@ -18,6 +18,7 @@ import com.mycom.myapp.review.dto.ReviewDto;
 import com.mycom.myapp.review.dto.ReviewParamDto;
 import com.mycom.myapp.review.dto.ReviewResultDto;
 import com.mycom.myapp.review.service.ReviewService;
+import com.mycom.myapp.user.dto.UserDto;
 
 @RestController
 @CrossOrigin(
@@ -32,6 +33,35 @@ public class ReviewController {
 
 	private final int SUCCESS = 1;
 
+
+	// reviewInsert
+	@PostMapping(value = "/reviews")
+	public ResponseEntity<ReviewResultDto> reviewInsert(ReviewDto reviewDto, MultipartHttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UserDto userDto = (UserDto) session.getAttribute("userDto");
+		reviewDto.setUserSeq(userDto.getUserSeq());
+
+		ReviewResultDto reviewResultDto = service.reviewInsert(reviewDto);
+
+		if (reviewResultDto.getResult() == SUCCESS) {
+			return new ResponseEntity<ReviewResultDto>(reviewResultDto, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<ReviewResultDto>(reviewResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	// reviewDelete
+	@DeleteMapping(value = "/reviews/{reviewId}")
+	public ResponseEntity<ReviewResultDto> reviewDelete(@PathVariable int reviewId) {
+		ReviewResultDto reviewResultDto = service.reviewDelete(reviewId);
+
+		if (reviewResultDto.getResult() == SUCCESS) {
+			return new ResponseEntity<ReviewResultDto>(reviewResultDto, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<ReviewResultDto>(reviewResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	// reviewList
 	@GetMapping(value = "/reviews")
 	public ResponseEntity<ReviewResultDto> reviewList(ReviewParamDto reviewParamDto) {
@@ -58,30 +88,6 @@ public class ReviewController {
 		ReviewResultDto reviewResultDto;
 		System.out.println(reviewParamDto);
 		reviewResultDto = service.reviewDetail(reviewParamDto);
-
-		if (reviewResultDto.getResult() == SUCCESS) {
-			return new ResponseEntity<ReviewResultDto>(reviewResultDto, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<ReviewResultDto>(reviewResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	// reviewInsert
-	@PostMapping(value = "/reviews")
-	public ResponseEntity<ReviewResultDto> reviewInsert(ReviewDto reviewDto, MultipartHttpServletRequest request) {
-		ReviewResultDto reviewResultDto = service.reviewInsert(reviewDto);
-
-		if (reviewResultDto.getResult() == SUCCESS) {
-			return new ResponseEntity<ReviewResultDto>(reviewResultDto, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<ReviewResultDto>(reviewResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
-	// reviewDelete
-	@DeleteMapping(value = "/reviews/{reviewId}")
-	public ResponseEntity<ReviewResultDto> reviewDelete(@PathVariable int reviewId) {
-		ReviewResultDto reviewResultDto = service.reviewDelete(reviewId);
 
 		if (reviewResultDto.getResult() == SUCCESS) {
 			return new ResponseEntity<ReviewResultDto>(reviewResultDto, HttpStatus.OK);

@@ -2,6 +2,12 @@ iframe {
   height: 350px;
   width: 100%;
 }
+.modal {
+  top: 60px;
+}
+.modal-body {
+  margin-top: 20px;
+}
 .modal-body p {
   margin-bottom: 0;
 }
@@ -32,7 +38,7 @@ iframe {
   height: 1em;
   padding: 0.25em 0.25em;
   color: #000;
-  background: transparent url("@/assets/img/icon/close.png") center/1em auto no-repeat;
+  background: transparent url('@/assets/img/icon/close.png') center/1em auto no-repeat;
   border: 0;
   border-radius: 0.25rem;
   opacity: 1;

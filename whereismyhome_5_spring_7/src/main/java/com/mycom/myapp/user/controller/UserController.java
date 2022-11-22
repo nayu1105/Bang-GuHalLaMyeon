@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,7 @@ public class UserController {
 	CodeService codeService;
 
 	private final int SUCCESS = 1;
+	private final int FAIL = -1;
 
 	@PostMapping(value = "/register")
 	public ResponseEntity<Map<String, String>> register(@RequestBody UserDto dto) {
@@ -73,9 +75,9 @@ public class UserController {
 		return new ResponseEntity<UserDto>(dto, HttpStatus.OK);
 	}
 	
-	@PostMapping("/user/{userSeq}")
-	private ResponseEntity<Map<String, String>> boardUpdate(UserDto dto) {
-		System.out.println(dto);
+	@PutMapping("/user/{userSeq}")
+	private ResponseEntity<Map<String, String>> boardUpdate(@PathVariable int userSeq, @RequestBody UserDto dto) {
+		dto.setUserSeq(userSeq);
 		UserResultDto userResultDto = userService.userUpdate(dto);
 	
 		Map<String, String> map = new HashMap<>();

@@ -9,6 +9,7 @@ import SignUp from "@/components/User/SignUp.vue";
 import UserDetail from "@/components/User/UserDetail.vue";
 import Boards from "@/components/Boards/Boards.vue";
 import BoardsDetails from "@/components/Boards/BoardsDetails.vue";
+import AdminBoardsDetails from "@/components/Admin/Board/AdminBoardsDetails.vue";
 import Events from "@/components/Events/Events.vue";
 import EventDetails from "@/components/Events/EventDetailsArea.vue";
 import Bookmark from "@/components/BookMark/BookMark.vue";
@@ -20,6 +21,7 @@ import HouseDetail from "@/components/House/HouseDetail.vue";
 import AdminEventDetails from "@/components/Admin/Event/AdminEventDetailsArea";
 
 export default new VueRouter({
+  mode: "history",
   routes: [
     {
       path: "/",
@@ -44,6 +46,10 @@ export default new VueRouter({
     {
       path: "/boards-details",
       component: BoardsDetails,
+    },
+    {
+      path: "/admin/boards-details",
+      component: AdminBoardsDetails,
     },
     {
       path: "/events",

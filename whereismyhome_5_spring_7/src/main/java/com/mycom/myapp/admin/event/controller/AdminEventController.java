@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -103,7 +104,12 @@ public class AdminEventController {
 
 	// eventUpdate
 	@PutMapping(value = "/admin/events/{eventId}")
-	public ResponseEntity<EventResultDto> eventUpdate(EventDto eventDto) {
+	public ResponseEntity<EventResultDto> eventUpdate(EventDto eventDto, MultipartHttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		UserDto userDto = (UserDto) session.getAttribute("userDto");
+		eventDto.setUserSeq(userDto.getUserSeq());
+		
 		EventResultDto eventResultDto = service.eventUpdate(eventDto);
 
 		if (eventResultDto.getResult() == SUCCESS) {
@@ -125,14 +131,14 @@ public class AdminEventController {
 			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	// participantDelete
 	@DeleteMapping(value = "/participant/{eventId}/{userSeq}")
 	public ResponseEntity<EventResultDto> participantDelete(@PathVariable int eventId, @PathVariable int userSeq) {
 		EventParticipateDto eventParticipateDto = new EventParticipateDto();
 		eventParticipateDto.setEventId(eventId);
 		eventParticipateDto.setUserSeq(userSeq);
-		
+
 		EventResultDto eventResultDto = service.participantDelete(eventParticipateDto);
 
 		if (eventResultDto.getResult() == SUCCESS) {
@@ -141,5 +147,5 @@ public class AdminEventController {
 			return new ResponseEntity<EventResultDto>(eventResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 }

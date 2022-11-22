@@ -11,4 +11,10 @@ public class UserResultDto {
 		this.result = result;
 	}
 
+	@Override
+	public String toString() {
+		return "UserResultDto [result=" + result + "]";
+	}
+	
+	
 }

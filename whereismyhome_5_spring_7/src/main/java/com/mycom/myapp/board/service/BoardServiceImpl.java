@@ -36,35 +36,12 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return boardResultDto;
 	}
-
-	@Override
-	public BoardResultDto boardListSearchWord(BoardParamDto boardParamDto) {
-		
-		BoardResultDto boardResultDto = new BoardResultDto();
-		try {
-			// 목록, 총건수를 가져온다.
-			List<BoardDto> list = dao.boardListSearchWord(boardParamDto);
-			int count = dao.boardListSearchWordTotalCnt(boardParamDto.getSearchWord());
-			boardResultDto.setList(list);
-			boardResultDto.setCount(count);
-			boardResultDto.setResult(SUCCESS);
-		} catch (Exception e) {
-			e.printStackTrace();
-			boardResultDto.setResult(FAIL);
-		}
-		return boardResultDto;
-	}
-
+	
 	@Override
 	public int boardListTotalCnt() {
 		return dao.boardListTotalCnt();
 	}
-
-	@Override
-	public int boardListSearchWordTotalCnt(String searchWord) {
-		return dao.boardListSearchWordTotalCnt(searchWord);
-	}
-
+	
 	@Override
 	public BoardResultDto boardDetail(BoardParamDto boardParamDto) {
 		BoardResultDto boardResultDto = new BoardResultDto();
@@ -72,13 +49,8 @@ public class BoardServiceImpl implements BoardService {
 		try {
 			BoardDto boardDto = dao.boardDetail(boardParamDto.getBoardId());
 			// 두 사용자가 같은지에 대한 sameUser 처리
-			if (boardDto.getUserSeq() == boardParamDto.getUserSeq()) {
-				boardDto.setSameUser(true);
-			} else {
-				boardDto.setSameUser(false);
-			}
 			boardResultDto.setDto(boardDto);
-			System.out.println(boardDto);
+			boardResultDto.setResult(SUCCESS);
 			return boardResultDto;
 		}catch (Exception e) {
 			e.printStackTrace();
