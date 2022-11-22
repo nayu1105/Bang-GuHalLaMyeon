@@ -107,6 +107,7 @@ export default new Vuex.Store({
       regTime: "",
       houseNo: 0,
       rate: 0,
+      avgRate: 0,
     },
     house: {
       houseList: [],
@@ -118,6 +119,13 @@ export default new Vuex.Store({
       sido: "",
       gugun: "",
       dong: "",
+
+      aptName: "",
+      dealAmount: "",
+      buildYear: 0,
+      dealYear: 0,
+      dealMonth: 0,
+      no: 0,
     },
   },
   // state 상태를 변경하는 유일한 방법
@@ -176,6 +184,16 @@ export default new Vuex.Store({
       state.board.title = payload.title;
       state.board.content = payload.content;
     },
+
+    SET_HOUSE_DETAIL(state, payload) {
+      state.house.aptName = payload.aptName;
+      state.house.dealAmount = payload.dealAmount;
+      state.house.buildYear = payload.buildYear;
+      state.house.dealYear = payload.dealYear;
+      state.house.dealMonth = payload.dealMonth;
+      state.house.no = payload.no;
+    },
+
     SET_HOUSE_SIDO_LIST(state, sidoList) {
       state.house.sidoList = sidoList;
     },
