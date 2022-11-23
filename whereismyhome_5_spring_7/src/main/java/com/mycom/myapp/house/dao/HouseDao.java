@@ -13,6 +13,6 @@ public interface HouseDao {
 	List<HouseDto> houseList(String lawdcd);
 
 	// 거래매매 상세조회
-	HouseDealDto houseDetail(long aptCode);
+	List<HouseDealDto> houseDetail(long aptCode);
 
 }

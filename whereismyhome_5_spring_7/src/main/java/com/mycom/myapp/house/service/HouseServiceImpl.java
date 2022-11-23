@@ -33,7 +33,7 @@ public class HouseServiceImpl implements HouseService {
 		System.out.println(aptCode);
 		HouseResultDto houseResultDto = new HouseResultDto();
 		try {
-			houseResultDto.setHouseDealdto(dao.houseDetail(aptCode));
+			houseResultDto.setDealList(dao.houseDetail(aptCode));
 			System.out.println("setHouseDealdto");
 			houseResultDto.setResult(SUCCESS);
 		}catch(Exception e){
