@@ -133,13 +133,13 @@ export default {
         kakao.maps.event.addListener(marker, "click", function () {
           $this.map.setCenter(marker.getPosition());
           console.log(marker.getTitle());
+          $this.$store.state.house.aptCode = marker.getTitle();
           $this.$store.dispatch("houseDetail", marker.getTitle());
 
           $this.$store.state.map.showSidebar = true;
           // marker의 title store에 저장 후 자식 sidebar의 async detail 함수 불러서 sidebar에 데이터 주기
           // 클릭한 위치를 중앙에 정렬하기
 
-          $this.$store.state.house.aptCode = marker.getTitle();
           // console.log($this.$store.state.house.houseDetailList.dealList[0]);
         });
 
@@ -171,10 +171,10 @@ export default {
       });
     },
   },
-  computed:{
-    getshowSidebar(){
+  computed: {
+    getshowSidebar() {
       return this.$store.getters.getshowSidebar;
-    }
+    },
   },
   created() {
     this.getHouseList();

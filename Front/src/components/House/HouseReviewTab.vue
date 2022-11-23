@@ -96,7 +96,7 @@
         <h3>후기 ({{ $store.state.review.totalListItemCount }})</h3>
 
         <ul v-if="$store.state.review.totalListItemCount > 0">
-          <li v-for="(review, listIdx) in list" :key="listIdx">
+          <li v-for="(review, listIdx) in $store.state.review.list" :key="listIdx">
             <div class="course__comment-box">
               <div class="course__comment-thumb float-start">
                 <img src="@/assets/img/noProfile.png" alt="" />

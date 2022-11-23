@@ -10,7 +10,11 @@
             <div class="course__meta-2 d-sm-flex mb-30">
               <div class="course__update mr-80 mb-30">
                 <h5>최근 거래 일자 :</h5>
-                <p>2022-11-17</p>
+                <p>
+                  {{ detailGetters.dealList[0].dealYear }}.{{
+                    detailGetters.dealList[0].dealMonth | fillZero()
+                  }}.{{ detailGetters.dealList[0].dealDay | fillZero() }}
+                </p>
               </div>
               <div class="course__rating-2 mb-30">
                 <h5>Review :</h5>
@@ -151,8 +155,8 @@ export default {
   },
   created() {
     this.$store.state.house.aptCode = this.$route.params.aptCode;
-    this.makeData();
     this.houseDetail();
+    this.makeData();
     this.reviewList();
   },
   methods: {
