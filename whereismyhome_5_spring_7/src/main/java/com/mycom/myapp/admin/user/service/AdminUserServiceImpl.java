@@ -11,14 +11,14 @@ import com.mycom.myapp.admin.user.dto.AdminUserParamDto;
 import com.mycom.myapp.admin.user.dto.AdminUserResultDto;
 
 @Service
-public class AdminUserServiceImpl implements AdminUserService{
-	
+public class AdminUserServiceImpl implements AdminUserService {
+
 	@Autowired
 	AdminUserDao dao;
-	
+
 	private final int SUCCESS = 1;
 	private final int FAIL = -1;
-	
+
 	@Override
 	public AdminUserResultDto userList(AdminUserParamDto adminUserParamDto) {
 		AdminUserResultDto adminUserResultDto = new AdminUserResultDto();
@@ -28,11 +28,47 @@ public class AdminUserServiceImpl implements AdminUserService{
 			adminUserResultDto.setList(list);
 			adminUserResultDto.setCount(count);
 			adminUserResultDto.setResult(SUCCESS);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			adminUserResultDto.setResult(FAIL);
-		}	
-		
+		}
+
+		return adminUserResultDto;
+	}
+
+	@Override
+	public AdminUserResultDto userDelete(int userSeq) {
+		AdminUserResultDto adminUserResultDto = new AdminUserResultDto();
+		try {
+			int result = dao.userDelete(userSeq);
+			if (result == 1) {
+				adminUserResultDto.setResult(SUCCESS);
+			} else {
+				adminUserResultDto.setResult(FAIL);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			adminUserResultDto.setResult(FAIL);
+		}
+
+		return adminUserResultDto;
+	}
+
+	@Override
+	public AdminUserResultDto userUpdate(AdminUserDto adminUserDto) {
+		AdminUserResultDto adminUserResultDto = new AdminUserResultDto();
+		try {
+			int result = dao.userUpdate(adminUserDto);
+			if (result == 1) {
+				adminUserResultDto.setResult(SUCCESS);
+			} else {
+				adminUserResultDto.setResult(FAIL);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			adminUserResultDto.setResult(FAIL);
+		}
+
 		return adminUserResultDto;
 	}
 

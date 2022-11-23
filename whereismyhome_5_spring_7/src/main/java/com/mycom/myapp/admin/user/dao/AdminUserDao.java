@@ -11,4 +11,9 @@ import com.mycom.myapp.admin.user.dto.AdminUserParamDto;
 public interface AdminUserDao {
 	List<AdminUserDto> userList(AdminUserParamDto adminUserParamDto);
 	int userListTotalCnt();
+	
+	// 회원 삭제
+	int userDelete(int userSeq);
+	// 회원 수정
+	int userUpdate(AdminUserDto adminUserDto);
 }
