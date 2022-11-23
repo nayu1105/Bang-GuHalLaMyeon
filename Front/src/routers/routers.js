@@ -68,7 +68,7 @@ export default new VueRouter({
       component: HouseDeal,
     },
     {
-      path: "/house-details",
+      path: "/house-details/:aptCode",
       component: HouseDetail,
     },
     {

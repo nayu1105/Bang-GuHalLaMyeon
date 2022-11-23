@@ -21,6 +21,10 @@ Vue.config.productionTip = false;
 library.add(fas, far);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
+// import VueApexCharts from "vue-apexcharts";
+// Vue.use(VueApexCharts);
+// Vue.component("apexchart", VueApexCharts);
+
 new Vue({
   render: (h) => h(App),
   router,

@@ -34,6 +34,7 @@ public class HouseServiceImpl implements HouseService {
 		HouseResultDto houseResultDto = new HouseResultDto();
 		try {
 			houseResultDto.setDealList(dao.houseDetail(aptCode));
+			houseResultDto.setAvgDealAmount(dao.houseDealMonthAmount(aptCode));
 			System.out.println("setHouseDealdto");
 			houseResultDto.setResult(SUCCESS);
 		}catch(Exception e){
