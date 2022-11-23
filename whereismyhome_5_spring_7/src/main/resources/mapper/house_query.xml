@@ -12,9 +12,9 @@
 
 	
 	<select id="houseDetail" parameterType="map" resultType="com.mycom.myapp.house.dto.HouseDealDto">
-		SELECT *
-		  FROM housedeal
-		 where aptCode= #{aptCode};
+		SELECT hi.aptName, hi.jibun, hd.dealAmount, hd.dealYear, hd.dealMonth, hd.dealDay, hd.area, hd.floor
+		  FROM housedeal hd, houseinfo hi
+		 where hd.aptCode= #{aptCode} and hi.aptCode = hd.aptCode;
 	</select>
 	
 </mapper>
