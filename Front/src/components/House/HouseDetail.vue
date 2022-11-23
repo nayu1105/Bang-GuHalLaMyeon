@@ -136,18 +136,48 @@ export default {
     HouseReviewTab,
     HouseDealAmountChart,
   },
+  data() {
+    return {
+      list: this.$store.state.house.houseDetailList.avgDealAmount,
+    };
+  },
   computed: {
     detailGetters() {
       return this.$store.getters.getHouseDetail;
     },
+    listGetters() {
+      return this.$store.getters.getReviewList;
+    },
   },
   created() {
+    this.$store.state.house.aptCode = this.$route.params.aptCode;
+    this.makeData();
     this.houseDetail();
+    this.reviewList();
   },
   methods: {
     houseDetail() {
       this.$store.dispatch("houseDetail");
       console.log(this.detailGetters.dealList);
+    },
+    reviewList() {
+      this.$store.dispatch("reviewList");
+    },
+    makeData() {
+      this.$store.state.house.listLabel = [];
+      this.$store.state.house.listData = [];
+      this.$store.state.house.houseDetailList.avgDealAmount = [];
+
+      let idx = 0;
+      this.list.forEach((el) => {
+        this.$store.state.house.listLabel[idx] = el.dealYear + "." + this.fillZero(el.dealMonth);
+        this.$store.state.house.listData[idx] = el.avgDealAmount;
+        idx++;
+      });
+    },
+    fillZero(num) {
+      let str = String(num);
+      return str.padStart(2, "0");
     },
   },
   filters: {

@@ -7,11 +7,25 @@
       <div class="card">
         <img src="@/assets/img/apt/noAptImg.jpg" class="card-img-top" />
         <div class="card-body">
-          <p class="card-title">111</p>
-          <p class="card-subtitle">111</p>
-          <p class="card-text">111㎡ 111층</p>
-          <p class="card-text">건축년도: 111 거래날짜 : 111.111.111</p>
-          <div style="display: inline-block">
+          <p class="card-title">{{ detailGetters.dealList[0].aptName }}</p>
+          <br />
+
+          <span style="font-size: 15px; font-weight: 700">면적 :</span>
+          <span class="ml-10" style="font-size: 15px">{{ detailGetters.dealList[0].area }}</span>
+          <br />
+          <span style="font-size: 15px; font-weight: 700">최근 거래 일자 :</span>
+          <span class="ml-10" style="font-size: 15px"
+            >{{ detailGetters.dealList[0].dealYear }}.{{ detailGetters.dealList[0].dealMonth }}.{{
+              detailGetters.dealList[0].dealDay
+            }}</span
+          >
+          <br />
+          <span style="font-size: 15px; font-weight: 700">거래 매매가 :</span>
+          <span class="ml-10" style="font-size: 15px"
+            >{{ detailGetters.dealList[0].dealAmount }} (단위: 만 원)</span
+          >
+
+          <div class="mt-20" style="display: inline-block">
             <button class="btn apt-btn" @click="linkToHouseDetail">아파트 상세보기</button>
             <button class="btn bookmark-btn">찜하기</button>
           </div>
@@ -29,6 +43,23 @@ export default {
       let aptCode = this.$store.state.house.aptCode;
       this.$router.push("/house-details/" + aptCode);
     },
+    houseDetail() {
+      this.$store.dispatch("houseDetail");
+      console.log(this.detailGetters.dealList);
+    },
+  },
+  data() {
+    return {
+      // list: this.$store.state.house.houseDetailList.avgDealAmount,
+    };
+  },
+  computed: {
+    detailGetters() {
+      return this.$store.getters.getHouseDetail;
+    },
+  },
+  created() {
+    this.houseDetail();
   },
 };
 </script>

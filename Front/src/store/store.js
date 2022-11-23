@@ -215,6 +215,12 @@ export default new Vuex.Store({
       state.house.dongList = dongList;
     },
 
+    SET_HOUSE_DEAL_AMOUNT(state) {
+      state.house.listLabel = [];
+      state.house.listData = [];
+      state.house.houseDetailList.avgDealAmount = [];
+    },
+
     SET_EVENT_LIST(state, list) {
       state.event.list = list;
     },

@@ -233,15 +233,9 @@ export default {
       return this.$store.getters.getReviewList;
     },
   },
-  created() {
-    this.reviewList();
-  },
   methods: {
     check(index) {
       this.score = index + 1;
-    },
-    reviewList() {
-      this.$store.dispatch("reviewList");
     },
     async reviewInsert() {
       let formData = new FormData();
@@ -268,13 +262,11 @@ export default {
         } else {
           // 등록 성공
           this.$alertify.success("리뷰가 등록되었습니다. ");
+          this.$router.go();
         }
       } catch (error) {
         this.$alertify.error("리뷰 등록 과정에서 오류가 발생했습니다. ");
       }
-    },
-    closeModal() {
-      this.$emit("call-parent-insert");
     },
   },
   filters: {

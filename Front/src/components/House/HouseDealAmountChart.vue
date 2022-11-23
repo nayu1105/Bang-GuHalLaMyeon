@@ -83,7 +83,7 @@ export default {
         labels: this.$store.state.house.listLabel,
         datasets: [
           {
-            label: "평균 매매가",
+            label: "월별 평균 매매가",
             borderColor: "#f49d1a",
             backgroundColor: "#f49d1a",
             data: this.$store.state.house.listData,
@@ -98,25 +98,7 @@ export default {
   },
 
   created() {
-    this.makeData();
-    ChartJS.destroy();
-  },
-  methods: {
-    makeData() {
-      this.$store.state.house.listLabel = [];
-      this.$store.state.house.houseDetailList.avgDealAmount = [];
-
-      let idx = 0;
-      this.list.forEach((el) => {
-        this.$store.state.house.listLabel[idx] = el.dealYear + "." + this.fillZero(el.dealMonth);
-        this.$store.state.house.listData[idx] = el.avgDealAmount;
-        idx++;
-      });
-    },
-    fillZero(num) {
-      let str = String(num);
-      return str.padStart(2, "0");
-    },
+    // ChartJS.destroy();
   },
 };
 </script>
