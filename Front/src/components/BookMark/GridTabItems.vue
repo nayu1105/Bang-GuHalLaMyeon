@@ -21,9 +21,9 @@
             <router-link :to="`/house-details/${bookmark.aptCode}`">{{ bookmark.aptName }}</router-link>
           </h3>
         </div>
-        <div class="course__more d-flex justify-content-between align-items-center">
+        <div class="course__more  course__more-2 d-flex align-items-center bookmark-detail-btn">
           <div class="course__btn">
-            <router-link :to="`/house-details/${bookmark.aptCode}`" class="link-btn">
+            <router-link :to="`/house-details/${bookmark.aptCode}`" class="link-btn bookmark-detail-btn">
               상세보기
               <i class="far fa-arrow-right"></i>
               <i class="far fa-arrow-right"></i>

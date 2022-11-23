@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="listGetters.length == 0" class="bookmark-zero"> 찜한 목록이 없습니다.</div>
+    <div v-if="listGetters.length == 0" class="bookmark-zero">찜한 목록이 없습니다.</div>
     <div v-for="(bookmark, index) in listGetters" :key="index" class="col-xxl-12">
       <div class="course__item white-bg mb-30 fix">
         <div class="row gx-0">
@@ -14,21 +14,29 @@
           <div class="col-xxl-8 col-xl-8 col-lg-8">
             <div class="course__right">
               <div class="course__content course__content-3">
+                <div><img src="@/assets/img/bookmark/bookmarkCheckedBtn.png" alt="" /></div>
                 <div class="course__meta d-flex align-items-center">
                   <div class="course__lesson mr-20">
-                    <span>{{ bookmark.sidoName }} {{ bookmark.gugunName }} {{ bookmark.dongName }}</span>
+                    <span
+                      >{{ bookmark.sidoName }} {{ bookmark.gugunName }}
+                      {{ bookmark.dongName }}</span
+                    >
                   </div>
                 </div>
                 <h3 class="course__title course__title-3">
-                  <router-link :to="`/house-details/${bookmark.aptCode}`">{{ bookmark.aptName }}</router-link>
-                </h3>              
+                  <router-link :to="`/house-details/${bookmark.aptCode}`">{{
+                    bookmark.aptName
+                  }}</router-link>
+                </h3>
               </div>
               <div
-                class="course__more course__more-2 d-flex justify-content-between align-items-center"
+                class="course__more course__more-2 d-flex align-items-center bookmark-detail-btn"
               >
-                
                 <div class="course__btn">
-                  <router-link :to="`/house-details/${bookmark.aptCode}`" class="link-btn">
+                  <router-link
+                    :to="`/house-details/${bookmark.aptCode}`"
+                    class="link-btn "
+                  >
                     상세보기
                     <i class="far fa-arrow-right"></i>
                     <i class="far fa-arrow-right"></i>
@@ -42,18 +50,17 @@
     </div>
   </div>
 </template>
-
 <script>
 import http from "@/common/axios.js";
 
 export default {
-  name: 'ListTabItems',
+  name: "ListTabItems",
   computed: {
-    listGetters(){
+    listGetters() {
       return this.$store.state.bookmark.list;
-    }
+    },
   },
-  methods:{
+  methods: {
     async bookmarkList() {
       let userSeq = this.$store.state.login.userSeq;
       try {
@@ -73,6 +80,6 @@ export default {
   mounted() {
     console.log("mounted");
     this.bookmarkList();
-  }
+  },
 };
 </script>
