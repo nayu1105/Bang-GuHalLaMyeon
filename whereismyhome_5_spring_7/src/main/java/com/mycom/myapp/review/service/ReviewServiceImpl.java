@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.mycom.myapp.review.dao.ReviewDao;
 import com.mycom.myapp.review.dto.ReviewDto;
 import com.mycom.myapp.review.dto.ReviewParamDto;
@@ -11,14 +12,27 @@ import com.mycom.myapp.review.dto.ReviewResultDto;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
-	
+
 	@Autowired
 	ReviewDao dao;
 
 	private final int SUCCESS = 1;
 	private final int FAIL = -1;
-	
 
+	@Override
+	public ReviewResultDto reviewInsert(ReviewDto dto) {
+		ReviewResultDto reviewResultDto = new ReviewResultDto();
+		reviewResultDto.setResult(dao.reviewInsert(dto));
+		return reviewResultDto;
+	}
+
+	@Override
+	public ReviewResultDto reviewDelete(int reviewId) {
+		ReviewResultDto reviewResultDto = new ReviewResultDto();
+		reviewResultDto.setResult(dao.reviewDelete(reviewId));
+		return reviewResultDto;
+	}
+	
 	@Override
 	public ReviewResultDto reviewList(ReviewParamDto reviewParamDto) {
 		ReviewResultDto reviewResultDto = new ReviewResultDto();
