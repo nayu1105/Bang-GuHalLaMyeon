@@ -157,6 +157,14 @@
                     {{ review.content }}
                   </p>
                 </div>
+                <button
+                  v-show="$store.state.login.userSeq == review.userSeq"
+                  class="btn btn-sm btn-warning btn-outline mt-20 ml-70"
+                  type="button"
+                  @click="changeToDelete(review.reviewId)"
+                >
+                  리뷰 삭제하기
+                </button>
               </div>
             </div>
           </li>
@@ -266,6 +274,34 @@ export default {
         }
       } catch (error) {
         this.$alertify.error("리뷰 등록 과정에서 오류가 발생했습니다. ");
+      }
+    },
+    changeToDelete(reviewId) {
+      var $this = this;
+      this.$alertify.confirm(
+        "리뷰를 삭제하시겠습니까?",
+        function () {
+          $this.reviewDelete(reviewId); // this 아님
+          $this.$router.go();
+        },
+        function () {
+          console.log("canceled!!!");
+        }
+      );
+    },
+    async reviewDelete(reviewId) {
+      try {
+        let response = await http.delete("/reviews/" + reviewId);
+        let { data } = response;
+
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          this.$alertify.success("리뷰가 삭제되었습니다. ");
+        }
+      } catch (error) {
+        console.error(error);
+        this.$alertify.error("서버에 문제가 생겼습니다. ");
       }
     },
   },
