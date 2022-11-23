@@ -23,7 +23,7 @@
 
     <article class="cont-select mt-5" @click.stop="">
       <button class="btn-select" @click="dongBtnToggle" ref="dongSelect">동</button>
-      <ul class="list-member">
+      <ul class="list-member" >
         <li v-for="(dong, index) in dongListGetters" :key="index">
           <button type="button" @click="dongAddNodeName(dong.dongCode)">{{ dong.dongName }}</button>
         </li>
@@ -98,30 +98,39 @@ export default {
       if (event.target.nodeName === 'BUTTON') {
         siSelect.innerText = event.target.innerText;
         this.$store.state.house.gugun = siSelect.innerText;
-        this.dongList(gugunCode);
+        var payload = {
+          sidoName: this.$store.state.house.sido,
+          gugunName: this.$store.state.house.gugun,
+        };
+        this.$store.state.house.lawdcd = gugunCode;
+        this.dongList(payload);
         const dongSelect = this.$refs.dongSelect;
         dongSelect.innerText = '동';
         this.$store.state.house.dong = '';
         siSelect.classList.remove('on');
-        this.getHouse(gugunCode);
       }
     },
 
-    dongAddNodeName(dongCode) {
+    dongAddNodeName() {
       const dongSelect = this.$refs.dongSelect;
       if (event.target.nodeName === 'BUTTON') {
         dongSelect.innerText = event.target.innerText;
         dongSelect.classList.remove('on');
         this.$store.state.house.dong = dongSelect.innerText;
-        console.log('dongcode');
-        console.log(dongCode);
+        // store dong이 변화가 오면 map center 이동;
+        console.log(this.$store.state.house.sido);
+        console.log(this.$store.state.house.gugun);
+        console.log(this.$store.state.house.dong);
+        console.log("getHouseList");
+        
+        this.$parent.getHouseList();
       }
     },
 
-    getHouse(dongCode) {
-      let param = dongCode.substr(0, 5);
-      this.$store.dispatch('houseList', param);
-    },
+    // getHouse(dongCode) {
+    //   let param = dongCode.substr(0, 5);
+    //   this.$store.dispatch('houseList', param);
+    // },
 
     clickBack() {
       const doSelect = this.$refs.doSelect;
@@ -139,8 +148,8 @@ export default {
     gugunList(sidoCode) {
       this.$store.dispatch('gugunList', sidoCode);
     },
-    dongList(gugunCode) {
-      this.$store.dispatch('dongList', gugunCode);
+    dongList(payload) {
+      this.$store.dispatch('dongList', payload);
     },
   },
   created() {
@@ -221,6 +230,7 @@ export default {
   cursor: pointer;
   text-align: left;
   background: url('../../assets/img/icon/select-arrow.svg') center right 0px no-repeat;
+
 }
 
 .btn-select:hover,
@@ -239,6 +249,16 @@ export default {
   box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   background-color: #fff !important;
+
+  overflow: auto; 
+  max-height:400px;
+  -ms-overflow-style: none;
+
+}
+
+.list-member::-webkit-scrollbar { 
+    display: none;
+    width: 0 !important;
 }
 
 .btn-select.on {

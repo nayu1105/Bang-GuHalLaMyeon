@@ -40,4 +40,12 @@ public class CityServiceImpl implements CityService {
 		return cityResultDto;
 	}
 
+	@Override
+	public CityResultDto lawdcdList() {
+		CityResultDto cityResultDto = new CityResultDto();
+		cityResultDto.setList(dao.lawdcdList());
+		cityResultDto.setResult(SUCCESS);
+		return cityResultDto;
+	}
+
 }
