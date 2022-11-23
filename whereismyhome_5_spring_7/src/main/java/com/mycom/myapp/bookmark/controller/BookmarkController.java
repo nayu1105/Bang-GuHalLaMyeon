@@ -50,6 +50,7 @@ public class BookmarkController {
 
 	@DeleteMapping(value = "/bookmarks")
 	public ResponseEntity<BookmarkResultDto> bookmarkDelete(BookmarkDto bookmarkDto) {
+		System.out.println(bookmarkDto);
 		BookmarkResultDto bookmarkResultDto;
 		bookmarkResultDto = service.bookmarkDelete(bookmarkDto);
 		if (bookmarkResultDto.getResult() == SUCCESS) {

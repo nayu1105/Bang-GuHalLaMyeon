@@ -1,3 +1,5 @@
+@use '../abstract' as *;
+
 .bookmark-detail-btn{
     justify-content: flex-end !important;
 }
@@ -5,4 +7,21 @@
 .bookmark-zero{
     display: flex;
     justify-content: center;
+}
+
+.bookmark-btn{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    padding: 5px;
+    background-color: transparent !important;
+}
+
+.bookmark-btn > img {
+    width: 20px;
+    padding-top: 5px;
+    &:hover{
+        cursor: pointer;
+        width: 22px;
+    }
 }
