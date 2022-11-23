@@ -380,7 +380,6 @@
     &__more{
         padding: 10px 30px;
         padding-top: 15px;
-        border-top: 1px solid $border-2;
         &-2{
             position: absolute;
             left: 0;
@@ -1370,4 +1369,9 @@
 }
 .course__menu .nav-tabs .nav-link {
     border: 0;
+}
+
+.bookmark-zero{
+    display: flex;
+    justify-content: center;
 }

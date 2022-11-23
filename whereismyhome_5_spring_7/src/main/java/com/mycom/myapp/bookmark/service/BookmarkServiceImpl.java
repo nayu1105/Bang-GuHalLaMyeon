@@ -21,6 +21,8 @@ public class BookmarkServiceImpl implements BookmarkService {
 		BookmarkResultDto bookmarkResultDto = new BookmarkResultDto();
 		try {
 			bookmarkResultDto.setList(dao.bookmarkList(userSeq));
+			System.out.println("service");
+			System.out.println(bookmarkResultDto);
 			bookmarkResultDto.setResult(SUCCESS);
 		} catch (Exception e) {
 			bookmarkResultDto.setResult(FAIL);

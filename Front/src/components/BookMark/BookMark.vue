@@ -61,26 +61,8 @@
                   </li>
                 </ul>
               </div>
-              <div class="course__view">
-                <h4>Showing 1 - 9 of 84</h4>
-              </div>
             </div>
-          </div>
-          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-            <div class="course__sort d-flex justify-content-sm-end">
-              <div class="course__sort-inner">
-                <select>
-                  <option>Default</option>
-                  <option>Option 1</option>
-                  <option>Option 2</option>
-                  <option>Option 3</option>
-                  <option>Option 4</option>
-                  <option>Option 5</option>
-                  <option>Option 6</option>
-                </select>
-              </div>
-            </div>
-          </div>
+          </div>          
         </div>
       </div>
       <div class="row">
@@ -111,10 +93,6 @@
           </div>
         </div>
       </div>
-
-      <!-- pagination start -->
-      <Pagination />
-      <!-- pagination end -->
     </div>
   </section>
 </template>
@@ -122,12 +100,10 @@
 <script>
 import GridTabItems from '@/components/BookMark/GridTabItems.vue';
 import ListTabItems from '@/components/BookMark/ListTabItems.vue';
-import Pagination from '@/components/BookMark/Pagination.vue';
 
 export default {
   name: 'BookMark',
   components: {
-    Pagination,
     GridTabItems,
     ListTabItems,
   },

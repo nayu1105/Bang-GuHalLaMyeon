@@ -1,16 +1,14 @@
 <template>
   <div>
-    <div v-for="course in courseItems" :key="course.id" class="col-xxl-12">
+    <div v-if="listGetters.length == 0" class="bookmark-zero"> 찜한 목록이 없습니다.</div>
+    <div v-for="(bookmark, index) in listGetters" :key="index" class="col-xxl-12">
       <div class="course__item white-bg mb-30 fix">
         <div class="row gx-0">
           <div class="col-xxl-4 col-xl-4 col-lg-4">
             <div class="course__thumb course__thumb-list w-img p-relative fix">
-              <router-link :to="`/course-details/${course.id}`">
-                <img :src="course.listImg" alt="" />
+              <router-link :to="`/house-details/${bookmark.aptCode}`">
+                <img src="@/assets/img/apt/noAptImg.jpg" alt="" />
               </router-link>
-              <div class="course__tag">
-                <a href="#" :class="course.color">{{ course.category }}</a>
-              </div>
             </div>
           </div>
           <div class="col-xxl-8 col-xl-8 col-lg-8">
@@ -18,40 +16,20 @@
               <div class="course__content course__content-3">
                 <div class="course__meta d-flex align-items-center">
                   <div class="course__lesson mr-20">
-                    <span><i class="far fa-book-alt"></i>{{ course.lesson }} Lesson</span>
-                  </div>
-                  <div class="course__rating">
-                    <span><i class="icon_star"></i>{{ course.rating }} (44)</span>
+                    <span>{{ bookmark.sidoName }} {{ bookmark.gugunName }} {{ bookmark.dongName }}</span>
                   </div>
                 </div>
                 <h3 class="course__title course__title-3">
-                  <router-link :to="`/course-details/${course.id}`">{{ course.title }}</router-link>
-                </h3>
-                <div class="course__summary">
-                  <p>
-                    Communia virtutes tutiorem declarat stoicorum sanabat oblivisci nostris tamquam
-                    iucunditatem
-                  </p>
-                </div>
-                <div class="course__teacher d-flex align-items-center">
-                  <div class="course__teacher-thumb mr-15">
-                    <img :src="course.teacherImg" alt="" />
-                  </div>
-                  <h6>
-                    <router-link to="/instructor-details">{{ course.teacherName }}</router-link>
-                  </h6>
-                </div>
+                  <router-link :to="`/house-details/${bookmark.aptCode}`">{{ bookmark.aptName }}</router-link>
+                </h3>              
               </div>
               <div
                 class="course__more course__more-2 d-flex justify-content-between align-items-center"
               >
-                <div class="course__status d-flex align-items-center">
-                  <span :class="course.color">${{ course.price }}</span>
-                  <span class="old-price">${{ course.oldPrice }}</span>
-                </div>
+                
                 <div class="course__btn">
-                  <router-link to="/course-details" class="link-btn">
-                    Know Details
+                  <router-link :to="`/house-details/${bookmark.aptCode}`" class="link-btn">
+                    상세보기
                     <i class="far fa-arrow-right"></i>
                     <i class="far fa-arrow-right"></i>
                   </router-link>
@@ -66,9 +44,35 @@
 </template>
 
 <script>
-import CourseMixin from '@/mixins/courseItemsMixin';
+import http from "@/common/axios.js";
+
 export default {
   name: 'ListTabItems',
-  mixins: [CourseMixin],
+  computed: {
+    listGetters(){
+      return this.$store.state.bookmark.list;
+    }
+  },
+  methods:{
+    async bookmarkList() {
+      let userSeq = this.$store.state.login.userSeq;
+      try {
+        let { data } = await http.get("/bookmarks/" + userSeq);
+        console.log(data);
+        if (data.login == "login") {
+          this.$router.push("/login");
+        } else {
+          this.$store.commit("SET_BOOKMARK_LIST", data.list);
+        }
+      } catch (error) {
+        console.log(error);
+        this.$alertify.error("서버에 문제가 있습니다");
+      }
+    },
+  },
+  mounted() {
+    console.log("mounted");
+    this.bookmarkList();
+  }
 };
 </script>
