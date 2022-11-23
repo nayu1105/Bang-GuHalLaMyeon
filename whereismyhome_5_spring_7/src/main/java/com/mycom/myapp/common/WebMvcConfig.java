@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.mycom.myapp.common.LoginInterceptor;
-
 @Configuration // xml 설정을 대신 ( servlet-context.xml 의 설정 내용을 대체), intercetpor 외에 다른 많은 설정 가능
 public class WebMvcConfig implements WebMvcConfigurer {
 	// 필요한 것 2가지
@@ -20,8 +18,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor).addPathPatterns("/**")
-				.excludePathPatterns("/", "/home", "/login", "/register")
-				.excludePathPatterns("/login/**", "/register/**", "/css/**", "/js/**", "/img/**");
+				.excludePathPatterns("/", "/home", "/login", "/register", "/boards")
+				.excludePathPatterns("/login/**", "/register/**", "/boards/**","/css/**", "/js/**", "/img/**", "/assets/**");
 	}
 }
 

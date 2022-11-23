@@ -27,7 +27,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			
 		HttpSession session = request.getSession();
 		UserDto userDto = (UserDto) session.getAttribute("userDto");
-
+		
 		if (userDto == null) {
 			// 나눠서 처리
 			// json 으로 session timeout => login 이동 내용을 만들어서 보낸다.
