@@ -11,5 +11,5 @@ public interface ReviewService {
 	ReviewResultDto reviewDetail(ReviewParamDto reviewParamDto);
 	
 	ReviewResultDto reviewList(ReviewParamDto reviewParamDto);
-	int reviewListTotalCnt();
+	int reviewListTotalCnt(ReviewParamDto reviewParamDto);
 }

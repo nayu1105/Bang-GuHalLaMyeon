@@ -5,7 +5,7 @@
         <div class="row g-0">
           <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4">
             <div class="course__review-rating-info grey-bg text-center">
-              <h5>{{ $store.state.review.avgRate }}</h5>
+              <h5>{{ avgRate }}</h5>
               <ul>
                 <li>
                   <a href="#"> <i class="icon_star"></i> </a>
@@ -95,8 +95,8 @@
       <div class="course__comment mb-75">
         <h3>후기 ({{ $store.state.review.totalListItemCount }})</h3>
 
-        <ul>
-          <li v-for="(review, index) in list" :key="index">
+        <ul v-if="$store.state.review.totalListItemCount > 0">
+          <li v-for="(review, listIdx) in list" :key="listIdx">
             <div class="course__comment-box">
               <div class="course__comment-thumb float-start">
                 <img src="@/assets/img/noProfile.png" alt="" />
@@ -106,8 +106,8 @@
                   <div class="mb-15">
                     <div
                       class="star"
-                      v-for="index in review.rate"
-                      :key="index"
+                      v-for="starIdx in review.rate"
+                      :key="starIdx"
                       style="display: inline"
                     >
                       <span>
@@ -116,8 +116,8 @@
                     </div>
                     <div
                       class="star"
-                      v-for="index in 5 - review.rate"
-                      :key="index"
+                      v-for="starIdx in 5 - review.rate"
+                      :key="starIdx"
                       style="display: inline"
                     >
                       <span>
@@ -186,23 +186,6 @@
                         </span>
                       </div>
                     </div>
-                    <!-- <ul>
-                      <li>
-                        <a href="#"> <i class="fa fa-star" aria-hidden="true"></i> </a>
-                      </li>
-                      <li>
-                        <a href="#"> <i class="icon_star"></i> </a>
-                      </li>
-                      <li>
-                        <a href="#"> <i class="icon_star"></i> </a>
-                      </li>
-                      <li>
-                        <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
-                      </li>
-                      <li>
-                        <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
-                      </li>
-                    </ul> -->
                   </div>
                   <div class="col-xxl-12 mt-20">
                     <div class="course__form-input">
@@ -242,7 +225,7 @@ export default {
       list: this.$store.state.review.list,
       avgRate: this.$store.state.review.avgRate,
 
-      score: 0,
+      score: 6,
     };
   },
   computed: {
@@ -250,15 +233,9 @@ export default {
       return this.$store.getters.getReviewList;
     },
   },
-  created() {
-    this.reviewList();
-  },
   methods: {
     check(index) {
       this.score = index + 1;
-    },
-    reviewList() {
-      this.$store.dispatch("reviewList");
     },
     async reviewInsert() {
       let formData = new FormData();
@@ -266,7 +243,7 @@ export default {
       formData.append("content", this.content);
 
       formData.append("rate", this.score - 1);
-      formData.append("houseNo", 3);
+      formData.append("houseNo", this.$store.state.house.aptCode);
 
       // multipart/form-data
       let options = {
@@ -285,13 +262,11 @@ export default {
         } else {
           // 등록 성공
           this.$alertify.success("리뷰가 등록되었습니다. ");
+          this.$router.go();
         }
       } catch (error) {
         this.$alertify.error("리뷰 등록 과정에서 오류가 발생했습니다. ");
       }
-    },
-    closeModal() {
-      this.$emit("call-parent-insert");
     },
   },
   filters: {

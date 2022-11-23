@@ -1,13 +1,13 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
+import Vue from "vue";
+import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
 import http from '@/common/axios.js';
 import util from '@/common/util.js';
 
-import router from '@/routers/routers.js';
+import router from "@/routers/routers.js";
 
 export default new Vuex.Store({
   plugins: [
@@ -120,15 +120,23 @@ export default new Vuex.Store({
       gugunList: [],
       dongList: [],
 
-      lawdcd: '11110',
+      lawdcd: "11110",
 
-      sido: '서울특별시',
-      gugun: '종로구',
-      dong: '',
+      sido: "서울특별시",
+      gugun: "종로구",
+      dong: "",
 
       aptName: '',
       jibun: '',
       houseDetailList: [],
+
+      aptCode: 0,
+      aptName: "",
+      jibun: "",
+
+      // 월별 평균 매매가 차트 정보
+      listLabel: [],
+      listData: [],
     },
     map: {
       showSidebar: false,
@@ -200,6 +208,20 @@ export default new Vuex.Store({
       state.board.title = payload.title;
       state.board.content = payload.content;
     },
+
+    // SET_HOUSE_DETAIL(state, payload) {
+    //   state.house.aptName = payload.aptName;
+    //   state.house.dealAmount = payload.dealAmount;
+    //   state.house.buildYear = payload.buildYear;
+    //   state.house.dealYear = payload.dealYear;
+    //   state.house.dealMonth = payload.dealMonth;
+    //   state.house.no = payload.no;
+    // },
+
+    SET_HOUSE_DETAIL(state, payload) {
+      state.house.houseDetailList = payload;
+    },
+
     SET_HOUSE_SIDO_LIST(state, sidoList) {
       state.house.sidoList = sidoList;
     },
@@ -208,6 +230,12 @@ export default new Vuex.Store({
     },
     SET_HOUSE_DONG_LIST(state, dongList) {
       state.house.dongList = dongList;
+    },
+
+    SET_HOUSE_DEAL_AMOUNT(state) {
+      state.house.listLabel = [];
+      state.house.listData = [];
+      state.house.houseDetailList.avgDealAmount = [];
     },
 
     SET_EVENT_LIST(state, list) {
@@ -270,13 +298,8 @@ export default new Vuex.Store({
     SET_REVIEW_MOVE_PAGE(state, pageIndex) {
       state.review.offset = (pageIndex - 1) * state.review.listRowCount;
       state.review.currentPageIndex = pageIndex;
-    },
+    }
 
-    SET_HOUSE_DETAIL(state, payload) {
-      state.house.houseDetailList = payload;
-      state.house.aptName = payload.aptName;
-      state.house.jibun = payload.jibun;
-    },
     SET_USER_CLSF(state, payload) {
       state.clsf.userClsf = payload;
     },
@@ -331,7 +354,7 @@ export default new Vuex.Store({
       let params = {
         limit: this.state.review.limit,
         offset: this.state.review.offset,
-        houseNo: 3,
+        houseNo: this.state.house.aptCode,
       };
 
       try {
@@ -382,7 +405,7 @@ export default new Vuex.Store({
     },
     async dongList(context, payload) {
       let params = {
-        option: 'dong',
+        option: "dong",
         sidoName: payload.sidoName,
         gugunName: payload.gugunName,
       };
@@ -398,13 +421,15 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async houseDetail(context, aptCode) {
+    async houseDetail(context) {
       try {
-        let { data } = await http.get('/houses/' + aptCode); // params: params shorthand property, let response 도 제거
-        if (data.result == 'login') {
-          router.push('/login');
+        let aptCode = this.state.house.aptCode;
+        let { data } = await http.get("/houses/" + aptCode); // params: params shorthand property, let response 도 제거
+        if (data.result == "login") {
+          router.push("/login");
         } else {
-          context.commit('SET_HOUSE_DETAIL', data);
+          context.commit("SET_HOUSE_DETAIL", data);
+          console.log("houseDetail-store: ");
           console.log(data);
         }
       } catch (error) {
@@ -455,6 +480,10 @@ export default new Vuex.Store({
 
     getDongList: function (state) {
       return state.house.dongList;
+    },
+
+    getHouseDetail: function (state) {
+      return state.house.houseDetailList;
     },
 
     // getHouseList: function (state) {

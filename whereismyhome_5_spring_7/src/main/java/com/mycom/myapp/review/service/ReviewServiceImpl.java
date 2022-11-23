@@ -39,7 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
 		try {
 			// 목록, 총건수를 가져온다.
 			List<ReviewDto> list = dao.reviewList(reviewParamDto);
-			int count = dao.reviewListTotalCnt();
+			int count = dao.reviewListTotalCnt(reviewParamDto);
 			reviewResultDto.setList(list);
 			reviewResultDto.setCount(count);
 			reviewResultDto.setResult(SUCCESS);
@@ -51,8 +51,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public int reviewListTotalCnt() {
-		return dao.reviewListTotalCnt();
+	public int reviewListTotalCnt(ReviewParamDto reviewParamDto) {
+		return dao.reviewListTotalCnt(reviewParamDto);
 	}
 
 	@Override
