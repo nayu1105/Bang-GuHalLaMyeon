@@ -5,7 +5,7 @@
         <div class="col-xxl-8 col-xl-8 col-lg-8">
           <div class="course__wrapper">
             <div class="page__title-content mb-25">
-              <h5 class="page__title-3">{{ $store.state.house.aptName }}</h5>
+              <h5 class="page__title-3">{{ detailGetters.dealList[0].aptName }}</h5>
             </div>
             <div class="course__meta-2 d-sm-flex mb-30">
               <div class="course__update mr-80 mb-30">
@@ -80,45 +80,39 @@
                   aria-labelledby="description-tab"
                 >
                   <div class="course__description">
-                    <h3>상세 정보</h3>
-                    <p>
-                      Only a quid me old mucker squiffy tomfoolery grub cheers ruddy cor blimey
-                      guvnor in my flat, up the duff Eaton car boot up the kyver pardon you A bit of
-                      how's your father David skive off sloshed, don't get shirty with me chip shop
-                      vagabond crikey bugger Queen's English chap. Matie boy nancy boy bite your arm
-                      off up the kyver old no biggie fantastic boot, David have it show off show off
-                      pick your nose and blow off lost the plot porkies bits and bobs only a quid
-                      bugger all mate, absolutely bladdered bamboozled it's your round don't get
-                      shirty with me down the pub well. Give us a bell bits and bobs Charles he lost
-                      his bottle super my lady cras starkers bite your arm off Queen's English,
-                    </p>
-
-                    <div class="course__tag-2 mb-35 mt-35">
-                      <i class="fal fa-tag"></i>
-                      <a href="#">Big data,</a>
-                      <a href="#">Data analysis,</a>
-                      <a href="#">Data modeling</a>
+                    <div>
+                      <h3>월별 평균 매매 실거래가</h3>
+                      <HouseDealAmountChart />
                     </div>
-                    <div class="course__description-list mb-45">
+
+                    <br />
+
+                    <div class="course__description-list mt-55 mb-45">
                       <h4>거래 일자</h4>
-                      <ul>
-                        <li><i class="icon_check"></i> Business's managers, leaders</li>
-                        <li>
-                          <i class="icon_check"></i> Downloadable lectures, code and design assets
-                          for all projects
-                        </li>
-                        <li>
-                          <i class="icon_check"></i> Anyone who is finding a chance to get the
-                          promotion
-                        </li>
-                      </ul>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="col-3">계약 일자</th>
+                            <th class="col-4">매매가 (단위: 만 원)</th>
+                            <th class="col-3">면적</th>
+                            <th class="col-2">층수</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(apt, aptIdx) in detailGetters.dealList" :key="aptIdx">
+                            <td scope="row">
+                              {{ apt.dealYear }}. {{ apt.dealMonth | fillZero() }}.
+                              {{ apt.dealDay | fillZero() }}
+                            </td>
+                            <td>{{ apt.dealAmount }}</td>
+                            <td>{{ apt.area }}</td>
+                            <td>{{ apt.floor }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
-
-                <!-- CurriculumTab start -->
-                <HouseContents />
-                <!-- CurriculumTab end -->
 
                 <!-- CurriculumTab start -->
                 <HouseReviewTab />
@@ -134,36 +128,62 @@
 
 <script>
 import HouseReviewTab from "@/components/House/HouseReviewTab.vue";
-import http from "@/common/axios.js";
+import HouseDealAmountChart from "@/components/House/HouseDealAmountChart.vue";
 
 export default {
   name: "HouseDetail",
   components: {
     HouseReviewTab,
+    HouseDealAmountChart,
+  },
+  data() {
+    return {
+      list: this.$store.state.house.houseDetailList.avgDealAmount,
+    };
+  },
+  computed: {
+    detailGetters() {
+      return this.$store.getters.getHouseDetail;
+    },
+    listGetters() {
+      return this.$store.getters.getReviewList;
+    },
   },
   created() {
-    let houseNo = this.$route.params.houseNo;
-    this.houseDetail(houseNo);
+    this.$store.state.house.aptCode = this.$route.params.aptCode;
+    this.makeData();
+    this.houseDetail();
+    this.reviewList();
   },
   methods: {
-    async houseDetail(houseNo) {
-      // back-end에서 detail 정보 가지고 와서
-      // store 에 detail 요소 바꾼 후
-      // router 를 이용해 이동
+    houseDetail() {
+      this.$store.dispatch("houseDetail");
+      console.log(this.detailGetters.dealList);
+    },
+    reviewList() {
+      this.$store.dispatch("reviewList");
+    },
+    makeData() {
+      this.$store.state.house.listLabel = [];
+      this.$store.state.house.listData = [];
+      this.$store.state.house.houseDetailList.avgDealAmount = [];
 
-      try {
-        let { data } = await http.get("/" + houseNo);
-
-        if (data.result == "login") {
-          this.$router.push("/login");
-        } else {
-          let { dto } = data;
-          this.$store.commit("SET_HOUSE_DETAIL", dto);
-        }
-      } catch (error) {
-        console.log("HouseMainVue: error : ");
-        console.log(error);
-      }
+      let idx = 0;
+      this.list.forEach((el) => {
+        this.$store.state.house.listLabel[idx] = el.dealYear + "." + this.fillZero(el.dealMonth);
+        this.$store.state.house.listData[idx] = el.avgDealAmount;
+        idx++;
+      });
+    },
+    fillZero(num) {
+      let str = String(num);
+      return str.padStart(2, "0");
+    },
+  },
+  filters: {
+    fillZero(num) {
+      let str = String(num);
+      return str.padStart(2, "0");
     },
   },
 };
