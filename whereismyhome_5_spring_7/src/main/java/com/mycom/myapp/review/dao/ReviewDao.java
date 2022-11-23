@@ -15,5 +15,5 @@ public interface ReviewDao {
 	ReviewDto reviewDetail(int reviewId);
 	
 	List<ReviewDto> reviewList(ReviewParamDto reviewParamDto);
-	int reviewListTotalCnt();
+	int reviewListTotalCnt(ReviewParamDto reviewParamDto);
 }

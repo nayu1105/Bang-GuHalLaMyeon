@@ -7,14 +7,14 @@ public class ReviewParamDto {
 	private int offset;
 
 	private int reviewId;
-	private int houseNo;
+	private long houseNo;
 	private String userEmail;
 
 	public ReviewParamDto() {
 
 	}
 
-	public ReviewParamDto(int limit, int offset, int reviewId, int houseNo, String userEmail) {
+	public ReviewParamDto(int limit, int offset, int reviewId, long houseNo, String userEmail) {
 		super();
 		this.limit = limit;
 		this.offset = offset;
@@ -47,11 +47,11 @@ public class ReviewParamDto {
 		this.reviewId = reviewId;
 	}
 
-	public int getHouseNo() {
+	public long getHouseNo() {
 		return houseNo;
 	}
 
-	public void setHouseNo(int houseNo) {
+	public void setHouseNo(long houseNo) {
 		this.houseNo = houseNo;
 	}
 

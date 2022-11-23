@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class ReviewDto {
 
 	private int reviewId;
-	private int houseNo;
+	private long houseNo;
 	private int rate;
 	private int userSeq;
 	private String userName;
@@ -19,7 +19,7 @@ public class ReviewDto {
 
 	}
 
-	public ReviewDto(int reviewId, int houseNo, int rate, int userSeq, String userName, String title, String content,
+	public ReviewDto(int reviewId, long houseNo, int rate, int userSeq, String userName, String title, String content,
 			LocalDateTime regDt, int avgRate) {
 		super();
 		this.reviewId = reviewId;
@@ -73,11 +73,11 @@ public class ReviewDto {
 		this.reviewId = reviewId;
 	}
 
-	public int getHouseNo() {
+	public long getHouseNo() {
 		return houseNo;
 	}
 
-	public void setHouseNo(int houseNo) {
+	public void setHouseNo(long houseNo) {
 		this.houseNo = houseNo;
 	}
 

@@ -32,7 +32,7 @@
 	
 	<!-- 리뷰 전체 count -->
 	<select id="reviewListTotalCnt" resultType="int">
-	select count(*) from HOUSEREVIEW
+	select count(*) from HOUSEREVIEW where house_no = #{houseNo}
 	</select>
 	
 </mapper>
