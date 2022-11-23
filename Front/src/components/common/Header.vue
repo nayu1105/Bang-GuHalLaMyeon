@@ -225,7 +225,9 @@ export default {
       this.showSidebar = false;
     },
     doLogout() {
-      this.$store.commit('SET_LOGIN', { isLogin: false, userName: '', userProfileImageUrl: '' });
+      this.$store.commit('SET_LOGIN', { isLogin: false, userName: '', userProfileImageUrl: '', userSeq:''});
+      console.log("logout");
+      this.$store.state.bookmark.list = [];
       this.$router.push('/home');
     },
     validLogin() {
