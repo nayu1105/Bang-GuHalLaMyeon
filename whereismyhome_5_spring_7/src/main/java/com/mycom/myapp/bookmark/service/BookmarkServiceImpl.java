@@ -31,17 +31,31 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 	@Override
 	public BookmarkResultDto bookmarkDelete(BookmarkDto	bookmarkDto) {
-		System.out.println("bookmarkDelete");
 		BookmarkResultDto bookmarkResultDto = new BookmarkResultDto();
 		try {
 			int result = dao.bookmarkDelete(bookmarkDto);
-			System.out.println(result);
 			if (result == SUCCESS) {
 				bookmarkResultDto.setResult(SUCCESS);
 			} else {
 				bookmarkResultDto.setResult(FAIL);
 			}
+		} catch (Exception e) {
+			bookmarkResultDto.setResult(FAIL);
+		}
 
+		return bookmarkResultDto;
+	}
+
+	@Override
+	public BookmarkResultDto bookmarkInsert(BookmarkDto bookmarkDto) {
+		BookmarkResultDto bookmarkResultDto = new BookmarkResultDto();
+		try {
+			int result = dao.bookmarkInsert(bookmarkDto);
+			if (result == SUCCESS) {
+				bookmarkResultDto.setResult(SUCCESS);
+			} else {
+				bookmarkResultDto.setResult(FAIL);
+			}
 		} catch (Exception e) {
 			bookmarkResultDto.setResult(FAIL);
 		}

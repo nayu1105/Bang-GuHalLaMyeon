@@ -34,7 +34,7 @@ public class BookmarkController {
 		System.out.println(userSeq);
 		BookmarkResultDto bookmarkResultDto;
 		bookmarkResultDto = service.bookmarkList(userSeq);
-		
+
 		System.out.println(bookmarkResultDto);
 
 		if (bookmarkResultDto.getResult() == SUCCESS) {
@@ -44,17 +44,27 @@ public class BookmarkController {
 
 		}
 	}
-	
+
 	@DeleteMapping(value = "/bookmarks")
-	public ResponseEntity<BookmarkResultDto> bookmarkDelete(BookmarkDto bookmarkDto){
-		System.out.println(bookmarkDto);
+	public ResponseEntity<BookmarkResultDto> bookmarkDelete(BookmarkDto bookmarkDto) {
 		BookmarkResultDto bookmarkResultDto;
 		bookmarkResultDto = service.bookmarkDelete(bookmarkDto);
 		if (bookmarkResultDto.getResult() == SUCCESS) {
 			return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
-
+		}
+	}
+	
+	@GetMapping(value="/bookmarks")
+	public ResponseEntity<BookmarkResultDto> bookmarkInsert(BookmarkDto bookmarkDto) {
+		System.out.println(bookmarkDto);
+		BookmarkResultDto bookmarkResultDto;
+		bookmarkResultDto = service.bookmarkInsert(bookmarkDto);
+		if (bookmarkResultDto.getResult() == SUCCESS) {
+			return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

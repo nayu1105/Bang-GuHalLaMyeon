@@ -10,9 +10,16 @@
 		 WHERE b.user_seq= #{userSeq} and b.house_no = hi.aptCode
 	</select>
 
-<!-- Bookmark 삭제 -->
+<!-- Bookmark Delete -->
 	<delete id="bookmarkDelete" parameterType="com.mycom.myapp.bookmark.dto.BookmarkDto">
 		DELETE from bookmark
 		where user_seq = #{userSeq} and house_no = #{houseNo}
 	</delete>
+	
+<!-- Bookmark Insert -->
+	<insert id="bookmarkInsert"  parameterType="com.mycom.myapp.bookmark.dto.BookmarkDto">
+		insert into bookmark (HOUSE_NO, USER_SEQ)
+		values (#{houseNo}, #{userSeq})
+	</insert>
+
 </mapper>
