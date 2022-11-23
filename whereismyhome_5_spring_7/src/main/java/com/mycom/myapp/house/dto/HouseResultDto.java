@@ -6,8 +6,8 @@ public class HouseResultDto {
 	// Spring에서 response를 json으로 처리하기 위해 미리 response 에 리턴값으로 사용하는 항목들을 Dto로 만든다.
 
 	private int result;
-	private HouseDto dto; // 게시글 하나
-	private List<HouseDto> list; // 게시글 목록
+	private List<HouseDealDto> dealList; // 상세
+	private List<HouseDto> list; // 목록
 	private int houseCnt;
 
 	public int getResult() {
@@ -18,12 +18,12 @@ public class HouseResultDto {
 		this.result = result;
 	}
 
-	public HouseDto getDto() {
-		return dto;
+	public List<HouseDealDto> getDealList() {
+		return dealList;
 	}
 
-	public void setDto(HouseDto dto) {
-		this.dto = dto;
+	public void setDealList(List<HouseDealDto> dealList) {
+		this.dealList = dealList;
 	}
 
 	public List<HouseDto> getList() {
@@ -40,6 +40,12 @@ public class HouseResultDto {
 
 	public void setHouseCnt(int houseCnt) {
 		this.houseCnt = houseCnt;
+	}
+
+	@Override
+	public String toString() {
+		return "HouseResultDto [result=" + result + ", dealList=" + dealList + ", list=" + list + ", houseCnt="
+				+ houseCnt + "]";
 	}
 
 }

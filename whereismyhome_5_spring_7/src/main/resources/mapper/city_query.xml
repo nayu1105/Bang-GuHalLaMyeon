@@ -14,8 +14,15 @@
 	</select>
 	
 	<select id="dongList" parameterType="map" resultType="com.mycom.myapp.city.dto.CityCodeDto">
-		select code dongCode, name dongName, city_code sidoCode, city_name sidoName, gugun_code gugunCode, gugun_name gugunName 
-		from dong_code
-		where gugun_code = #{gugunCode}
+		SELECT dongCode, dongName 
+		  FROM my_house.dong_code
+		 where sidoName = #{sidoName} and gugunName= #{gugunName} and dongName is not null
+		 order by dongCode;
 	</select>
+	
+	<select id="lawdcdList" parameterType="map" resultType="com.mycom.myapp.city.dto.CityCodeDto">
+		select code lawdcd, name gugunName
+		from gugun_code
+	</select>
+	
 </mapper>

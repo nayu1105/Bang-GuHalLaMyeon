@@ -62,4 +62,16 @@ public class CityController {
 			return new ResponseEntity<CityResultDto>(cityResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping(value ="/city/lawdcd")
+	ResponseEntity<CityResultDto> lawdcdList(){
+		System.out.println("/city/lawdcd");
+		CityResultDto cityResultDto = new CityResultDto();
+		cityResultDto = service.lawdcdList();
+		if(cityResultDto.getResult()==SUCCESS) {
+			return new ResponseEntity<CityResultDto>(cityResultDto, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<CityResultDto>(cityResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -89,9 +90,16 @@ export default new Vuex.Store({
       gugunList: [],
       dongList: [],
 
-      sido: '',
-      gugun: '',
+      lawdcd: '11110',
+
+      sido: '서울특별시',
+      gugun: '종로구',
       dong: '',
+
+      houseDetailList: [],
+    },
+    map: {
+      showSidebar: false,
     },
   },
   // state 상태를 변경하는 유일한 방법
@@ -159,9 +167,6 @@ export default new Vuex.Store({
     SET_HOUSE_DONG_LIST(state, dongList) {
       state.house.dongList = dongList;
     },
-    SET_HOUSE_LIST(state, list) {
-      state.house.houseList = list;
-    },
 
     SET_EVENT_LIST(state, list) {
       state.event.list = list;
@@ -209,6 +214,9 @@ export default new Vuex.Store({
     },
     SET_EVENT_ENDDATE(state, endDate) {
       state.event.endDate = endDate;
+    },
+    SET_HOUSE_DETAIL(state, payload) {
+      state.house.houseDetailList = payload;
     },
   },
   // for async method
@@ -289,7 +297,8 @@ export default new Vuex.Store({
     async dongList(context, payload) {
       let params = {
         option: 'dong',
-        gugunCode: payload,
+        sidoName: payload.sidoName,
+        gugunName: payload.gugunName,
       };
       try {
         let { data } = await http.get('/city', { params }); // params: params shorthand property, let response 도 제거
@@ -303,15 +312,13 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async houseList(context, payload) {
-      let lawd_cd = payload;
-      let deal_ymd = 202112;
+    async houseDetail(context, aptCode) {
       try {
-        let { data } = await http.get('/houses/search/' + lawd_cd + '/' + deal_ymd); // params: params shorthand property, let response 도 제거
+        let { data } = await http.get('/houses/' + aptCode); // params: params shorthand property, let response 도 제거
         if (data.result == 'login') {
           router.push('/login');
         } else {
-          context.commit('SET_HOUSE_LIST', data.list);
+          context.commit('SET_HOUSE_DETAIL', data);
           console.log(data);
         }
       } catch (error) {
@@ -339,9 +346,9 @@ export default new Vuex.Store({
       return state.house.dongList;
     },
 
-    getHouseList: function (state) {
-      return state.house.houseList;
-    },
+    // getHouseList: function (state) {
+    //   return state.house.houseList;
+    // },
 
     getEventList: function (state) {
       return state.event.list;
@@ -458,4 +465,10 @@ export default new Vuex.Store({
       }
     },
   },
+  plugins: [
+    createPersistedState({
+      //주목! : 여기에 쓴 모듈만 저장됩니다.
+      paths: ['cart', 'auth'],
+    }),
+  ],
 });
