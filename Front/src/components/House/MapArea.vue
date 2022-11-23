@@ -4,7 +4,7 @@
     <div class="map_wrap">
       <div id="map"></div>
     </div>
-    <MapSidebar v-show="this.$store.state.map.showSidebar"></MapSidebar>
+    <MapSidebar v-show="getshowSidebar"></MapSidebar>
   </div>
 </template>
 
@@ -154,10 +154,12 @@ export default {
       var $this = this;
       var geocoder = new kakao.maps.services.Geocoder();
 
-      var location = this.$store.state.house.sido + " " + this.$store.state.house.gugun;
+      var location = $this.$store.state.house.sido + " " + $this.$store.state.house.gugun;
 
-      if (this.$store.state.house.dong != "") {
-        location += " " + this.$store.state.house.dong;
+      console.log(location);
+
+      if ($this.$store.state.house.dong != "") {
+        location += " " + $this.$store.state.house.dong;
       }
 
       geocoder.addressSearch(location, function (result, status) {
@@ -168,6 +170,11 @@ export default {
         }
       });
     },
+  },
+  computed:{
+    getshowSidebar(){
+      return this.$store.getters.getshowSidebar;
+    }
   },
   created() {
     this.getHouseList();
