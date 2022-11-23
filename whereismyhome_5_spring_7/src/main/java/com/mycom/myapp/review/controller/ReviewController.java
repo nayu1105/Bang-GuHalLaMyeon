@@ -68,6 +68,9 @@ public class ReviewController {
 		ReviewResultDto reviewResultDto;
 		reviewResultDto = service.reviewList(reviewParamDto);
 
+		System.out.println("reviewResultDto: ");
+		System.out.println(reviewResultDto);
+		
 		// System.out.println(reviewParamDto);
 
 		if (reviewResultDto.getResult() == SUCCESS) {
