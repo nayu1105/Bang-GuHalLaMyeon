@@ -30,26 +30,20 @@
                     <ul>
                       <li><router-link to="/">Home</router-link></li>
                       <li class="has-dropdown">
-                        <router-link to="/boards" @click.native="validLogin">공지사항</router-link>
+                        <router-link to="/boards">공지사항</router-link>
                         <ul class="submenu">
                           <li>
-                            <router-link to="/boards" @click.native="validLogin"
-                              >공지사항</router-link
-                            >
+                            <router-link to="/boards">공지사항</router-link>
                           </li>
                           <li>
-                            <router-link to="/events" @click.native="validLogin"
-                              >이벤트</router-link
-                            >
+                            <router-link to="/events">이벤트</router-link>
                           </li>
                         </ul>
                       </li>
                       <li>
-                        <router-link to="/houseDeal" @click.native="validLogin"
-                          >실거래가</router-link
-                        >
+                        <router-link to="/houseDeal">실거래가</router-link>
                       </li>
-                      <li class="has-dropdown" v-show="this.$store.state.login.isLogin">
+                      <li class="has-dropdown" v-show="this.$store.state.login.userCode === '002'">
                         <router-link to="/adminBoards">관리자</router-link>
                         <ul class="submenu">
                           <li><router-link to="/adminEvents">관리자 정보</router-link></li>
@@ -135,21 +129,19 @@
                 <a @click="menuOption.boardsDropdown = !menuOption.boardsDropdown">공지사항</a>
                 <ul class="sub-menu" :class="[menuOption.boardsDropdown === true ? 'active' : '']">
                   <li>
-                    <router-link to="/boards" @click.native="validLogin">공지사항</router-link>
+                    <router-link to="/boards">공지사항</router-link>
                   </li>
                   <li>
-                    <router-link to="/events" @click.native="validLogin">이벤트</router-link>
+                    <router-link to="/events">이벤트</router-link>
                   </li>
                 </ul>
               </li>
               <li>
-                <router-link to="houseDeal" class="border-0" @click.native="validLogin"
-                  >실거래가</router-link
-                >
+                <router-link to="houseDeal" class="border-0">실거래가</router-link>
               </li>
 
               <li
-                v-show="this.$store.state.login.isLogin"
+                v-show="this.$store.state.login.userCode === '002'"
                 class="menu-item-has-children has-droupdown"
                 :class="[menuOption.adminDropDown === true ? 'active' : '']"
               >
@@ -192,7 +184,7 @@
 
 <script>
 export default {
-  name: 'HomeHeader',
+  name: "HomeHeader",
   data() {
     return {
       isSticky: false,
@@ -225,23 +217,20 @@ export default {
       this.showSidebar = false;
     },
     doLogout() {
-      this.$store.commit('SET_LOGIN', { isLogin: false, userName: '', userProfileImageUrl: '', userSeq:''});
+      this.$store.commit("SET_LOGIN", {
+        isLogin: false,
+        userName: "",
+        userProfileImageUrl: "",
+        userSeq: "",
+        userCode: "",
+      });
       console.log("logout");
       this.$store.state.bookmark.list = [];
-      this.$router.push('/home');
-    },
-    validLogin() {
-      console.log(this.$store.state.login.isLogin);
-      if (!this.$store.state.login.isLogin) {
-        this.$router.push('/login');
-      }
-    },
-    LinkToLogin() {
-      this.$router.push('/login');
+      this.$router.push("/home");
     },
   },
   mounted() {
-    window.addEventListener('scroll', this.handleSticky);
+    window.addEventListener("scroll", this.handleSticky);
   },
 };
 </script>

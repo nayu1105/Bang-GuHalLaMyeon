@@ -24,6 +24,7 @@ export default new Vuex.Store({
       userSeq: "",
       userName: "",
       userProfileImageUrl: "",
+      userCode: "",
 
       // Login
       userEmail: "nanana@ssafy.com",
@@ -146,6 +147,9 @@ export default new Vuex.Store({
       state.login.userName = payload.userName;
       state.login.userSeq = payload.userSeq;
       state.login.userProfileImageUrl = payload.userProfileImageUrl;
+      state.login.userCode = payload.userCode;
+
+      console.log(payload);
     },
 
     UPDATE_USER(state, payload) {
