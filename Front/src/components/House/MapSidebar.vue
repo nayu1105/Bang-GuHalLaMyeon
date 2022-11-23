@@ -25,9 +25,9 @@
             >{{ detailGetters.dealList[0].dealAmount }} (단위: 만 원)</span
           >
 
-          <div class="mt-20" style="display: inline-block">
+          <div class="mt-20" style="display: flex; justify-content: space-between">
             <button class="btn apt-btn" @click="linkToHouseDetail">아파트 상세보기</button>
-            <button class="btn bookmark-btn">찜하기</button>
+            <button class="btn sidebar-bookmark-btn" @click="bookmarkInsert">찜하기</button>
           </div>
         </div>
       </div>
@@ -36,17 +36,46 @@
 </template>
 
 <script>
+import http from '@/common/axios.js';
+
+import Vue from 'vue';
+import VueAlertify from 'vue-alertify';
+
+Vue.use(VueAlertify);
+
 export default {
-  name: "MapSidebar",
+  name: 'MapSidebar',
   methods: {
     linkToHouseDetail() {
       let aptCode = this.$store.state.house.aptCode;
-      this.$router.push("/house-details/" + aptCode);
+      this.$router.push('/house-details/' + aptCode);
     },
     houseDetail() {
-      this.$store.dispatch("houseDetail");
+      this.$store.dispatch('houseDetail');
       console.log(this.detailGetters.dealList);
     },
+    async bookmarkInsert(){
+      let params = {
+        userSeq : this.$store.state.login.userSeq,
+        houseNo : this.$store.state.house.aptCode,
+      }
+      try {
+        let response = await http.post('/bookmarks', params);
+        let { data } = response;
+
+        console.log(data);
+
+        //interceptor session check fail
+        if (data.result == 'login') {
+          //sessionTimeout 상태
+          this.$router.push('/login');
+        } else {
+          this.$alertify.success("북마크에 추가되었습니다.");
+        }
+      } catch (error) {
+        this.$alertify.error('글 등록과정에서 오류가 발생했습니다.');
+      }
+    }
   },
   data() {
     return {
@@ -66,5 +95,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url("@/assets/css/map.css");
+@import url('@/assets/css/map.css');
 </style>

@@ -1,13 +1,13 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
 import http from '@/common/axios.js';
 import util from '@/common/util.js';
 
-import router from "@/routers/routers.js";
+import router from '@/routers/routers.js';
 
 export default new Vuex.Store({
   plugins: [
@@ -120,19 +120,17 @@ export default new Vuex.Store({
       gugunList: [],
       dongList: [],
 
-      lawdcd: "11110",
+      lawdcd: '11110',
 
-      sido: "서울특별시",
-      gugun: "종로구",
-      dong: "",
+      sido: '서울특별시',
+      gugun: '종로구',
+      dong: '',
 
       aptName: '',
       jibun: '',
       houseDetailList: [],
 
       aptCode: 0,
-      aptName: "",
-      jibun: "",
 
       // 월별 평균 매매가 차트 정보
       listLabel: [],
@@ -298,7 +296,7 @@ export default new Vuex.Store({
     SET_REVIEW_MOVE_PAGE(state, pageIndex) {
       state.review.offset = (pageIndex - 1) * state.review.listRowCount;
       state.review.currentPageIndex = pageIndex;
-    }
+    },
 
     SET_USER_CLSF(state, payload) {
       state.clsf.userClsf = payload;
@@ -405,7 +403,7 @@ export default new Vuex.Store({
     },
     async dongList(context, payload) {
       let params = {
-        option: "dong",
+        option: 'dong',
         sidoName: payload.sidoName,
         gugunName: payload.gugunName,
       };
@@ -424,12 +422,12 @@ export default new Vuex.Store({
     async houseDetail(context) {
       try {
         let aptCode = this.state.house.aptCode;
-        let { data } = await http.get("/houses/" + aptCode); // params: params shorthand property, let response 도 제거
-        if (data.result == "login") {
-          router.push("/login");
+        let { data } = await http.get('/houses/' + aptCode); // params: params shorthand property, let response 도 제거
+        if (data.result == 'login') {
+          router.push('/login');
         } else {
-          context.commit("SET_HOUSE_DETAIL", data);
-          console.log("houseDetail-store: ");
+          context.commit('SET_HOUSE_DETAIL', data);
+          console.log('houseDetail-store: ');
           console.log(data);
         }
       } catch (error) {
