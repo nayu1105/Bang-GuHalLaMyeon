@@ -16,9 +16,9 @@
           <br />
           <span style="font-size: 15px; font-weight: 700">최근 거래 일자 :</span>
           <span class="ml-10" style="font-size: 15px"
-            >{{ detailGetters.dealList[0].dealYear }}.{{ detailGetters.dealList[0].dealMonth }}.{{
-              detailGetters.dealList[0].dealDay
-            }}</span
+            >{{ detailGetters.dealList[0].dealYear }}.{{
+              detailGetters.dealList[0].dealMonth | fillZero()
+            }}.{{ detailGetters.dealList[0].dealDay | fillZero() }}</span
           >
           <br />
           <span style="font-size: 15px; font-weight: 700">거래 매매가 :</span>
@@ -143,6 +143,12 @@ export default {
   },
   created() {
     this.houseDetail();
+  },
+  filters: {
+    fillZero(num) {
+      let str = String(num);
+      return str.padStart(2, "0");
+    },
   },
 };
 </script>

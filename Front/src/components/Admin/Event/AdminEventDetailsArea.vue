@@ -67,18 +67,6 @@
           <div class="col-xxl-4 col-xl-4 col-lg-4">
             <div class="events__sidebar pl-70">
               <div class="events__sidebar-widget white-bg mb-20">
-                <div class="events__sidebar-shape">
-                  <img
-                    class="events-sidebar-img-2"
-                    src="@/assets/img/events/event-shape-2.png"
-                    alt=""
-                  />
-                  <img
-                    class="events-sidebar-img-3"
-                    src="@/assets/img/events/event-shape-3.png"
-                    alt=""
-                  />
-                </div>
                 <div class="events__info">
                   <div class="events__info-content mb-35">
                     <div class="events__allow mb-30">
@@ -100,7 +88,7 @@
                 </div>
               </div>
               <div class="admin-footer">
-                <button type="button" @click="changeToUpdate" class="btn btn-sm btn-primary mr-10">
+                <button type="button" @click="changeToUpdate" class="btn btn-sm btn-warning mr-10">
                   수정
                 </button>
                 <button type="button" @click="changeToDelete" class="btn btn-sm btn-success">

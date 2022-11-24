@@ -12,7 +12,7 @@ import router from '@/routers/routers.js';
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      paths: ['login', 'house', 'clsf'],
+      paths: ["login", "house", "review", "clsf"],
     }),
   ],
   state: {
@@ -601,6 +601,9 @@ export default new Vuex.Store({
       } else {
         return true;
       }
+    },
+    getshowSidebar: function (state) {
+      return state.map.showSidebar;
     },
   },
 });
