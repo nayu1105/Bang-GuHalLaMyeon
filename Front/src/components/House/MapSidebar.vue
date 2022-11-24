@@ -37,15 +37,15 @@
 </template>
 
 <script>
-import http from '@/common/axios.js';
+import http from "@/common/axios.js";
 
-import Vue from 'vue';
-import VueAlertify from 'vue-alertify';
+import Vue from "vue";
+import VueAlertify from "vue-alertify";
 
 Vue.use(VueAlertify);
 
 export default {
-  name: 'MapSidebar',
+  name: "MapSidebar",
   data() {
     return {
       roadviewContainer: null,
@@ -56,10 +56,10 @@ export default {
   methods: {
     linkToHouseDetail() {
       let aptCode = this.$store.state.house.aptCode;
-      this.$router.push('/house-details/' + aptCode);
+      this.$router.push("/house-details/" + aptCode);
     },
     houseDetail() {
-      this.$store.dispatch('houseDetail');
+      this.$store.dispatch("houseDetail");
       console.log(this.detailGetters.dealList);
     },
     async bookmarkInsert() {
@@ -68,26 +68,30 @@ export default {
         houseNo: this.$store.state.house.aptCode,
       };
       try {
-        let response = await http.post('/bookmarks', params);
+        let response = await http.post("/bookmarks", params);
         let { data } = response;
 
         console.log(data);
 
         //interceptor session check fail
-        if (data.result == 'login') {
+        if (data.result == "login") {
           //sessionTimeout 상태
-          this.$router.push('/login');
+          this.$router.push("/login");
         } else {
-          this.$alertify.success('북마크에 추가되었습니다.');
+          if (data.exist == 1) {
+            this.$alertify.error("이미 북마크에 추가 되어있습니다.");
+          } else {
+            this.$alertify.success("북마크에 추가되었습니다.");
+          }
         }
       } catch (error) {
-        this.$alertify.error('글 등록과정에서 오류가 발생했습니다.');
+        this.$alertify.error("글 등록과정에서 오류가 발생했습니다.");
       }
     },
     initMap() {
       var $this = this;
 
-      $this.roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+      $this.roadviewContainer = document.getElementById("roadview"); //로드뷰를 표시할 div
       $this.roadview = new kakao.maps.Roadview($this.roadviewContainer); //로드뷰 객체
       $this.roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
 
@@ -121,12 +125,12 @@ export default {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src =
-        '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9fa060a9b4a46b0e7e27c1cfe9d4e2f4&libraries=services,clusterer,drawing';
+        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9fa060a9b4a46b0e7e27c1cfe9d4e2f4&libraries=services,clusterer,drawing";
 
       /* global kakao */
-      script.addEventListener('load', () => {
+      script.addEventListener("load", () => {
         kakao.maps.load(this.initMap);
       });
       document.head.appendChild(script);
@@ -145,5 +149,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url('@/assets/css/map.css');
+@import url("@/assets/css/map.css");
 </style>

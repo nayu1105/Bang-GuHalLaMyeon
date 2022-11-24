@@ -21,5 +21,12 @@
 		insert into bookmark (HOUSE_NO, USER_SEQ)
 		values (#{houseNo}, #{userSeq})
 	</insert>
+	
+<!-- Bokkmark Exist -->
+	<select id="bookmarkExist" parameterType="com.mycom.myapp.bookmark.dto.BookmarkDto" resultType="int">
+		select count(*)
+		  from bookmark
+		 where HOUSE_NO = #{houseNo} and USER_SEQ = #{userSeq}
+	</select>
 
 </mapper>
