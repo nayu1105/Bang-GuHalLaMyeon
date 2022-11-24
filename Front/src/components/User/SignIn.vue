@@ -23,7 +23,7 @@
                 </p>
               </div>
             </div> -->
-            <div class="sign__form">
+            <div class="form-group sign__form">
               <form action="#">
                 <div class="sign__input-wrapper mb-25">
                   <h5>이메일</h5>
@@ -78,11 +78,20 @@ import http from "@/common/axios.js";
 export default {
   name: "LoginArea",
   methods: {
+    validateEmail(email) {
+      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      return re.test(email);
+    },
     async login() {
       let params = {
         userEmail: this.$store.state.login.userEmail,
         userPassword: this.$store.state.login.userPassword,
       };
+
+      if (!this.validateEmail(params.userEmail)) {
+        this.$alertify.error("이메일 형식이 올바르지 않습니다.");
+        return;
+      }
 
       try {
         let { data } = await http.post("/login", params);
@@ -97,7 +106,7 @@ export default {
           userCode: data.userCode,
         });
         console.log(this.$store.state.login.userCode);
-        this.$router.push("/home");
+        this.$router.push("/home").catch(() => {});
       } catch (error) {
         if (error.response.status == "404") {
           this.$alertify.error("이메일 또는 비밀번호를 확인하세요.");
