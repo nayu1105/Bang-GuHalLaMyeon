@@ -34,11 +34,8 @@ public class BookmarkController {
 
 	@GetMapping(value = "/bookmarks/{userSeq}")
 	public ResponseEntity<BookmarkResultDto> bookmarkList(@PathVariable int userSeq) {
-		System.out.println("list");
 		BookmarkResultDto bookmarkResultDto;
 		bookmarkResultDto = service.bookmarkList(userSeq);
-		
-		System.out.println(bookmarkResultDto);
 
 		if (bookmarkResultDto.getResult() == SUCCESS) {
 			return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.OK);
