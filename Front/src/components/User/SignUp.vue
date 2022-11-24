@@ -42,14 +42,14 @@
                 <div class="sign__input-wrapper mb-25">
                   <h5>비밀번호</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="비밀번호" v-model="userPassword" />
+                    <input type="password" placeholder="비밀번호" v-model="userPassword" />
                     <i class="fal fa-lock"></i>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-10">
                   <h5>비밀번호 재입력</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="비밀번호 재입력" v-model="userPassword2" />
+                    <input type="password" placeholder="비밀번호 재입력" v-model="userPassword2" />
                     <i class="fal fa-lock"></i>
                   </div>
                 </div>
