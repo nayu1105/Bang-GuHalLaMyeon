@@ -1,12 +1,7 @@
 <template>
   <section class="teacher__area pt-100 pb-110">
     <div class="container">
-      <div class="row">
-        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-          <div class="teacher__details-thumb p-relative w-img pr-30">
-            <img src="@/assets/img/profile/profile.png" alt="" />
-          </div>
-        </div>
+      <div class="row justify-content-center">
         <div class="col-xxl-8 col-xl-8 col-lg-8">
           <div class="teacher__wrapper">
             <div class="teacher__top d-md-flex align-items-end justify-content-between">

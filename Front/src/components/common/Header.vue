@@ -46,7 +46,6 @@
                       <li class="has-dropdown" v-show="this.$store.state.login.userCode === '002'">
                         <router-link to="/adminBoards">관리자</router-link>
                         <ul class="submenu">
-                          <li><router-link to="/adminEvents">관리자 정보</router-link></li>
                           <li><router-link to="/adminBoards">공지사항 관리</router-link></li>
                           <li><router-link to="/adminEvents">이벤트 관리</router-link></li>
                           <li><router-link to="/userManage">회원 정보 관리</router-link></li>

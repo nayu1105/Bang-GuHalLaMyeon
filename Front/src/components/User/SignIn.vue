@@ -11,18 +11,6 @@
       <div class="row">
         <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
           <div class="sign__wrapper white-bg">
-            <!-- <div class="sign__header mb-35">
-              <div class="sign__in text-center">
-                <a href="#" class="sign__social text-start mb-15">
-                  <i class="fab fa-facebook-f"></i>Sign in with Facebook</a
-                >
-                <p>
-                  <span>........</span> Or,
-                  <router-link to="/login">sign in</router-link>
-                  with your email<span> ........</span>
-                </p>
-              </div>
-            </div> -->
             <div class="form-group sign__form">
               <form action="#">
                 <div class="sign__input-wrapper mb-25">
@@ -30,8 +18,8 @@
                   <div class="sign__input">
                     <input
                       type="text"
-                      placeholder="이메일"
-                      v-model="$store.state.login.userEmail"
+                      placeholder="bang@bang.com"
+                      v-model="userEmail"
                     />
                     <i class="fal fa-envelope"></i>
                   </div>
@@ -41,19 +29,13 @@
                   <div class="sign__input">
                     <input
                       type="password"
-                      placeholder="비밀번호"
-                      v-model="$store.state.login.userPassword"
+                      v-model="userPassword"
                     />
                     <i class="fal fa-lock"></i>
                   </div>
                 </div>
                 <div class="sign__action d-sm-flex justify-content-between mb-30">
-                  <!-- <div class="sign__agree d-flex align-items-center">
-                    <input class="m-check-input" type="checkbox" id="m-agree" />
-                    <label class="m-check-label" for="m-agree">Keep me signed in </label>
-                  </div> -->
                   <div class="sign__forgot">
-                    <!-- <a href="#">Forgot your password?</a> -->
                   </div>
                 </div>
                 <button class="e-btn w-100" @click="login"><span></span> 로그인</button>
@@ -77,6 +59,12 @@ Vue.use(VueAlertify);
 import http from "@/common/axios.js";
 export default {
   name: "LoginArea",
+  data() {
+    return {
+      userEmail: '',
+      userPassword: '',
+    }
+  },
   methods: {
     validateEmail(email) {
       var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -84,8 +72,8 @@ export default {
     },
     async login() {
       let params = {
-        userEmail: this.$store.state.login.userEmail,
-        userPassword: this.$store.state.login.userPassword,
+        userEmail: this.userEmail,
+        userPassword: this.userPassword,
       };
 
       if (!this.validateEmail(params.userEmail)) {
@@ -105,6 +93,12 @@ export default {
           userProfileImageUrl: data.userProfileImageUrl,
           userCode: data.userCode,
         });
+
+        this.$store.commit("UPDATE_USER",{
+          userEmail: this.userEmail,
+          userPassword : this.userPassword,
+        })
+
         console.log(this.$store.state.login.userCode);
         this.$router.push("/home").catch(() => {});
       } catch (error) {
