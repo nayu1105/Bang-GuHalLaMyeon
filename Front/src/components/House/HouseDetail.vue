@@ -22,7 +22,7 @@
                   <div>
                     <div
                       class="star"
-                      v-for="starIdx in $store.state.review.list[0].avgRate"
+                      v-for="starIdx in $store.state.review.avgRate"
                       :key="starIdx"
                       style="display: inline"
                     >
@@ -32,7 +32,7 @@
                     </div>
                     <div
                       class="star"
-                      v-for="starIdx in 5 - $store.state.review.list[0].avgRate"
+                      v-for="starIdx in 5 - $store.state.review.avgRate"
                       :key="starIdx"
                       style="display: inline"
                     >
@@ -41,7 +41,7 @@
                       </span>
                     </div>
                   </div>
-                  <p class="ml-10">{{ $store.state.review.list[0].avgRate }}</p>
+                  <p class="ml-10">{{ $store.state.review.avgRate }}</p>
                 </div>
               </div>
             </div>

@@ -3,6 +3,13 @@
 
 <mapper namespace="com.mycom.myapp.review.dao.ReviewDao">
 
+	<!-- 리뷰 별점 평균 조회 -->
+	<select id="reviewAvgRate" parameterType="map" resultType="Integer">
+		select AVG(rate) as avgRate 
+		  from HOUSEREVIEW
+		 where house_no=#{houseNo}
+	</select>
+
 	<!-- 리뷰 등록 -->
 	<insert id="reviewInsert" parameterType="com.mycom.myapp.review.dto.ReviewDto">
 		insert into HOUSEREVIEW (title, content, user_seq, house_no, rate, reg_dt)
