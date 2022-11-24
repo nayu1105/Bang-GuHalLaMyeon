@@ -30,26 +30,20 @@
                     <ul>
                       <li><router-link to="/">Home</router-link></li>
                       <li class="has-dropdown">
-                        <router-link to="/boards" @click.native="validLogin">공지사항</router-link>
+                        <router-link to="/boards">공지사항</router-link>
                         <ul class="submenu">
                           <li>
-                            <router-link to="/boards" @click.native="validLogin"
-                              >공지사항</router-link
-                            >
+                            <router-link to="/boards">공지사항</router-link>
                           </li>
                           <li>
-                            <router-link to="/events" @click.native="validLogin"
-                              >이벤트</router-link
-                            >
+                            <router-link to="/events">이벤트</router-link>
                           </li>
                         </ul>
                       </li>
                       <li>
-                        <router-link to="/houseDeal" @click.native="validLogin"
-                          >실거래가</router-link
-                        >
+                        <router-link to="/houseDeal">실거래가</router-link>
                       </li>
-                      <li class="has-dropdown" v-show="this.$store.state.login.isLogin">
+                      <li class="has-dropdown" v-show="this.$store.state.login.userCode === '002'">
                         <router-link to="/adminBoards">관리자</router-link>
                         <ul class="submenu">
                           <li><router-link to="/adminEvents">관리자 정보</router-link></li>
@@ -149,7 +143,7 @@
               </li>
 
               <li
-                v-show="this.$store.state.login.isLogin"
+                v-show="this.$store.state.login.userCode === '002'"
                 class="menu-item-has-children has-droupdown"
                 :class="[menuOption.adminDropDown === true ? 'active' : '']"
               >
@@ -235,7 +229,11 @@ export default {
       this.showSidebar = false;
     },
     doLogout() {
-      this.$store.commit("SET_LOGIN", { isLogin: false, userName: "", userProfileImageUrl: "" });
+      this.$store.commit("SET_LOGIN", { isLogin: false, userName: "", userProfileImageUrl: "",
+        userSeq: "",
+        userCode: "" });
+        
+      this.$store.state.bookmark.list = [];
       this.$router.push("/home");
     },
     validLogin() {

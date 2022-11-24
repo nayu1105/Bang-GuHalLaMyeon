@@ -27,21 +27,12 @@ iframe {
   border: none;
   padding: 10px;
   padding-bottom: 0;
-  background: transparent;
 }
 .modal-dialog {
   max-width: 700px;
 }
 .modal-content button.btn-close {
-  box-sizing: content-box;
-  width: 1em;
-  height: 1em;
-  padding: 0.25em 0.25em;
-  color: #000;
-  background: transparent url('@/assets/img/icon/close.png') center/1em auto no-repeat;
-  border: 0;
-  border-radius: 0.25rem;
-  opacity: 1;
+  padding: 12px;
 }
 .btn-close:hover {
   opacity: 1;
@@ -51,5 +42,11 @@ iframe {
 }
 
 .modal-footer {
-  display: none;
+  border-top: 0px;
+}
+
+.modal-button {
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
 }

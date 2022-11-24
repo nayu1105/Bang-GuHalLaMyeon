@@ -86,15 +86,18 @@ export default {
 
       try {
         let { data } = await http.post("/login", params);
+        
+        console.log(data);
 
-        this.$store.commit("SET_LOGIN", {
+        this.$store.commit('SET_LOGIN', {
           isLogin: true,
           userName: data.userName,
           userSeq: data.userSeq,
           userProfileImageUrl: data.userProfileImageUrl,
+          userCode: data.userCode,
         });
-        console.log(this.$store.state.login.userSeq);
-        this.$router.push("/");
+        console.log(this.$store.state.login.userCode);
+        this.$router.push('/home');
       } catch (error) {
         if (error.response.status == "404") {
           this.$alertify.error("이메일 또는 비밀번호를 확인하세요.");

@@ -1,4 +1,18 @@
-.user_btn{
-    display: flex;
-    justify-content: end;
+@use '../abstract' as *;
+
+.user_btn {
+  display: flex;
+  justify-content: end;
+}
+
+.admin-user-btn {
+  height: 45px;
+  text-align: center;
+  color: $white;
+  background: $e-blue;
+}
+
+.admin-user-btns {
+  display: flex;
+  justify-content: space-evenly;
 }

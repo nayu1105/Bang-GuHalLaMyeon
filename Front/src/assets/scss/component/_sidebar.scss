@@ -1,0 +1,11 @@
+@use '../abstract' as *;
+
+.sidebar-bookmark-btn{
+    background-color: #FF0075;
+    color: $white;
+    margin: 3px;
+    padding: 7px !important;
+    &:hover{
+        color: $white;
+    }
+}
