@@ -52,8 +52,6 @@ export default {
       // store 에 detail 요소 바꾼 후
       // router 를 이용해 이동
 
-      console.log(eventId);
-
       try {
         let { data } = await http.get("/events/" + eventId);
         console.log(data);

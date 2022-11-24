@@ -2,7 +2,7 @@
   <section class="page__title-area pt-120 pb-90">
     <div class="container">
       <div class="row">
-        <div class="col-xxl-8 col-xl-8 col-lg-8">
+        <div class="col-xxl-12 col-xl-12 col-lg-12">
           <div class="course__wrapper">
             <div class="page__title-content mb-25">
               <h5 class="page__title-3">{{ detailGetters.dealList[0].aptName }}</h5>
@@ -98,27 +98,29 @@
 
                     <div class="course__description-list mt-55 mb-45">
                       <h4>거래 일자</h4>
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th class="col-3">계약 일자</th>
-                            <th class="col-4">매매가 (단위: 만 원)</th>
-                            <th class="col-3">면적</th>
-                            <th class="col-2">층수</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="(apt, aptIdx) in detailGetters.dealList" :key="aptIdx">
-                            <td scope="row">
-                              {{ apt.dealYear }}. {{ apt.dealMonth | fillZero() }}.
-                              {{ apt.dealDay | fillZero() }}
-                            </td>
-                            <td>{{ apt.dealAmount }}</td>
-                            <td>{{ apt.area }}</td>
-                            <td>{{ apt.floor }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                      <div class="tableBox" style="width: 100%; height: 450px; display: block">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th class="col-3">계약 일자</th>
+                              <th class="col-3">매매가 (단위: 만 원)</th>
+                              <th class="col-3">면적</th>
+                              <th class="col-3">층수</th>
+                            </tr>
+                          </thead>
+                          <tbody style="display: block">
+                            <tr v-for="(apt, aptIdx) in detailGetters.dealList" :key="aptIdx">
+                              <td scope="row">
+                                {{ apt.dealYear }}. {{ apt.dealMonth | fillZero() }}.
+                                {{ apt.dealDay | fillZero() }}
+                              </td>
+                              <td style="padding-left: 13px">{{ apt.dealAmount }}</td>
+                              <td style="padding-left: 16px">{{ apt.area }}</td>
+                              <td style="padding-left: 20px">{{ apt.floor }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -201,5 +203,46 @@ export default {
 <style scoped>
 .fa-solid {
   color: #f49d1a;
+}
+
+.table tbody::-webkit-scrollbar {
+  width: 10px;
+}
+.table tbody::-webkit-scrollbar-thumb {
+  background-color: #f49d1a;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+.table tbody::-webkit-scrollbar-track {
+  background-color: #f49d1a38;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+}
+
+.table thead {
+  float: left;
+  width: 100%;
+}
+
+.table tbody {
+  overflow: auto;
+  float: left;
+  width: 100%;
+  height: 500px;
+}
+
+.table tbody tr {
+  display: table;
+  width: 100%;
+}
+
+.table thead tr {
+  display: table;
+  width: 100%;
+}
+
+.table td {
+  width: 100px;
 }
 </style>
