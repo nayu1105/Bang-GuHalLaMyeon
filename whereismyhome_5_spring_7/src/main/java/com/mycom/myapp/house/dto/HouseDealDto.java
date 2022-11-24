@@ -23,4 +23,7 @@ public class HouseDealDto {
 	
 	private long avgDealAmount;
 	
+	private String lng;
+	private String lat;
+	
 }
