@@ -41,7 +41,18 @@
                     >
                       참여 완료
                     </button>
-                    <button v-else class="e-btn e-btn-7 w-100" @click="participate">
+                    <button
+                      v-else-if="btnState === 2"
+                      class="e-btn e-btn-7 w-100"
+                      style="background-color: grey; pointer-events: none"
+                    >
+                      이벤트 종료
+                    </button>
+                    <button
+                      v-else-if="btnState === 0"
+                      class="e-btn e-btn-7 w-100"
+                      @click="participate"
+                    >
                       이벤트 참여하기
                     </button>
                   </div>
@@ -75,11 +86,33 @@ export default {
     this.participateState(eventId);
   },
   methods: {
+    eventStatus() {
+      if (this.btnState !== 1) {
+        // 0: 참여하기
+        // 1: 참여 완료
+        // 2: 이벤트 종료
+        // 3: 버튼 안보이기
+
+        if (this.$store.state.event.statusCode === 2) {
+          // 이벤트 종료
+          this.btnState = 2;
+        } else if (this.$store.state.event.statusCode === 0) {
+          // 진행중인 이벤트
+          this.btnState = 0;
+        } else if (this.$store.state.event.statusCode === 3) {
+          // 발표 게시글 ( 참가 관련 버튼 X )
+          this.btnState = 3;
+        }
+      }
+    },
+
     async participateState(eventId) {
       try {
         let stateData = await http.get(`/eventsParticipate/${eventId}`);
         this.btnState = stateData.data;
-        console.log(this.btnState);
+        // 참여 X : 0
+        // 참여 O : 1
+        this.eventStatus();
       } catch (error) {
         console.log("EventMainVue: error : ");
         console.log(error);

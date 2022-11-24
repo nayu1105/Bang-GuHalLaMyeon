@@ -6,7 +6,7 @@
 <!-- userSeq에 따른 Bookmark List -->
 	<select id="bookmarkList" parameterType="int" resultType="com.mycom.myapp.bookmark.dto.BookmarkDto">
 		SELECT hi.*, dc.sidoName, dc.gugunName 
-		  FROM bookmark b, houseinfo hi, dongCode dc
+		  FROM bookmark b, houseinfo hi, dong_code dc
 		 WHERE b.user_seq= #{userSeq} and b.house_no = hi.aptCode and hi.dongCode = dc.dongCode;
 	</select>
 
@@ -21,5 +21,12 @@
 		insert into bookmark (HOUSE_NO, USER_SEQ)
 		values (#{houseNo}, #{userSeq})
 	</insert>
+	
+<!-- Bokkmark Exist -->
+	<select id="bookmarkExist" parameterType="com.mycom.myapp.bookmark.dto.BookmarkDto" resultType="int">
+		select count(*)
+		  from bookmark
+		 where HOUSE_NO = #{houseNo} and USER_SEQ = #{userSeq}
+	</select>
 
 </mapper>

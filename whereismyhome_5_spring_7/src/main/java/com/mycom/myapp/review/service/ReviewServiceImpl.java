@@ -40,6 +40,8 @@ public class ReviewServiceImpl implements ReviewService {
 			// 목록, 총건수를 가져온다.
 			List<ReviewDto> list = dao.reviewList(reviewParamDto);
 			int count = dao.reviewListTotalCnt(reviewParamDto);
+			Integer avgRate = dao.reviewAvgRate(reviewParamDto);
+			reviewResultDto.setAvgRate(avgRate);
 			reviewResultDto.setList(list);
 			reviewResultDto.setCount(count);
 			reviewResultDto.setResult(SUCCESS);

@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class BookmarkResultDto {
 	private int result;
 	private List<BookmarkDto> list;
+	private int exist;
 }

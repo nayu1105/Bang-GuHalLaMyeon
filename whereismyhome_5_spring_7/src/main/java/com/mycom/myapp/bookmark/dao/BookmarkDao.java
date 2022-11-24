@@ -11,4 +11,5 @@ public interface BookmarkDao {
 	List<BookmarkDto> bookmarkList(int userSeq);
 	int bookmarkDelete(BookmarkDto	bookmarkDto);
 	int bookmarkInsert(BookmarkDto	bookmarkDto);
+	int bookmarkExist(BookmarkDto bookmarkDto);
 }
