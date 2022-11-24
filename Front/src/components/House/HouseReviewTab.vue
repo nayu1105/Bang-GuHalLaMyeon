@@ -15,12 +15,12 @@
                 class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6"
                 style="font-size: 70px; display: inline"
               >
-                {{ $store.state.review.list[0].avgRate }}
+                {{ $store.state.review.avgRate }}
               </h1>
               <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6" style="display: inline">
                 <div
                   class="star"
-                  v-for="starIdx in $store.state.review.list[0].avgRate"
+                  v-for="starIdx in $store.state.review.avgRate"
                   :key="starIdx"
                   style="display: inline"
                 >
@@ -30,7 +30,7 @@
                 </div>
                 <div
                   class="star"
-                  v-for="starIdx in 5 - $store.state.review.list[0].avgRate"
+                  v-for="starIdx in 5 - $store.state.review.avgRate"
                   :key="starIdx"
                   style="display: inline"
                 >

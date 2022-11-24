@@ -16,4 +16,6 @@ public interface ReviewDao {
 	
 	List<ReviewDto> reviewList(ReviewParamDto reviewParamDto);
 	int reviewListTotalCnt(ReviewParamDto reviewParamDto);
+	
+	Integer reviewAvgRate(ReviewParamDto reviewParamDto);
 }
