@@ -12,32 +12,37 @@ import com.google.gson.JsonObject;
 import com.mycom.myapp.user.dto.UserDto;
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor{
+public class LoginInterceptor implements HandlerInterceptor {
+
 	@Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		System.out.println(">>>>> " + request.getRequestURI());
-        HttpSession session = request.getSession();
-        UserDto userDto = (UserDto) session.getAttribute("userDto");
-        
-        // CORS 에서  put, delete 등 오류 해결 코드
-        if (request.getMethod().equals("OPTIONS")) {
-            return true;
-        }
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 
-        // 
-        if( userDto == null ) {
-        	
+		System.out.println("LoginInterceptor : preHandle !!!");
+
+		// CORS put, delete 요청에 대한 허락
+		if( request.getMethod().equals("OPTIONS")) {
+			return true;
+		}
+			
+		HttpSession session = request.getSession();
+		UserDto userDto = (UserDto) session.getAttribute("userDto");
+		
+		System.out.println(userDto);
+		
+		if (userDto == null) {
+			// 나눠서 처리
+			// json 으로 session timeout => login 이동 내용을 만들어서 보낸다.
 			Gson gson = new Gson();
-
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("result", "login");
-			
 			String jsonStr = gson.toJson(jsonObject);
 			response.getWriter().write(jsonStr);
-			
-        	return false;
-        }
 
-        return true;
-    }
+			return false;
+		}
+
+		return true; // 통과
+
+	}
 }

@@ -20,5 +20,6 @@
     	<mapper resource="mapper/adminevent_query.xml"></mapper>
     	<mapper resource="mapper/adminuser_query.xml"></mapper>
     	<mapper resource="mapper/review_query.xml"></mapper>
+    	<mapper resource="mapper/bookmark_query.xml"></mapper>
     </mappers>
 </configuration>

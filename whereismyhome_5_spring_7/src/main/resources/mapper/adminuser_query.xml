@@ -3,8 +3,9 @@
 <mapper namespace="com.mycom.myapp.admin.user.dao.AdminUserDao">
 <!-- userList -->
 	<select id="userList" parameterType="com.mycom.myapp.admin.user.dto.AdminUserParamDto" resultType="com.mycom.myapp.admin.user.dto.AdminUserDto">
-		 select user_seq, user_name, user_password, user_email, user_profile_image_url, user_register_date, user_clsf
-		 from USERS
+		 select users.user_seq, users.user_name, users.user_password, users.user_email, users.user_profile_image_url, users.user_register_date, code.code_name userClsf 
+		 from USERS users ,  CODE code
+		 where code.group_code='002' and users.user_clsf = code.code
 		 order by user_seq
 		 limit #{limit} offset #{offset}
 	</select>
@@ -14,5 +15,17 @@
 	select count(*) from USERS
 	</select>
 	
+<!-- userDelete -->
+	<delete id="userDelete" parameterType="map">
+		delete from users
+		where USER_SEQ = #{userSeq}
+	</delete>
+
+<!-- userUpdate -->
+	<update id="userUpdate" parameterType="com.mycom.myapp.admin.user.dto.AdminUserDto">
+		update users
+		set user_name = #{userName}, user_password = #{userPassword}, user_email = #{userEmail}, user_clsf = #{userClsf}
+		where user_seq = #{userSeq}
+	</update>
 
 </mapper>

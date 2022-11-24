@@ -4,22 +4,22 @@
     <div class="map_wrap">
       <div id="map"></div>
     </div>
-    <MapSidebar v-show="this.$store.state.map.showSidebar"></MapSidebar>
+    <MapSidebar v-show="this.$store.state.map.showSidebar" ref="child_component"></MapSidebar>
   </div>
 </template>
 
 <script>
-import MapCityBtn from "@/components/House/MapCityBtn.vue";
-import MapSidebar from "@/components/House/MapSidebar.vue";
+import MapCityBtn from '@/components/House/MapCityBtn.vue';
+import MapSidebar from '@/components/House/MapSidebar.vue';
 
-import Vue from "vue";
-import VueAlertify from "vue-alertify";
+import Vue from 'vue';
+import VueAlertify from 'vue-alertify';
 Vue.use(VueAlertify);
 
-import http from "@/common/axios.js";
+import http from '@/common/axios.js';
 
 export default {
-  name: "KakaoMap",
+  name: 'KakaoMap',
   components: {
     MapCityBtn,
     MapSidebar,
@@ -36,12 +36,12 @@ export default {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
-      const script = document.createElement("script");
+      const script = document.createElement('script');
       script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9fa060a9b4a46b0e7e27c1cfe9d4e2f4&libraries=services,clusterer,drawing";
+        '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9fa060a9b4a46b0e7e27c1cfe9d4e2f4&libraries=services,clusterer,drawing';
 
       /* global kakao */
-      script.addEventListener("load", () => {
+      script.addEventListener('load', () => {
         kakao.maps.load(this.initMap);
       });
       document.head.appendChild(script);
@@ -53,7 +53,7 @@ export default {
 
   methods: {
     initMap() {
-      const container = document.getElementById("map");
+      const container = document.getElementById('map');
       const options = {
         center: new kakao.maps.LatLng(37.5366059, 126.9917822),
         level: 3,
@@ -80,7 +80,7 @@ export default {
         minLevel: 2, // 클러스터 할 최소 지도 레벨
       });
 
-      kakao.maps.event.addListener(this.clusterer, "clusterclick", function (cluster) {
+      kakao.maps.event.addListener(this.clusterer, 'clusterclick', function (cluster) {
         cluster.getBounds();
       });
     },
@@ -97,11 +97,11 @@ export default {
       };
 
       try {
-        let { data } = await http.get("/houses", { params });
-        if (data.result == "login") {
-          this.$router.push("/login");
+        let { data } = await http.get('/houses', { params });
+        if (data.result == 'login') {
+          this.$router.push('/login');
         } else {
-          console.log("makeClusterMakers");
+          console.log('makeClusterMakers');
           this.makeClusterMakers(data.list);
         }
       } catch (error) {
@@ -117,7 +117,7 @@ export default {
       }
 
       $this.markers = [];
-      var imageSrc = require("@/assets/img/icon/marker/marker.png"); // 마커이미지의 주소입니다
+      var imageSrc = require('@/assets/img/icon/marker/marker.png'); // 마커이미지의 주소입니다
       var imageSize = new kakao.maps.Size(45, 45); // 마커이미지의 크기입니다
       var imageOption = { offset: new kakao.maps.Point(13, 34) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
@@ -130,16 +130,18 @@ export default {
           title: el.aptCode,
         });
 
-        kakao.maps.event.addListener(marker, "click", function () {
+        kakao.maps.event.addListener(marker, 'click', function () {
           $this.map.setCenter(marker.getPosition());
           console.log(marker.getTitle());
-          $this.$store.dispatch("houseDetail", marker.getTitle());
+          $this.$store.dispatch('houseDetail', marker.getTitle());
 
           $this.$store.state.map.showSidebar = true;
           // marker의 title store에 저장 후 자식 sidebar의 async detail 함수 불러서 sidebar에 데이터 주기
           // 클릭한 위치를 중앙에 정렬하기
 
           $this.$store.state.house.aptCode = marker.getTitle();
+
+          $this.$refs.child_component.toggleRoadview(marker.getPosition());
           // console.log($this.$store.state.house.houseDetailList.dealList[0]);
         });
 
@@ -154,10 +156,10 @@ export default {
       var $this = this;
       var geocoder = new kakao.maps.services.Geocoder();
 
-      var location = this.$store.state.house.sido + " " + this.$store.state.house.gugun;
+      var location = this.$store.state.house.sido + ' ' + this.$store.state.house.gugun;
 
-      if (this.$store.state.house.dong != "") {
-        location += " " + this.$store.state.house.dong;
+      if (this.$store.state.house.dong != '') {
+        location += ' ' + this.$store.state.house.dong;
       }
 
       geocoder.addressSearch(location, function (result, status) {
@@ -177,5 +179,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url("@/assets/css/map.css");
+@import url('@/assets/css/map.css');
 </style>

@@ -1,29 +1,34 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
-import http from "@/common/axios.js";
-import util from "@/common/util.js";
+import http from '@/common/axios.js';
+import util from '@/common/util.js';
 
-import router from "@/routers/routers.js";
+import router from '@/routers/routers.js';
 
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
+  plugins: [
+    createPersistedState({
+      paths: ['login', 'house', 'clsf'],
+    }),
+  ],
   state: {
     // login, NavBar
     login: {
       // NavBar
       isLogin: false,
 
-      userSeq: "",
-      userName: "",
-      userProfileImageUrl: "",
+      userSeq: '',
+      userName: '',
+      userProfileImageUrl: '',
+      userCode: '',
 
       // Login
-      userEmail: "nanana@ssafy.com",
-      userPassword: "1234",
+      userEmail: 'nanana@ssafy.com',
+      userPassword: '1234',
     },
     //
     board: {
@@ -31,7 +36,7 @@ export default new Vuex.Store({
       list: [],
       limit: 10,
       offset: 0,
-      searchWord: "",
+      searchWord: '',
 
       // pagination
       listRowCount: 10,
@@ -43,11 +48,11 @@ export default new Vuex.Store({
       // detail, update, delete
 
       boardId: 0,
-      title: "",
-      content: "",
-      userName: "",
-      regDate: "",
-      regTime: "",
+      title: '',
+      content: '',
+      userName: '',
+      regDate: '',
+      regTime: '',
       readCount: 0,
     },
     event: {
@@ -66,23 +71,23 @@ export default new Vuex.Store({
       // detail, update, delete
 
       eventId: 0,
-      title: "",
-      content: "",
-      startDate: "",
-      endDate: "",
-      htmlUrl: "",
+      title: '',
+      content: '',
+      startDate: '',
+      endDate: '',
+      htmlUrl: '',
       statusCode: 0,
       userSeq: 0,
-      regDate: "",
-      regTime: "",
+      regDate: '',
+      regTime: '',
       // regDt: {
       //   date: {},
       //   time: {},
       //   // date: { year: 0, month: 0, day: 0 },
       //   // time: { hour: 0, minute: 0, second: 0, nano: 0 },
       // },
-      userName: "",
-      userProfileImageUrl: "",
+      userName: '',
+      userProfileImageUrl: '',
     },
     review: {
       // list
@@ -100,10 +105,10 @@ export default new Vuex.Store({
       // detail, delete
 
       reviewId: 0,
-      title: "",
-      content: "",
-      regDate: "",
-      regTime: "",
+      title: '',
+      content: '',
+      regDate: '',
+      regTime: '',
       houseNo: 0,
       rate: 0,
       avgRate: 0,
@@ -115,17 +120,17 @@ export default new Vuex.Store({
       gugunList: [],
       dongList: [],
 
-      lawdcd: "11110",
+      lawdcd: '11110',
 
-      sido: "서울특별시",
-      gugun: "종로구",
-      dong: "",
+      sido: '서울특별시',
+      gugun: '종로구',
+      dong: '',
 
+      aptName: '',
+      jibun: '',
       houseDetailList: [],
 
       aptCode: 0,
-      aptName: "",
-      jibun: "",
 
       // 월별 평균 매매가 차트 정보
       listLabel: [],
@@ -133,6 +138,13 @@ export default new Vuex.Store({
     },
     map: {
       showSidebar: false,
+    },
+    clsf: {
+      userClsf: [],
+    },
+    bookmark: {
+      list: [],
+      uncheckedList: [],
     },
   },
   // state 상태를 변경하는 유일한 방법
@@ -142,6 +154,9 @@ export default new Vuex.Store({
       state.login.userName = payload.userName;
       state.login.userSeq = payload.userSeq;
       state.login.userProfileImageUrl = payload.userProfileImageUrl;
+      state.login.userCode = payload.userCode;
+
+      console.log(payload);
     },
 
     UPDATE_USER(state, payload) {
@@ -171,13 +186,13 @@ export default new Vuex.Store({
         payload.regDt.date.year,
         payload.regDt.date.month,
         payload.regDt.date.day,
-        "."
+        '.'
       );
       state.board.regTime = util.makeTimeStr(
         payload.regDt.time.hour,
         payload.regDt.time.minute,
         payload.regDt.time.second,
-        ":"
+        ':'
       );
       state.board.readCount = payload.readCount;
       state.board.sameUser = payload.sameUser;
@@ -249,13 +264,13 @@ export default new Vuex.Store({
         payload.regDt.date.year,
         payload.regDt.date.month,
         payload.regDt.date.day,
-        "."
+        '.'
       );
       state.event.regTime = util.makeTimeStr(
         payload.regDt.time.hour,
         payload.regDt.time.minute,
         payload.regDt.time.second,
-        ":"
+        ':'
       );
     },
     // for UpdateModal event v-modal
@@ -282,6 +297,13 @@ export default new Vuex.Store({
       state.review.offset = (pageIndex - 1) * state.review.listRowCount;
       state.review.currentPageIndex = pageIndex;
     },
+
+    SET_USER_CLSF(state, payload) {
+      state.clsf.userClsf = payload;
+    },
+    SET_BOOKMARK_LIST(state, payload) {
+      state.bookmark.list = payload;
+    },
   },
   // for async method
   actions: {
@@ -292,14 +314,14 @@ export default new Vuex.Store({
         searchWord: this.state.board.searchWord,
       };
       try {
-        let { data } = await http.get("/boards", { params }); // params: params shorthand property, let response 도 제거
-        console.log("BoardMainVue: data : ");
+        let { data } = await http.get('/boards', { params }); // params: params shorthand property, let response 도 제거
+        console.log('BoardMainVue: data : ');
         console.log(data);
-        if (data.result == "login") {
-          router.push("/login");
+        if (data.result == 'login') {
+          router.push('/login');
         } else {
-          context.commit("SET_BOARD_LIST", data.list);
-          context.commit("SET_BOARD_TOTAL_LIST_ITEM_COUNT", data.count);
+          context.commit('SET_BOARD_LIST', data.list);
+          context.commit('SET_BOARD_TOTAL_LIST_ITEM_COUNT', data.count);
         }
       } catch (error) {
         console.error(error);
@@ -313,14 +335,14 @@ export default new Vuex.Store({
       };
 
       try {
-        let { data } = await http.get("/events", { params }); // params: params shorthand property, let response 도 제거
-        console.log("EventMainVue: data : ");
+        let { data } = await http.get('/events', { params }); // params: params shorthand property, let response 도 제거
+        console.log('EventMainVue: data : ');
         console.log(data);
-        if (data.result == "login") {
-          router.push("/login");
+        if (data.result == 'login') {
+          router.push('/login');
         } else {
-          context.commit("SET_EVENT_LIST", data.list);
-          context.commit("SET_EVENT_TOTAL_LIST_ITEM_COUNT", data.count);
+          context.commit('SET_EVENT_LIST', data.list);
+          context.commit('SET_EVENT_TOTAL_LIST_ITEM_COUNT', data.count);
         }
       } catch (error) {
         console.error(error);
@@ -334,14 +356,14 @@ export default new Vuex.Store({
       };
 
       try {
-        let { data } = await http.get("/reviews", { params }); // params: params shorthand property, let response 도 제거
-        console.log("ReviewMainVue: data : ");
+        let { data } = await http.get('/reviews', { params }); // params: params shorthand property, let response 도 제거
+        console.log('ReviewMainVue: data : ');
         console.log(data);
-        if (data.result == "login") {
-          router.push("/login");
+        if (data.result == 'login') {
+          router.push('/login');
         } else {
-          context.commit("SET_REVIEW_LIST", data.list);
-          context.commit("SET_REVIEW_TOTAL_LIST_ITEM_COUNT", data.count);
+          context.commit('SET_REVIEW_LIST', data.list);
+          context.commit('SET_REVIEW_TOTAL_LIST_ITEM_COUNT', data.count);
         }
       } catch (error) {
         console.error(error);
@@ -349,14 +371,14 @@ export default new Vuex.Store({
     },
     async sidoList(context) {
       let params = {
-        option: "sido",
+        option: 'sido',
       };
       try {
-        let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
-        if (data.result == "login") {
-          router.push("/login");
+        let { data } = await http.get('/city', { params }); // params: params shorthand property, let response 도 제거
+        if (data.result == 'login') {
+          router.push('/login');
         } else {
-          context.commit("SET_HOUSE_SIDO_LIST", data.list);
+          context.commit('SET_HOUSE_SIDO_LIST', data.list);
         }
       } catch (error) {
         console.error(error);
@@ -364,15 +386,15 @@ export default new Vuex.Store({
     },
     async gugunList(context, payload) {
       let params = {
-        option: "gugun",
+        option: 'gugun',
         sidoCode: payload,
       };
       try {
-        let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
-        if (data.result == "login") {
-          router.push("/login");
+        let { data } = await http.get('/city', { params }); // params: params shorthand property, let response 도 제거
+        if (data.result == 'login') {
+          router.push('/login');
         } else {
-          context.commit("SET_HOUSE_GUGUN_LIST", data.list);
+          context.commit('SET_HOUSE_GUGUN_LIST', data.list);
           console.log(data);
         }
       } catch (error) {
@@ -381,16 +403,16 @@ export default new Vuex.Store({
     },
     async dongList(context, payload) {
       let params = {
-        option: "dong",
+        option: 'dong',
         sidoName: payload.sidoName,
         gugunName: payload.gugunName,
       };
       try {
-        let { data } = await http.get("/city", { params }); // params: params shorthand property, let response 도 제거
-        if (data.result == "login") {
-          router.push("/login");
+        let { data } = await http.get('/city', { params }); // params: params shorthand property, let response 도 제거
+        if (data.result == 'login') {
+          router.push('/login');
         } else {
-          context.commit("SET_HOUSE_DONG_LIST", data.list);
+          context.commit('SET_HOUSE_DONG_LIST', data.list);
           console.log(data);
         }
       } catch (error) {
@@ -400,13 +422,25 @@ export default new Vuex.Store({
     async houseDetail(context) {
       try {
         let aptCode = this.state.house.aptCode;
-        let { data } = await http.get("/houses/" + aptCode); // params: params shorthand property, let response 도 제거
-        if (data.result == "login") {
-          router.push("/login");
+        let { data } = await http.get('/houses/' + aptCode); // params: params shorthand property, let response 도 제거
+        if (data.result == 'login') {
+          router.push('/login');
         } else {
-          context.commit("SET_HOUSE_DETAIL", data);
-          console.log("houseDetail-store: ");
+          context.commit('SET_HOUSE_DETAIL', data);
+          console.log('houseDetail-store: ');
           console.log(data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async userCodeList(context) {
+      try {
+        let { data } = await http.get('/register/getcommon/' + '002');
+        if (data.result == 'login') {
+          router.push('/login');
+        } else {
+          context.commit('SET_USER_CLSF', data.list);
         }
       } catch (error) {
         console.error(error);
@@ -416,6 +450,19 @@ export default new Vuex.Store({
   getters: {
     isLogin: function (state) {
       return state.login.isLogin;
+    },
+
+    getUncheckedList: function (state) {
+      return state.bookmark.uncheckedList;
+    },
+
+    getBookmarkList: function (state) {
+      console.log(state.bookmark.list);
+      return state.bookmark.list;
+    },
+
+    getClsf: function (state) {
+      return state.clsf.userClsf;
     },
 
     getBoardList: function (state) {
