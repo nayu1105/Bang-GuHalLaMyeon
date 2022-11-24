@@ -37,6 +37,45 @@
             <label for="endInsert" class="form-label">종료 일시</label>
             <input type="date" class="form-control" id="endInsert" v-model="endDate" />
           </div>
+          <div class="mb-3">
+            <label for="statusUpdate" class="form-label">진행 상태</label>
+            <div class="radioBtn">
+              <!-- 
+                0: 참여하기
+                1: 참여 완료
+                2: 이벤트 종료
+                3: 버튼 안보이기
+              -->
+              <input
+                type="radio"
+                name="status"
+                value="2"
+                autocomplete="off"
+                @change="radioChange($event)"
+                class="ml-10"
+              />
+              이벤트 종료
+              <input
+                type="radio"
+                name="status"
+                value="0"
+                autocomplete="off"
+                @change="radioChange($event)"
+                class="ml-10"
+              />
+              진행 중
+              <input
+                type="radio"
+                name="status"
+                value="3"
+                autocomplete="off"
+                @change="radioChange($event)"
+                class="ml-10"
+              />
+              발표 게시글
+            </div>
+          </div>
+
           <button
             @click="eventInsert"
             id="btnEventInsert"
@@ -68,10 +107,14 @@ export default {
       CKEditor: null,
       startDate: "",
       endDate: "",
+      statusCode: 0,
     };
   },
 
   methods: {
+    radioChange(event) {
+      this.statusCode = event.target.value;
+    },
     initUI() {
       this.title = "";
       this.CKEditor.setData("");
@@ -84,6 +127,7 @@ export default {
       formData.append("content", this.CKEditor.getData());
       formData.append("startDate", this.startDate);
       formData.append("endDate", this.endDate);
+      formData.append("statusCode", this.statusCode);
 
       // multipart/form-data
       let options = {

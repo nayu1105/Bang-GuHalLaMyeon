@@ -42,11 +42,16 @@
             </div>
           </div>
         </div>
+
+        <!-- <paginationUI v-on:call-parent="movePage"></paginationUI> -->
+
+        <div
+          class="board_insert_btn col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1"
+        >
+          <div class="d-sm-block e-btn" @click="showInsertModal">등록</div>
+        </div>
       </div>
-      <!-- <paginationUI v-on:call-parent="movePage"></paginationUI> -->
-      <button class="d-sm-block e-btn mb-50" @click="showInsertModal" style="cursor: pointer">
-        등록
-      </button>
+
       <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
     </div>
   </section>
