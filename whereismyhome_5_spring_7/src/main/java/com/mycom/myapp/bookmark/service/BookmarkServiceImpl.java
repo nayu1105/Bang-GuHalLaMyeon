@@ -21,8 +21,6 @@ public class BookmarkServiceImpl implements BookmarkService {
 		BookmarkResultDto bookmarkResultDto = new BookmarkResultDto();
 		try {
 			bookmarkResultDto.setList(dao.bookmarkList(userSeq));
-			System.out.println("service");
-			System.out.println(bookmarkResultDto);
 			bookmarkResultDto.setResult(SUCCESS);
 		} catch (Exception e) {
 			bookmarkResultDto.setResult(FAIL);
@@ -51,12 +49,19 @@ public class BookmarkServiceImpl implements BookmarkService {
 	@Override
 	public BookmarkResultDto bookmarkInsert(BookmarkDto bookmarkDto) {
 		BookmarkResultDto bookmarkResultDto = new BookmarkResultDto();
-		try {
-			int result = dao.bookmarkInsert(bookmarkDto);
-			if (result == SUCCESS) {
+		try {;
+			bookmarkResultDto.setExist(dao.bookmarkExist(bookmarkDto));
+			
+			if(bookmarkResultDto.getExist()==1) {
 				bookmarkResultDto.setResult(SUCCESS);
-			} else {
-				bookmarkResultDto.setResult(FAIL);
+			}
+			else{
+				int result = dao.bookmarkInsert(bookmarkDto);
+				if (result == SUCCESS) {
+					bookmarkResultDto.setResult(SUCCESS);
+				} else {
+					bookmarkResultDto.setResult(FAIL);
+				}
 			}
 		} catch (Exception e) {
 			bookmarkResultDto.setResult(FAIL);

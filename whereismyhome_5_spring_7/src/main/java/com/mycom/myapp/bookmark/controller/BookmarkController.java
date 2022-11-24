@@ -34,11 +34,8 @@ public class BookmarkController {
 
 	@GetMapping(value = "/bookmarks/{userSeq}")
 	public ResponseEntity<BookmarkResultDto> bookmarkList(@PathVariable int userSeq) {
-		System.out.println("list");
 		BookmarkResultDto bookmarkResultDto;
 		bookmarkResultDto = service.bookmarkList(userSeq);
-		
-		System.out.println(bookmarkResultDto);
 
 		if (bookmarkResultDto.getResult() == SUCCESS) {
 			return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.OK);
@@ -64,11 +61,16 @@ public class BookmarkController {
 	public ResponseEntity<BookmarkResultDto> bookmarkInsert(@RequestBody BookmarkDto bookmarkDto) {
 		BookmarkResultDto bookmarkResultDto;
 		bookmarkResultDto = service.bookmarkInsert(bookmarkDto);
-		if (bookmarkResultDto.getResult() == SUCCESS) {
+		
+		if(bookmarkResultDto.getExist()==1) {
 			return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		}else {
+			if (bookmarkResultDto.getResult() == SUCCESS) {
+				return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<BookmarkResultDto>(bookmarkResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}		
 	}
 
 }
