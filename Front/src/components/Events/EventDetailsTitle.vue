@@ -1,15 +1,5 @@
 <template>
   <section class="page__title-area pt-120">
-    <div class="page__title-shape">
-      <img
-        class="page-title-shape-5 d-none d-sm-block"
-        src="@/assets/img/page-title/page-title-shape-1.png"
-        alt=""
-      />
-      <img class="page-title-shape-6" src="@/assets/img/page-title/page-title-shape-2.png" alt="" />
-      <img class="page-title-shape-7" src="@/assets/img/page-title/page-title-shape-4.png" alt="" />
-      <img class="page-title-shape-8" src="@/assets/img/page-title/page-title-shape-5.png" alt="" />
-    </div>
     <div class="container">
       <div class="row">
         <div class="col-xxl-9 col-xl-8">

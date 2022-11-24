@@ -1,8 +1,5 @@
 <template>
   <section class="events__area pt-115 pb-120 p-relative">
-    <div class="events__shape">
-      <img class="events-1-shape" src="@/assets/img/events/events-shape.png" alt="" />
-    </div>
     <div class="container">
       <div class="row">
         <div class="col-xxl-4 offset-xxl-4">
@@ -27,12 +24,14 @@
             >
               <div class="events__content">
                 <div class="events__meta">
-                  <span>{{ board.regDt.date | makeDateStr('.') }}</span>
+                  <span>{{ board.regDt.date | makeDateStr(".") }}</span>
                 </div>
-                <h3 class="events__title link-btn" @click="boardDetail(board.boardId)">{{ board.title }}</h3>
+                <h3 class="events__title link-btn" @click="boardDetail(board.boardId)">
+                  {{ board.title }}
+                </h3>
               </div>
               <div class="events__more">
-                 <div class="link-btn" @click="boardDetail(board.boardId)">
+                <div class="link-btn" @click="boardDetail(board.boardId)">
                   More
                   <i class="far fa-arrow-right"></i>
                   <i class="far fa-arrow-right"></i>
@@ -47,14 +46,14 @@
 </template>
 
 <script>
-import http from '@/common/axios.js';
+import http from "@/common/axios.js";
 // import util from '@/common/util.js';
 
-import Vue from 'vue';
-import VueAlertify from 'vue-alertify';
+import Vue from "vue";
+import VueAlertify from "vue-alertify";
 Vue.use(VueAlertify);
 export default {
-  name: 'BoardArea',
+  name: "BoardArea",
   computed: {
     // gttters 이용
     listGetters() {
@@ -63,27 +62,27 @@ export default {
   },
   methods: {
     boardList() {
-      this.$store.dispatch('boardList');
+      this.$store.dispatch("boardList");
     },
-    async boardDetail(boardId){
+    async boardDetail(boardId) {
       // back-end에서 detail 정보 가지고 와서
       // store 에 detail 요소 바꾼 후
       // router 를 이용해 이동
 
-      try{
-        let { data } = await http.get("/boards/"+ boardId ); // params: params shorthand property, let response 도 제거
+      try {
+        let { data } = await http.get("/boards/" + boardId); // params: params shorthand property, let response 도 제거
         if (data.result == "login") {
           this.$router.push("/login");
         } else {
           this.$store.commit("SET_BOARD_DETAIL", data.dto);
-       }
-      }catch(error){
+        }
+      } catch (error) {
         console.log(error);
         this.$alertify.error("서버에 문제가 있습니다");
       }
 
-      this.$router.push('/boards-details');
-    }
+      this.$router.push("/boards-details");
+    },
   },
   created() {
     this.boardList();
@@ -93,9 +92,9 @@ export default {
       return (
         date.year +
         separator +
-        (date.month < 10 ? '0' + date.month : date.month) +
+        (date.month < 10 ? "0" + date.month : date.month) +
         separator +
-        (date.day < 10 ? '0' + date.day : date.day)
+        (date.day < 10 ? "0" + date.day : date.day)
       );
     },
   },

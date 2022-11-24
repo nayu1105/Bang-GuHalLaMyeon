@@ -18,7 +18,7 @@
                 <div class="logo" style="vertical-align: middle">
                   <router-link to="/">
                     <img src="@/assets/img/logo/logo-gif.gif" style="width: 50px" alt="logo" />
-                    <span>방구할라면</span>
+                    <span class="ml-10">방구할라면</span>
                   </router-link>
                 </div>
               </div>
@@ -125,7 +125,7 @@
 
           <div class="side-info-content sidebar-menu mm-menu">
             <ul>
-              <li>
+              <li @click="handleSidebarClose">
                 <router-link to="/home" class="border-0">Home</router-link>
               </li>
               <li
@@ -134,15 +134,15 @@
               >
                 <a @click="menuOption.boardsDropdown = !menuOption.boardsDropdown">공지사항</a>
                 <ul class="sub-menu" :class="[menuOption.boardsDropdown === true ? 'active' : '']">
-                  <li>
+                  <li @click="handleSidebarClose">
                     <router-link to="/boards" @click.native="validLogin">공지사항</router-link>
                   </li>
-                  <li>
+                  <li @click="handleSidebarClose">
                     <router-link to="/events" @click.native="validLogin">이벤트</router-link>
                   </li>
                 </ul>
               </li>
-              <li>
+              <li @click="handleSidebarClose">
                 <router-link to="houseDeal" class="border-0" @click.native="validLogin"
                   >실거래가</router-link
                 >
@@ -155,9 +155,15 @@
               >
                 <a @click="menuOption.adminDropDown = !menuOption.adminDropDown">관리자</a>
                 <ul class="sub-menu" :class="[menuOption.adminDropDown === true ? 'active' : '']">
-                  <li><router-link to="/adminBoards">공지사항 관리</router-link></li>
-                  <li><router-link to="/adminEvents">이벤트 관리</router-link></li>
-                  <li><router-link to="/userManage">회원 정보 관리</router-link></li>
+                  <li @click="handleSidebarClose">
+                    <router-link to="/adminBoards">공지사항 관리</router-link>
+                  </li>
+                  <li @click="handleSidebarClose">
+                    <router-link to="/adminEvents">이벤트 관리</router-link>
+                  </li>
+                  <li @click="handleSidebarClose">
+                    <router-link to="/userManage">회원 정보 관리</router-link>
+                  </li>
                 </ul>
               </li>
               <li
@@ -167,8 +173,12 @@
               >
                 <a @click="menuOption.myDropDown = !menuOption.myDropDown">내 정보</a>
                 <ul class="sub-menu" :class="[menuOption.myDropDown === true ? 'active' : '']">
-                  <li><router-link to="/userDatail">회원 정보</router-link></li>
-                  <li><router-link to="/bookmark">찜한 목록</router-link></li>
+                  <li @click="handleSidebarClose">
+                    <router-link to="/userDatail">회원 정보</router-link>
+                  </li>
+                  <li @click="handleSidebarClose">
+                    <router-link to="/bookmark">찜한 목록</router-link>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -192,7 +202,7 @@
 
 <script>
 export default {
-  name: 'HomeHeader',
+  name: "HomeHeader",
   data() {
     return {
       isSticky: false,
@@ -225,21 +235,21 @@ export default {
       this.showSidebar = false;
     },
     doLogout() {
-      this.$store.commit('SET_LOGIN', { isLogin: false, userName: '', userProfileImageUrl: '' });
-      this.$router.push('/home');
+      this.$store.commit("SET_LOGIN", { isLogin: false, userName: "", userProfileImageUrl: "" });
+      this.$router.push("/home");
     },
     validLogin() {
       console.log(this.$store.state.login.isLogin);
       if (!this.$store.state.login.isLogin) {
-        this.$router.push('/login');
+        this.$router.push("/login");
       }
     },
     LinkToLogin() {
-      this.$router.push('/login');
+      this.$router.push("/login");
     },
   },
   mounted() {
-    window.addEventListener('scroll', this.handleSticky);
+    window.addEventListener("scroll", this.handleSticky);
   },
 };
 </script>

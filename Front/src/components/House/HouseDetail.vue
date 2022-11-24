@@ -16,27 +16,32 @@
                   }}.{{ detailGetters.dealList[0].dealDay | fillZero() }}
                 </p>
               </div>
-              <div class="course__rating-2 mb-30">
+              <div class="course__rating-2 mb-30" v-if="$store.state.review.totalListItemCount > 0">
                 <h5>Review :</h5>
                 <div class="course__rating-inner d-flex align-items-center">
-                  <ul>
-                    <li>
-                      <a href="#"> <i class="fas fa-star"></i> </a>
-                    </li>
-                    <li>
-                      <a href="#"> <i class="fas fa-star"></i> </a>
-                    </li>
-                    <li>
-                      <a href="#"> <i class="fas fa-star"></i> </a>
-                    </li>
-                    <li>
-                      <a href="#"> <i class="fas fa-star"></i> </a>
-                    </li>
-                    <li>
-                      <a href="#"> <i class="fas fa-star"></i> </a>
-                    </li>
-                  </ul>
-                  <p>4.5</p>
+                  <div>
+                    <div
+                      class="star"
+                      v-for="starIdx in $store.state.review.list[0].avgRate"
+                      :key="starIdx"
+                      style="display: inline"
+                    >
+                      <span>
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                    </div>
+                    <div
+                      class="star"
+                      v-for="starIdx in 5 - $store.state.review.list[0].avgRate"
+                      :key="starIdx"
+                      style="display: inline"
+                    >
+                      <span>
+                        <i class="fa-regular fa-star"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <p class="ml-10">{{ $store.state.review.list[0].avgRate }}</p>
                 </div>
               </div>
             </div>
@@ -192,3 +197,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.fa-solid {
+  color: #f49d1a;
+}
+</style>

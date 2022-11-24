@@ -16,7 +16,7 @@
         <!-- Grid row -->
         <div class="row mt-3">
           <!-- Grid column -->
-          <div class="col-md-5 col-lg-2 col-xl-4 mx-auto mb-4">
+          <div class="col-md-4 col-lg-5 col-xl-4 mx-auto mb-4">
             <!-- Links -->
             <router-link to="/">
               <!-- <img :src="`${footerBgTwo ? require('../../assets/img/logo/logo.png') : require('../../assets/img/logo/logo-2.png')}`" alt=""> -->
@@ -28,7 +28,7 @@
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div class="col-md-7 col-lg-2 col-xl-8 mx-auto mb-4">
+          <div class="col-md-8 col-lg-7 col-xl-8 mx-auto mb-4">
             <!-- Links -->
             <h4 class="text-uppercase fw-bold mb-4" style="color: white">Company</h4>
 

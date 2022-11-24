@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
           <div class="sign__wrapper white-bg">
-            <div class="sign__header mb-35">
+            <!-- <div class="sign__header mb-35">
               <div class="sign__in text-center">
                 <a href="#" class="sign__social text-start mb-15">
                   <i class="fab fa-facebook-f"></i>Sign in with Facebook</a
@@ -22,39 +22,43 @@
                   with your email<span> ........</span>
                 </p>
               </div>
-            </div>
+            </div> -->
             <div class="sign__form">
               <form action="#">
                 <div class="sign__input-wrapper mb-25">
-                  <h5>Email</h5>
+                  <h5>이메일</h5>
                   <div class="sign__input">
-                    <input type="text" placeholder="Email" v-model="$store.state.login.userEmail" />
+                    <input
+                      type="text"
+                      placeholder="이메일"
+                      v-model="$store.state.login.userEmail"
+                    />
                     <i class="fal fa-envelope"></i>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-10">
-                  <h5>Password</h5>
+                  <h5>비밀번호</h5>
                   <div class="sign__input">
                     <input
                       type="text"
-                      placeholder="Password"
+                      placeholder="비밀번호"
                       v-model="$store.state.login.userPassword"
                     />
                     <i class="fal fa-lock"></i>
                   </div>
                 </div>
                 <div class="sign__action d-sm-flex justify-content-between mb-30">
-                  <div class="sign__agree d-flex align-items-center">
+                  <!-- <div class="sign__agree d-flex align-items-center">
                     <input class="m-check-input" type="checkbox" id="m-agree" />
                     <label class="m-check-label" for="m-agree">Keep me signed in </label>
-                  </div>
+                  </div> -->
                   <div class="sign__forgot">
-                    <a href="#">Forgot your password?</a>
+                    <!-- <a href="#">Forgot your password?</a> -->
                   </div>
                 </div>
-                <button class="e-btn w-100" @click="login"><span></span> Sign In</button>
+                <button class="e-btn w-100" @click="login"><span></span> 로그인</button>
                 <div class="sign__new text-center mt-20">
-                  <p>New to Educal? <router-link to="/register">Sign Up</router-link></p>
+                  <p>계정이 없다면?<router-link to="/register"> 회원가입</router-link></p>
                 </div>
               </form>
             </div>
@@ -66,13 +70,13 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import VueAlertify from 'vue-alertify';
+import Vue from "vue";
+import VueAlertify from "vue-alertify";
 Vue.use(VueAlertify);
 
-import http from '@/common/axios.js';
+import http from "@/common/axios.js";
 export default {
-  name: 'LoginArea',
+  name: "LoginArea",
   methods: {
     async login() {
       let params = {
@@ -81,21 +85,21 @@ export default {
       };
 
       try {
-        let { data } = await http.post('/login', params);
+        let { data } = await http.post("/login", params);
 
-        this.$store.commit('SET_LOGIN', {
+        this.$store.commit("SET_LOGIN", {
           isLogin: true,
           userName: data.userName,
           userSeq: data.userSeq,
           userProfileImageUrl: data.userProfileImageUrl,
         });
         console.log(this.$store.state.login.userSeq);
-        this.$router.push('/');
+        this.$router.push("/");
       } catch (error) {
-        if (error.response.status == '404') {
-          this.$alertify.error('이메일 또는 비밀번호를 확인하세요.');
+        if (error.response.status == "404") {
+          this.$alertify.error("이메일 또는 비밀번호를 확인하세요.");
         } else {
-          this.$alertify.error('Opps!! 서버에 문제가 발생했습니다.');
+          this.$alertify.error("Opps!! 서버에 문제가 발생했습니다.");
         }
       }
     },
