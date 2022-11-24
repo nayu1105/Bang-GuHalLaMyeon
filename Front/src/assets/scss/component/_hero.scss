@@ -8,8 +8,10 @@
   &__area {
   }
   &__height {
-    min-height: 1050px;
-
+    min-height: 980px;
+    // @media #{$xl} {
+    //   min-height: 980px;
+    // }
     @media #{$lg} {
       min-height: 850px;
     }
@@ -32,7 +34,7 @@
     }
   }
   &__title {
-    font-size: 72px;
+    font-size: 68px;
     line-height: 1;
 
     @media #{$xxl} {

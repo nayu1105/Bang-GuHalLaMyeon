@@ -2,37 +2,52 @@
   <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
     <div class="course__review">
       <div class="course__review-rating mb-50">
-        <div class="row g-0">
-          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4">
+        <div class="row g-0" v-if="$store.state.review.totalListItemCount > 0">
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
             <div class="course__review-rating-info grey-bg text-center">
-              <h5>{{ avgRate }}</h5>
-              <ul>
-                <li>
-                  <a href="#"> <i class="icon_star"></i> </a>
-                </li>
-                <li>
-                  <a href="#"> <i class="icon_star"></i> </a>
-                </li>
-                <li>
-                  <a href="#"> <i class="icon_star"></i> </a>
-                </li>
-                <li>
-                  <a href="#"> <i class="icon_star"></i> </a>
-                </li>
-                <li>
-                  <a href="#"> <i class="icon_star"></i> </a>
-                </li>
-              </ul>
-              <p>4 Ratings</p>
+              <div>
+                <h3 style="display: inline" class="mr-30">Total</h3>
+                <h6 style="display: inline">
+                  총 리뷰 수 : {{ $store.state.review.totalListItemCount }}
+                </h6>
+              </div>
+              <h1
+                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6"
+                style="font-size: 70px; display: inline"
+              >
+                {{ $store.state.review.list[0].avgRate }}
+              </h1>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6" style="display: inline">
+                <div
+                  class="star"
+                  v-for="starIdx in $store.state.review.list[0].avgRate"
+                  :key="starIdx"
+                  style="display: inline"
+                >
+                  <span>
+                    <i class="fa-solid fa-star fa-2x"></i>
+                  </span>
+                </div>
+                <div
+                  class="star"
+                  v-for="starIdx in 5 - $store.state.review.list[0].avgRate"
+                  :key="starIdx"
+                  style="display: inline"
+                >
+                  <span>
+                    <i class="fa-regular fa-star fa-2x"></i>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-8">
+          <!-- <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-8">
             <div class="course__review-details grey-bg">
               <h5>Detailed Rating</h5>
               <div class="course__review-content mb-20">
                 <div class="course__review-item d-flex align-items-center justify-content-between">
                   <div class="course__review-text">
-                    <span>5 stars</span>
+                    <span>5점</span>
                   </div>
                   <div class="course__review-progress">
                     <div class="single-progress" data-width="100%"></div>
@@ -43,7 +58,7 @@
                 </div>
                 <div class="course__review-item d-flex align-items-center justify-content-between">
                   <div class="course__review-text">
-                    <span>4 stars</span>
+                    <span>4점</span>
                   </div>
                   <div class="course__review-progress">
                     <div class="single-progress" data-width="30%"></div>
@@ -54,7 +69,7 @@
                 </div>
                 <div class="course__review-item d-flex align-items-center justify-content-between">
                   <div class="course__review-text">
-                    <span>3 stars</span>
+                    <span>3점</span>
                   </div>
                   <div class="course__review-progress">
                     <div class="single-progress" data-width="0%"></div>
@@ -65,7 +80,7 @@
                 </div>
                 <div class="course__review-item d-flex align-items-center justify-content-between">
                   <div class="course__review-text">
-                    <span>2 stars</span>
+                    <span>2점</span>
                   </div>
                   <div class="course__review-progress">
                     <div class="single-progress" data-width="0%"></div>
@@ -76,7 +91,7 @@
                 </div>
                 <div class="course__review-item d-flex align-items-center justify-content-between">
                   <div class="course__review-text">
-                    <span>1 stars</span>
+                    <span>1점</span>
                   </div>
                   <div class="course__review-progress">
                     <div class="single-progress" data-width="0%"></div>
@@ -87,7 +102,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -96,7 +111,7 @@
         <h3>후기 ({{ $store.state.review.totalListItemCount }})</h3>
 
         <ul v-if="$store.state.review.totalListItemCount > 0">
-          <li v-for="(review, listIdx) in list" :key="listIdx">
+          <li v-for="(review, listIdx) in $store.state.review.list" :key="listIdx">
             <div class="course__comment-box">
               <div class="course__comment-thumb float-start">
                 <img src="@/assets/img/noProfile.png" alt="" />
@@ -157,6 +172,14 @@
                     {{ review.content }}
                   </p>
                 </div>
+                <button
+                  v-show="$store.state.login.userSeq == review.userSeq"
+                  class="btn btn-sm btn-warning btn-outline mt-20 ml-70"
+                  type="button"
+                  @click="changeToDelete(review.reviewId)"
+                >
+                  리뷰 삭제하기
+                </button>
               </div>
             </div>
           </li>
@@ -266,6 +289,34 @@ export default {
         }
       } catch (error) {
         this.$alertify.error("리뷰 등록 과정에서 오류가 발생했습니다. ");
+      }
+    },
+    changeToDelete(reviewId) {
+      var $this = this;
+      this.$alertify.confirm(
+        "리뷰를 삭제하시겠습니까?",
+        function () {
+          $this.reviewDelete(reviewId); // this 아님
+          $this.$router.go();
+        },
+        function () {
+          console.log("canceled!!!");
+        }
+      );
+    },
+    async reviewDelete(reviewId) {
+      try {
+        let response = await http.delete("/reviews/" + reviewId);
+        let { data } = response;
+
+        if (data.result == "login") {
+          this.$router.push("/login");
+        } else {
+          this.$alertify.success("리뷰가 삭제되었습니다. ");
+        }
+      } catch (error) {
+        console.error(error);
+        this.$alertify.error("서버에 문제가 생겼습니다. ");
       }
     },
   },
