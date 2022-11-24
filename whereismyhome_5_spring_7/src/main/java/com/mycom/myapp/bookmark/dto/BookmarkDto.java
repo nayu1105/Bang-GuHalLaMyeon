@@ -25,4 +25,8 @@ public class BookmarkDto {
 	private String landCode;
 	private String lng;
 	private String lat;
+	
+	private String dealAmout;
+	private String area;
+	private String tradingVolume;
 }
