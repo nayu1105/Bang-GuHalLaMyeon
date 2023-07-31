@@ -42,7 +42,7 @@
 <img width="398" alt="image" src="https://github.com/nayu1105/Bang-GuHalLaMyeon/assets/72187208/681fb125-ba5c-4c93-a3c3-fcb9238a00a5">
 
 ## 개발 환경
-|Vue|Vuex|chart.js|BootStap5|Sass|
+|Vue|Vuex|chart.js|BootStap5|Scss|
 |:--:|:--:|:--:|:--:|:--:|
 | <img src="https://github.com/nayu1105/Bang-GuHalLaMyeon/assets/72187208/bb468abe-8c4f-49c9-895a-3dc6bbd386a8" width="50"/> | <img src="https://github.com/nayu1105/Bang-GuHalLaMyeon/assets/72187208/b59cb3b2-f266-4091-8861-1a02f253c353" width="50"/> | <img src="https://github.com/nayu1105/Bang-GuHalLaMyeon/assets/72187208/ef278ae8-5834-4567-9aa6-25c6149383ba" width="50"/>|<img src="https://github.com/nayu1105/Bang-GuHalLaMyeon/assets/72187208/885e681e-149a-4716-a855-cb7a1a0c7de3" width="50"/> | <img src="https://github.com/nayu1105/Bang-GuHalLaMyeon/assets/72187208/37def1c1-f020-4537-ae37-adcb956aaf6a" width="50"/> |
 |SpringBoot|MyBatis|MySQL|Postman|
