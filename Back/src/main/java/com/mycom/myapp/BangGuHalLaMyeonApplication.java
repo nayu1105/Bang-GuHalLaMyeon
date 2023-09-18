@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Whereismyhome5Spring7Application {
+public class BangGuHalLaMyeonApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Whereismyhome5Spring7Application.class, args);
+		SpringApplication.run(BangGuHalLaMyeonApplication.class, args);
 	}
 
 }
